@@ -1101,10 +1101,11 @@ function getMode() {
 /* TODAY */
 
 function getTodayString() {
-
-  const now = new Date();
-
-  return now.toISOString().split("T")[0];
+  // Use the user's LOCAL date — matches todayLocal() used by the streak
+  // system. Using toISOString() here would return UTC, which can be a day
+  // ahead in the evening for US users and cause "today" to disagree
+  // between the daily seed and the streak tracker.
+  return todayLocal();
 }
 
 /* DATE */
