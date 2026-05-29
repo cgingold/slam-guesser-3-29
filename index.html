@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>🎾 Slam Guesser</title>
+
+<style>
+
+/* ===========================================================
+   PALETTE — tennis.com-inspired editorial
+   =========================================================== */
+:root {
+  --bg:           #e8edeb;   /* cool off-white body */
+  --surface:      #ffffff;   /* card / control surfaces */
+  --ink:          #1d3e35;   /* dark forest green (primary text) */
+  --ink-soft:     #4a6e63;   /* muted green for secondary */
+  --ink-faint:    #94a8a0;   /* low-contrast labels */
+  --line:         #cfd4d0;   /* subtle dividers */
+  --accent:       #a5e85a;   /* tennis-ball lime */
+  --accent-ink:   #1d3e35;
+  --header-bg:    #1d3e35;
+  --header-ink:   #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Arial, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===========================================================
+   HEADER BAR — dark forest band across the top
+   =========================================================== */
+.header {
+  background: var(--header-bg);
+  color: var(--header-ink);
+  padding: 14px 24px;
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.brand {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--header-ink);
+}
+
+.brand .ball {
+  font-style: normal;
+  margin-right: 4px;
+}
+
+/* play toggle — lives in the dark header band */
+.play-toggle {
+  display: flex;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 3px;
+}
+
+.play-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 6px 14px;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.play-btn:hover { color: #fff; }
+
+.play-btn.active {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.play-btn[data-play="practice"].active {
+  background: #fde047;
+  color: #1d3e35;
+}
+
+/* header right-side group — children are right-packed so the date button
+   (leftmost) can hide without shifting the info icon or play toggle.
+   flex:1 makes the group fill the space after the brand; without that
+   it'd be content-sized and justify-content would have nothing to act on. */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+  flex: 1 1 auto;
+}
+
+/* circular info icon button */
+.icon-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.85);
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+  filter: none;
+}
+
+/* Date picker — pill button in header */
+.date-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.85);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.date-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+  filter: none;
+}
+
+.date-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Date popover — appears below the header bar, anchored toward the right */
+.date-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px 16px;
+  box-shadow: 0 12px 32px rgba(29, 62, 53, 0.18);
+  z-index: 50;
+  min-width: 280px;
+  max-width: calc(100vw - 32px);
+}
+
+.date-popover[hidden] { display: none; }
+
+.date-popover-title {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+
+.date-popover-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.date-pill {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  padding: 8px 6px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  line-height: 1.2;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.date-pill:hover:not(.active) {
+  background: rgba(29, 62, 53, 0.05);
+  border-color: var(--ink-soft);
+  filter: none;
+}
+
+.date-pill .dp-weekday {
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.date-pill .dp-day {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.date-pill.today {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+.date-pill.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--header-ink);
+}
+
+.date-pill.active .dp-weekday {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dp-mark {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.dp-mark-win  { color: #16a34a; }
+.dp-mark-loss { color: #b8512a; }
+
+.date-pill.active .dp-mark-win  { color: #a5e85a; }
+.date-pill.active .dp-mark-loss { color: #fdb89a; }
+
+.date-pill { position: relative; }
+
+/* How-to-Play dialog */
+.howto-dialog {
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  max-width: 440px;
+  width: calc(100% - 32px);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 24px 48px rgba(29, 62, 53, 0.25);
+}
+
+.howto-dialog::backdrop {
+  background: rgba(29, 62, 53, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.howto-inner {
+  padding: 28px 28px 24px;
+  position: relative;
+}
+
+.howto-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--ink-soft);
+  font-size: 26px;
+  line-height: 1;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.howto-close:hover {
+  background: rgba(29, 62, 53, 0.06);
+  color: var(--ink);
+  filter: none;
+}
+
+.howto-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 14px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.howto-body {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0 0 12px;
+}
+
+.howto-body:last-child { margin-bottom: 0; }
+
+.howto-body strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* ===========================================================
+   APP CONTAINER
+   =========================================================== */
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 36px 24px 48px;
+}
+
+/* page title — serif italic, editorial */
+.page-title {
+  text-align: center;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 44px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 28px;
+  color: var(--ink);
+}
+
+/* ===========================================================
+   MODE TOGGLE — pill segmented control like the reference
+   =========================================================== */
+.mode-toggle {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px;
+  margin: 0 auto 24px;
+  width: fit-content;
+}
+
+.mode-btn {
+  background: transparent;
+  border: none;
+  color: var(--ink-soft);
+  padding: 9px 22px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.mode-btn:hover { color: var(--ink); }
+
+.mode-btn.active {
+  background: var(--ink);
+  color: var(--header-ink);
+}
+
+/* keep mode identity, harmonized with the palette */
+.mode-btn[data-mode="winners"].active { background: #2d6e4f; }
+.mode-btn[data-mode="hard"].active    { background: #b8512a; }
+
+/* small descriptor that appears under the toggle for modes that need it */
+.mode-note {
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin: -16px auto 22px;
+  max-width: 480px;
+  padding: 0 12px;
+  line-height: 1.4;
+}
+
+.mode-note[hidden] { display: none; }
+
+/* ===========================================================
+   CONTROLS ROW
+   =========================================================== */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.input-wrap { position: relative; }
+
+input#guess {
+  padding: 11px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  width: 280px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+input#guess::placeholder { color: var(--ink-faint); }
+
+input#guess:focus {
+  border-color: var(--ink-soft);
+  box-shadow: 0 0 0 3px rgba(29, 62, 53, 0.08);
+}
+
+/* guess pips */
+.pips {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.pip {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(29, 62, 53, 0.15);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.pip.used-1 { background: #f4a8a0; }
+.pip.used-2 { background: #d63a26; }
+.pip.used-3 { background: #8a1e10; transform: scale(1.15); }
+
+/* buttons */
+button {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: var(--ink);
+  color: var(--header-ink);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.05s;
+}
+
+button:hover:not(:disabled) { filter: brightness(1.12); }
+button:active:not(:disabled) { transform: translateY(1px); }
+
+button:disabled {
+  background: rgba(29, 62, 53, 0.12);
+  color: rgba(29, 62, 53, 0.4);
+  cursor: not-allowed;
+}
+
+#guessBtn { background: var(--ink); }
+
+/* Give Up — quieter ghost button */
+#giveUpBtn {
+  background: transparent;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+}
+#giveUpBtn:hover:not(:disabled) {
+  border-color: #b8512a;
+  color: #b8512a;
+  background: rgba(184, 81, 42, 0.05);
+  filter: none;
+}
+
+/* post-round CTAs — accent lime when enabled */
+#nextBtn:not(:disabled),
+#shareBtn:not(:disabled) {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* When the share button becomes available after a win, a single gentle
+   pulse calls a tiny bit of attention to it. Just once — no looping. */
+#shareBtn:not(:disabled) {
+  animation: sharePulse 0.6s ease-out 1;
+}
+
+@keyframes sharePulse {
+  0%   { transform: scale(1);    box-shadow: 0 0 0 0   rgba(165, 232, 90, 0.5); }
+  50%  { transform: scale(1.06); box-shadow: 0 0 0 8px rgba(165, 232, 90, 0);   }
+  100% { transform: scale(1);    box-shadow: 0 0 0 0   rgba(165, 232, 90, 0);   }
+}
+
+/* ===========================================================
+   AUTOCOMPLETE
+   =========================================================== */
+.suggestions {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 280px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 10;
+  box-shadow: 0 10px 28px rgba(29, 62, 53, 0.12);
+}
+
+.suggestion {
+  padding: 9px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.suggestion:hover { background: rgba(29, 62, 53, 0.05); }
+
+/* ===========================================================
+   HINT PANEL — quieter, pill-shaped
+   =========================================================== */
+#hintPanel {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 6px 0;
+  flex-wrap: wrap;
+  min-height: 0;
+}
+
+.hint-card {
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeIn 0.25s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.gender-card        { background: #ede5f8; color: #5b21b6; } /* fallback */
+.gender-card.male   { background: #dbeae6; color: #0f5e54; } /* muted teal */
+.gender-card.female { background: #f4e3d2; color: #8a4a1f; } /* muted amber */
+.nation-card  { background: #e3e5e2; color: #4a6e63; }
+.answer-card  { background: #fde2e0; color: #8a1e10; }
+.correct-card { background: #d4f0c4; color: #166534; }
+.invalid-card { background: #fdf0d6; color: #92400e; }
+.already-played-card {
+  background: #e6efea;
+  color: #1d3e35;
+  border: 1px solid #cfd4d0;
+}
+
+/* ===========================================================
+   TABLE
+   =========================================================== */
+.table-wrap {
+  overflow-x: auto;
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  max-height: 65vh;
+  margin-bottom: 16px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 720px;
+}
+
+th, td {
+  border: 1px solid #e3e5e2;
+  padding: 3px 3px;
+  font-size: 10.5px;
+  text-align: center;
+}
+
+th {
+  background: #f1f1ec;
+  position: sticky;
+  top: 0;
+  font-weight: 600;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+.slam {
+  background: #f1f1ec;
+  position: sticky;
+  left: 0;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* result cells — re-tuned for light background */
+.W  { background: #16a34a; color: white; font-weight: 700; }
+.F  { background: #c084fc; color: #2e1065; font-weight: 600; }
+.SF { background: #fde047; color: #713f12; font-weight: 600; }
+.QF { background: #fdba74; color: #7c2d12; font-weight: 600; }
+.R1, .R2, .R3, .R4 { background: #3b82f6; color: white; }
+.Q1, .Q2, .Q3, .Q  { background: #93c5fd; color: #1e3a8a; }
+.A  { background: #c5cac6; color: #4a6e63; }
+.NH { background: #115e59; color: white; }
+
+/* ===========================================================
+   LEGEND
+   =========================================================== */
+.legend-wrap { display: flex; justify-content: center; }
+
+details.legend {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 12px;
+  width: fit-content;
+  max-width: 100%;
+}
+
+details.legend summary {
+  cursor: pointer;
+  padding: 8px 16px;
+  color: var(--ink-soft);
+  user-select: none;
+  font-weight: 600;
+  list-style: none;
+  letter-spacing: 0.02em;
+}
+
+details.legend summary::-webkit-details-marker { display: none; }
+details.legend summary::after { content: "▾"; margin-left: 8px; font-size: 10px; }
+details.legend[open] summary::after { content: "▴"; }
+
+.legend-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  padding: 8px 16px 14px;
+  border-top: 1px solid var(--line);
+}
+
+.legend-item {
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-weight: 700;
+  min-width: 32px;
+  text-align: center;
+  font-size: 11px;
+}
+
+.legend-label {
+  color: var(--ink-soft);
+  margin-right: 4px;
+  align-self: center;
+}
+
+/* ===========================================================
+   MOBILE
+   =========================================================== */
+@media (max-width: 640px) {
+  .header { padding: 12px 16px; }
+  .brand { font-size: 18px; }
+  .play-btn { padding: 5px 11px; font-size: 10px; }
+  .header-right { gap: 8px; }
+  .icon-btn { width: 30px; height: 30px; }
+
+  .app { padding: 24px 16px 40px; }
+  .page-title { font-size: 32px; margin-bottom: 20px; }
+
+  .mode-btn { padding: 8px 16px; font-size: 12px; }
+  input#guess { width: 100%; max-width: 280px; }
+  .suggestions { width: 100%; max-width: 280px; }
+  .controls { gap: 8px; }
+  button { padding: 9px 14px; font-size: 12px; }
+
+  .howto-inner { padding: 24px 22px 22px; }
+  .howto-title { font-size: 24px; }
+  .howto-body { font-size: 13.5px; }
+
+  .date-btn { padding: 5px 10px; font-size: 11px; }
+  .date-btn svg { width: 12px; height: 12px; }
+  .date-popover {
+    min-width: 0;
+    width: calc(100vw - 24px);
+    right: -8px; /* nudge to stay within viewport */
+  }
+  .date-popover-grid { grid-template-columns: repeat(5, 1fr); }
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="brand"><span class="ball">🎾</span>Slam Guesser</div>
+
+    <div class="header-right">
+      <div class="play-toggle">
+        <button class="play-btn"
+                data-play="daily"
+                onclick="setPlayType('daily')">Daily</button>
+        <button class="play-btn"
+                data-play="practice"
+                onclick="setPlayType('practice')">Practice</button>
+      </div>
+
+      <button class="icon-btn"
+              id="howToBtn"
+              aria-label="How to play"
+              title="How to play"
+              onclick="document.getElementById('howToDialog').showModal()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<dialog id="howToDialog" class="howto-dialog">
+  <div class="howto-inner">
+    <button class="howto-close"
+            aria-label="Close"
+            onclick="document.getElementById('howToDialog').close()">×</button>
+    <h2 class="howto-title">How to Play</h2>
+    <p class="howto-body">
+      Each puzzle shows a tennis pro's Grand Slam results — your job is to
+      guess who it is.
+    </p>
+    <p class="howto-body">
+      You get three tries; each wrong guess reveals a hint (gender, then
+      nationality, then the answer).
+    </p>
+    <p class="howto-body">
+      A new puzzle drops every day. Want to keep playing? Switch to
+      <strong>Practice</strong> for unlimited random rounds.
+    </p>
+  </div>
+</dialog>
+
+<div class="app">
+
+
+<div class="controls">
+  <div class="input-wrap">
+    <input id="guess" placeholder="Guess player..." autocomplete="off"/>
+    <div id="suggestions" class="suggestions" style="display:none"></div>
+  </div>
+
+  <div class="pips" aria-label="Guesses remaining">
+    <div class="pip" id="pip1"></div>
+    <div class="pip" id="pip2"></div>
+    <div class="pip" id="pip3"></div>
+  </div>
+
+  <button id="guessBtn" onclick="guess()">Guess</button>
+  <button id="giveUpBtn" onclick="giveUp()">Give Up</button>
+  <button id="nextBtn" onclick="next()" disabled>Next</button>
+  <button id="shareBtn" onclick="share()" disabled>Share</button>
+</div>
+
+<div id="hintPanel"></div>
+
+<div class="table-wrap">
+  <table id="table"></table>
+</div>
+
+<div class="legend-wrap">
+  <details class="legend">
+    <summary>Legend</summary>
+    <div class="legend-grid">
+      <div class="legend-item W">W</div>  <span class="legend-label">Winner</span>
+      <div class="legend-item F">F</div>  <span class="legend-label">Final</span>
+      <div class="legend-item SF">SF</div> <span class="legend-label">Semifinal</span>
+      <div class="legend-item QF">QF</div> <span class="legend-label">Quarterfinal</span>
+      <div class="legend-item R1">R1-R4</div> <span class="legend-label">Rounds</span>
+      <div class="legend-item Q">Q</div>  <span class="legend-label">Qualifying</span>
+      <div class="legend-item A">A</div>  <span class="legend-label">Absent</span>
+      <div class="legend-item NH">NH</div> <span class="legend-label">Not Held</span>
+    </div>
+  </details>
+</div>
+
+</div><!-- /.app -->
+
+<script>
+
+const DAILY_KEY = "slamGuesserSimple.daily.v1";
+
+/* ---- Daily result storage -----------------------------
+   Records each completed daily so revisits show the
+   finished state instead of letting the user re-play.
+   Shape:
+     {
+       "2026-05-28": {
+         "standard": { player, wrong, outcome, gaveUp },
+         "hard":     { player, wrong, outcome, gaveUp }
+       },
+       ...
+     }
+   Auto-prunes to ~last 7 days to avoid unbounded growth. */
+
+function getDailyResults() {
+  try {
+    const raw = localStorage.getItem(DAILY_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveDailyResult(date, mode, result) {
+  try {
+    const all = getDailyResults();
+    if (!all[date]) all[date] = {};
+    all[date][mode] = result;
+
+    // Prune: keep only the most recent 2 dates. Only today matters now
+    // for the "you've already played today" restore, but we keep yesterday
+    // too as a small buffer for timezone-edge cases.
+    const dates = Object.keys(all).sort();
+    while (dates.length > 2) {
+      delete all[dates.shift()];
+    }
+
+    localStorage.setItem(DAILY_KEY, JSON.stringify(all));
+  } catch { /* ignore quota errors */ }
+}
+
+function getDailyResult(date, mode) {
+  const all = getDailyResults();
+  return all?.[date]?.[mode] || null;
+}
+
+/* Replay a finished daily round so revisits show the locked end-state.
+   Returns true if a restoration was performed, false otherwise. */
+function maybeRestoreFinishedDaily() {
+  // Only restore for daily play. Past dates (picked via the date popover)
+  // restore their saved state too, so users see what they previously did
+  // instead of being able to re-play.
+  if (game.playType !== "daily") return false;
+
+  const saved = getDailyResult(game.date, game.mode);
+  if (!saved) return false;
+
+  // Historical play is immutable. If we have a snapshot of the player as
+  // they existed when the user played this date, replay against THAT,
+  // regardless of how the live rotation has changed since (added players,
+  // re-shuffled pool, etc.). This is what lets us update the data without
+  // wiping out the user's calendar history.
+  if (saved.playerSnapshot) {
+    game.current = saved.playerSnapshot;
+    game.previous = saved.playerSnapshot.name;
+    // Re-render the table now that game.current has been swapped.
+    render();
+  } else {
+    // Legacy saved entry without a snapshot — fall back to the old
+    // name-match safety check. If the rotation has shifted, we silently
+    // skip restoration rather than risk showing the wrong hints.
+    if (!game.current || saved.player !== game.current.name) return false;
+  }
+
+  // Reset the round state to match the saved finished state
+  game.wrong = saved.wrong;
+  game.lastOutcome = saved.outcome;
+  game.gaveUp = !!saved.gaveUp;
+
+  // Rebuild hint cards (gender appears at wrong>=1, nation at wrong>=2,
+  // answer/correct/give-up at the very end).
+  const panel = document.getElementById("hintPanel");
+  panel.innerHTML = "";
+
+  if (saved.wrong >= 1) {
+    const g = document.createElement("div");
+    const genderClass = (game.current.gender || "").toLowerCase();
+    g.className = `hint-card gender-card ${genderClass}`;
+    g.textContent = `👤 Gender: ${game.current.gender}`;
+    panel.appendChild(g);
+  }
+  if (saved.wrong >= 2) {
+    const n = document.createElement("div");
+    n.className = "hint-card nation-card";
+    const flag = nationalityToFlag(game.current.nationality);
+    n.textContent = `${flag} ${game.current.nationality}`;
+    panel.appendChild(n);
+  }
+  if (saved.outcome === "win") {
+    const a = document.createElement("div");
+    a.className = "hint-card correct-card";
+    a.textContent = `✅ Correct: ${game.current.name}`;
+    panel.appendChild(a);
+  } else if (saved.gaveUp) {
+    const a = document.createElement("div");
+    a.className = "hint-card answer-card";
+    a.textContent = `🏳️ Gave Up: ${game.current.name}`;
+    panel.appendChild(a);
+  } else {
+    // Lost on 3rd guess
+    const a = document.createElement("div");
+    a.className = "hint-card answer-card";
+    a.textContent = `❌ Answer: ${game.current.name}`;
+    panel.appendChild(a);
+  }
+
+  // Show a small "already played" banner so the state is explicit
+  const banner = document.createElement("div");
+  banner.className = "hint-card already-played-card";
+  banner.textContent = "🕘 You've already played today's puzzle";
+  panel.insertBefore(banner, panel.firstChild);
+
+  // Lock the input/buttons via the same end-of-round flow
+  game.locked = true;
+  document.getElementById("guessBtn").disabled = true;
+  document.getElementById("giveUpBtn").disabled = true;
+  document.getElementById("shareBtn").disabled = false;
+
+  // Daily mode keeps Next hidden; nothing to do for nextBtn
+  updateUI();
+  return true;
+}
+
+/* ------------------------------------------------------- */
+
+function todayLocal() {
+  // YYYY-MM-DD in the user's local timezone
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+/* ========================================================= */
+
+let game = {
+  players: [],
+  guessPool: [],
+  current: null,
+  previous: null,
+  wrong: 0,
+  locked: false,
+  selectedSuggestion: false,
+  suggestionIndex: -1,
+  suggestionItems: [],
+  lockProgressHints: false,
+  roundHistory: [],
+  currentRoundResult: null,
+  day: 0,
+  lastOutcome: null,
+
+  // NEW
+  mode: "standard",
+
+// NEW
+playType: "daily", // daily | archive | practice
+date: null,
+};
+/* HIGHLIGHT HELPERS */
+
+function highlightPlayButtons() {
+  document
+    .querySelectorAll(".play-btn")
+    .forEach(btn => {
+      btn.classList.toggle(
+        "active",
+        btn.dataset.play === game.playType
+      );
+    });
+}
+
+/* URL SYNC
+   Wordle-style clean URL: state lives in localStorage and in memory,
+   not in the URL. Shared links can still pre-seed state via ?date= or
+   ?play= (handled in load()), but the URL is never *written* back.
+   This function exists as a no-op so existing call sites still work. */
+
+function syncURL() { /* no-op — see comment above */ }
+
+/* SEED REBUILD */
+
+function rebuildSeed() {
+
+  if (
+    game.playType === "daily" ||
+    game.playType === "archive"
+  ) {
+    game.seed = `${game.mode}-${game.date}`;
+  } else {
+    // practice — fresh random each time
+    game.seed =
+      Math.random()
+        .toString(36)
+        .substring(2, 10);
+  }
+}
+
+/* =========================================================
+   DAILY ROTATION — Fisher-Yates with a stable seed
+   =========================================================
+   Per-mode deterministic schedule. Walks through every player in
+   shuffled order before any repeats. Cycle length = pool size:
+     Standard ≈ 328 days, Winners ≈ 100, Hard ≈ 233.
+
+   Bump SHUFFLE_SEED to reshuffle the rotation. Note: any change to
+   the player pool (adding/removing players) will shift the schedule. */
+
+const SHUFFLE_SEED = "slam-guesser-simple-v1";
+const ROTATION_EPOCH = "2026-01-01"; // day 0 of the rotation
+
+// Lightweight integer hash for strings (32-bit, deterministic).
+function hashStr(s) {
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) {
+    h = ((h << 5) + h + s.charCodeAt(i)) | 0;
+  }
+  return h;
+}
+
+// Mulberry32 — a good small PRNG seeded by an integer.
+function mulberry32(seedInt) {
+  let a = seedInt >>> 0;
+  return function () {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// Deterministic shuffle of an array (Fisher-Yates with a seeded RNG).
+function shuffleStable(arr, seedStr) {
+  const out = arr.slice();
+  const rand = mulberry32(hashStr(seedStr));
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
+// Cache the shuffled order per mode so we don't redo the work each round.
+const shuffleCache = {};
+
+function getRotationFor(mode, pool) {
+  // Cache key combines mode + pool size — if the pool changes (data
+  // refresh), we recompute rather than serve stale order.
+  const key = `${mode}:${pool.length}`;
+  if (!shuffleCache[key]) {
+    shuffleCache[key] = shuffleStable(pool, `${SHUFFLE_SEED}:${mode}`);
+  }
+  return shuffleCache[key];
+}
+
+// Whole-day delta between two YYYY-MM-DD strings (b - a). Negative if a > b.
+function daysBetween(a, b) {
+  const [ay, am, ad] = a.split("-").map(Number);
+  const [by, bm, bd] = b.split("-").map(Number);
+  const da = Date.UTC(ay, am - 1, ad);
+  const db = Date.UTC(by, bm - 1, bd);
+  return Math.round((db - da) / 86400000);
+}
+
+// Day-index for the rotation. Can be negative (pre-epoch) — we wrap via
+// the safe modulo below.
+function rotationDayIndex(dateIso) {
+  return daysBetween(ROTATION_EPOCH, dateIso);
+}
+
+function mod(n, m) {
+  return ((n % m) + m) % m;
+}
+
+// Pick today's (or any date's) player for the given mode + pool.
+// Manual overrides (loaded from daily_overrides.json) take precedence,
+// but only when the named player is actually in the eligible pool.
+// If the override is missing or invalid, fall back to the auto-pick so
+// the game never breaks on stale overrides.
+function pickRotationPlayer(mode, dateIso, pool) {
+  if (!pool || pool.length === 0) return null;
+
+  const overrideName = getDailyOverride(dateIso, mode);
+  if (overrideName) {
+    const match = pool.find(p => p.name === overrideName);
+    if (match) {
+      return match;
+    }
+    // Stale or invalid override — log once and fall through.
+    console.warn(
+      `[overrides] ${dateIso} ${mode} → "${overrideName}" not in eligible pool, falling back to auto-pick.`
+    );
+  }
+
+  const order = getRotationFor(mode, pool);
+  const i = mod(rotationDayIndex(dateIso), order.length);
+  return order[i];
+}
+
+/* =========================================================
+   DAILY OVERRIDES — loaded once from daily_overrides.json
+   =========================================================
+   File shape:
+     { "overrides": {
+         "2026-06-15": { "standard": "Roger Federer" },
+         "2026-06-20": { "winners": "Serena Williams" }
+     } }
+   The file is optional. If missing or invalid, the game falls back to
+   pure auto-pick for every date. */
+
+let dailyOverrides = {}; // { "YYYY-MM-DD": { mode: "Player Name" } }
+
+function getDailyOverride(dateIso, mode) {
+  return dailyOverrides?.[dateIso]?.[mode] || null;
+}
+
+async function loadDailyOverrides() {
+  try {
+    const res = await fetch("./daily_overrides_simple.json");
+    if (!res.ok) return; // file just isn't there — silent
+    const data = await res.json();
+    const raw = data?.overrides && typeof data.overrides === "object"
+      ? data.overrides
+      : (typeof data === "object" ? data : {});
+    dailyOverrides = raw || {};
+  } catch {
+    // missing file, parse error, or CORS issue — silently use no overrides
+    dailyOverrides = {};
+  }
+}
+
+/* MODE — single-mode game; these are kept as no-ops so the rest of the
+   code still calls them without conditionals. */
+
+function highlightModeButtons() { /* no-op: no toggle in single-mode build */ }
+function updateModeNote() { /* no-op: no mode descriptor needed */ }
+function setMode() { /* no-op: there's only one mode here */ }
+
+/* PLAY TYPE SWITCH */
+
+function setPlayType(playType) {
+
+  if (playType === game.playType) return; // no-op
+
+  game.playType = playType;
+
+  highlightPlayButtons();
+  updateDateUI();
+  syncURL();
+  rebuildSeed();
+
+  // start a fresh round in the new play type
+  next();
+}
+
+/* CALENDAR REMOVED — daily mode is now "today only".
+   These stubs exist because setPlayType() and other places call them. */
+
+function updateDateUI() { /* no-op: no calendar in this build */ }
+function closeDatePopover() { /* no-op: no popover */ }
+
+
+/* DAILY PUZZLE SYSTEM */
+
+/* PLAY TYPE */
+
+function getPlayType() {
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  return params.get("play") || "daily";
+}
+
+/* MODE */
+
+function getMode() {
+  // Single-mode game. Any URL "mode" param is ignored.
+  return "standard";
+}
+
+/* TODAY */
+
+function getTodayString() {
+  // Use the user's LOCAL date. Using toISOString() here would return UTC,
+  // which can be a day ahead in the evening for US users and shift the
+  // daily seed/puzzle a day earlier than expected.
+  return todayLocal();
+}
+
+/* DATE */
+
+function getRequestedDate() {
+  // Daily is "today only" in this simplified build. No past-date access.
+  return getTodayString();
+}
+
+/* LOAD */
+
+async function load() {
+
+  const res =
+    await fetch("./players_328.json");
+
+  game.players =
+    await res.json();
+
+  const res2 =
+    await fetch("./guess_pool_328.json");
+
+  game.guessPool =
+    await res2.json();
+
+  buildGuessPoolIndex();
+
+  // Load manual daily overrides — optional file. If missing or invalid,
+  // the game proceeds with pure auto-picks.
+  await loadDailyOverrides();
+
+  // URL STATE
+  game.playType = getPlayType();
+  game.mode = getMode();
+  game.date = getRequestedDate();
+
+  highlightModeButtons();
+  highlightPlayButtons();
+  updateDateUI();
+
+  rebuildSeed();
+
+  next();
+
+  // After honoring any shared-link params (?date=, ?play=), clear them
+  // so the URL stays clean Wordle-style for the rest of the session.
+  if (window.location.search) {
+    history.replaceState(null, "", window.location.pathname);
+  }
+}
+
+/* RESET HINTS */
+
+function clearHints() {
+  document.getElementById("hintPanel").innerHTML = "";
+}
+
+/* MESSAGE */
+
+function showMessage(text){
+
+  const panel =
+    document.getElementById("hintPanel");
+
+  const div =
+    document.createElement("div");
+
+  div.className =
+    "hint-card invalid-card";
+
+  div.textContent = text;
+
+  panel.appendChild(div);
+
+  setTimeout(() => div.remove(), 2000);
+}
+
+/* FLAGS */
+
+function nationalityToFlag(nation) {
+
+  const map = {
+    "Australia":"🇦🇺","Austria":"🇦🇹","Argentina":"🇦🇷","Belarus":"🇧🇾",
+    "Belgium":"🇧🇪","Brazil":"🇧🇷","Bulgaria":"🇧🇬","Canada":"🇨🇦",
+    "Chile":"🇨🇱","China":"🇨🇳","Croatia":"🇭🇷","Czech Republic":"🇨🇿",
+    "Denmark":"🇩🇰","Estonia":"🇪🇪","Finland":"🇫🇮","France":"🇫🇷",
+    "Germany":"🇩🇪","Greece":"🇬🇷","Hungary":"🇭🇺","India":"🇮🇳",
+    "Italy":"🇮🇹","Japan":"🇯🇵","Kazakhstan":"🇰🇿","Latvia":"🇱🇻",
+    "Mexico":"🇲🇽","Netherlands":"🇳🇱","New Zealand":"🇳🇿","Norway":"🇳🇴",
+    "Poland":"🇵🇱","Portugal":"🇵🇹","Romania":"🇷🇴","Russia":"🇷🇺",
+    "Serbia":"🇷🇸","Slovakia":"🇸🇰","Slovenia":"🇸🇮","South Africa":"🇿🇦",
+    "South Korea":"🇰🇷","Spain":"🇪🇸","Sweden":"🇸🇪","Switzerland":"🇨🇭",
+    "Tunisia":"🇹🇳","Turkey":"🇹🇷","Ukraine":"🇺🇦","United Kingdom":"🇬🇧",
+    "United States":"🇺🇸","USA":"🇺🇸","US":"🇺🇸"
+  };
+
+  return map[nation] || "";
+}
+
+/* SEEDING */
+
+function seededRandom(seed) {
+  // Hash the FULL seed string into an initial state. (Previously used
+  // only seed.length and the first character, which meant every daily
+  // seed in a given mode produced the same player every day.)
+  let hash = 5381;
+  for (let i = 0; i < seed.length; i++) {
+    hash = ((hash << 5) + hash + seed.charCodeAt(i)) | 0;
+  }
+  let x = Math.sin(hash) * 10000;
+
+  return function () {
+    x = Math.sin(x) * 10000;
+    return x - Math.floor(x);
+  };
+}
+
+/* NEXT PLAYER */
+
+
+function next() {
+
+
+// practice mode gets fresh random seed every round
+if (game.playType === "practice") {
+
+  game.seed =
+    Math.random()
+      .toString(36)
+      .substring(2, 10);
+}
+ const rand =
+  seededRandom(game.seed);
+   
+  game.wrong = 0;
+  game.locked = false;
+  game.selectedSuggestion = false;
+  game.hintLocked = false;
+  game.lockProgressHints = false;
+  game.gaveUp = false;
+
+const nextBtn =
+  document.getElementById("nextBtn");
+
+const shareBtn =
+  document.getElementById("shareBtn");
+
+nextBtn.style.display =
+  game.playType === "practice"
+    ? "inline-block"
+    : "none";
+
+shareBtn.style.display =
+  game.playType === "practice"
+    ? "none"
+    : "inline-block";
+
+shareBtn.disabled = true;
+
+game.lastOutcome = null;
+
+document.getElementById("guessBtn").disabled = false;
+document.getElementById("giveUpBtn").disabled = false;
+
+nextBtn.disabled = true;
+
+  document.getElementById("guess").value = "";
+
+  hideSuggestions();
+  clearHints();
+
+ // Single-mode filter — players who reached QF or deeper at any slam.
+ // Smaller and more recognizable than the multi-mode "Standard" pool.
+ let eligiblePlayers = game.players.filter(player => {
+   const slams = player.slams || {};
+   for (const tournament of Object.values(slams)) {
+     for (const result of Object.values(tournament)) {
+       if (
+         result === "QF" ||
+         result === "SF" ||
+         result === "F" ||
+         result === "W"
+       ) {
+         return true;
+       }
+     }
+   }
+   return false;
+ });
+
+// SAFETY CHECK
+if (!eligiblePlayers.length) {
+  showMessage("No eligible players");
+  return;
+}
+
+let p;
+
+// practice mode = true random (skip the previous player when possible
+// to avoid back-to-back repeats within a session)
+if (game.playType === "practice") {
+
+  do {
+
+    p = eligiblePlayers[
+      Math.floor(
+        Math.random() * eligiblePlayers.length
+      )
+    ];
+
+  } while (
+    eligiblePlayers.length > 1 &&
+    p?.name === game.previous
+  );
+}
+
+// daily/archive = deterministic rotation. Each player appears exactly
+// once before any repeats; the rotation cycle length equals the
+// eligible-pool size for that mode.
+else {
+  p = pickRotationPlayer(game.mode, game.date, eligiblePlayers);
+}
+
+  game.current = p;
+  game.previous = p.name;
+
+  render();
+  updateUI();
+
+  // If this is today's daily and the user already finished it, replay
+  // the finished state instead of letting them guess again.
+  maybeRestoreFinishedDaily();
+}
+
+/* GUESS */
+
+function guess() {
+
+  if (game.locked) return;
+
+  const input = document.getElementById("guess");
+  const val = input.value.trim();
+
+  if(!val){
+    showMessage("⚠️ Please select a player");
+    return;
+  }
+
+  if(!game.selectedSuggestion){
+    showMessage("⚠️ Choose a player from the dropdown");
+    return;
+  }
+
+  const target = game.current.name.toLowerCase();
+  const guessLower = val.toLowerCase();
+
+  const ok =
+    guessLower === target ||
+    guessLower === target.split(" ").pop();
+
+  if (ok) {
+  game.lastOutcome = ("win")
+  game.lockProgressHints = true; // only block gender/nation hints
+
+  showHints(true);
+
+  endRound();
+} else {
+    game.wrong++;
+    showHints(false);
+
+    if (game.wrong >= 3) {
+  game.lastOutcome = ("lose");
+  endRound();
+}
+
+    updateUI();
+  }
+
+  // Clear the input after a processed guess (win or wrong) so the player
+  // has a fresh box for their next attempt. Early-return validation cases
+  // above bail before this point and preserve what the user typed.
+  input.value = "";
+  game.selectedSuggestion = false;
+
+  hideSuggestions();
+}
+
+/* GIVE UP */
+
+function giveUp() {
+
+  if (game.locked) return;
+
+  game.lastOutcome = ("lose");
+  game.gaveUp = true;
+
+  const panel = document.getElementById("hintPanel");
+
+  const a = document.createElement("div");
+  a.className = "hint-card answer-card";
+  a.textContent = `🏳️ Gave Up: ${game.current.name}`;
+
+  panel.appendChild(a);
+
+  endRound();
+}
+
+// "win" or "lose"
+function setOutcome(type) {
+  game.lastOutcome = type; // "win" or "lose"
+}
+
+
+/* HINTS */
+
+function showHints(correct) {
+
+  const panel = document.getElementById("hintPanel");
+
+  // ❌ only block progressive hints (gender/nation)
+  if (!game.lockProgressHints) {
+
+    if (game.wrong === 1) {
+      const g = document.createElement("div");
+      const genderClass = (game.current.gender || "").toLowerCase();
+      g.className = `hint-card gender-card ${genderClass}`;
+      g.textContent = `👤 Gender: ${game.current.gender}`;
+      panel.appendChild(g);
+    }
+
+    if (game.wrong === 2) {
+      const n = document.createElement("div");
+      n.className = "hint-card nation-card";
+
+      const flag = nationalityToFlag(game.current.nationality);
+
+      n.textContent = `${flag} ${game.current.nationality}`;
+      panel.appendChild(n);
+    }
+  }
+
+  // ✅ ALWAYS allow final answer reveal
+  if (correct) {
+    const a = document.createElement("div");
+    a.className = "hint-card correct-card";
+    a.textContent = `✅ Correct: ${game.current.name}`;
+    panel.appendChild(a);
+  }
+
+  if (game.wrong >= 3 && !correct) {
+    const a = document.createElement("div");
+    a.className = "hint-card answer-card";
+    a.textContent = `❌ Answer: ${game.current.name}`;
+    panel.appendChild(a);
+  }
+}
+
+/* END ROUND */
+
+function endRound() {
+
+  // record result BEFORE locking next round
+  if (game.current) {
+    game.roundHistory.push({
+      player: game.current.name,
+      result:
+        game.wrong >= 3 ? "fail" :
+        game.wrong === 0 ? "correct" :
+        "partial"
+    });
+  }
+
+  // Persist the finished daily round so revisits can restore it.
+  // Saved for any daily play (today or archive); restoration is gated
+  // separately to "today" in next().
+  if (game.playType === "daily" && game.current) {
+    saveDailyResult(game.date, game.mode, {
+      player: game.current.name,
+      // Full snapshot of the player as they existed at play time. Future
+      // pool updates can reshuffle the schedule freely; revisits to this
+      // date will replay against this snapshot, not the current rotation.
+      playerSnapshot: game.current,
+      wrong: game.wrong,
+      outcome: game.lastOutcome,
+      gaveUp: !!game.gaveUp,
+    });
+  }
+
+  game.locked = true;
+
+  document.getElementById("guessBtn").disabled = true;
+  document.getElementById("giveUpBtn").disabled = true;
+  document.getElementById("shareBtn").disabled = false;
+
+  const nextBtn = document.getElementById("nextBtn");
+
+  nextBtn.disabled = false;
+  // (background turns green automatically via CSS when enabled)
+
+  updateUI();
+}
+
+/* AUTOCOMPLETE (CHANGED ONLY SOURCE) */
+
+/* Strip diacritics for fuzzy autocomplete matching ("Alex" should find
+   "Àlex Corretja"). Built once after the guess pool loads. */
+function deaccent(s) {
+  return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+let guessPoolIndex = []; // [{ display: "Àlex Corretja", search: "alex corretja" }]
+
+function buildGuessPoolIndex() {
+  guessPoolIndex = game.guessPool.map(name => ({
+    display: name,
+    search: deaccent(name).toLowerCase(),
+  }));
+}
+
+function updateSuggestions() {
+game.suggestionIndex = -1;
+game.suggestionItems = [];
+
+  game.selectedSuggestion = false;
+
+  const rawInput = document.getElementById("guess").value;
+  const input = deaccent(rawInput).toLowerCase();
+
+  const box = document.getElementById("suggestions");
+
+  if (input.length < 3) {
+    box.style.display = "none";
+    return;
+  }
+
+  // Match against the deaccented index, return the original display name.
+  const matches = guessPoolIndex
+    .filter(p => p.search.includes(input))
+    .slice(0, 8)
+    .map(p => p.display);
+
+  box.innerHTML = "";
+  matches.forEach(m => {
+
+  const div = document.createElement("div");
+  div.className = "suggestion";
+  div.textContent = m;
+
+  div.dataset.index = game.suggestionItems.length;
+
+  game.suggestionItems.push(div);
+
+  div.onclick = () => {
+    document.getElementById("guess").value = m;
+    game.selectedSuggestion = true;
+    box.style.display = "none";
+  };
+
+  box.appendChild(div);
+});
+
+  box.style.display = matches.length ? "block" : "none";
+}
+
+function hideSuggestions() {
+  document.getElementById("suggestions").style.display = "none";
+}
+function updateHighlight() {
+
+  const items = game.suggestionItems;
+
+  for (let i = 0; i < items.length; i++) {
+
+    if (i === game.suggestionIndex) {
+      items[i].style.background = "#1e293b";
+      items[i].style.color = "white";
+
+const box = document.getElementById("suggestions");
+
+const item = items[i];
+
+const itemTop = item.offsetTop;
+const itemBottom = itemTop + item.offsetHeight;
+
+const boxTop = box.scrollTop;
+const boxBottom = boxTop + box.offsetHeight;
+
+if (itemTop < boxTop) {
+  box.scrollTop = itemTop;
+}
+
+if (itemBottom > boxBottom) {
+  box.scrollTop = itemBottom - box.offsetHeight;
+}
+
+    } else {
+      items[i].style.background = "";
+      items[i].style.color = "";
+    }
+  }
+}
+
+/* SHARE */
+
+/* =========================================================
+   SHARE — spoiler-free, emoji-forward summary
+   =========================================================
+   Reveals effort (guesses used) and mode, never the player.
+   Format:
+     🎾 Slam Guesser — Daily 2026-05-27 · Standard
+     ✅ Solved in 2/3
+     🔴 🟢 ⚪
+     https://...
+*/
+
+function buildShareLines() {
+  const won  = game.lastOutcome === "win";
+  const wrong = game.wrong;
+  const gaveUp = !won && wrong < 3;
+
+  // Header line — daily uses date, practice says "Practice"
+  const tag = game.playType === "daily"
+    ? `Daily ${game.date}`
+    : "Practice";
+  const header = `🎾 Slam Guesser — ${tag}`;
+
+  // Outcome line
+  let outcome;
+  if (won) {
+    const guessNum = wrong + 1;          // 1, 2, or 3
+    outcome = `✅ Solved in ${guessNum}/3`;
+  } else if (gaveUp) {
+    outcome = `🏳️ Gave up`;
+  } else {
+    outcome = `❌ Missed (3/3)`;
+  }
+
+  // Pip row — Wordle-style visual without revealing anything
+  // 🟢 = correct guess at that slot, 🔴 = wrong, ⚪ = unused
+  const pips = [];
+  for (let i = 0; i < 3; i++) {
+    if (i < wrong) {
+      pips.push("🔴");
+    } else if (i === wrong && won) {
+      pips.push("🟢");
+    } else {
+      pips.push("⚪");
+    }
+  }
+  const pipLine = pips.join(" ");
+
+  return { header, outcome, pipLine };
+}
+
+function share() {
+
+  // Daily is "today only" — recipients of a shared link will see their own
+  // today, not the sharer's. Always share the bare URL.
+  const url = `${window.location.origin}${window.location.pathname}`;
+
+  const { header, outcome, pipLine } = buildShareLines();
+
+  const text = [header, outcome, pipLine].join("\n");
+  const fullText = `${text}\n\n${url}`;
+
+  if (navigator.share) {
+    navigator.share({
+      title: "🎾 Slam Guesser",
+      text,
+      url,
+    }).catch(() => {});
+    return;
+  }
+
+  navigator.clipboard
+    .writeText(fullText)
+    .then(() => showMessage("📋 Copied!"))
+    .catch(() => showMessage("Couldn't copy"));
+}
+
+
+/* CLASS MAP */
+
+function cls(v) {
+
+  if (!v) return "";
+
+  if (v === "W") return "W";
+  if (v === "F") return "F";
+  if (v === "SF") return "SF";
+  if (v === "QF") return "QF";
+
+  if (v === "4R") return "R4";
+  if (v === "3R") return "R3";
+  if (v === "2R") return "R2";
+  if (v === "1R") return "R1";
+
+  if (v === "A") return "A";
+  if (v === "NH") return "NH";
+
+  if (v === "Q1") return "Q1";
+  if (v === "Q2") return "Q2";
+  if (v === "Q3") return "Q3";
+
+  if (v.includes("Q")) return "Q";
+
+  return "";
+}
+
+/* RENDER */
+
+function render() {
+
+  const p = game.current;
+
+  const slams = Object.keys(p.slams || {});
+
+  const years = [...new Set(
+  slams.flatMap(s => Object.keys(p.slams?.[s] || {}))
+)]
+  .map(Number)
+  .sort((a,b)=>a-b)
+  .map(String);
+
+  let html = "<tr><th>Slam</th>";
+
+  years.forEach(y => {
+    html += `<th>${y}</th>`;
+  });
+
+  html += "</tr>";
+
+  for (const slam of slams) {
+
+    html += `<tr><td class="slam">${slam}</td>`;
+
+    for (const y of years) {
+
+      const v = p.slams?.[slam]?.[y] || "";
+      html += `<td class="${cls(v)}">${v}</td>`;
+    }
+
+    html += "</tr>";
+  }
+
+  document.getElementById("table").innerHTML = html;
+}
+
+/* UI */
+
+function updateUI() {
+
+  // Drive the three pip dots. Each pip "fills" once its index is <= wrong.
+  // We use used-1 / used-2 / used-3 classes to escalate the color as the
+  // count climbs, applied to ALL filled pips so the row visually intensifies.
+  const wrong = game.wrong;
+  const pips = [
+    document.getElementById("pip1"),
+    document.getElementById("pip2"),
+    document.getElementById("pip3"),
+  ];
+
+  for (let i = 0; i < pips.length; i++) {
+    const p = pips[i];
+    if (!p) continue;
+    p.classList.remove("used-1", "used-2", "used-3");
+    if (i < wrong) {
+      // pick the class matching the current total wrong count
+      p.classList.add(`used-${Math.min(wrong, 3)}`);
+    }
+  }
+}
+
+/* EVENTS */
+
+document.getElementById("guess")
+  .addEventListener("input", updateSuggestions);
+
+document.getElementById("guess")
+  .addEventListener("keydown", e => {
+
+    const box = document.getElementById("suggestions");
+
+    if (box.style.display === "block") {
+
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        game.suggestionIndex =
+          Math.min(game.suggestionIndex + 1, game.suggestionItems.length - 1);
+
+        updateHighlight();
+      }
+
+      else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        game.suggestionIndex =
+          Math.max(game.suggestionIndex - 1, 0);
+
+        updateHighlight();
+      }
+
+      else if (e.key === "Enter") {
+
+        if (game.suggestionIndex >= 0) {
+          e.preventDefault();
+          game.suggestionItems[game.suggestionIndex].click();
+        } else {
+          guess();
+        }
+      }
+
+    } else {
+      if (e.key === "Enter") guess();
+    }
+  });
+
+document.addEventListener("click", e => {
+  if (!e.target.closest(".controls")) {
+    hideSuggestions();
+  }
+});
+
+// First-visit onboarding: open the how-to-play dialog once.
+function maybeShowFirstTimeHowTo() {
+  const KEY = "slamGuesserSimple.seenHowTo.v1";
+  try {
+    if (localStorage.getItem(KEY)) return;
+    const dlg = document.getElementById("howToDialog");
+    if (dlg && typeof dlg.showModal === "function") {
+      dlg.showModal();
+      localStorage.setItem(KEY, "1");
+    }
+  } catch { /* ignore */ }
+}
+
+load().then(maybeShowFirstTimeHowTo);
+
+</script>
+
+</body>
+</html>
