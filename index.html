@@ -452,13 +452,13 @@ body {
 .input-wrap { position: relative; }
 
 input#guess {
-  padding: 11px 16px;
+  padding: 10px 16px;
   border-radius: 999px;
   border: 1px solid var(--line);
   background: var(--surface);
   color: var(--ink);
   width: 280px;
-  font-size: 14px;
+  font-size: 16px; /* must be >=16px to prevent iOS auto-zoom on focus */
   outline: none;
   transition: border-color 0.15s, box-shadow 0.15s;
 }
