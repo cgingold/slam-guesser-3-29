@@ -56,17 +56,46 @@ body {
 
 .brand {
   font-family: Georgia, "Times New Roman", serif;
-  font-style: italic;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   color: var(--header-ink);
 }
 
-.brand .ball {
-  font-style: normal;
-  margin-right: 4px;
-}
+/* Brand variants — swap any of these blocks into .brand to try them.
+   Comment out the block above first.
+
+   --- Editorial italic ---
+   .brand {
+     font-family: Georgia, "Times New Roman", serif;
+     font-style: italic;
+     font-size: 22px;
+     font-weight: 600;
+     letter-spacing: -0.01em;
+     color: var(--header-ink);
+   }
+
+   --- Magazine masthead (thin, very wide tracking) ---
+   .brand {
+     font-family: Georgia, "Times New Roman", serif;
+     font-size: 17px;
+     font-weight: 400;
+     letter-spacing: 0.25em;
+     text-transform: uppercase;
+     color: var(--header-ink);
+   }
+
+   --- NYT Games style (heavy caps, tight tracking) ---
+   .brand {
+     font-family: Georgia, "Times New Roman", serif;
+     font-size: 18px;
+     font-weight: 700;
+     letter-spacing: 0.02em;
+     text-transform: uppercase;
+     color: var(--header-ink);
+   }
+*/
 
 /* play toggle — lives in the dark header band */
 .play-toggle {
@@ -611,6 +640,7 @@ th {
   background: #f1f1ec;
   position: sticky;
   top: 0;
+  z-index: 2;
   font-weight: 600;
   color: var(--ink-soft);
   letter-spacing: 0.02em;
@@ -620,8 +650,20 @@ th {
   background: #f1f1ec;
   position: sticky;
   left: 0;
+  z-index: 2;
   font-weight: 600;
   color: var(--ink);
+}
+
+/* The top-left corner cell (the "Slam" header) sits at the intersection
+   of the sticky row and sticky column, so it needs both axes and a
+   higher z-index than either alone. */
+th.slam,
+th:first-child {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 3;
 }
 
 /* result cells — re-tuned for light background */
@@ -725,18 +767,9 @@ details.legend[open] summary::after { content: "▴"; }
 
 <header class="header">
   <div class="header-inner">
-    <div class="brand"><span class="ball">🎾</span>Slam Guesser</div>
+    <div class="brand">Slam Guesser</div>
 
     <div class="header-right">
-      <div class="play-toggle">
-        <button class="play-btn"
-                data-play="daily"
-                onclick="setPlayType('daily')">Daily</button>
-        <button class="play-btn"
-                data-play="practice"
-                onclick="setPlayType('practice')">Practice</button>
-      </div>
-
       <button class="icon-btn"
               id="howToBtn"
               aria-label="How to play"
@@ -767,8 +800,7 @@ details.legend[open] summary::after { content: "▴"; }
       nationality, then the answer).
     </p>
     <p class="howto-body">
-      A new puzzle drops every day. Want to keep playing? Switch to
-      <strong>Practice</strong> for unlimited random rounds.
+      A new puzzle drops every day. See you tomorrow.
     </p>
   </div>
 </dialog>
@@ -790,7 +822,6 @@ details.legend[open] summary::after { content: "▴"; }
 
   <button id="guessBtn" onclick="guess()">Guess</button>
   <button id="giveUpBtn" onclick="giveUp()">Give Up</button>
-  <button id="nextBtn" onclick="next()" disabled>Next</button>
   <button id="shareBtn" onclick="share()" disabled>Share</button>
 </div>
 
@@ -870,11 +901,6 @@ function getDailyResult(date, mode) {
 /* Replay a finished daily round so revisits show the locked end-state.
    Returns true if a restoration was performed, false otherwise. */
 function maybeRestoreFinishedDaily() {
-  // Only restore for daily play. Past dates (picked via the date popover)
-  // restore their saved state too, so users see what they previously did
-  // instead of being able to re-play.
-  if (game.playType !== "daily") return false;
-
   const saved = getDailyResult(game.date, game.mode);
   if (!saved) return false;
 
@@ -983,25 +1009,14 @@ let game = {
   day: 0,
   lastOutcome: null,
 
-  // NEW
   mode: "standard",
-
-// NEW
-playType: "daily", // daily | archive | practice
-date: null,
+  playType: "daily", // single play type — no practice mode in this build
+  date: null,
 };
-/* HIGHLIGHT HELPERS */
+/* HIGHLIGHT HELPERS — no-ops since there's no play toggle */
 
-function highlightPlayButtons() {
-  document
-    .querySelectorAll(".play-btn")
-    .forEach(btn => {
-      btn.classList.toggle(
-        "active",
-        btn.dataset.play === game.playType
-      );
-    });
-}
+function highlightPlayButtons() { /* no-op */ }
+function setPlayType() { /* no-op */ }
 
 /* URL SYNC
    Wordle-style clean URL: state lives in localStorage and in memory,
@@ -1014,19 +1029,7 @@ function syncURL() { /* no-op — see comment above */ }
 /* SEED REBUILD */
 
 function rebuildSeed() {
-
-  if (
-    game.playType === "daily" ||
-    game.playType === "archive"
-  ) {
-    game.seed = `${game.mode}-${game.date}`;
-  } else {
-    // practice — fresh random each time
-    game.seed =
-      Math.random()
-        .toString(36)
-        .substring(2, 10);
-  }
+  game.seed = `${game.mode}-${game.date}`;
 }
 
 /* =========================================================
@@ -1170,23 +1173,6 @@ function highlightModeButtons() { /* no-op: no toggle in single-mode build */ }
 function updateModeNote() { /* no-op: no mode descriptor needed */ }
 function setMode() { /* no-op: there's only one mode here */ }
 
-/* PLAY TYPE SWITCH */
-
-function setPlayType(playType) {
-
-  if (playType === game.playType) return; // no-op
-
-  game.playType = playType;
-
-  highlightPlayButtons();
-  updateDateUI();
-  syncURL();
-  rebuildSeed();
-
-  // start a fresh round in the new play type
-  next();
-}
-
 /* CALENDAR REMOVED — daily mode is now "today only".
    These stubs exist because setPlayType() and other places call them. */
 
@@ -1199,11 +1185,7 @@ function closeDatePopover() { /* no-op: no popover */ }
 /* PLAY TYPE */
 
 function getPlayType() {
-
-  const params =
-    new URLSearchParams(window.location.search);
-
-  return params.get("play") || "daily";
+  return "daily"; // single play type
 }
 
 /* MODE */
@@ -1342,18 +1324,6 @@ function seededRandom(seed) {
 
 function next() {
 
-
-// practice mode gets fresh random seed every round
-if (game.playType === "practice") {
-
-  game.seed =
-    Math.random()
-      .toString(36)
-      .substring(2, 10);
-}
- const rand =
-  seededRandom(game.seed);
-   
   game.wrong = 0;
   game.locked = false;
   game.selectedSuggestion = false;
@@ -1361,21 +1331,8 @@ if (game.playType === "practice") {
   game.lockProgressHints = false;
   game.gaveUp = false;
 
-const nextBtn =
-  document.getElementById("nextBtn");
-
 const shareBtn =
   document.getElementById("shareBtn");
-
-nextBtn.style.display =
-  game.playType === "practice"
-    ? "inline-block"
-    : "none";
-
-shareBtn.style.display =
-  game.playType === "practice"
-    ? "none"
-    : "inline-block";
 
 shareBtn.disabled = true;
 
@@ -1383,8 +1340,6 @@ game.lastOutcome = null;
 
 document.getElementById("guessBtn").disabled = false;
 document.getElementById("giveUpBtn").disabled = false;
-
-nextBtn.disabled = true;
 
   document.getElementById("guess").value = "";
 
@@ -1416,32 +1371,7 @@ if (!eligiblePlayers.length) {
   return;
 }
 
-let p;
-
-// practice mode = true random (skip the previous player when possible
-// to avoid back-to-back repeats within a session)
-if (game.playType === "practice") {
-
-  do {
-
-    p = eligiblePlayers[
-      Math.floor(
-        Math.random() * eligiblePlayers.length
-      )
-    ];
-
-  } while (
-    eligiblePlayers.length > 1 &&
-    p?.name === game.previous
-  );
-}
-
-// daily/archive = deterministic rotation. Each player appears exactly
-// once before any repeats; the rotation cycle length equals the
-// eligible-pool size for that mode.
-else {
-  p = pickRotationPlayer(game.mode, game.date, eligiblePlayers);
-}
+let p = pickRotationPlayer(game.mode, game.date, eligiblePlayers);
 
   game.current = p;
   game.previous = p.name;
@@ -1449,8 +1379,8 @@ else {
   render();
   updateUI();
 
-  // If this is today's daily and the user already finished it, replay
-  // the finished state instead of letting them guess again.
+  // If the user already finished today's puzzle, replay the finished state
+  // instead of letting them guess again.
   maybeRestoreFinishedDaily();
 }
 
@@ -1593,10 +1523,8 @@ function endRound() {
     });
   }
 
-  // Persist the finished daily round so revisits can restore it.
-  // Saved for any daily play (today or archive); restoration is gated
-  // separately to "today" in next().
-  if (game.playType === "daily" && game.current) {
+  // Persist the finished daily round so revisits restore it on refresh.
+  if (game.current) {
     saveDailyResult(game.date, game.mode, {
       player: game.current.name,
       // Full snapshot of the player as they existed at play time. Future
@@ -1614,11 +1542,6 @@ function endRound() {
   document.getElementById("guessBtn").disabled = true;
   document.getElementById("giveUpBtn").disabled = true;
   document.getElementById("shareBtn").disabled = false;
-
-  const nextBtn = document.getElementById("nextBtn");
-
-  nextBtn.disabled = false;
-  // (background turns green automatically via CSS when enabled)
 
   updateUI();
 }
@@ -1741,23 +1664,26 @@ function buildShareLines() {
   const wrong  = game.wrong;
   const guessNum = won ? wrong + 1 : null;
 
-  // Header — daily uses a friendly date ("May 28"), practice says "Practice"
-  let tag;
-  if (game.playType === "daily" && game.date) {
+  // Header — friendly date ("May 28")
+  let tag = "";
+  if (game.date) {
     const [y, m, d] = game.date.split("-").map(Number);
     const dt = new Date(y, m - 1, d);
     tag = dt.toLocaleDateString(undefined, { month: "long", day: "numeric" });
-  } else {
-    tag = "Practice";
   }
   const header = `Slam Guesser — ${tag}`;
 
-  // Balls row — lit in attempt order, ⚪ for unused.
-  // On a loss/give-up, all three are ⚪ (no correct guess at all).
+  // Balls row — a tennis ball for each used attempt (right or wrong),
+  // ⚪ for unused. Ends in ✅ on a win or ❌ on a loss/give-up.
+  // "Used" = the slot was filled by a guess (correct or not). When the
+  // round ends in a win, the final correct guess counts as used; when
+  // it ends in a loss or give-up, the wrong guesses count as used.
+  const attemptsUsed = won ? guessNum : wrong;
   const balls = [];
   for (let i = 0; i < 3; i++) {
-    balls.push(won && i < guessNum ? "🎾" : "⚪");
+    balls.push(i < attemptsUsed ? "🎾" : "⚪");
   }
+  balls.push(won ? " ✅" : " ❌");
   const ballsLine = balls.join("");
 
   // Career stat line — count of W / F / SF / QF across the player's slams.
@@ -1860,9 +1786,19 @@ function render() {
 
   html += "</tr>";
 
+  // Display labels for the slam column. Backend keys stay as
+  // AustralianOpen/FrenchOpen/Wimbledon/USOpen for data continuity.
+  const SLAM_LABELS = {
+    "AustralianOpen": "Australian Open",
+    "FrenchOpen":     "French Open",
+    "Wimbledon":      "Wimbledon",
+    "USOpen":         "US Open",
+  };
+
   for (const slam of slams) {
 
-    html += `<tr><td class="slam">${slam}</td>`;
+    const label = SLAM_LABELS[slam] || slam;
+    html += `<tr><td class="slam">${label}</td>`;
 
     for (const y of years) {
 
