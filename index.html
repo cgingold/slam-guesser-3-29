@@ -1737,42 +1737,47 @@ if (itemBottom > boxBottom) {
 */
 
 function buildShareLines() {
-  const won  = game.lastOutcome === "win";
-  const wrong = game.wrong;
-  const gaveUp = !won && wrong < 3;
+  const won    = game.lastOutcome === "win";
+  const wrong  = game.wrong;
+  const guessNum = won ? wrong + 1 : null;
 
-  // Header line — daily uses date, practice says "Practice"
-  const tag = game.playType === "daily"
-    ? `Daily ${game.date}`
-    : "Practice";
-  const header = `🎾 Slam Guesser — ${tag}`;
-
-  // Outcome line
-  let outcome;
-  if (won) {
-    const guessNum = wrong + 1;          // 1, 2, or 3
-    outcome = `✅ Solved in ${guessNum}/3`;
-  } else if (gaveUp) {
-    outcome = `🏳️ Gave up`;
+  // Header — daily uses a friendly date ("May 28"), practice says "Practice"
+  let tag;
+  if (game.playType === "daily" && game.date) {
+    const [y, m, d] = game.date.split("-").map(Number);
+    const dt = new Date(y, m - 1, d);
+    tag = dt.toLocaleDateString(undefined, { month: "long", day: "numeric" });
   } else {
-    outcome = `❌ Missed (3/3)`;
+    tag = "Practice";
   }
+  const header = `Slam Guesser — ${tag}`;
 
-  // Pip row — Wordle-style visual without revealing anything
-  // 🟢 = correct guess at that slot, 🔴 = wrong, ⚪ = unused
-  const pips = [];
+  // Balls row — lit in attempt order, ⚪ for unused.
+  // On a loss/give-up, all three are ⚪ (no correct guess at all).
+  const balls = [];
   for (let i = 0; i < 3; i++) {
-    if (i < wrong) {
-      pips.push("🔴");
-    } else if (i === wrong && won) {
-      pips.push("🟢");
-    } else {
-      pips.push("⚪");
-    }
+    balls.push(won && i < guessNum ? "🎾" : "⚪");
   }
-  const pipLine = pips.join(" ");
+  const ballsLine = balls.join("");
 
-  return { header, outcome, pipLine };
+  // Career stat line — count of W / F / SF / QF across the player's slams.
+  let statLine = null;
+  if (game.current && game.current.slams) {
+    const counts = { W: 0, F: 0, SF: 0, QF: 0 };
+    for (const t of Object.values(game.current.slams)) {
+      for (const r of Object.values(t)) {
+        if (counts[r] !== undefined) counts[r]++;
+      }
+    }
+    const parts = [];
+    if (counts.W)  parts.push(`${counts.W} 🟩`);
+    if (counts.F)  parts.push(`${counts.F} 🟪`);
+    if (counts.SF) parts.push(`${counts.SF} 🟨`);
+    if (counts.QF) parts.push(`${counts.QF} 🟧`);
+    if (parts.length) statLine = parts.join("  ");
+  }
+
+  return { header, ballsLine, statLine };
 }
 
 function share() {
@@ -1781,9 +1786,11 @@ function share() {
   // today, not the sharer's. Always share the bare URL.
   const url = `${window.location.origin}${window.location.pathname}`;
 
-  const { header, outcome, pipLine } = buildShareLines();
+  const { header, ballsLine, statLine } = buildShareLines();
 
-  const text = [header, outcome, pipLine].join("\n");
+  const text = [header, ballsLine, statLine]
+    .filter(Boolean)
+    .join("\n");
   const fullText = `${text}\n\n${url}`;
 
   if (navigator.share) {
