@@ -659,7 +659,7 @@ button:disabled {
 .scroll-hint {
   text-align: center;
   font-size: 11px;
-  color: var(--ink);
+  color: var(--ink-faint);
   margin-bottom: 8px;
   letter-spacing: 0.04em;
 }
@@ -718,6 +718,25 @@ th:first-child {
 .Q1, .Q2, .Q3, .Q  { background: #93c5fd; color: #1e3a8a; }
 .A  { background: #c5cac6; color: #4a6e63; }
 .NH { background: #115e59; color: white; }
+
+/* Career reveal animation — each cell "stamps" in one by one with a
+   sharp overshoot. The data is in the cell from first paint; the
+   .is-hidden class hides it behind a gray plate until its stagger
+   delay fires, at which point the stamp animation plays. */
+.reveal-cell.is-hidden {
+  background-color: #e8eae6 !important;
+  color: transparent !important;
+}
+.reveal-cell.is-stamping {
+  animation: stampIn 0.32s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  transform-origin: center;
+}
+@keyframes stampIn {
+  0%   { transform: scale(1.55); opacity: 0; }
+  55%  { transform: scale(0.92); opacity: 1; }
+  78%  { transform: scale(1.04); }
+  100% { transform: scale(1.0);  opacity: 1; }
+}
 
 /* ===========================================================
    LEGEND
@@ -1444,6 +1463,10 @@ let p = pickRotationPlayer(game.mode, game.date, eligiblePlayers);
   game.current = p;
   game.previous = p.name;
 
+  // If this date has a saved result, we're about to restore — skip the
+  // career-reveal animation since the user has already seen the table.
+  game._skipReveal = !!getDailyResult(game.date, game.mode);
+
   render();
   updateUI();
 
@@ -1878,15 +1901,15 @@ function render() {
     "USOpen":         "US Open",
   };
 
-  for (const slam of slams) {
-
+  for (let rowIdx = 0; rowIdx < slams.length; rowIdx++) {
+    const slam = slams[rowIdx];
     const label = SLAM_LABELS[slam] || slam;
     html += `<tr><td class="slam">${label}</td>`;
 
-    for (const y of years) {
-
+    for (let colIdx = 0; colIdx < years.length; colIdx++) {
+      const y = years[colIdx];
       const v = p.slams?.[slam]?.[y] || "";
-      html += `<td class="${cls(v)}">${v}</td>`;
+      html += `<td class="${cls(v)} reveal-cell" data-row="${rowIdx}" data-col="${colIdx}">${v}</td>`;
     }
 
     html += "</tr>";
@@ -1894,9 +1917,53 @@ function render() {
 
   document.getElementById("table").innerHTML = html;
 
+  // Trigger the column-by-column reveal animation. Skipped on restores
+  // (the user has already seen this player), only fires on fresh rounds.
+  if (!game._skipReveal) {
+    // Pre-mark cells as hidden immediately so the gray plate is in place
+    // even if the actual reveal is deferred (e.g. how-to modal is open).
+    const cells = document.querySelectorAll("#table .reveal-cell");
+    cells.forEach(c => c.classList.add("is-hidden"));
+
+    const howTo = document.getElementById("howToDialog");
+    const howToOpen = howTo && howTo.open;
+    const willShowHowTo = !localStorage.getItem("slamGuesserSimple.seenHowTo.v1");
+
+    if (howToOpen || willShowHowTo) {
+      // Defer the reveal until the modal is closed.
+      game._pendingReveal = { cols: years.length, rows: slams.length };
+    } else {
+      animateReveal(years.length, slams.length);
+    }
+  }
+
   // After the table updates, refresh the "scroll for full career" hint
   // (runs on next frame so layout is settled).
   requestAnimationFrame(updateScrollHint);
+}
+
+/* Reveal animation: each cell stamps in one at a time. Order is
+   column-by-column (left → right), top-to-bottom within each column.
+   Boom, boom, boom — each slam result lands like a stamp. */
+function animateReveal(numCols, numRows) {
+  const STAGGER_MS = 350; // per-cell beat
+
+  const cells = document.querySelectorAll("#table .reveal-cell");
+  cells.forEach(c => c.classList.add("is-hidden"));
+
+  void document.getElementById("table").offsetWidth;
+
+  cells.forEach(cell => {
+    const row = parseInt(cell.dataset.row, 10);
+    const col = parseInt(cell.dataset.col, 10);
+    const order = col * numRows + row; // column-first, row-within-column
+    const delay = order * STAGGER_MS;
+    setTimeout(() => {
+      cell.classList.remove("is-hidden");
+      cell.classList.add("is-stamping");
+      setTimeout(() => cell.classList.remove("is-stamping"), 350);
+    }, delay);
+  });
 }
 
 function updateScrollHint() {
@@ -2031,6 +2098,20 @@ function startCountdown() {
 load().then(() => {
   maybeShowFirstTimeHowTo();
   startCountdown();
+});
+
+// When the how-to dialog closes, if there's a pending reveal animation
+// (deferred because the modal was open), play it now.
+document.addEventListener("DOMContentLoaded", () => {
+  const howTo = document.getElementById("howToDialog");
+  if (!howTo) return;
+  howTo.addEventListener("close", () => {
+    if (game && game._pendingReveal) {
+      const { cols, rows } = game._pendingReveal;
+      game._pendingReveal = null;
+      animateReveal(cols, rows);
+    }
+  });
 });
 
 </script>
