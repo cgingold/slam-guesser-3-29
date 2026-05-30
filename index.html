@@ -653,8 +653,18 @@ button:disabled {
   border-radius: 12px;
   border: 1px solid var(--line);
   max-height: 65vh;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
+
+.scroll-hint {
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+
+.scroll-hint[hidden] { display: none; }
 
 table {
   border-collapse: collapse;
@@ -884,6 +894,8 @@ th:first-child {
 <div class="table-wrap">
   <table id="table"></table>
 </div>
+
+<div id="scrollHint" class="scroll-hint" hidden>← scroll for full career →</div>
 
 <div class="legend-wrap">
   <div class="legend">
@@ -1881,7 +1893,26 @@ function render() {
   }
 
   document.getElementById("table").innerHTML = html;
+
+  // After the table updates, refresh the "scroll for full career" hint
+  // (runs on next frame so layout is settled).
+  requestAnimationFrame(updateScrollHint);
 }
+
+function updateScrollHint() {
+  const wrap = document.querySelector(".table-wrap");
+  const hint = document.getElementById("scrollHint");
+  if (!wrap || !hint) return;
+  // Allow 2px of slack for sub-pixel rounding.
+  const needsScroll = wrap.scrollWidth > wrap.clientWidth + 2;
+  hint.hidden = !needsScroll;
+}
+
+// Recompute on resize (orientation change, window resize, etc.)
+window.addEventListener("resize", () => {
+  clearTimeout(window.__scrollHintTimer);
+  window.__scrollHintTimer = setTimeout(updateScrollHint, 80);
+});
 
 /* UI */
 
