@@ -365,6 +365,39 @@ body {
   font-weight: 700;
 }
 
+.giveup-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.giveup-confirm,
+.giveup-cancel {
+  flex: 1 1 0;
+  padding: 11px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: filter 0.15s, background 0.15s, border-color 0.15s;
+}
+
+.giveup-confirm {
+  background: transparent;
+  color: var(--ink-soft);
+  border-color: var(--line);
+}
+.giveup-confirm:hover { border-color: #b8512a; color: #b8512a; background: rgba(184, 81, 42, 0.05); filter: none; }
+
+.giveup-cancel {
+  background: var(--ink);
+  color: var(--header-ink);
+  border-color: var(--ink);
+}
+.giveup-cancel:hover { filter: brightness(1.12); }
+
 /* ===========================================================
    APP CONTAINER
    =========================================================== */
@@ -713,6 +746,29 @@ th:first-child {
   letter-spacing: 0.02em;
 }
 
+.countdown {
+  text-align: center;
+  margin: 32px auto 0;
+  color: var(--ink-soft);
+}
+
+.countdown-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-faint);
+  margin-bottom: 4px;
+}
+
+.countdown-time {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
 /* ===========================================================
    MOBILE
    =========================================================== */
@@ -791,6 +847,17 @@ th:first-child {
   </div>
 </dialog>
 
+<dialog id="giveUpDialog" class="howto-dialog">
+  <div class="howto-inner">
+    <h2 class="howto-title">Are you sure?</h2>
+    <p class="howto-body">What would Rafa do?</p>
+    <div class="giveup-actions">
+      <button class="giveup-confirm" onclick="confirmGiveUp()">Yes, give up</button>
+      <button class="giveup-cancel" onclick="document.getElementById('giveUpDialog').close()">Play on</button>
+    </div>
+  </div>
+</dialog>
+
 <div class="app">
 
 
@@ -828,6 +895,11 @@ th:first-child {
     <span class="legend-pair"><span class="legend-item A">A</span> Absent</span>
     <span class="legend-pair"><span class="legend-item NH">NH</span> Not Held</span>
   </div>
+</div>
+
+<div class="countdown">
+  <div class="countdown-label">Next puzzle in</div>
+  <div class="countdown-time" id="countdownTime">--:--:--</div>
 </div>
 
 </div><!-- /.app -->
@@ -1424,6 +1496,21 @@ function guess() {
 /* GIVE UP */
 
 function giveUp() {
+  if (game.locked) return;
+  // Show the confirmation dialog instead of giving up immediately.
+  const dlg = document.getElementById("giveUpDialog");
+  if (dlg && typeof dlg.showModal === "function") {
+    dlg.showModal();
+  } else {
+    // Fallback if <dialog> isn't supported
+    confirmGiveUp();
+  }
+}
+
+function confirmGiveUp() {
+  // Close the dialog if it's open
+  const dlg = document.getElementById("giveUpDialog");
+  if (dlg && dlg.open) dlg.close();
 
   if (game.locked) return;
 
@@ -1882,7 +1969,37 @@ function maybeShowFirstTimeHowTo() {
   } catch { /* ignore */ }
 }
 
-load().then(maybeShowFirstTimeHowTo);
+// Countdown to the next local midnight (when the next daily puzzle drops).
+// Reloads the page once midnight passes so the new day's puzzle loads.
+function startCountdown() {
+  const el = document.getElementById("countdownTime");
+  if (!el) return;
+
+  function tick() {
+    const now = new Date();
+    const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0);
+    const ms = tomorrow - now;
+    if (ms <= 0) {
+      // Day rolled over while the tab was open. Reload to pull the new puzzle.
+      window.location.reload();
+      return;
+    }
+    const h = Math.floor(ms / 3600000);
+    const m = Math.floor((ms % 3600000) / 60000);
+    const s = Math.floor((ms % 60000) / 1000);
+    el.textContent =
+      String(h).padStart(2, "0") + ":" +
+      String(m).padStart(2, "0") + ":" +
+      String(s).padStart(2, "0");
+  }
+  tick();
+  setInterval(tick, 1000);
+}
+
+load().then(() => {
+  maybeShowFirstTimeHowTo();
+  startCountdown();
+});
 
 </script>
 
