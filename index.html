@@ -1973,14 +1973,32 @@ function animateReveal(numCols, numRows) {
 
   void document.getElementById("table").offsetWidth;
 
+  const wrap = document.querySelector(".table-wrap");
+
   cells.forEach(cell => {
     const row = parseInt(cell.dataset.row, 10);
     const col = parseInt(cell.dataset.col, 10);
-    const order = col * numRows + row; // column-first, row-within-column
+    const order = col * numRows + row;
     const delay = order * STAGGER_MS;
     setTimeout(() => {
       cell.classList.remove("is-hidden");
       cell.classList.add("is-stamping");
+      // Auto-scroll: keep the next column in view, but don't scroll once
+      // we've reached the last column (nowhere meaningful to go, and the
+      // smooth-scroll engine causes a visible bump at the edge).
+      if (wrap && col < numCols - 1) {
+        const wrapRect = wrap.getBoundingClientRect();
+        const cellRect = cell.getBoundingClientRect();
+        const RIGHT_MARGIN = 40;
+        if (cellRect.right > wrapRect.right - RIGHT_MARGIN) {
+          const overflow = cellRect.right - (wrapRect.right - RIGHT_MARGIN);
+          const maxScroll = wrap.scrollWidth - wrap.clientWidth;
+          const target = Math.min(wrap.scrollLeft + overflow, maxScroll);
+          if (target > wrap.scrollLeft + 1) {
+            wrap.scrollTo({ left: target, behavior: "smooth" });
+          }
+        }
+      }
       setTimeout(() => cell.classList.remove("is-stamping"), 350);
     }, delay);
   });
