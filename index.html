@@ -679,52 +679,38 @@ th:first-child {
 /* ===========================================================
    LEGEND
    =========================================================== */
-.legend-wrap { display: flex; justify-content: center; }
-
-details.legend {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  font-size: 12px;
-  width: fit-content;
-  max-width: 100%;
+.legend-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 0 8px;
+  margin-top: 6px;
 }
 
-details.legend summary {
-  cursor: pointer;
-  padding: 8px 16px;
-  color: var(--ink-soft);
-  user-select: none;
-  font-weight: 600;
-  list-style: none;
-  letter-spacing: 0.02em;
-}
-
-details.legend summary::-webkit-details-marker { display: none; }
-details.legend summary::after { content: "▾"; margin-left: 8px; font-size: 10px; }
-details.legend[open] summary::after { content: "▴"; }
-
-.legend-grid {
+.legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 12px;
-  padding: 8px 16px 14px;
-  border-top: 1px solid var(--line);
+  gap: 4px 10px;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--ink-soft);
+  max-width: 720px;
+}
+
+.legend-pair {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
 }
 
 .legend-item {
-  padding: 3px 8px;
-  border-radius: 5px;
+  padding: 1px 6px;
+  border-radius: 4px;
   font-weight: 700;
-  min-width: 32px;
   text-align: center;
-  font-size: 11px;
-}
-
-.legend-label {
-  color: var(--ink-soft);
-  margin-right: 4px;
-  align-self: center;
+  font-size: 10px;
+  letter-spacing: 0.02em;
 }
 
 /* ===========================================================
@@ -832,19 +818,16 @@ details.legend[open] summary::after { content: "▴"; }
 </div>
 
 <div class="legend-wrap">
-  <details class="legend">
-    <summary>Legend</summary>
-    <div class="legend-grid">
-      <div class="legend-item W">W</div>  <span class="legend-label">Winner</span>
-      <div class="legend-item F">F</div>  <span class="legend-label">Final</span>
-      <div class="legend-item SF">SF</div> <span class="legend-label">Semifinal</span>
-      <div class="legend-item QF">QF</div> <span class="legend-label">Quarterfinal</span>
-      <div class="legend-item R1">R1-R4</div> <span class="legend-label">Rounds</span>
-      <div class="legend-item Q">Q</div>  <span class="legend-label">Qualifying</span>
-      <div class="legend-item A">A</div>  <span class="legend-label">Absent</span>
-      <div class="legend-item NH">NH</div> <span class="legend-label">Not Held</span>
-    </div>
-  </details>
+  <div class="legend">
+    <span class="legend-pair"><span class="legend-item W">W</span> Winner</span>
+    <span class="legend-pair"><span class="legend-item F">F</span> Final</span>
+    <span class="legend-pair"><span class="legend-item SF">SF</span> Semifinal</span>
+    <span class="legend-pair"><span class="legend-item QF">QF</span> Quarterfinal</span>
+    <span class="legend-pair"><span class="legend-item R1">R1-R4</span> Rounds</span>
+    <span class="legend-pair"><span class="legend-item Q">Q</span> Qualifying</span>
+    <span class="legend-pair"><span class="legend-item A">A</span> Absent</span>
+    <span class="legend-pair"><span class="legend-item NH">NH</span> Not Held</span>
+  </div>
 </div>
 
 </div><!-- /.app -->
