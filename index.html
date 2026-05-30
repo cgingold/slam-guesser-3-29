@@ -985,7 +985,8 @@ function getDailyResult(date, mode) {
   return all?.[date]?.[mode] || null;
 }
 
-/* Replay a finished daily round so revisits show the locked end-state.
+/* Restore a saved daily — either finished (locked, share enabled) or
+   in-progress (mid-round wrong-count, hints visible, can keep guessing).
    Returns true if a restoration was performed, false otherwise. */
 function maybeRestoreFinishedDaily() {
   const saved = getDailyResult(game.date, game.mode);
@@ -994,27 +995,24 @@ function maybeRestoreFinishedDaily() {
   // Historical play is immutable. If we have a snapshot of the player as
   // they existed when the user played this date, replay against THAT,
   // regardless of how the live rotation has changed since (added players,
-  // re-shuffled pool, etc.). This is what lets us update the data without
-  // wiping out the user's calendar history.
+  // re-shuffled pool, etc.).
   if (saved.playerSnapshot) {
     game.current = saved.playerSnapshot;
     game.previous = saved.playerSnapshot.name;
-    // Re-render the table now that game.current has been swapped.
     render();
   } else {
-    // Legacy saved entry without a snapshot — fall back to the old
-    // name-match safety check. If the rotation has shifted, we silently
-    // skip restoration rather than risk showing the wrong hints.
     if (!game.current || saved.player !== game.current.name) return false;
   }
 
-  // Reset the round state to match the saved finished state
+  // Reset the round state to match the saved state
   game.wrong = saved.wrong;
   game.lastOutcome = saved.outcome;
   game.gaveUp = !!saved.gaveUp;
 
+  const inProgress = !!saved.inProgress && saved.outcome === null;
+
   // Rebuild hint cards (gender appears at wrong>=1, nation at wrong>=2,
-  // answer/correct/give-up at the very end).
+  // answer/correct/give-up at the very end — for finished rounds only).
   const panel = document.getElementById("hintPanel");
   panel.innerHTML = "";
 
@@ -1032,6 +1030,19 @@ function maybeRestoreFinishedDaily() {
     n.textContent = `${flag} ${game.current.nationality}`;
     panel.appendChild(n);
   }
+
+  if (inProgress) {
+    // Mid-round: leave the input/buttons enabled so the user can keep
+    // guessing. No banner, no answer reveal.
+    game.locked = false;
+    document.getElementById("guessBtn").disabled = false;
+    document.getElementById("giveUpBtn").disabled = false;
+    document.getElementById("shareBtn").disabled = true;
+    updateUI();
+    return true;
+  }
+
+  // Finished round — append the outcome card
   if (saved.outcome === "win") {
     const a = document.createElement("div");
     a.className = "hint-card correct-card";
@@ -1043,7 +1054,6 @@ function maybeRestoreFinishedDaily() {
     a.textContent = `🏳️ Gave Up: ${game.current.name}`;
     panel.appendChild(a);
   } else {
-    // Lost on 3rd guess
     const a = document.createElement("div");
     a.className = "hint-card answer-card";
     a.textContent = `❌ Answer: ${game.current.name}`;
@@ -1515,6 +1525,16 @@ function guess() {
     if (game.wrong >= 3) {
   game.lastOutcome = ("lose");
   endRound();
+} else {
+  // Mid-round: persist the in-progress state so a refresh restores it.
+  saveDailyResult(game.date, game.mode, {
+    player: game.current.name,
+    playerSnapshot: game.current,
+    wrong: game.wrong,
+    outcome: null,
+    gaveUp: false,
+    inProgress: true,
+  });
 }
 
     updateUI();
