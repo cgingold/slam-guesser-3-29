@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>🎾 Slam Guesser</title>
+<title>🎾 Slam Grid</title>
+
+<!-- Pixel/LED-style display font for the courtside countdown. Falls back
+     to monospace if the font fails to load. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
 <style>
 
@@ -776,26 +782,111 @@ th:first-child {
 }
 
 .countdown {
-  text-align: center;
+  display: flex;
+  justify-content: center;
   margin: 32px auto 0;
-  color: var(--ink-soft);
+}
+
+.countdown-panel {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  background: #115e44; /* courtside dark green */
+  border-radius: 10px;
+  padding: 14px 20px 14px 14px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+.clock-face {
+  flex: 0 0 auto;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clock-svg { width: 100%; height: 100%; }
+
+/* Gold bezel + cream dial — both use radial gradients defined in SVG <defs> */
+.clock-svg .bezel {
+  fill: url(#bezelGrad);
+}
+.clock-svg .dial {
+  fill: url(#dialGrad);
+}
+.clock-svg .ticks line {
+  stroke: #1a2f24;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+.clock-svg .hand-hour {
+  stroke: #0c1f17;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+.clock-svg .hand-minute {
+  stroke: #0c1f17;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+.clock-svg .hand-pin {
+  fill: #0c1f17;
+}
+
+/* Digital readout */
+.countdown-readout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 16px;
+  margin-left: 14px;
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .countdown-label {
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--ink-faint);
-  margin-bottom: 4px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 6px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* LED screen panel — dark backing with a faint dot-matrix grid so the
+   digits look like they're emitting from a real scoreboard. */
+.led-screen {
+  display: inline-block;
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.04) 0.8px, transparent 1.2px) 0 0 / 4px 4px,
+    linear-gradient(180deg, #0c1410 0%, #0a1612 100%);
+  border-radius: 4px;
+  padding: 1px 8px 0;
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.8),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba(255, 255, 255, 0.05);
+  line-height: 0;
 }
 
 .countdown-time {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 28px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--ink);
+  font-family: "VT323", "Courier New", monospace;
+  font-size: 44px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
   font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: #ffd84a;
+  text-shadow:
+    0 0 1px  #fffacb,
+    0 0 5px  #ffc23a,
+    0 0 12px #ffa800,
+    0 0 22px rgba(255, 168, 0, 0.6);
 }
 
 /* ===========================================================
@@ -838,7 +929,7 @@ th:first-child {
 
 <header class="header">
   <div class="header-inner">
-    <div class="brand">Slam Guesser</div>
+    <div class="brand">Slam Grid</div>
 
     <div class="header-right">
       <button class="icon-btn"
@@ -863,7 +954,7 @@ th:first-child {
             onclick="document.getElementById('howToDialog').close()">×</button>
     <h2 class="howto-title">How to Play</h2>
     <p class="howto-body">
-      Each puzzle shows a tennis pro's Grand Slam results — your job is to
+      Each grid shows a tennis pro's Grand Slam results — your job is to
       guess who it is.
     </p>
     <p class="howto-body">
@@ -929,9 +1020,73 @@ th:first-child {
   </div>
 </div>
 
-<div class="countdown">
-  <div class="countdown-label">Next puzzle in</div>
-  <div class="countdown-time" id="countdownTime">--:--:--</div>
+<div class="countdown" aria-label="Time until next grid">
+  <div class="countdown-panel">
+
+    <!-- Analog clock showing current local time -->
+    <div class="clock-face">
+      <svg viewBox="0 0 100 100" class="clock-svg" aria-hidden="true">
+        <defs>
+          <!-- Brushed-gold bezel: bright at top-left, darker at bottom-right -->
+          <radialGradient id="bezelGrad" cx="35%" cy="30%" r="80%">
+            <stop offset="0%"   stop-color="#f1d27a"/>
+            <stop offset="45%"  stop-color="#c9a04a"/>
+            <stop offset="100%" stop-color="#6f4e1a"/>
+          </radialGradient>
+          <!-- Inner cream dial with subtle vignette -->
+          <radialGradient id="dialGrad" cx="50%" cy="42%" r="60%">
+            <stop offset="0%"   stop-color="#ffffff"/>
+            <stop offset="70%"  stop-color="#f7f0dc"/>
+            <stop offset="100%" stop-color="#dcc89a"/>
+          </radialGradient>
+          <!-- Soft inner shadow over the dial — adds depth -->
+          <radialGradient id="dialShadow" cx="50%" cy="50%" r="50%">
+            <stop offset="70%"  stop-color="rgba(0,0,0,0)"/>
+            <stop offset="100%" stop-color="rgba(70,50,10,0.25)"/>
+          </radialGradient>
+        </defs>
+
+        <!-- Outer bezel with brushed-gold gradient -->
+        <circle cx="50" cy="50" r="48" class="bezel"></circle>
+        <!-- Inner rim shadow line for separation -->
+        <circle cx="50" cy="50" r="43" fill="none" stroke="rgba(60,40,5,0.45)" stroke-width="0.6"/>
+        <circle cx="50" cy="50" r="42" class="dial"></circle>
+        <circle cx="50" cy="50" r="42" fill="url(#dialShadow)"/>
+
+        <!-- Hour ticks (computed from 12 evenly-spaced positions). The
+             <g> rotates the master tick around the center. -->
+        <g class="ticks">
+          <line x1="50" y1="9"  x2="50" y2="15" transform="rotate(0   50 50)"/>
+          <line x1="50" y1="9"  x2="50" y2="15" transform="rotate(30  50 50)"/>
+          <line x1="50" y1="9"  x2="50" y2="15" transform="rotate(60  50 50)"/>
+          <line x1="50" y1="9"  x2="50" y2="15" transform="rotate(90  50 50)"/>
+          <line x1="50" y1="9"  x2="50" y2="15" transform="rotate(120 50 50)"/>
+          <line x1="50" y1="9"  x2="50" y2="15" transform="rotate(150 50 50)"/>
+          <line x1="50" y1="9"  x2="50" y2="15" transform="rotate(180 50 50)"/>
+          <line x1="50" y1="9"  x2="50" y2="15" transform="rotate(210 50 50)"/>
+          <line x1="50" y1="9"  x2="50" y2="15" transform="rotate(240 50 50)"/>
+          <line x1="50" y1="9"  x2="50" y2="15" transform="rotate(270 50 50)"/>
+          <line x1="50" y1="9"  x2="50" y2="15" transform="rotate(300 50 50)"/>
+          <line x1="50" y1="9"  x2="50" y2="15" transform="rotate(330 50 50)"/>
+        </g>
+
+        <!-- Hands. The line points straight up by default (y2 < y1).
+             JS sets a rotate transform around 50,50 each tick. -->
+        <line x1="50" y1="50" x2="50" y2="24" class="hand-hour"   id="handHour"   transform="rotate(0 50 50)"></line>
+        <line x1="50" y1="50" x2="50" y2="16" class="hand-minute" id="handMinute" transform="rotate(0 50 50)"></line>
+        <circle cx="50" cy="50" r="2.5" class="hand-pin"></circle>
+      </svg>
+    </div>
+
+    <!-- Digital readout + label -->
+    <div class="countdown-readout">
+      <div class="countdown-label">Next grid in</div>
+      <div class="led-screen">
+        <div class="countdown-time" id="countdownTime">--:--</div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 </div><!-- /.app -->
@@ -1063,7 +1218,7 @@ function maybeRestoreFinishedDaily() {
   // Show a small "already played" banner so the state is explicit
   const banner = document.createElement("div");
   banner.className = "hint-card already-played-card";
-  banner.textContent = "🕘 You've already played today's puzzle";
+  banner.textContent = "🕘 You've already played today's grid";
   panel.insertBefore(banner, panel.firstChild);
 
   // Lock the input/buttons via the same end-of-round flow
@@ -1779,7 +1934,7 @@ if (itemBottom > boxBottom) {
    =========================================================
    Reveals effort (guesses used) and mode, never the player.
    Format:
-     🎾 Slam Guesser — Daily 2026-05-27 · Standard
+     🎾 Slam Grid — Daily 2026-05-27 · Standard
      ✅ Solved in 2/3
      🔴 🟢 ⚪
      https://...
@@ -1797,7 +1952,7 @@ function buildShareLines() {
     const dt = new Date(y, m - 1, d);
     tag = dt.toLocaleDateString(undefined, { month: "long", day: "numeric" });
   }
-  const header = `Slam Guesser — ${tag}`;
+  const header = `Slam Grid — ${tag}`;
 
   // Balls row — a tennis ball for each used attempt (right or wrong),
   // ⚪ for unused. Ends in ✅ on a win or ❌ on a loss/give-up.
@@ -1847,7 +2002,7 @@ function share() {
 
   if (navigator.share) {
     navigator.share({
-      title: "🎾 Slam Guesser",
+      title: "🎾 Slam Grid",
       text,
       url,
     }).catch(() => {});
@@ -2106,28 +2261,41 @@ function maybeShowFirstTimeHowTo() {
   } catch { /* ignore */ }
 }
 
-// Countdown to the next local midnight (when the next daily puzzle drops).
+// Countdown to the next local midnight (when the next daily grid drops).
+// Drives both the digital readout (H:MM) and the analog clock hands.
 // Reloads the page once midnight passes so the new day's puzzle loads.
 function startCountdown() {
   const el = document.getElementById("countdownTime");
   if (!el) return;
+  const handHour   = document.getElementById("handHour");
+  const handMinute = document.getElementById("handMinute");
 
   function tick() {
     const now = new Date();
     const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0);
     const ms = tomorrow - now;
     if (ms <= 0) {
-      // Day rolled over while the tab was open. Reload to pull the new puzzle.
       window.location.reload();
       return;
     }
     const h = Math.floor(ms / 3600000);
     const m = Math.floor((ms % 3600000) / 60000);
     const s = Math.floor((ms % 60000) / 1000);
-    el.textContent =
-      String(h).padStart(2, "0") + ":" +
-      String(m).padStart(2, "0") + ":" +
-      String(s).padStart(2, "0");
+
+    // Digital: HH:MM (always 2-digit hour for steady spacing)
+    el.textContent = String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0");
+
+    // Analog: show the actual current local time (like the courtside clock).
+    // Hour hand: 30deg per hour + 0.5deg per minute. Minute hand: 6deg per min.
+    if (handHour && handMinute) {
+      const localH = now.getHours() % 12;
+      const localM = now.getMinutes();
+      const localS = now.getSeconds();
+      const hourAngle = localH * 30 + localM * 0.5;
+      const minAngle  = localM * 6 + localS * 0.1;
+      handHour.setAttribute("transform",   `rotate(${hourAngle} 50 50)`);
+      handMinute.setAttribute("transform", `rotate(${minAngle} 50 50)`);
+    }
   }
   tick();
   setInterval(tick, 1000);
