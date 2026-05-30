@@ -838,21 +838,22 @@ th:first-child {
       guess who it is.
     </p>
     <p class="howto-body">
-      You get three tries; each wrong guess reveals a hint (gender, then
-      nationality, then the answer).
+      Incorrect guesses reveal a hint (first gender, then
+      country). After three wrong, it's game over. 
+      Until tomorrow. 
     </p>
     <p class="howto-body">
-      A new puzzle drops every day. See you tomorrow.
+      Vamos.
     </p>
   </div>
 </dialog>
 
 <dialog id="giveUpDialog" class="howto-dialog">
   <div class="howto-inner">
-    <h2 class="howto-title">Are you sure?</h2>
-    <p class="howto-body">What would Rafa do?</p>
+    <h2 class="howto-title">What would Rafa do?</h2>
+    <p class="howto-body">You sure?</p>
     <div class="giveup-actions">
-      <button class="giveup-confirm" onclick="confirmGiveUp()">Yes, give up</button>
+      <button class="giveup-confirm" onclick="confirmGiveUp()">Give up</button>
       <button class="giveup-cancel" onclick="document.getElementById('giveUpDialog').close()">Play on</button>
     </div>
   </div>
