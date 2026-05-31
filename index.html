@@ -2036,14 +2036,18 @@ function endRound() {
   document.getElementById("giveUpBtn").disabled = true;
   document.getElementById("shareBtn").disabled = false;
 
-  revealCountdown();
-
   updateUI();
 
-  // Open the result modal as the final beat — modal sits over the
-  // already-completed page state. Closing the modal returns the user
-  // to the normal end-of-round view (hint cards, share button, countdown).
-  openResultModal();
+  if (game.gaveUp) {
+    // Give-up has no modal — reveal the countdown immediately since
+    // there's no other dismissal beat to wait for.
+    revealCountdown();
+  } else {
+    // For win/loss, open the modal first. The countdown stays hidden
+    // until the user closes the modal — that dismissal becomes the
+    // "see you tomorrow" reveal moment.
+    openResultModal();
+  }
 }
 
 // Open the round-end modal. "Winner" (✅ + lime glow) on a correct
@@ -2581,14 +2585,26 @@ load().then(() => {
 // (deferred because the modal was open), play it now.
 document.addEventListener("DOMContentLoaded", () => {
   const howTo = document.getElementById("howToDialog");
-  if (!howTo) return;
-  howTo.addEventListener("close", () => {
-    if (game && game._pendingReveal) {
-      const { cols, rows } = game._pendingReveal;
-      game._pendingReveal = null;
-      animateReveal(cols, rows);
-    }
-  });
+  if (howTo) {
+    howTo.addEventListener("close", () => {
+      if (game && game._pendingReveal) {
+        const { cols, rows } = game._pendingReveal;
+        game._pendingReveal = null;
+        animateReveal(cols, rows);
+      }
+    });
+  }
+
+  // When the result modal closes, fade in the countdown clock. This is
+  // the "see you tomorrow" beat — held back until the user dismisses
+  // the result so it has its own moment instead of competing with the
+  // modal's reveal.
+  const result = document.getElementById("resultDialog");
+  if (result) {
+    result.addEventListener("close", () => {
+      revealCountdown();
+    });
+  }
 });
 </script>
 
