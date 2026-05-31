@@ -240,7 +240,7 @@ body {
   color: var(--ink);
   padding: 8px 6px;
   border-radius: 8px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   text-align: center;
@@ -623,9 +623,9 @@ button:disabled {
 }
 
 .hint-card {
-  padding: 5px 11px;
+  padding: 6px 13px;
   border-radius: 999px;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.02em;
   opacity: 0;
@@ -664,8 +664,8 @@ button:disabled {
 
 .scroll-hint {
   text-align: center;
-  font-size: 11px;
-  color: var(--ink-faint);
+  font-size: 12px;
+  color: var(--ink);
   margin-bottom: 8px;
   letter-spacing: 0.04em;
 }
@@ -675,14 +675,15 @@ button:disabled {
 table {
   border-collapse: collapse;
   width: 100%;
-  min-width: 720px;
+  min-width: 760px;
 }
 
 th, td {
   border: 1px solid #e3e5e2;
-  padding: 3px 3px;
-  font-size: 10.5px;
+  padding: 8px 4px;
+  font-size: 12px;
   text-align: center;
+  vertical-align: middle;
 }
 
 th {
@@ -702,6 +703,14 @@ th {
   z-index: 2;
   font-weight: 600;
   color: var(--ink);
+  /* Lock the slam-name column width so "Australian Open" always fits on
+     one line, no wrapping. The cells are centered vertically. */
+  width: 100px;
+  min-width: 100px;
+  white-space: nowrap;
+  text-align: center;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 /* The top-left corner cell (the "Slam" header) sits at the intersection
@@ -760,7 +769,7 @@ th:first-child {
   gap: 4px 10px;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--ink-soft);
   max-width: 720px;
 }
@@ -785,7 +794,11 @@ th:first-child {
   display: flex;
   justify-content: center;
   margin: 32px auto 0;
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
 }
+.countdown[hidden] { display: none; }
+.countdown.is-visible { opacity: 1; }
 
 .countdown-panel {
   display: flex;
@@ -1020,7 +1033,7 @@ th:first-child {
   </div>
 </div>
 
-<div class="countdown" aria-label="Time until next grid">
+<div id="countdown" class="countdown" aria-label="Time until next grid" hidden>
   <div class="countdown-panel">
 
     <!-- Analog clock showing current local time -->
@@ -1227,7 +1240,8 @@ function maybeRestoreFinishedDaily() {
   document.getElementById("giveUpBtn").disabled = true;
   document.getElementById("shareBtn").disabled = false;
 
-  // Daily mode keeps Next hidden; nothing to do for nextBtn
+  revealCountdown();
+
   updateUI();
   return true;
 }
@@ -1824,7 +1838,23 @@ function endRound() {
   document.getElementById("giveUpBtn").disabled = true;
   document.getElementById("shareBtn").disabled = false;
 
+  revealCountdown();
+
   updateUI();
+}
+
+// Gentle reveal of the courtside countdown clock — only appears after the
+// user's round is over. Lives at the bottom of the page as a "see you
+// tomorrow" moment, not a constant fixture.
+function revealCountdown() {
+  const el = document.getElementById("countdown");
+  if (!el) return;
+  if (!el.hasAttribute("hidden") && el.classList.contains("is-visible")) return;
+  el.hidden = false;
+  // Force a frame so the transition runs from opacity 0 → 1.
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => el.classList.add("is-visible"));
+  });
 }
 
 /* AUTOCOMPLETE (CHANGED ONLY SOURCE) */
@@ -2270,23 +2300,29 @@ function startCountdown() {
   const handHour   = document.getElementById("handHour");
   const handMinute = document.getElementById("handMinute");
 
+  // Remember the date this page loaded on. When the local date changes
+  // (i.e. midnight passes), reload so today's grid loads.
+  const startDate = new Date().toDateString();
+
   function tick() {
     const now = new Date();
-    const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0);
-    const ms = tomorrow - now;
-    if (ms <= 0) {
+
+    // Date-rollover check — fires reliably at midnight even though `ms`
+    // never goes negative (we always compute the *next* upcoming midnight).
+    if (now.toDateString() !== startDate) {
       window.location.reload();
       return;
     }
+
+    const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0);
+    const ms = tomorrow - now;
     const h = Math.floor(ms / 3600000);
     const m = Math.floor((ms % 3600000) / 60000);
-    const s = Math.floor((ms % 60000) / 1000);
 
     // Digital: HH:MM (always 2-digit hour for steady spacing)
     el.textContent = String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0");
 
     // Analog: show the actual current local time (like the courtside clock).
-    // Hour hand: 30deg per hour + 0.5deg per minute. Minute hand: 6deg per min.
     if (handHour && handMinute) {
       const localH = now.getHours() % 12;
       const localM = now.getMinutes();
