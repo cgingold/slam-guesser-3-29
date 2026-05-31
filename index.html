@@ -4,19 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>🎾 Slam Grid</title>
-<meta name="description" content="Slam Grid — for tennis fans. Guess the pro from their Grand Slam career.">
+<meta name="description" content="Slam Grid — a game for tennis fans. Guess the pro from their Grand Slam career.">
 
 <!-- Favicon (SVG — modern browsers render this crisp at any size) -->
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
+<!-- Homescreen icons -->
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#1d3e35">
+
 <!-- Social preview (Open Graph + Twitter) -->
 <meta property="og:title" content="Slam Grid">
-<meta property="og:description" content="For tennis fans. Guess the pro from their Grand Slam career.">
+<meta property="og:description" content="A game for tennis fans. Guess the pro from their Grand Slam career.">
 <meta property="og:image" content="./og_image.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Slam Grid">
-<meta name="twitter:description" content="For tennis fans. Guess the pro from their Grand Slam career.">
+<meta name="twitter:description" content="A game for tennis fans. Guess the pro from their Grand Slam career.">
 <meta name="twitter:image" content="./og_image.png">
 
 <!-- Pixel/LED-style display font for the courtside countdown. Falls back
@@ -422,6 +427,108 @@ body {
   border-color: var(--ink);
 }
 .giveup-cancel:hover { filter: brightness(1.12); }
+
+/* ===========================================================
+   RESULT MODAL — round-end celebration
+   =========================================================== */
+.result-dialog {
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  max-width: 380px;
+  width: calc(100% - 32px);
+  background: var(--ink);
+  color: #ffffff;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+  /* Border state set per outcome via .is-win / .is-loss */
+}
+
+/* Winner — lime accent border + soft outer glow */
+.result-dialog.is-win {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  box-shadow:
+    0 0 0 4px rgba(165, 232, 90, 0.18),
+    0 0 32px 4px rgba(165, 232, 90, 0.35),
+    0 24px 48px rgba(0, 0, 0, 0.4);
+}
+
+/* Missed — warm orange accent border, no glow (quieter) */
+.result-dialog.is-loss {
+  outline: 2px solid #fdba74;
+  outline-offset: -2px;
+  box-shadow:
+    0 0 0 4px rgba(253, 186, 116, 0.15),
+    0 24px 48px rgba(0, 0, 0, 0.4);
+}
+
+.result-dialog::backdrop {
+  background: rgba(12, 26, 22, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.result-inner {
+  padding: 32px 28px 26px;
+  text-align: center;
+  position: relative;
+}
+
+.result-dialog .howto-close {
+  color: rgba(255, 255, 255, 0.5);
+}
+.result-dialog .howto-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.result-outcome {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  margin-bottom: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.result-outcome.is-win  { color: var(--accent); }
+.result-outcome.is-loss { color: #fdba74; }
+
+.result-player {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: #ffffff;
+  margin: 0 0 22px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.result-flag {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.result-share {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border: none;
+  padding: 8px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+.result-share:hover { filter: brightness(1.08); }
 
 /* ===========================================================
    APP CONTAINER
@@ -1041,6 +1148,21 @@ th:first-child {
   </div>
 </dialog>
 
+<!-- Round-result modal — opens automatically on win/lose/give-up and
+     reveals the player, animates the W/F/SF/QF stat counts, and offers
+     the share button as the primary action. Closing returns the user
+     to the regular end-of-round page state. -->
+<dialog id="resultDialog" class="result-dialog">
+  <div class="result-inner">
+    <button class="howto-close"
+            aria-label="Close"
+            onclick="document.getElementById('resultDialog').close()">×</button>
+    <div class="result-outcome" id="resultOutcome">Correct</div>
+    <div class="result-player" id="resultPlayer">—</div>
+    <button class="result-share" onclick="share()">Share</button>
+  </div>
+</dialog>
+
 <div class="app">
 
 
@@ -1281,7 +1403,7 @@ function maybeRestoreFinishedDaily() {
   // Show a small "already played" banner so the state is explicit
   const banner = document.createElement("div");
   banner.className = "hint-card already-played-card";
-  banner.textContent = "🕘 You've already played today's grid";
+  banner.textContent = "🕘 You've already played today's game";
   panel.insertBefore(banner, panel.firstChild);
 
   // Lock the input/buttons via the same end-of-round flow
@@ -1917,6 +2039,53 @@ function endRound() {
   revealCountdown();
 
   updateUI();
+
+  // Open the result modal as the final beat — modal sits over the
+  // already-completed page state. Closing the modal returns the user
+  // to the normal end-of-round view (hint cards, share button, countdown).
+  openResultModal();
+}
+
+// Open the round-end modal. "Winner" (✅ + lime glow) on a correct
+// guess, "Missed" (❌ + orange border) after 3 wrong. Give-ups skip
+// the modal entirely — the user already conceded; no celebration needed.
+function openResultModal() {
+  // No modal on give-up
+  if (game.gaveUp) return;
+
+  const dlg = document.getElementById("resultDialog");
+  if (!dlg || typeof dlg.showModal !== "function") return;
+
+  const won = game.lastOutcome === "win";
+
+  // Border treatment via class on the dialog itself
+  dlg.classList.remove("is-win", "is-loss");
+  dlg.classList.add(won ? "is-win" : "is-loss");
+
+  // Outcome label — emoji + word, both colored by parent state
+  const outcome = document.getElementById("resultOutcome");
+  outcome.classList.remove("is-win", "is-loss");
+  outcome.classList.add(won ? "is-win" : "is-loss");
+  outcome.textContent = won ? "✅ Winner" : "❌ Missed It";
+
+  // Player name with country flag to the right
+  const playerEl = document.getElementById("resultPlayer");
+  playerEl.innerHTML = "";
+  if (game.current) {
+    const nameSpan = document.createElement("span");
+    nameSpan.textContent = game.current.name;
+    playerEl.appendChild(nameSpan);
+
+    const flag = nationalityToFlag(game.current.nationality);
+    if (flag) {
+      const flagSpan = document.createElement("span");
+      flagSpan.className = "result-flag";
+      flagSpan.textContent = flag;
+      playerEl.appendChild(flagSpan);
+    }
+  }
+
+  dlg.showModal();
 }
 
 // Gentle reveal of the courtside countdown clock — only appears after the
