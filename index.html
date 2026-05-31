@@ -4,6 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>🎾 Slam Grid</title>
+<meta name="description" content="Slam Grid — for tennis fans. Guess the pro from their Grand Slam career.">
+
+<!-- Favicon (SVG — modern browsers render this crisp at any size) -->
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+
+<!-- Social preview (Open Graph + Twitter) -->
+<meta property="og:title" content="Slam Grid">
+<meta property="og:description" content="For tennis fans. Guess the pro from their Grand Slam career.">
+<meta property="og:image" content="./og_image.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Slam Grid">
+<meta name="twitter:description" content="For tennis fans. Guess the pro from their Grand Slam career.">
+<meta name="twitter:image" content="./og_image.png">
 
 <!-- Pixel/LED-style display font for the courtside countdown. Falls back
      to monospace if the font fails to load. -->
@@ -61,16 +75,21 @@ body {
 }
 
 .brand {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  text-decoration: none;
   color: var(--header-ink);
 }
 
-/* Brand variants — swap any of these blocks into .brand to try them.
-   Comment out the block above first.
+.brand svg {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+/* Old text brand variants kept here for reference (the brand is now an SVG
+   logo defined in the markup; no font styling needed). */
 
    --- Editorial italic ---
    .brand {
@@ -942,7 +961,37 @@ th:first-child {
 
 <header class="header">
   <div class="header-inner">
-    <div class="brand">Slam Grid</div>
+    <div class="brand" aria-label="Slam Grid">
+      <svg viewBox="0 0 605 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Tile mark — Alcaraz 2022-2026 career slice -->
+        <g transform="translate(20, 20)">
+          <rect x="0"   y="0"   width="36" height="36" rx="3" fill="#3b82f6"/>
+          <rect x="40"  y="0"   width="36" height="36" rx="3" fill="#c5cac6"/>
+          <rect x="80"  y="0"   width="36" height="36" rx="3" fill="#fdba74"/>
+          <rect x="120" y="0"   width="36" height="36" rx="3" fill="#fdba74"/>
+          <rect x="160" y="0"   width="36" height="36" rx="3" fill="#16a34a"/>
+
+          <rect x="0"   y="40"  width="36" height="36" rx="3" fill="#fdba74"/>
+          <rect x="40"  y="40"  width="36" height="36" rx="3" fill="#fde047"/>
+          <rect x="80"  y="40"  width="36" height="36" rx="3" fill="#16a34a"/>
+          <rect x="120" y="40"  width="36" height="36" rx="3" fill="#16a34a"/>
+
+          <rect x="0"   y="80"  width="36" height="36" rx="3" fill="#3b82f6"/>
+          <rect x="40"  y="80"  width="36" height="36" rx="3" fill="#16a34a"/>
+          <rect x="80"  y="80"  width="36" height="36" rx="3" fill="#16a34a"/>
+          <rect x="120" y="80"  width="36" height="36" rx="3" fill="#c084fc"/>
+
+          <rect x="0"   y="120" width="36" height="36" rx="3" fill="#16a34a"/>
+          <rect x="40"  y="120" width="36" height="36" rx="3" fill="#fde047"/>
+          <rect x="80"  y="120" width="36" height="36" rx="3" fill="#3b82f6"/>
+          <rect x="120" y="120" width="36" height="36" rx="3" fill="#16a34a"/>
+        </g>
+        <text x="195" y="120"
+              font-family="Georgia, 'Times New Roman', serif"
+              font-size="48" font-weight="600" letter-spacing="9"
+              fill="#ffffff">SLAM GRID</text>
+      </svg>
+    </div>
 
     <div class="header-right">
       <button class="icon-btn"
