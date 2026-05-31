@@ -2555,8 +2555,12 @@ function startCountdown() {
       0
     );
     const ms = tomorrow - now;
-    const h = Math.floor(ms / 3600000);
-    const m = Math.floor((ms % 3600000) / 60000);
+    // Ceiling minutes — if any seconds remain in the current minute,
+    // round up. Avoids the misleading "00:00" display while there are
+    // still 0-59 seconds left until the new grid drops.
+    const totalMinutes = Math.ceil(ms / 60000);
+    const h = Math.floor(totalMinutes / 60);
+    const m = totalMinutes % 60;
 
     // Digital: HH:MM (always 2-digit hour for steady spacing)
     el.textContent = String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0");
