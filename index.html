@@ -705,12 +705,12 @@ th {
   color: var(--ink);
   /* Lock the slam-name column width so "Australian Open" always fits on
      one line, no wrapping. The cells are centered vertically. */
-  width: 100px;
-  min-width: 100px;
+  width: 120px;
+  min-width: 120px;
   white-space: nowrap;
   text-align: center;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 /* The top-left corner cell (the "Slam" header) sits at the intersection
@@ -1105,7 +1105,6 @@ th:first-child {
 </div><!-- /.app -->
 
 <script>
-
 const DAILY_KEY = "slamGuesserSimple.daily.v1";
 
 /* ---- Daily result storage -----------------------------
@@ -1145,7 +1144,9 @@ function saveDailyResult(date, mode, result) {
     }
 
     localStorage.setItem(DAILY_KEY, JSON.stringify(all));
-  } catch { /* ignore quota errors */ }
+  } catch {
+    /* ignore quota errors */
+  }
 }
 
 function getDailyResult(date, mode) {
@@ -1281,8 +1282,12 @@ let game = {
 };
 /* HIGHLIGHT HELPERS — no-ops since there's no play toggle */
 
-function highlightPlayButtons() { /* no-op */ }
-function setPlayType() { /* no-op */ }
+function highlightPlayButtons() {
+  /* no-op */
+}
+function setPlayType() {
+  /* no-op */
+}
 
 /* URL SYNC
    Wordle-style clean URL: state lives in localStorage and in memory,
@@ -1290,7 +1295,9 @@ function setPlayType() { /* no-op */ }
    ?play= (handled in load()), but the URL is never *written* back.
    This function exists as a no-op so existing call sites still work. */
 
-function syncURL() { /* no-op — see comment above */ }
+function syncURL() {
+  /* no-op — see comment above */
+}
 
 /* SEED REBUILD */
 
@@ -1324,7 +1331,8 @@ function hashStr(s) {
 function mulberry32(seedInt) {
   let a = seedInt >>> 0;
   return function () {
-    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
     let t = a;
     t = Math.imul(t ^ (t >>> 15), t | 1);
     t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
@@ -1385,7 +1393,7 @@ function pickRotationPlayer(mode, dateIso, pool) {
 
   const overrideName = getDailyOverride(dateIso, mode);
   if (overrideName) {
-    const match = pool.find(p => p.name === overrideName);
+    const match = pool.find((p) => p.name === overrideName);
     if (match) {
       return match;
     }
@@ -1422,9 +1430,12 @@ async function loadDailyOverrides() {
     const res = await fetch("./daily_overrides_simple.json");
     if (!res.ok) return; // file just isn't there — silent
     const data = await res.json();
-    const raw = data?.overrides && typeof data.overrides === "object"
-      ? data.overrides
-      : (typeof data === "object" ? data : {});
+    const raw =
+      data?.overrides && typeof data.overrides === "object"
+        ? data.overrides
+        : typeof data === "object"
+          ? data
+          : {};
     dailyOverrides = raw || {};
   } catch {
     // missing file, parse error, or CORS issue — silently use no overrides
@@ -1435,16 +1446,25 @@ async function loadDailyOverrides() {
 /* MODE — single-mode game; these are kept as no-ops so the rest of the
    code still calls them without conditionals. */
 
-function highlightModeButtons() { /* no-op: no toggle in single-mode build */ }
-function updateModeNote() { /* no-op: no mode descriptor needed */ }
-function setMode() { /* no-op: there's only one mode here */ }
+function highlightModeButtons() {
+  /* no-op: no toggle in single-mode build */
+}
+function updateModeNote() {
+  /* no-op: no mode descriptor needed */
+}
+function setMode() {
+  /* no-op: there's only one mode here */
+}
 
 /* CALENDAR REMOVED — daily mode is now "today only".
    These stubs exist because setPlayType() and other places call them. */
 
-function updateDateUI() { /* no-op: no calendar in this build */ }
-function closeDatePopover() { /* no-op: no popover */ }
-
+function updateDateUI() {
+  /* no-op: no calendar in this build */
+}
+function closeDatePopover() {
+  /* no-op: no popover */
+}
 
 /* DAILY PUZZLE SYSTEM */
 
@@ -1480,18 +1500,13 @@ function getRequestedDate() {
 /* LOAD */
 
 async function load() {
+  const res = await fetch("./players_328.json");
 
-  const res =
-    await fetch("./players_328.json");
+  game.players = await res.json();
 
-  game.players =
-    await res.json();
+  const res2 = await fetch("./guess_pool_328.json");
 
-  const res2 =
-    await fetch("./guess_pool_328.json");
-
-  game.guessPool =
-    await res2.json();
+  game.guessPool = await res2.json();
 
   buildGuessPoolIndex();
 
@@ -1527,16 +1542,12 @@ function clearHints() {
 
 /* MESSAGE */
 
-function showMessage(text){
+function showMessage(text) {
+  const panel = document.getElementById("hintPanel");
 
-  const panel =
-    document.getElementById("hintPanel");
+  const div = document.createElement("div");
 
-  const div =
-    document.createElement("div");
-
-  div.className =
-    "hint-card invalid-card";
+  div.className = "hint-card invalid-card";
 
   div.textContent = text;
 
@@ -1548,20 +1559,54 @@ function showMessage(text){
 /* FLAGS */
 
 function nationalityToFlag(nation) {
-
   const map = {
-    "Australia":"🇦🇺","Austria":"🇦🇹","Argentina":"🇦🇷","Belarus":"🇧🇾",
-    "Belgium":"🇧🇪","Brazil":"🇧🇷","Bulgaria":"🇧🇬","Canada":"🇨🇦",
-    "Chile":"🇨🇱","China":"🇨🇳","Croatia":"🇭🇷","Czech Republic":"🇨🇿",
-    "Denmark":"🇩🇰","Estonia":"🇪🇪","Finland":"🇫🇮","France":"🇫🇷",
-    "Germany":"🇩🇪","Greece":"🇬🇷","Hungary":"🇭🇺","India":"🇮🇳",
-    "Italy":"🇮🇹","Japan":"🇯🇵","Kazakhstan":"🇰🇿","Latvia":"🇱🇻",
-    "Mexico":"🇲🇽","Netherlands":"🇳🇱","New Zealand":"🇳🇿","Norway":"🇳🇴",
-    "Poland":"🇵🇱","Portugal":"🇵🇹","Romania":"🇷🇴","Russia":"🇷🇺",
-    "Serbia":"🇷🇸","Slovakia":"🇸🇰","Slovenia":"🇸🇮","South Africa":"🇿🇦",
-    "South Korea":"🇰🇷","Spain":"🇪🇸","Sweden":"🇸🇪","Switzerland":"🇨🇭",
-    "Tunisia":"🇹🇳","Turkey":"🇹🇷","Ukraine":"🇺🇦","United Kingdom":"🇬🇧",
-    "United States":"🇺🇸","USA":"🇺🇸","US":"🇺🇸"
+    Australia: "🇦🇺",
+    Austria: "🇦🇹",
+    Argentina: "🇦🇷",
+    Belarus: "🇧🇾",
+    Belgium: "🇧🇪",
+    Brazil: "🇧🇷",
+    Bulgaria: "🇧🇬",
+    Canada: "🇨🇦",
+    Chile: "🇨🇱",
+    China: "🇨🇳",
+    Croatia: "🇭🇷",
+    "Czech Republic": "🇨🇿",
+    Denmark: "🇩🇰",
+    Estonia: "🇪🇪",
+    Finland: "🇫🇮",
+    France: "🇫🇷",
+    Germany: "🇩🇪",
+    Greece: "🇬🇷",
+    Hungary: "🇭🇺",
+    India: "🇮🇳",
+    Italy: "🇮🇹",
+    Japan: "🇯🇵",
+    Kazakhstan: "🇰🇿",
+    Latvia: "🇱🇻",
+    Mexico: "🇲🇽",
+    Netherlands: "🇳🇱",
+    "New Zealand": "🇳🇿",
+    Norway: "🇳🇴",
+    Poland: "🇵🇱",
+    Portugal: "🇵🇹",
+    Romania: "🇷🇴",
+    Russia: "🇷🇺",
+    Serbia: "🇷🇸",
+    Slovakia: "🇸🇰",
+    Slovenia: "🇸🇮",
+    "South Africa": "🇿🇦",
+    "South Korea": "🇰🇷",
+    Spain: "🇪🇸",
+    Sweden: "🇸🇪",
+    Switzerland: "🇨🇭",
+    Tunisia: "🇹🇳",
+    Turkey: "🇹🇷",
+    Ukraine: "🇺🇦",
+    "United Kingdom": "🇬🇧",
+    "United States": "🇺🇸",
+    USA: "🇺🇸",
+    US: "🇺🇸",
   };
 
   return map[nation] || "";
@@ -1587,9 +1632,7 @@ function seededRandom(seed) {
 
 /* NEXT PLAYER */
 
-
 function next() {
-
   game.wrong = 0;
   game.locked = false;
   game.selectedSuggestion = false;
@@ -1597,47 +1640,41 @@ function next() {
   game.lockProgressHints = false;
   game.gaveUp = false;
 
-const shareBtn =
-  document.getElementById("shareBtn");
+  const shareBtn = document.getElementById("shareBtn");
 
-shareBtn.disabled = true;
+  shareBtn.disabled = true;
 
-game.lastOutcome = null;
+  game.lastOutcome = null;
 
-document.getElementById("guessBtn").disabled = false;
-document.getElementById("giveUpBtn").disabled = false;
+  document.getElementById("guessBtn").disabled = false;
+  document.getElementById("giveUpBtn").disabled = false;
 
   document.getElementById("guess").value = "";
 
   hideSuggestions();
   clearHints();
 
- // Single-mode filter — players who reached QF or deeper at any slam.
- // Smaller and more recognizable than the multi-mode "Standard" pool.
- let eligiblePlayers = game.players.filter(player => {
-   const slams = player.slams || {};
-   for (const tournament of Object.values(slams)) {
-     for (const result of Object.values(tournament)) {
-       if (
-         result === "QF" ||
-         result === "SF" ||
-         result === "F" ||
-         result === "W"
-       ) {
-         return true;
-       }
-     }
-   }
-   return false;
- });
+  // Single-mode filter — players who reached QF or deeper at any slam.
+  // Smaller and more recognizable than the multi-mode "Standard" pool.
+  let eligiblePlayers = game.players.filter((player) => {
+    const slams = player.slams || {};
+    for (const tournament of Object.values(slams)) {
+      for (const result of Object.values(tournament)) {
+        if (result === "QF" || result === "SF" || result === "F" || result === "W") {
+          return true;
+        }
+      }
+    }
+    return false;
+  });
 
-// SAFETY CHECK
-if (!eligiblePlayers.length) {
-  showMessage("No eligible players");
-  return;
-}
+  // SAFETY CHECK
+  if (!eligiblePlayers.length) {
+    showMessage("No eligible players");
+    return;
+  }
 
-let p = pickRotationPlayer(game.mode, game.date, eligiblePlayers);
+  let p = pickRotationPlayer(game.mode, game.date, eligiblePlayers);
 
   game.current = p;
   game.previous = p.name;
@@ -1657,18 +1694,17 @@ let p = pickRotationPlayer(game.mode, game.date, eligiblePlayers);
 /* GUESS */
 
 function guess() {
-
   if (game.locked) return;
 
   const input = document.getElementById("guess");
   const val = input.value.trim();
 
-  if(!val){
+  if (!val) {
     showMessage("⚠️ Please select a player");
     return;
   }
 
-  if(!game.selectedSuggestion){
+  if (!game.selectedSuggestion) {
     showMessage("⚠️ Choose a player from the dropdown");
     return;
   }
@@ -1676,35 +1712,33 @@ function guess() {
   const target = game.current.name.toLowerCase();
   const guessLower = val.toLowerCase();
 
-  const ok =
-    guessLower === target ||
-    guessLower === target.split(" ").pop();
+  const ok = guessLower === target || guessLower === target.split(" ").pop();
 
   if (ok) {
-  game.lastOutcome = ("win")
-  game.lockProgressHints = true; // only block gender/nation hints
+    game.lastOutcome = "win";
+    game.lockProgressHints = true; // only block gender/nation hints
 
-  showHints(true);
+    showHints(true);
 
-  endRound();
-} else {
+    endRound();
+  } else {
     game.wrong++;
     showHints(false);
 
     if (game.wrong >= 3) {
-  game.lastOutcome = ("lose");
-  endRound();
-} else {
-  // Mid-round: persist the in-progress state so a refresh restores it.
-  saveDailyResult(game.date, game.mode, {
-    player: game.current.name,
-    playerSnapshot: game.current,
-    wrong: game.wrong,
-    outcome: null,
-    gaveUp: false,
-    inProgress: true,
-  });
-}
+      game.lastOutcome = "lose";
+      endRound();
+    } else {
+      // Mid-round: persist the in-progress state so a refresh restores it.
+      saveDailyResult(game.date, game.mode, {
+        player: game.current.name,
+        playerSnapshot: game.current,
+        wrong: game.wrong,
+        outcome: null,
+        gaveUp: false,
+        inProgress: true,
+      });
+    }
 
     updateUI();
   }
@@ -1739,7 +1773,7 @@ function confirmGiveUp() {
 
   if (game.locked) return;
 
-  game.lastOutcome = ("lose");
+  game.lastOutcome = "lose";
   game.gaveUp = true;
 
   const panel = document.getElementById("hintPanel");
@@ -1758,16 +1792,13 @@ function setOutcome(type) {
   game.lastOutcome = type; // "win" or "lose"
 }
 
-
 /* HINTS */
 
 function showHints(correct) {
-
   const panel = document.getElementById("hintPanel");
 
   // ❌ only block progressive hints (gender/nation)
   if (!game.lockProgressHints) {
-
     if (game.wrong === 1) {
       const g = document.createElement("div");
       const genderClass = (game.current.gender || "").toLowerCase();
@@ -1806,15 +1837,11 @@ function showHints(correct) {
 /* END ROUND */
 
 function endRound() {
-
   // record result BEFORE locking next round
   if (game.current) {
     game.roundHistory.push({
       player: game.current.name,
-      result:
-        game.wrong >= 3 ? "fail" :
-        game.wrong === 0 ? "correct" :
-        "partial"
+      result: game.wrong >= 3 ? "fail" : game.wrong === 0 ? "correct" : "partial",
     });
   }
 
@@ -1868,15 +1895,15 @@ function deaccent(s) {
 let guessPoolIndex = []; // [{ display: "Àlex Corretja", search: "alex corretja" }]
 
 function buildGuessPoolIndex() {
-  guessPoolIndex = game.guessPool.map(name => ({
+  guessPoolIndex = game.guessPool.map((name) => ({
     display: name,
     search: deaccent(name).toLowerCase(),
   }));
 }
 
 function updateSuggestions() {
-game.suggestionIndex = -1;
-game.suggestionItems = [];
+  game.suggestionIndex = -1;
+  game.suggestionItems = [];
 
   game.selectedSuggestion = false;
 
@@ -1892,29 +1919,28 @@ game.suggestionItems = [];
 
   // Match against the deaccented index, return the original display name.
   const matches = guessPoolIndex
-    .filter(p => p.search.includes(input))
+    .filter((p) => p.search.includes(input))
     .slice(0, 8)
-    .map(p => p.display);
+    .map((p) => p.display);
 
   box.innerHTML = "";
-  matches.forEach(m => {
+  matches.forEach((m) => {
+    const div = document.createElement("div");
+    div.className = "suggestion";
+    div.textContent = m;
 
-  const div = document.createElement("div");
-  div.className = "suggestion";
-  div.textContent = m;
+    div.dataset.index = game.suggestionItems.length;
 
-  div.dataset.index = game.suggestionItems.length;
+    game.suggestionItems.push(div);
 
-  game.suggestionItems.push(div);
+    div.onclick = () => {
+      document.getElementById("guess").value = m;
+      game.selectedSuggestion = true;
+      box.style.display = "none";
+    };
 
-  div.onclick = () => {
-    document.getElementById("guess").value = m;
-    game.selectedSuggestion = true;
-    box.style.display = "none";
-  };
-
-  box.appendChild(div);
-});
+    box.appendChild(div);
+  });
 
   box.style.display = matches.length ? "block" : "none";
 }
@@ -1923,33 +1949,30 @@ function hideSuggestions() {
   document.getElementById("suggestions").style.display = "none";
 }
 function updateHighlight() {
-
   const items = game.suggestionItems;
 
   for (let i = 0; i < items.length; i++) {
-
     if (i === game.suggestionIndex) {
       items[i].style.background = "#1e293b";
       items[i].style.color = "white";
 
-const box = document.getElementById("suggestions");
+      const box = document.getElementById("suggestions");
 
-const item = items[i];
+      const item = items[i];
 
-const itemTop = item.offsetTop;
-const itemBottom = itemTop + item.offsetHeight;
+      const itemTop = item.offsetTop;
+      const itemBottom = itemTop + item.offsetHeight;
 
-const boxTop = box.scrollTop;
-const boxBottom = boxTop + box.offsetHeight;
+      const boxTop = box.scrollTop;
+      const boxBottom = boxTop + box.offsetHeight;
 
-if (itemTop < boxTop) {
-  box.scrollTop = itemTop;
-}
+      if (itemTop < boxTop) {
+        box.scrollTop = itemTop;
+      }
 
-if (itemBottom > boxBottom) {
-  box.scrollTop = itemBottom - box.offsetHeight;
-}
-
+      if (itemBottom > boxBottom) {
+        box.scrollTop = itemBottom - box.offsetHeight;
+      }
     } else {
       items[i].style.background = "";
       items[i].style.color = "";
@@ -1971,8 +1994,8 @@ if (itemBottom > boxBottom) {
 */
 
 function buildShareLines() {
-  const won    = game.lastOutcome === "win";
-  const wrong  = game.wrong;
+  const won = game.lastOutcome === "win";
+  const wrong = game.wrong;
   const guessNum = won ? wrong + 1 : null;
 
   // Header — friendly date ("May 28")
@@ -2007,8 +2030,8 @@ function buildShareLines() {
       }
     }
     const parts = [];
-    if (counts.W)  parts.push(`${counts.W} 🟩`);
-    if (counts.F)  parts.push(`${counts.F} 🟪`);
+    if (counts.W) parts.push(`${counts.W} 🟩`);
+    if (counts.F) parts.push(`${counts.F} 🟪`);
     if (counts.SF) parts.push(`${counts.SF} 🟨`);
     if (counts.QF) parts.push(`${counts.QF} 🟧`);
     if (parts.length) statLine = parts.join("  ");
@@ -2018,24 +2041,23 @@ function buildShareLines() {
 }
 
 function share() {
-
   // Daily is "today only" — recipients of a shared link will see their own
   // today, not the sharer's. Always share the bare URL.
   const url = `${window.location.origin}${window.location.pathname}`;
 
   const { header, ballsLine, statLine } = buildShareLines();
 
-  const text = [header, ballsLine, statLine]
-    .filter(Boolean)
-    .join("\n");
+  const text = [header, ballsLine, statLine].filter(Boolean).join("\n");
   const fullText = `${text}\n\n${url}`;
 
   if (navigator.share) {
-    navigator.share({
-      title: "🎾 Slam Grid",
-      text,
-      url,
-    }).catch(() => {});
+    navigator
+      .share({
+        title: "🎾 Slam Grid",
+        text,
+        url,
+      })
+      .catch(() => {});
     return;
   }
 
@@ -2045,11 +2067,9 @@ function share() {
     .catch(() => showMessage("Couldn't copy"));
 }
 
-
 /* CLASS MAP */
 
 function cls(v) {
-
   if (!v) return "";
 
   if (v === "W") return "W";
@@ -2077,21 +2097,18 @@ function cls(v) {
 /* RENDER */
 
 function render() {
-
   const p = game.current;
 
   const slams = Object.keys(p.slams || {});
 
-  const years = [...new Set(
-  slams.flatMap(s => Object.keys(p.slams?.[s] || {}))
-)]
-  .map(Number)
-  .sort((a,b)=>a-b)
-  .map(String);
+  const years = [...new Set(slams.flatMap((s) => Object.keys(p.slams?.[s] || {})))]
+    .map(Number)
+    .sort((a, b) => a - b)
+    .map(String);
 
   let html = "<tr><th>Slam</th>";
 
-  years.forEach(y => {
+  years.forEach((y) => {
     html += `<th>${y}</th>`;
   });
 
@@ -2100,10 +2117,10 @@ function render() {
   // Display labels for the slam column. Backend keys stay as
   // AustralianOpen/FrenchOpen/Wimbledon/USOpen for data continuity.
   const SLAM_LABELS = {
-    "AustralianOpen": "Australian Open",
-    "FrenchOpen":     "French Open",
-    "Wimbledon":      "Wimbledon",
-    "USOpen":         "US Open",
+    AustralianOpen: "Australian Open",
+    FrenchOpen: "French Open",
+    Wimbledon: "Wimbledon",
+    USOpen: "US Open",
   };
 
   for (let rowIdx = 0; rowIdx < slams.length; rowIdx++) {
@@ -2128,7 +2145,7 @@ function render() {
     // Pre-mark cells as hidden immediately so the gray plate is in place
     // even if the actual reveal is deferred (e.g. how-to modal is open).
     const cells = document.querySelectorAll("#table .reveal-cell");
-    cells.forEach(c => c.classList.add("is-hidden"));
+    cells.forEach((c) => c.classList.add("is-hidden"));
 
     const howTo = document.getElementById("howToDialog");
     const howToOpen = howTo && howTo.open;
@@ -2154,13 +2171,13 @@ function animateReveal(numCols, numRows) {
   const STAGGER_MS = 350; // per-cell beat
 
   const cells = document.querySelectorAll("#table .reveal-cell");
-  cells.forEach(c => c.classList.add("is-hidden"));
+  cells.forEach((c) => c.classList.add("is-hidden"));
 
   void document.getElementById("table").offsetWidth;
 
   const wrap = document.querySelector(".table-wrap");
 
-  cells.forEach(cell => {
+  cells.forEach((cell) => {
     const row = parseInt(cell.dataset.row, 10);
     const col = parseInt(cell.dataset.col, 10);
     const order = col * numRows + row;
@@ -2207,7 +2224,6 @@ window.addEventListener("resize", () => {
 /* UI */
 
 function updateUI() {
-
   // Drive the three pip dots. Each pip "fills" once its index is <= wrong.
   // We use used-1 / used-2 / used-3 classes to escalate the color as the
   // count climbs, applied to ALL filled pips so the row visually intensifies.
@@ -2231,48 +2247,39 @@ function updateUI() {
 
 /* EVENTS */
 
-document.getElementById("guess")
-  .addEventListener("input", updateSuggestions);
+document.getElementById("guess").addEventListener("input", updateSuggestions);
 
-document.getElementById("guess")
-  .addEventListener("keydown", e => {
+document.getElementById("guess").addEventListener("keydown", (e) => {
+  const box = document.getElementById("suggestions");
 
-    const box = document.getElementById("suggestions");
+  if (box.style.display === "block") {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      game.suggestionIndex = Math.min(
+        game.suggestionIndex + 1,
+        game.suggestionItems.length - 1
+      );
 
-    if (box.style.display === "block") {
+      updateHighlight();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      game.suggestionIndex = Math.max(game.suggestionIndex - 1, 0);
 
-      if (e.key === "ArrowDown") {
+      updateHighlight();
+    } else if (e.key === "Enter") {
+      if (game.suggestionIndex >= 0) {
         e.preventDefault();
-        game.suggestionIndex =
-          Math.min(game.suggestionIndex + 1, game.suggestionItems.length - 1);
-
-        updateHighlight();
+        game.suggestionItems[game.suggestionIndex].click();
+      } else {
+        guess();
       }
-
-      else if (e.key === "ArrowUp") {
-        e.preventDefault();
-        game.suggestionIndex =
-          Math.max(game.suggestionIndex - 1, 0);
-
-        updateHighlight();
-      }
-
-      else if (e.key === "Enter") {
-
-        if (game.suggestionIndex >= 0) {
-          e.preventDefault();
-          game.suggestionItems[game.suggestionIndex].click();
-        } else {
-          guess();
-        }
-      }
-
-    } else {
-      if (e.key === "Enter") guess();
     }
-  });
+  } else {
+    if (e.key === "Enter") guess();
+  }
+});
 
-document.addEventListener("click", e => {
+document.addEventListener("click", (e) => {
   if (!e.target.closest(".controls")) {
     hideSuggestions();
   }
@@ -2288,7 +2295,9 @@ function maybeShowFirstTimeHowTo() {
       dlg.showModal();
       localStorage.setItem(KEY, "1");
     }
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
 }
 
 // Countdown to the next local midnight (when the next daily grid drops).
@@ -2297,7 +2306,7 @@ function maybeShowFirstTimeHowTo() {
 function startCountdown() {
   const el = document.getElementById("countdownTime");
   if (!el) return;
-  const handHour   = document.getElementById("handHour");
+  const handHour = document.getElementById("handHour");
   const handMinute = document.getElementById("handMinute");
 
   // Remember the date this page loaded on. When the local date changes
@@ -2314,7 +2323,15 @@ function startCountdown() {
       return;
     }
 
-    const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0);
+    const tomorrow = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() + 1,
+      0,
+      0,
+      0,
+      0
+    );
     const ms = tomorrow - now;
     const h = Math.floor(ms / 3600000);
     const m = Math.floor((ms % 3600000) / 60000);
@@ -2328,8 +2345,8 @@ function startCountdown() {
       const localM = now.getMinutes();
       const localS = now.getSeconds();
       const hourAngle = localH * 30 + localM * 0.5;
-      const minAngle  = localM * 6 + localS * 0.1;
-      handHour.setAttribute("transform",   `rotate(${hourAngle} 50 50)`);
+      const minAngle = localM * 6 + localS * 0.1;
+      handHour.setAttribute("transform", `rotate(${hourAngle} 50 50)`);
       handMinute.setAttribute("transform", `rotate(${minAngle} 50 50)`);
     }
   }
@@ -2355,7 +2372,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
 </script>
 
 </body>
