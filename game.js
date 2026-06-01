@@ -603,16 +603,31 @@ function next() {
   hideSuggestions();
   clearHints();
 
-  // Eligibility: only the top N players (by autoScore) are in the
-  // daily rotation. Anyone outside the top N stays in the data (we
-  // need them for the autocomplete guess pool) but never gets picked.
-  // The exact ranking is computed in the admin/builder tools; we just
-  // re-sort here and slice.
+  // Eligibility flow:
+  //   1. Take the top-N players by autoScore (default 300).
+  //   2. ADD any below-cut players who have a manualDay (Mon-Sun) override
+  //      — admin force-included them.
+  //   3. REMOVE any player whose manualDay === "excluded" — admin force-
+  //      excluded them despite high score.
+  //
+  // The 144 below-cut players are still in `game.players` for autocomplete
+  // matching; the eligibility filter is just about who can be picked.
   const TOP_N = 300;
-  let eligiblePlayers = game.players
+  const sortedByScore = game.players
     .slice()
-    .sort((a, b) => (b.autoScore ?? 0) - (a.autoScore ?? 0))
-    .slice(0, TOP_N);
+    .sort((a, b) => (b.autoScore ?? 0) - (a.autoScore ?? 0));
+  const topN = sortedByScore.slice(0, TOP_N);
+  const topNSet = new Set(topN.map((p) => p.name));
+
+  // Below-cut players with a Mon-Sun override get force-included.
+  const forceIncluded = sortedByScore.slice(TOP_N).filter(
+    (p) => p.manualDay && p.manualDay !== "excluded"
+  );
+
+  // Anything explicitly excluded gets dropped.
+  let eligiblePlayers = [...topN, ...forceIncluded].filter(
+    (p) => p.manualDay !== "excluded"
+  );
 
   // Day-of-week difficulty bucket — Mon = easiest, Sun = hardest. Each
   // player is assigned to one day, either via manualDay override or via
@@ -1361,9 +1376,52 @@ function startCountdown() {
   setInterval(tick, 1000);
 }
 
+// Each day-of-week maps to a round (R1-R4 → QF → SF → F) styled to
+// match the in-game result-cell palette + a difficulty-gradient halo.
+// Kept in sync with the chart pills defined in index.html.
+const ROUND_BY_DAY = [
+  // 0=Mon ... 6=Sun
+  { round: "R1", halo: "#a5e85a", fill: "#3b82f6", text: "#ffffff" },
+  { round: "R2", halo: "#ccea4f", fill: "#3b82f6", text: "#ffffff" },
+  { round: "R3", halo: "#fde047", fill: "#3b82f6", text: "#ffffff" },
+  { round: "R4", halo: "#fdcd5c", fill: "#3b82f6", text: "#ffffff" },
+  { round: "QF", halo: "#fdb168", fill: "#fdba74", text: "#7c2d12" },
+  { round: "SF", halo: "#dc7a3f", fill: "#fde047", text: "#713f12" },
+  { round: "F",  halo: "#b8512a", fill: "#c084fc", text: "#2e1065" },
+];
+
+function todayDayIndex() {
+  // 0=Mon..6=Sun. JS native getDay() is 0=Sun..6=Sat — shift it.
+  return (new Date().getDay() + 6) % 7;
+}
+
+function paintRoundButton() {
+  const halo = document.getElementById("roundBtnHalo");
+  const fill = document.getElementById("roundBtnFill");
+  const label = document.getElementById("roundBtnLabel");
+  if (!halo || !fill || !label) return;
+  const r = ROUND_BY_DAY[todayDayIndex()];
+  halo.style.background = r.halo;
+  fill.style.background = r.fill;
+  fill.style.color = r.text;
+  label.textContent = r.round;
+}
+
+function openDifficultyDialog() {
+  const dlg = document.getElementById("difficultyDialog");
+  if (!dlg || typeof dlg.showModal !== "function") return;
+  // Highlight today's pill so the connection from the header button is clear.
+  const todayIdx = todayDayIndex();
+  document.querySelectorAll(".diff-pill").forEach((el) => {
+    el.classList.toggle("is-today", parseInt(el.dataset.day, 10) === todayIdx);
+  });
+  dlg.showModal();
+}
+
 load().then(() => {
   maybeShowFirstTimeHowTo();
   startCountdown();
+  paintRoundButton();
   // Reveal the page. One animation frame after marking ready so the
   // browser flushes the initial paint with everything already in its
   // final state — fades in cleanly instead of snapping.
@@ -1402,5 +1460,11 @@ document.addEventListener("DOMContentLoaded", () => {
     result.addEventListener("close", () => {
       revealCountdown();
     });
+  }
+
+  // Round-of-day button → open the difficulty chart modal
+  const roundBtn = document.getElementById("roundBtn");
+  if (roundBtn) {
+    roundBtn.addEventListener("click", openDifficultyDialog);
   }
 });

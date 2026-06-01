@@ -70,6 +70,21 @@
     </div>
 
     <div class="header-right">
+      <!-- Today's round button. Shows the current day's round indicator
+           (R1/R2/.../F) styled to match the difficulty chart. Click opens
+           the full difficulty chart modal. JS fills in the round + colors
+           based on today's day-of-week. -->
+      <button class="round-btn"
+              id="roundBtn"
+              aria-label="Show difficulty chart"
+              title="Today's round — click to see difficulty">
+        <span class="round-btn-halo" id="roundBtnHalo">
+          <span class="round-btn-fill" id="roundBtnFill">
+            <span class="round-btn-label" id="roundBtnLabel">R1</span>
+          </span>
+        </span>
+      </button>
+
       <button class="icon-btn"
               id="howToBtn"
               aria-label="How to play"
@@ -129,6 +144,72 @@
     <div class="result-outcome" id="resultOutcome">Correct</div>
     <div class="result-player" id="resultPlayer">—</div>
     <button class="result-share" onclick="share()">Share</button>
+  </div>
+</dialog>
+
+<!-- Difficulty chart modal — opens when the round button in the header
+     is clicked. Shows seven pills (R1→F) with day labels, today's pill
+     highlighted, and a gradient bar reinforcing easier → harder. -->
+<dialog id="difficultyDialog" class="howto-dialog difficulty-dialog">
+  <div class="howto-inner">
+    <button class="howto-close"
+            aria-label="Close"
+            onclick="document.getElementById('difficultyDialog').close()">×</button>
+
+    <!-- The 7-pill chart, identical structure to the static svg/png we built -->
+    <div class="diff-chart" id="diffChart">
+      <div class="diff-pills">
+        <div class="diff-pill" data-day="0">
+          <div class="diff-day">MON</div>
+          <span class="diff-halo" style="background:#a5e85a">
+            <span class="diff-fill" style="background:#3b82f6;color:#ffffff">R1</span>
+          </span>
+        </div>
+        <div class="diff-pill" data-day="1">
+          <div class="diff-day">TUE</div>
+          <span class="diff-halo" style="background:#ccea4f">
+            <span class="diff-fill" style="background:#3b82f6;color:#ffffff">R2</span>
+          </span>
+        </div>
+        <div class="diff-pill" data-day="2">
+          <div class="diff-day">WED</div>
+          <span class="diff-halo" style="background:#fde047">
+            <span class="diff-fill" style="background:#3b82f6;color:#ffffff">R3</span>
+          </span>
+        </div>
+        <div class="diff-pill" data-day="3">
+          <div class="diff-day">THU</div>
+          <span class="diff-halo" style="background:#fdcd5c">
+            <span class="diff-fill" style="background:#3b82f6;color:#ffffff">R4</span>
+          </span>
+        </div>
+        <div class="diff-pill" data-day="4">
+          <div class="diff-day">FRI</div>
+          <span class="diff-halo" style="background:#fdb168">
+            <span class="diff-fill" style="background:#fdba74;color:#7c2d12">QF</span>
+          </span>
+        </div>
+        <div class="diff-pill" data-day="5">
+          <div class="diff-day">SAT</div>
+          <span class="diff-halo" style="background:#dc7a3f">
+            <span class="diff-fill" style="background:#fde047;color:#713f12">SF</span>
+          </span>
+        </div>
+        <div class="diff-pill" data-day="6">
+          <div class="diff-day">SUN</div>
+          <span class="diff-halo" style="background:#b8512a">
+            <span class="diff-fill" style="background:#c084fc;color:#2e1065">F</span>
+          </span>
+        </div>
+      </div>
+      <div class="diff-axis">
+        <div class="diff-axis-bar"></div>
+        <div class="diff-axis-labels">
+          <span>easier</span>
+          <span>harder</span>
+        </div>
+      </div>
+    </div>
   </div>
 </dialog>
 

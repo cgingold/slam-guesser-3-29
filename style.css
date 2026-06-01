@@ -175,6 +175,148 @@ body.is-ready .app { opacity: 1; }
   filter: none;
 }
 
+/* =========================================================
+   ROUND-OF-DAY BUTTON — sits to the left of the info icon
+   ========================================================= */
+.round-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  transition: transform 0.12s;
+}
+.round-btn:hover { transform: scale(1.06); filter: none; }
+.round-btn:active { transform: scale(0.96); }
+
+.round-btn-halo {
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  padding: 2px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  /* halo background is set inline by JS based on today's gradient color */
+}
+.round-btn-fill {
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18);
+  /* fill background + text color set inline by JS based on today's round */
+}
+.round-btn-label {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+/* =========================================================
+   DIFFICULTY CHART MODAL
+   ========================================================= */
+.difficulty-dialog {
+  max-width: 540px;
+  width: calc(100% - 32px);
+}
+
+/* The difficulty dialog has no header/body text — just the chart and
+   close button. Tighten padding so the chart sits centered without
+   the empty headline space. */
+.difficulty-dialog .howto-inner {
+  padding: 36px 28px 28px;
+}
+
+.diff-chart {
+  margin-top: 0;
+}
+
+.diff-pills {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.diff-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.diff-day {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+
+.diff-halo {
+  display: inline-flex;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 9px;
+  padding: 3px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.diff-fill {
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  align-items: center;
+  justify-content: center;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 18px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18);
+}
+
+/* Today's pill — white glow + slight bump so the connection from the
+   header button is obvious */
+.diff-pill.is-today .diff-halo {
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4px rgba(29, 62, 53, 0.22);
+  transform: translateY(-2px);
+}
+.diff-pill.is-today .diff-day {
+  color: var(--ink);
+}
+
+.diff-axis {
+  margin-top: 4px;
+}
+.diff-axis-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to right, #a5e85a 0%, #fde047 35%, #fdba74 65%, #b8512a 100%);
+}
+.diff-axis-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
 /* Date picker — pill button in header */
 .date-btn {
   background: rgba(255, 255, 255, 0.08);
