@@ -69,7 +69,7 @@
         "1996": "A"
       }
     },
-    "autoScore": 20.8
+    "autoScore": 51.3
   },
   {
     "name": "Adriano Panatta",
@@ -145,7 +145,7 @@
         "1983": "A"
       }
     },
-    "autoScore": 19.5
+    "autoScore": 31.4
   },
   {
     "name": "Agnieszka Radwanska",
@@ -217,7 +217,8 @@
       "source": "wikipedia",
       "page": "Agnieszka Radwańska"
     },
-    "autoScore": 46.5
+    "autoScore": 97.3,
+    "autoDay": "tuesday"
   },
   {
     "name": "Agustín Calleri",
@@ -281,7 +282,7 @@
         "2009": "A"
       }
     },
-    "autoScore": 23.4
+    "autoScore": 50.7
   },
   {
     "name": "Ajla Tomljanović",
@@ -366,12 +367,13 @@
         "2025": "1R"
       }
     },
-    "autoScore": 36.9
+    "autoScore": 77.5,
+    "autoDay": "thursday"
   },
   {
     "name": "Albert Costa",
     "gender": "Male",
-    "nationality": "",
+    "nationality": "Spain",
     "slams": {
       "AustralianOpen": {
         "1993": "A",
@@ -438,7 +440,7 @@
         "2006": "A"
       }
     },
-    "autoScore": 31.8
+    "autoScore": 60.9
   },
   {
     "name": "Albert Montañés",
@@ -518,7 +520,7 @@
         "2016": "Q2"
       }
     },
-    "autoScore": 27.6
+    "autoScore": 62
   },
   {
     "name": "Alberto Berasategui",
@@ -570,7 +572,7 @@
         "2000": "A"
       }
     },
-    "autoScore": 23.1
+    "autoScore": 46.4
   },
   {
     "name": "Alejandro Davidovich Fokina",
@@ -623,7 +625,8 @@
       "source": "wikipedia",
       "page": "Alejandro Davidovich Fokina"
     },
-    "autoScore": 34.7
+    "autoScore": 77.3,
+    "autoDay": "thursday"
   },
   {
     "name": "Aleksandra Krunić",
@@ -704,7 +707,8 @@
         "2024": "A"
       }
     },
-    "autoScore": 32.4
+    "autoScore": 71.3,
+    "autoDay": "sunday"
   },
   {
     "name": "Àlex Corretja",
@@ -776,7 +780,7 @@
         "2005": "A"
       }
     },
-    "autoScore": 33.2
+    "autoScore": 60.6
   },
   {
     "name": "Alex de Minaur",
@@ -833,7 +837,8 @@
         "2025": "QF"
       }
     },
-    "autoScore": 41.3
+    "autoScore": 88.9,
+    "autoDay": "wednesday"
   },
   {
     "name": "Alex Michelsen",
@@ -866,7 +871,8 @@
       "source": "wikipedia",
       "page": "Alex Michelsen"
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "friday"
   },
   {
     "name": "Alexander Bublik",
@@ -927,7 +933,8 @@
       "source": "wikipedia",
       "page": "Alexander Bublik"
     },
-    "autoScore": 34.7
+    "autoScore": 77.3,
+    "autoDay": "thursday"
   },
   {
     "name": "Alexander Zverev",
@@ -992,7 +999,8 @@
         "2025": "3R"
       }
     },
-    "autoScore": 62.7
+    "autoScore": 110.2,
+    "autoDay": "monday"
   },
   {
     "name": "Alexei Popyrin",
@@ -1045,7 +1053,8 @@
       "source": "wikipedia",
       "page": "Alexei Popyrin"
     },
-    "autoScore": 33.6
+    "autoScore": 75,
+    "autoDay": "friday"
   },
   {
     "name": "Aliaksandra Sasnovich",
@@ -1118,7 +1127,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 75,
+    "autoDay": "friday"
   },
   {
     "name": "Alicia Molik",
@@ -1190,7 +1200,7 @@
         "2011": "A"
       }
     },
-    "autoScore": 25.7
+    "autoScore": 55.6
   },
   {
     "name": "Alison Riske-Amritraj",
@@ -1274,7 +1284,8 @@
         "2023": "A"
       }
     },
-    "autoScore": 32.9
+    "autoScore": 73.4,
+    "autoDay": "saturday"
   },
   {
     "name": "Alison Van Uytvanck",
@@ -1346,7 +1357,8 @@
         "2024": "A"
       }
     },
-    "autoScore": 33.5
+    "autoScore": 72.5,
+    "autoDay": "saturday"
   },
   {
     "name": "Alize Cornet",
@@ -1446,7 +1458,8 @@
         "2025": "A"
       }
     },
-    "autoScore": 34.1
+    "autoScore": 79.3,
+    "autoDay": "thursday"
   },
   {
     "name": "Amanda Anisimova",
@@ -1507,7 +1520,8 @@
       "source": "wikipedia",
       "page": "Amanda Anisimova"
     },
-    "autoScore": 45.3
+    "autoScore": 90.2,
+    "autoDay": "tuesday"
   },
   {
     "name": "Amanda Coetzer",
@@ -1591,7 +1605,7 @@
         "2004": "A"
       }
     },
-    "autoScore": 29.3
+    "autoScore": 63.4
   },
   {
     "name": "Amélie Mauresmo",
@@ -1667,7 +1681,8 @@
         "2009": "2R"
       }
     },
-    "autoScore": 55.7
+    "autoScore": 95.7,
+    "autoDay": "tuesday"
   },
   {
     "name": "Amy Frazier",
@@ -1751,7 +1766,7 @@
         "2006": "1R"
       }
     },
-    "autoScore": 23.8
+    "autoScore": 55.8
   },
   {
     "name": "Ana Ivanovic",
@@ -1823,7 +1838,8 @@
         "2016": "1R"
       }
     },
-    "autoScore": 47.9
+    "autoScore": 93.5,
+    "autoDay": "tuesday"
   },
   {
     "name": "Ana Konjuh",
@@ -1888,7 +1904,8 @@
       "source": "wikipedia",
       "page": "Ana Konjuh"
     },
-    "autoScore": 34.1
+    "autoScore": 73.8,
+    "autoDay": "saturday"
   },
   {
     "name": "Anastasia Myskina",
@@ -1940,7 +1957,8 @@
         "2007": "A"
       }
     },
-    "autoScore": 33.7
+    "autoScore": 65.5,
+    "autoDay": "sunday"
   },
   {
     "name": "Anastasia Pavlyuchenkova",
@@ -2033,7 +2051,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 47.5
+    "autoScore": 89.8,
+    "autoDay": "tuesday"
   },
   {
     "name": "Anastasia Potapova",
@@ -2086,7 +2105,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "friday"
   },
   {
     "name": "Anastasija Sevastova",
@@ -2166,7 +2186,8 @@
         "2023": "18–9"
       }
     },
-    "autoScore": 35.5
+    "autoScore": 76.1,
+    "autoDay": "thursday"
   },
   {
     "name": "Andre Agassi",
@@ -2266,7 +2287,8 @@
         "2006": "3R"
       }
     },
-    "autoScore": 125.1
+    "autoScore": 165.9,
+    "autoDay": "monday"
   },
   {
     "name": "Andrea Petkovic",
@@ -2346,7 +2368,8 @@
         "2022": "1R"
       }
     },
-    "autoScore": 36.0
+    "autoScore": 72.7,
+    "autoDay": "saturday"
   },
   {
     "name": "Andrea Petrovic",
@@ -2426,7 +2449,8 @@
         "2022": "1R"
       }
     },
-    "autoScore": 36.0
+    "autoScore": 73.8,
+    "autoDay": "saturday"
   },
   {
     "name": "Andreas Seppi",
@@ -2526,7 +2550,8 @@
         "2022": "Q3"
       }
     },
-    "autoScore": 31.2
+    "autoScore": 74.2,
+    "autoDay": "friday"
   },
   {
     "name": "Andrei Cherkasov",
@@ -2598,7 +2623,7 @@
         "2001": "A"
       }
     },
-    "autoScore": 21.9
+    "autoScore": 45
   },
   {
     "name": "Andrei Chesnokov",
@@ -2682,7 +2707,7 @@
         "2000": "A"
       }
     },
-    "autoScore": 21.6
+    "autoScore": 48.1
   },
   {
     "name": "Andrei Olhovskiy",
@@ -2786,7 +2811,7 @@
         "2005": "A"
       }
     },
-    "autoScore": 34.8
+    "autoScore": 59
   },
   {
     "name": "Andrei Pavel",
@@ -2882,12 +2907,12 @@
         "2009": "1R"
       }
     },
-    "autoScore": 24.5
+    "autoScore": 55.2
   },
   {
     "name": "Andrés Gómez",
-    "gender": "",
-    "nationality": "",
+    "gender": "Male",
+    "nationality": "Ecuador",
     "slams": {
       "AustralianOpen": {
         "1979": "A",
@@ -2954,7 +2979,7 @@
         "1992": "A"
       }
     },
-    "autoScore": 24.7
+    "autoScore": 48.2
   },
   {
     "name": "Andrey Golubev",
@@ -3014,7 +3039,7 @@
         "2017": "A"
       }
     },
-    "autoScore": 28.2
+    "autoScore": 61.1
   },
   {
     "name": "Andrey Rublev",
@@ -3079,7 +3104,8 @@
         "2025": "4R"
       }
     },
-    "autoScore": 44.6
+    "autoScore": 92.5,
+    "autoDay": "tuesday"
   },
   {
     "name": "Andy Murray",
@@ -3175,7 +3201,8 @@
         "2024": "A"
       }
     },
-    "autoScore": 107.3
+    "autoScore": 157.8,
+    "autoDay": "monday"
   },
   {
     "name": "Andy Roddick",
@@ -3243,7 +3270,9 @@
         "2012": "4R"
       }
     },
-    "autoScore": 64.6
+    "autoScore": 101.4,
+    "autoDay": "tuesday",
+    "manualDay": "monday"
   },
   {
     "name": "Anett Kontaveit",
@@ -3303,7 +3332,8 @@
         "2023": "A"
       }
     },
-    "autoScore": 32.9
+    "autoScore": 74.5,
+    "autoDay": "friday"
   },
   {
     "name": "Angelique Kerber",
@@ -3391,7 +3421,8 @@
         "2024": "A"
       }
     },
-    "autoScore": 63.7
+    "autoScore": 118,
+    "autoDay": "monday"
   },
   {
     "name": "Anhelina Kalinina",
@@ -3452,7 +3483,8 @@
         "2025": "A"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 72.8,
+    "autoDay": "saturday"
   },
   {
     "name": "Anna Blinkova",
@@ -3508,7 +3540,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 33.0
+    "autoScore": 71.5,
+    "autoDay": "saturday"
   },
   {
     "name": "Anna Chakvetadze",
@@ -3568,7 +3601,7 @@
       "source": "wikipedia",
       "page": "Anna Chakvetadze"
     },
-    "autoScore": 28.9
+    "autoScore": 60.7
   },
   {
     "name": "Anna Kalinskaya",
@@ -3625,7 +3658,8 @@
         "2025": "3R"
       }
     },
-    "autoScore": 34.7
+    "autoScore": 75.1,
+    "autoDay": "friday"
   },
   {
     "name": "Anne Kremer",
@@ -3713,7 +3747,7 @@
         "2013": "A"
       }
     },
-    "autoScore": 24.6
+    "autoScore": 53.3
   },
   {
     "name": "Arantxa Rus",
@@ -3805,7 +3839,8 @@
         "2025": "Q3"
       }
     },
-    "autoScore": 33.0
+    "autoScore": 72.6,
+    "autoDay": "saturday"
   },
   {
     "name": "Arantxa Sánchez Vicario",
@@ -3889,7 +3924,9 @@
         "2002": "1R"
       }
     },
-    "autoScore": 104.5
+    "autoScore": 141,
+    "autoDay": "monday",
+    "manualDay": "tuesday"
   },
   {
     "name": "Arnaud Clément",
@@ -3969,7 +4006,8 @@
         "2012": "A"
       }
     },
-    "autoScore": 31.4
+    "autoScore": 68.7,
+    "autoDay": "sunday"
   },
   {
     "name": "Arthur Cazaux",
@@ -4015,7 +4053,8 @@
       "source": "wikipedia",
       "page": "Arthur Cazaux"
     },
-    "autoScore": 33.0
+    "autoScore": 72.6,
+    "autoDay": "saturday"
   },
   {
     "name": "Arthur Fils",
@@ -4057,7 +4096,8 @@
       "source": "wikipedia",
       "page": "Arthur Fils"
     },
-    "autoScore": 33.0
+    "autoScore": 72.6,
+    "autoDay": "saturday"
   },
   {
     "name": "Aryna Sabalenka",
@@ -4110,7 +4150,8 @@
         "2025": "W"
       }
     },
-    "autoScore": 83.7
+    "autoScore": 130.3,
+    "autoDay": "monday"
   },
   {
     "name": "Ashleigh Barty",
@@ -4174,7 +4215,8 @@
         "2022": "A"
       }
     },
-    "autoScore": 52.9
+    "autoScore": 95.8,
+    "autoDay": "tuesday"
   },
   {
     "name": "Aslan Karatsev",
@@ -4242,7 +4284,8 @@
       "source": "wikipedia",
       "page": "Aslan Karatsev"
     },
-    "autoScore": 33.9
+    "autoScore": 71.7,
+    "autoDay": "saturday"
   },
   {
     "name": "Barbara Potter",
@@ -4293,7 +4336,7 @@
       },
       "USOpen": {}
     },
-    "autoScore": 15.8
+    "autoScore": 33.9
   },
   {
     "name": "Barbara Schett",
@@ -4357,7 +4400,7 @@
         "2005": "A"
       }
     },
-    "autoScore": 22.1
+    "autoScore": 55.5
   },
   {
     "name": "Barbora Krejčíková",
@@ -4423,7 +4466,8 @@
         "2025": "QF"
       }
     },
-    "autoScore": 50.0
+    "autoScore": 94.9,
+    "autoDay": "tuesday"
   },
   {
     "name": "Barbora Strýcová",
@@ -4523,7 +4567,8 @@
         "2023": "1R"
       }
     },
-    "autoScore": 34.4
+    "autoScore": 76,
+    "autoDay": "friday"
   },
   {
     "name": "Beatriz Haddad Maia",
@@ -4584,7 +4629,8 @@
         "2025": "4R"
       }
     },
-    "autoScore": 36.2
+    "autoScore": 77.7,
+    "autoDay": "thursday"
   },
   {
     "name": "Belinda Bencic",
@@ -4649,7 +4695,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 38.8
+    "autoScore": 85.9,
+    "autoDay": "wednesday"
   },
   {
     "name": "Ben Shelton",
@@ -4686,7 +4733,8 @@
         "2025": "3R"
       }
     },
-    "autoScore": 39.9
+    "autoScore": 81.6,
+    "autoDay": "wednesday"
   },
   {
     "name": "Bernard Tomic",
@@ -4774,7 +4822,8 @@
         "2025": "Q2"
       }
     },
-    "autoScore": 34.1
+    "autoScore": 78.2,
+    "autoDay": "thursday"
   },
   {
     "name": "Bernarda Pera",
@@ -4838,7 +4887,8 @@
         "2025": "Q1"
       }
     },
-    "autoScore": 33.0
+    "autoScore": 72.6,
+    "autoDay": "saturday"
   },
   {
     "name": "Bernd Karbacher",
@@ -4894,7 +4944,7 @@
         "2000": "A"
       }
     },
-    "autoScore": 20.2
+    "autoScore": 41.4
   },
   {
     "name": "Bethanie Mattek-Sands",
@@ -4998,7 +5048,8 @@
         "2022": "A"
       }
     },
-    "autoScore": 29.4
+    "autoScore": 65.9,
+    "autoDay": "sunday"
   },
   {
     "name": "Bettina Bunge",
@@ -5062,7 +5113,7 @@
         "1989": "A"
       }
     },
-    "autoScore": 12.8
+    "autoScore": 28.1
   },
   {
     "name": "Bianca Andreescu",
@@ -5115,7 +5166,8 @@
         "2025": "A"
       }
     },
-    "autoScore": 39.0
+    "autoScore": 79.6,
+    "autoDay": "thursday"
   },
   {
     "name": "Björn Borg",
@@ -5171,7 +5223,8 @@
         "1981": "F"
       }
     },
-    "autoScore": 98.5
+    "autoScore": 120.9,
+    "autoDay": "monday"
   },
   {
     "name": "Bojana Jovanovski",
@@ -5227,7 +5280,7 @@
         "2018": "Q2"
       }
     },
-    "autoScore": 28.8
+    "autoScore": 63.5
   },
   {
     "name": "Boris Becker",
@@ -5311,7 +5364,8 @@
         "1999": "A"
       }
     },
-    "autoScore": 86.9
+    "autoScore": 122.5,
+    "autoDay": "monday"
   },
   {
     "name": "Borna Ćorić",
@@ -5377,7 +5431,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 34.1
+    "autoScore": 74.9,
+    "autoDay": "friday"
   },
   {
     "name": "Botic van de Zandschulp",
@@ -5426,7 +5481,8 @@
       "source": "wikipedia",
       "page": "Botic van de Zandschulp"
     },
-    "autoScore": 34.7
+    "autoScore": 75.1,
+    "autoDay": "friday"
   },
   {
     "name": "Brad Gilbert",
@@ -5498,7 +5554,7 @@
         "1995": "A"
       }
     },
-    "autoScore": 17.2
+    "autoScore": 40.4
   },
   {
     "name": "Brandon Nakashima",
@@ -5551,7 +5607,8 @@
       "source": "wikipedia",
       "page": "Brandon Nakashima"
     },
-    "autoScore": 33.6
+    "autoScore": 75,
+    "autoDay": "friday"
   },
   {
     "name": "Brian Gottfried",
@@ -5627,7 +5684,7 @@
         "1984": "2R"
       }
     },
-    "autoScore": 17.2
+    "autoScore": 38.3
   },
   {
     "name": "Brian Teacher",
@@ -5707,7 +5764,7 @@
         "1987": "A"
       }
     },
-    "autoScore": 18.4
+    "autoScore": 34.8
   },
   {
     "name": "Butch Buchholz",
@@ -5779,7 +5836,7 @@
         "1969": "QF"
       }
     },
-    "autoScore": 5.9
+    "autoScore": 7.4
   },
   {
     "name": "Cameron Norrie",
@@ -5848,7 +5905,8 @@
       "source": "wikipedia",
       "page": "Cameron Norrie"
     },
-    "autoScore": 36.2
+    "autoScore": 78.8,
+    "autoDay": "thursday"
   },
   {
     "name": "Camila Giorgi",
@@ -5924,7 +5982,8 @@
         "2024": "A"
       }
     },
-    "autoScore": 33.5
+    "autoScore": 74.7,
+    "autoDay": "friday"
   },
   {
     "name": "Carla Suárez Navarro",
@@ -6000,7 +6059,8 @@
         "2021": "1R"
       }
     },
-    "autoScore": 38.3
+    "autoScore": 84.6,
+    "autoDay": "wednesday"
   },
   {
     "name": "Carlos Alcaraz",
@@ -6043,7 +6103,8 @@
         "2025": "W"
       }
     },
-    "autoScore": 87.0
+    "autoScore": 134.7,
+    "autoDay": "monday"
   },
   {
     "name": "Carlos Moyá",
@@ -6127,7 +6188,8 @@
         "2010": "A"
       }
     },
-    "autoScore": 41.0
+    "autoScore": 76,
+    "autoDay": "friday"
   },
   {
     "name": "Caroline Dolehide",
@@ -6180,7 +6242,8 @@
         "2024": "2R"
       }
     },
-    "autoScore": 33.0
+    "autoScore": 71.5,
+    "autoDay": "saturday"
   },
   {
     "name": "Caroline Garcia",
@@ -6260,7 +6323,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 35.6
+    "autoScore": 80.8,
+    "autoDay": "wednesday"
   },
   {
     "name": "Caroline Wozniacki",
@@ -6344,7 +6408,8 @@
         "2024": "4R"
       }
     },
-    "autoScore": 55.7
+    "autoScore": 109.1,
+    "autoDay": "monday"
   },
   {
     "name": "Casper Ruud",
@@ -6397,7 +6462,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 47.1
+    "autoScore": 89.6,
+    "autoDay": "wednesday"
   },
   {
     "name": "Cédric Pioline",
@@ -6477,7 +6543,7 @@
         "2002": "Q1"
       }
     },
-    "autoScore": 34.6
+    "autoScore": 62.9
   },
   {
     "name": "Chanda Rubin",
@@ -6565,7 +6631,7 @@
         "2007": "A"
       }
     },
-    "autoScore": 26.4
+    "autoScore": 64
   },
   {
     "name": "Chris Evert",
@@ -6657,7 +6723,8 @@
         "1989": "QF"
       }
     },
-    "autoScore": 212.6
+    "autoScore": 244.1,
+    "autoDay": "monday"
   },
   {
     "name": "Christian Ruud",
@@ -6721,7 +6788,7 @@
       "source": "wikipedia",
       "page": "Christian Ruud"
     },
-    "autoScore": 18.6
+    "autoScore": 41.4
   },
   {
     "name": "Chung Hyeon",
@@ -6777,7 +6844,8 @@
       "source": "wikipedia",
       "page": "Chung Hyeon"
     },
-    "autoScore": 31.5
+    "autoScore": 66.5,
+    "autoDay": "sunday"
   },
   {
     "name": "Clara Burel",
@@ -6821,7 +6889,8 @@
         "2024": "2R"
       }
     },
-    "autoScore": 32.4
+    "autoScore": 70.2,
+    "autoDay": "sunday"
   },
   {
     "name": "Clara Tauson",
@@ -6878,7 +6947,8 @@
       "source": "wikipedia",
       "page": "Clara Tauson"
     },
-    "autoScore": 33.6
+    "autoScore": 75,
+    "autoDay": "friday"
   },
   {
     "name": "Cliff Drysdale",
@@ -6970,7 +7040,7 @@
         "1980": "A"
       }
     },
-    "autoScore": 20.4
+    "autoScore": 30
   },
   {
     "name": "Coco Gauff",
@@ -7015,7 +7085,8 @@
         "2025": "4R"
       }
     },
-    "autoScore": 58.1
+    "autoScore": 107.5,
+    "autoDay": "monday"
   },
   {
     "name": "Conchita Martínez",
@@ -7103,7 +7174,8 @@
         "2005": "1R"
       }
     },
-    "autoScore": 60.6
+    "autoScore": 99.3,
+    "autoDay": "tuesday"
   },
   {
     "name": "Cristian Garin",
@@ -7184,7 +7256,8 @@
       "source": "wikipedia",
       "page": "Cristian Garín"
     },
-    "autoScore": 34.7
+    "autoScore": 76.2,
+    "autoDay": "thursday"
   },
   {
     "name": "Cristina Bucșa",
@@ -7229,7 +7302,8 @@
         "2025": "4R"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "friday"
   },
   {
     "name": "Dája Bedáňová",
@@ -7273,7 +7347,7 @@
         "2005": "A"
       }
     },
-    "autoScore": 21.5
+    "autoScore": 47.6
   },
   {
     "name": "Daniel Altmaier",
@@ -7330,7 +7404,8 @@
       "source": "wikipedia",
       "page": "Daniel Altmaier"
     },
-    "autoScore": 33.6
+    "autoScore": 75,
+    "autoDay": "friday"
   },
   {
     "name": "Daniela Hantuchova",
@@ -7418,12 +7493,13 @@
         "2017": "A"
       }
     },
-    "autoScore": 34.1
+    "autoScore": 78.4,
+    "autoDay": "thursday"
   },
   {
     "name": "Danielle Collins",
     "gender": "Female",
-    "nationality": "",
+    "nationality": "United States",
     "slams": {
       "AustralianOpen": {
         "2014": "A",
@@ -7482,7 +7558,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 39.6
+    "autoScore": 80.4,
+    "autoDay": "thursday"
   },
   {
     "name": "Daniil Medvedev",
@@ -7540,7 +7617,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 66.3
+    "autoScore": 114.4,
+    "autoDay": "monday"
   },
   {
     "name": "Daria Kasatkina",
@@ -7601,7 +7679,8 @@
         "2025": "3R"
       }
     },
-    "autoScore": 37.3
+    "autoScore": 82.2,
+    "autoDay": "wednesday"
   },
   {
     "name": "Daria Saville",
@@ -7681,7 +7760,8 @@
         "2025": "Q1"
       }
     },
-    "autoScore": 33.0
+    "autoScore": 73.7,
+    "autoDay": "saturday"
   },
   {
     "name": "David Ferrer",
@@ -7765,7 +7845,8 @@
         "2018": "1R"
       }
     },
-    "autoScore": 52.4
+    "autoScore": 98.1,
+    "autoDay": "tuesday"
   },
   {
     "name": "David Goffin",
@@ -7842,7 +7923,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 37.4
+    "autoScore": 86.2,
+    "autoDay": "wednesday"
   },
   {
     "name": "David Nalbandian",
@@ -7910,7 +7992,8 @@
         "2013": "A"
       }
     },
-    "autoScore": 40.7
+    "autoScore": 75,
+    "autoDay": "friday"
   },
   {
     "name": "David Wheaton",
@@ -7990,7 +8073,7 @@
         "2001": "A"
       }
     },
-    "autoScore": 21.7
+    "autoScore": 49.5
   },
   {
     "name": "Dayana Yastremska",
@@ -8040,7 +8123,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 35.1
+    "autoScore": 75.4,
+    "autoDay": "friday"
   },
   {
     "name": "Denis Istomin",
@@ -8132,7 +8216,8 @@
         "2022": "A"
       }
     },
-    "autoScore": 30.6
+    "autoScore": 69.6,
+    "autoDay": "sunday"
   },
   {
     "name": "Denis Shapovalov",
@@ -8186,7 +8271,8 @@
         "2025": "3R"
       }
     },
-    "autoScore": 37.3
+    "autoScore": 78.9,
+    "autoDay": "thursday"
   },
   {
     "name": "Dennis Ralston",
@@ -8282,7 +8368,7 @@
         "1977": "A"
       }
     },
-    "autoScore": 19.3
+    "autoScore": 30.3
   },
   {
     "name": "Diana Shnaider",
@@ -8311,7 +8397,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "friday"
   },
   {
     "name": "Diego Schwartzman",
@@ -8375,7 +8462,8 @@
         "2024": "1R"
       }
     },
-    "autoScore": 38.3
+    "autoScore": 80.9,
+    "autoDay": "wednesday"
   },
   {
     "name": "Dinara Safina",
@@ -8431,7 +8519,8 @@
         "2011": "A"
       }
     },
-    "autoScore": 41.8
+    "autoScore": 75.1,
+    "autoDay": "friday"
   },
   {
     "name": "Dmitry Tursunov",
@@ -8515,7 +8604,7 @@
         "2017": "1R"
       }
     },
-    "autoScore": 28.2
+    "autoScore": 63.3
   },
   {
     "name": "Dominic Thiem",
@@ -8575,7 +8664,8 @@
         "2024": "1R"
       }
     },
-    "autoScore": 55.6
+    "autoScore": 102.3,
+    "autoDay": "tuesday"
   },
   {
     "name": "Dominik Hrbatý",
@@ -8651,7 +8741,7 @@
         "2010": "A"
       }
     },
-    "autoScore": 28.2
+    "autoScore": 61.3
   },
   {
     "name": "Dominika Cibulkova",
@@ -8719,7 +8809,8 @@
         "2019": "A"
       }
     },
-    "autoScore": 41.5
+    "autoScore": 78.6,
+    "autoDay": "thursday"
   },
   {
     "name": "Donna Vekic",
@@ -8791,7 +8882,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 36.7
+    "autoScore": 80.9,
+    "autoDay": "wednesday"
   },
   {
     "name": "Eddie Dibbs",
@@ -8847,7 +8939,7 @@
         "1981": "A"
       }
     },
-    "autoScore": 15.1
+    "autoScore": 24.4
   },
   {
     "name": "Ekaterina Alexandrova",
@@ -8904,7 +8996,8 @@
         "2025": "4R"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 77.2,
+    "autoDay": "thursday"
   },
   {
     "name": "Ekaterina Makarova",
@@ -8980,7 +9073,8 @@
         "2019": "A"
       }
     },
-    "autoScore": 36.8
+    "autoScore": 81.4,
+    "autoDay": "wednesday"
   },
   {
     "name": "Elena Bovina",
@@ -9056,7 +9150,7 @@
         "2012": "A"
       }
     },
-    "autoScore": 25.7
+    "autoScore": 56.7
   },
   {
     "name": "Elena Dementieva",
@@ -9136,7 +9230,8 @@
         "2010": "4R"
       }
     },
-    "autoScore": 45.8
+    "autoScore": 87.3,
+    "autoDay": "wednesday"
   },
   {
     "name": "Elena Likhovtseva",
@@ -9212,12 +9307,12 @@
         "2007": "2R"
       }
     },
-    "autoScore": 25.9
+    "autoScore": 60.8
   },
   {
     "name": "Elena Rybakina",
     "gender": "Female",
-    "nationality": "",
+    "nationality": "Kazakhstan",
     "slams": {
       "AustralianOpen": {
         "2018": "A",
@@ -9262,7 +9357,9 @@
         "2025": "4R"
       }
     },
-    "autoScore": 54.4
+    "autoScore": 100.3,
+    "autoDay": "tuesday",
+    "manualDay": "monday"
   },
   {
     "name": "Elena Vesnina",
@@ -9338,7 +9435,8 @@
         "2021": "A"
       }
     },
-    "autoScore": 32.1
+    "autoScore": 71.1,
+    "autoDay": "sunday"
   },
   {
     "name": "Eleni Daniilidou",
@@ -9418,7 +9516,7 @@
         "2014": "A"
       }
     },
-    "autoScore": 26.4
+    "autoScore": 60.5
   },
   {
     "name": "Elina Svitolina",
@@ -9495,7 +9593,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 50.6
+    "autoScore": 98.5,
+    "autoDay": "tuesday"
   },
   {
     "name": "Elisabetta Cocciaretto",
@@ -9544,7 +9643,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "friday"
   },
   {
     "name": "Elise Mertens",
@@ -9605,7 +9705,8 @@
         "2025": "3R"
       }
     },
-    "autoScore": 37.3
+    "autoScore": 91,
+    "autoDay": "tuesday"
   },
   {
     "name": "Emilio Sanchez",
@@ -9681,7 +9782,8 @@
         "1998": "A"
       }
     },
-    "autoScore": 46.7
+    "autoScore": 69.1,
+    "autoDay": "sunday"
   },
   {
     "name": "Emma Navarro",
@@ -9727,7 +9829,8 @@
         "2025": "3R"
       }
     },
-    "autoScore": 37.3
+    "autoScore": 78.9,
+    "autoDay": "thursday"
   },
   {
     "name": "Emma Raducanu",
@@ -9777,7 +9880,8 @@
         "2025": "3R"
       }
     },
-    "autoScore": 39.6
+    "autoScore": 82,
+    "autoDay": "wednesday"
   },
   {
     "name": "Ernests Gulbis",
@@ -9869,7 +9973,8 @@
         "2023": "A"
       }
     },
-    "autoScore": 33.8
+    "autoScore": 73.6,
+    "autoDay": "saturday"
   },
   {
     "name": "Eugenie Bouchard",
@@ -9929,7 +10034,8 @@
         "2023": "Q2"
       }
     },
-    "autoScore": 39.9
+    "autoScore": 79.3,
+    "autoDay": "thursday"
   },
   {
     "name": "Evonne Goolagong Cawley",
@@ -10013,7 +10119,9 @@
         "1983": "A"
       }
     },
-    "autoScore": 104.2
+    "autoScore": 120.7,
+    "autoDay": "monday",
+    "manualDay": "friday"
   },
   {
     "name": "Fabio Fognini",
@@ -10113,7 +10221,8 @@
       "source": "wikipedia",
       "page": "Fabio Fognini"
     },
-    "autoScore": 34.1
+    "autoScore": 80.4,
+    "autoDay": "thursday"
   },
   {
     "name": "Fabiola Zuluaga",
@@ -10165,7 +10274,7 @@
         "2005": "2R"
       }
     },
-    "autoScore": 22.5
+    "autoScore": 48.1
   },
   {
     "name": "Fabrice Santoro",
@@ -10269,7 +10378,7 @@
         "2010": "A"
       }
     },
-    "autoScore": 25.1
+    "autoScore": 56.5
   },
   {
     "name": "Feliciano López",
@@ -10381,7 +10490,8 @@
         "2023": "A"
       }
     },
-    "autoScore": 35.6
+    "autoScore": 81.2,
+    "autoDay": "wednesday"
   },
   {
     "name": "Felix Auger-Aliassime",
@@ -10438,7 +10548,8 @@
         "2025": "SF"
       }
     },
-    "autoScore": 38.8
+    "autoScore": 83.7,
+    "autoDay": "wednesday"
   },
   {
     "name": "Fernando González",
@@ -10514,7 +10625,8 @@
         "2012": "A"
       }
     },
-    "autoScore": 35.6
+    "autoScore": 69.2,
+    "autoDay": "sunday"
   },
   {
     "name": "Fernando Verdasco",
@@ -10614,7 +10726,8 @@
         "2023": "A"
       }
     },
-    "autoScore": 36.6
+    "autoScore": 89.4,
+    "autoDay": "wednesday"
   },
   {
     "name": "Filippo Volandri",
@@ -10694,7 +10807,7 @@
         "2016": "A"
       }
     },
-    "autoScore": 27.6
+    "autoScore": 60.9
   },
   {
     "name": "Flavia Pennetta",
@@ -10774,7 +10887,8 @@
         "2015": "W"
       }
     },
-    "autoScore": 40.0
+    "autoScore": 80.7,
+    "autoDay": "wednesday"
   },
   {
     "name": "Flavio Cobolli",
@@ -10819,7 +10933,8 @@
       "source": "wikipedia",
       "page": "Flavio Cobolli"
     },
-    "autoScore": 34.7
+    "autoScore": 74,
+    "autoDay": "friday"
   },
   {
     "name": "Florian Mayer",
@@ -10907,7 +11022,8 @@
         "2018": "1R"
       }
     },
-    "autoScore": 31.0
+    "autoScore": 65.9,
+    "autoDay": "sunday"
   },
   {
     "name": "Frances Tiafoe",
@@ -10972,7 +11088,8 @@
         "2025": "3R"
       }
     },
-    "autoScore": 39.9
+    "autoScore": 82.7,
+    "autoDay": "wednesday"
   },
   {
     "name": "Francesca Schiavone",
@@ -11072,7 +11189,8 @@
         "2018": "A"
       }
     },
-    "autoScore": 44.3
+    "autoScore": 91.5,
+    "autoDay": "tuesday"
   },
   {
     "name": "Francisco Cerundolo",
@@ -11113,7 +11231,8 @@
       "source": "wikipedia",
       "page": "Francisco Cerúndolo"
     },
-    "autoScore": 33.6
+    "autoScore": 76.1,
+    "autoDay": "thursday"
   },
   {
     "name": "Francisco Clavet",
@@ -11185,7 +11304,7 @@
         "2003": "A"
       }
     },
-    "autoScore": 19.8
+    "autoScore": 47.3
   },
   {
     "name": "Franco Squillari",
@@ -11241,96 +11360,7 @@
         "2005": "A"
       }
     },
-    "autoScore": 21.3
-  },
-  {
-    "name": "Gabriela Dabrowski",
-    "gender": "Female",
-    "nationality": "Canada",
-    "slams": {
-      "AustralianOpen": {
-        "2008": "A",
-        "2009": "A",
-        "2010": "A",
-        "2011": "A",
-        "2012": "A",
-        "2013": "A",
-        "2014": "A",
-        "2015": "3R",
-        "2016": "1R",
-        "2017": "2R",
-        "2018": "QF",
-        "2019": "1R",
-        "2020": "QF",
-        "2021": "2R",
-        "2022": "2R",
-        "2023": "3R",
-        "2024": "SF",
-        "2025": "SF",
-        "2026": "SF"
-      },
-      "FrenchOpen": {
-        "2008": "A",
-        "2009": "A",
-        "2010": "A",
-        "2011": "A",
-        "2012": "A",
-        "2013": "A",
-        "2014": "2R",
-        "2015": "1R",
-        "2016": "2R",
-        "2017": "3R",
-        "2018": "3R",
-        "2019": "QF",
-        "2020": "3R",
-        "2021": "3R",
-        "2022": "3R",
-        "2023": "3R",
-        "2024": "A",
-        "2025": "A"
-      },
-      "Wimbledon": {
-        "2008": "A",
-        "2009": "A",
-        "2010": "A",
-        "2011": "A",
-        "2012": "A",
-        "2013": "Q1",
-        "2014": "1R",
-        "2015": "1R",
-        "2016": "2R",
-        "2017": "1R",
-        "2018": "SF",
-        "2019": "F",
-        "2020": "NH",
-        "2021": "1R",
-        "2022": "3R",
-        "2023": "1R",
-        "2024": "F",
-        "2025": "QF"
-      },
-      "USOpen": {
-        "2008": "A",
-        "2009": "A",
-        "2010": "A",
-        "2011": "A",
-        "2012": "A",
-        "2013": "A",
-        "2014": "3R",
-        "2015": "1R",
-        "2016": "1R",
-        "2017": "QF",
-        "2018": "2R",
-        "2019": "QF",
-        "2020": "QF",
-        "2021": "SF",
-        "2022": "QF",
-        "2023": "W",
-        "2024": "QF",
-        "2025": "W"
-      }
-    },
-    "autoScore": 71.0
+    "autoScore": 45.5
   },
   {
     "name": "Gabriela Sabatini",
@@ -11398,7 +11428,8 @@
         "1996": "3R"
       }
     },
-    "autoScore": 63.1
+    "autoScore": 91,
+    "autoDay": "tuesday"
   },
   {
     "name": "Gaël Monfils",
@@ -11504,7 +11535,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 45.4
+    "autoScore": 97.5,
+    "autoDay": "tuesday"
   },
   {
     "name": "Garbiñe Muguruza",
@@ -11568,7 +11600,8 @@
         "2023": "A"
       }
     },
-    "autoScore": 56.6
+    "autoScore": 104.8,
+    "autoDay": "tuesday"
   },
   {
     "name": "Gastón Gaudio",
@@ -11648,7 +11681,7 @@
         "2011": "A"
       }
     },
-    "autoScore": 30.0
+    "autoScore": 62.3
   },
   {
     "name": "Gilles Simon",
@@ -11740,7 +11773,8 @@
         "2022": "Q2"
       }
     },
-    "autoScore": 33.4
+    "autoScore": 79.9,
+    "autoDay": "thursday"
   },
   {
     "name": "Giovanni Mpetshi Perricard",
@@ -11786,7 +11820,8 @@
       "source": "wikipedia",
       "page": "Giovanni Mpetshi Perricard"
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "friday"
   },
   {
     "name": "Goran Ivanišević",
@@ -11874,7 +11909,8 @@
         "2005": "A"
       }
     },
-    "autoScore": 50.6
+    "autoScore": 81.6,
+    "autoDay": "wednesday"
   },
   {
     "name": "Goran Prpić",
@@ -11926,7 +11962,7 @@
         "1993": "1R"
       }
     },
-    "autoScore": 16.0
+    "autoScore": 32.3
   },
   {
     "name": "Greet Minnen",
@@ -11970,7 +12006,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 33.0
+    "autoScore": 71.5,
+    "autoDay": "saturday"
   },
   {
     "name": "Greg Rusedski",
@@ -12038,7 +12075,7 @@
         "2006": "1R"
       }
     },
-    "autoScore": 26.7
+    "autoScore": 59.7
   },
   {
     "name": "Grigor Dimitrov",
@@ -12124,7 +12161,8 @@
         "2025": "A"
       }
     },
-    "autoScore": 43.6
+    "autoScore": 94.3,
+    "autoDay": "tuesday"
   },
   {
     "name": "Guillermo Cañas",
@@ -12204,7 +12242,7 @@
         "2009": "A"
       }
     },
-    "autoScore": 26.7
+    "autoScore": 58.7
   },
   {
     "name": "Guillermo Coria",
@@ -12256,7 +12294,7 @@
         "2008": "A"
       }
     },
-    "autoScore": 30.5
+    "autoScore": 61.7
   },
   {
     "name": "Guillermo García López",
@@ -12344,7 +12382,8 @@
         "2021": "A"
       }
     },
-    "autoScore": 30.6
+    "autoScore": 68.5,
+    "autoDay": "sunday"
   },
   {
     "name": "Guillermo Vilas",
@@ -12440,7 +12479,8 @@
         "1989": "A"
       }
     },
-    "autoScore": 65.1
+    "autoScore": 89.7,
+    "autoDay": "tuesday"
   },
   {
     "name": "Gustavo Kuerten",
@@ -12512,7 +12552,8 @@
         "2008": "A"
       }
     },
-    "autoScore": 46.3
+    "autoScore": 79.7,
+    "autoDay": "thursday"
   },
   {
     "name": "Hailey Baptiste",
@@ -12561,7 +12602,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "saturday"
   },
   {
     "name": "Hana Mandlíková",
@@ -12629,7 +12671,8 @@
         "1990": "A"
       }
     },
-    "autoScore": 70.9
+    "autoScore": 97.5,
+    "autoDay": "tuesday"
   },
   {
     "name": "Harold Solomon",
@@ -12705,7 +12748,7 @@
         "1986": "A"
       }
     },
-    "autoScore": 20.3
+    "autoScore": 38.3
   },
   {
     "name": "Helena Sukova",
@@ -12793,7 +12836,8 @@
         "1998": "A"
       }
     },
-    "autoScore": 49.4
+    "autoScore": 82.2,
+    "autoDay": "wednesday"
   },
   {
     "name": "Henri Leconte",
@@ -12877,7 +12921,7 @@
         "1996": "A"
       }
     },
-    "autoScore": 29.6
+    "autoScore": 53.8
   },
   {
     "name": "Holger Rune",
@@ -12915,7 +12959,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 36.3
+    "autoScore": 80.6,
+    "autoDay": "thursday"
   },
   {
     "name": "Hsieh Su-wei",
@@ -13027,7 +13072,8 @@
       "source": "wikipedia",
       "page": "Hsieh Su-wei"
     },
-    "autoScore": 33.5
+    "autoScore": 74.7,
+    "autoDay": "friday"
   },
   {
     "name": "Hubert Hurkacz",
@@ -13076,7 +13122,8 @@
         "2025": "A"
       }
     },
-    "autoScore": 36.2
+    "autoScore": 79.9,
+    "autoDay": "thursday"
   },
   {
     "name": "Hyung-taik Lee",
@@ -13148,7 +13195,7 @@
         "2009": "A"
       }
     },
-    "autoScore": 23.4
+    "autoScore": 52.9
   },
   {
     "name": "Iga Świątek",
@@ -13193,7 +13240,8 @@
         "2025": "QF"
       }
     },
-    "autoScore": 79.6
+    "autoScore": 133,
+    "autoDay": "monday"
   },
   {
     "name": "Igor Andreev",
@@ -13249,7 +13297,7 @@
         "2013": "A"
       }
     },
-    "autoScore": 26.9
+    "autoScore": 60.4
   },
   {
     "name": "Ilie Năstase",
@@ -13345,7 +13393,7 @@
         "1985": "1R"
       }
     },
-    "autoScore": 41.1
+    "autoScore": 59.7
   },
   {
     "name": "Iva Majoli",
@@ -13413,7 +13461,7 @@
         "2004": "A"
       }
     },
-    "autoScore": 31.3
+    "autoScore": 59.2
   },
   {
     "name": "Ivan Lendl",
@@ -13497,7 +13545,8 @@
         "1994": "2R"
       }
     },
-    "autoScore": 126.5
+    "autoScore": 160.7,
+    "autoDay": "monday"
   },
   {
     "name": "Ivan Ljubičić",
@@ -13581,7 +13630,7 @@
         "2012": "A"
       }
     },
-    "autoScore": 27.8
+    "autoScore": 59.5
   },
   {
     "name": "Ivo Karlović",
@@ -13685,7 +13734,8 @@
         "2021": "1R"
       }
     },
-    "autoScore": 31.7
+    "autoScore": 71.9,
+    "autoDay": "saturday"
   },
   {
     "name": "Jack Draper",
@@ -13739,7 +13789,8 @@
       "source": "wikipedia",
       "page": "Jack Draper"
     },
-    "autoScore": 34.5
+    "autoScore": 76.3,
+    "autoDay": "thursday"
   },
   {
     "name": "Jack Sock",
@@ -13815,7 +13866,8 @@
       "source": "wikipedia",
       "page": "Jack Sock"
     },
-    "autoScore": 31.2
+    "autoScore": 69.8,
+    "autoDay": "sunday"
   },
   {
     "name": "Jakob Hlasek",
@@ -13887,7 +13939,7 @@
         "1996": "4R"
       }
     },
-    "autoScore": 16.7
+    "autoScore": 40.5
   },
   {
     "name": "Jamie Hampton",
@@ -13919,7 +13971,7 @@
         "2013": "3R"
       }
     },
-    "autoScore": 25.8
+    "autoScore": 57
   },
   {
     "name": "Jan Kodeš",
@@ -13987,7 +14039,7 @@
         "1981": "A"
       }
     },
-    "autoScore": 38.5
+    "autoScore": 57.3
   },
   {
     "name": "Jan-Lennard Struff",
@@ -14068,7 +14120,8 @@
       "source": "wikipedia",
       "page": "Jan-Lennard Struff"
     },
-    "autoScore": 33.6
+    "autoScore": 76.1,
+    "autoDay": "thursday"
   },
   {
     "name": "Jana Novotná",
@@ -14144,7 +14197,8 @@
         "1999": "3R"
       }
     },
-    "autoScore": 57.2
+    "autoScore": 89.7,
+    "autoDay": "tuesday"
   },
   {
     "name": "Janko Tipsarevic",
@@ -14240,7 +14294,8 @@
         "2019": "1R"
       }
     },
-    "autoScore": 31.6
+    "autoScore": 71.6,
+    "autoDay": "saturday"
   },
   {
     "name": "Jannik Sinner",
@@ -14286,7 +14341,8 @@
         "2025": "F"
       }
     },
-    "autoScore": 75.6
+    "autoScore": 124.8,
+    "autoDay": "monday"
   },
   {
     "name": "Jarkko Nieminen",
@@ -14362,7 +14418,7 @@
         "2015": "1R"
       }
     },
-    "autoScore": 30.3
+    "autoScore": 63.2
   },
   {
     "name": "Jasmine Paolini",
@@ -14423,7 +14479,8 @@
         "2025": "3R"
       }
     },
-    "autoScore": 41.6
+    "autoScore": 84.1,
+    "autoDay": "wednesday"
   },
   {
     "name": "Jaume Munar",
@@ -14492,7 +14549,8 @@
       "source": "wikipedia",
       "page": "Jaume Munar"
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "saturday"
   },
   {
     "name": "Jelena Dokic",
@@ -14568,7 +14626,7 @@
       "source": "wikipedia",
       "page": "Jelena Dokic"
     },
-    "autoScore": 30.0
+    "autoScore": 64.1
   },
   {
     "name": "Jelena Janković",
@@ -14648,7 +14706,8 @@
         "2017": "1R"
       }
     },
-    "autoScore": 41.9
+    "autoScore": 90.4,
+    "autoDay": "tuesday"
   },
   {
     "name": "Jeļena Ostapenko",
@@ -14709,7 +14768,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 45.5
+    "autoScore": 87.2,
+    "autoDay": "wednesday"
   },
   {
     "name": "Jennifer Brady",
@@ -14770,7 +14830,8 @@
       "source": "wikipedia",
       "page": "Jennifer Brady"
     },
-    "autoScore": 37.3
+    "autoScore": 76.6,
+    "autoDay": "thursday"
   },
   {
     "name": "Jennifer Capriati",
@@ -14846,7 +14907,8 @@
         "2004": "SF"
       }
     },
-    "autoScore": 64.4
+    "autoScore": 101,
+    "autoDay": "tuesday"
   },
   {
     "name": "Jéssica Bouzas Maneiro",
@@ -14883,7 +14945,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "saturday"
   },
   {
     "name": "Jessica Pegula",
@@ -14964,7 +15027,8 @@
       "source": "wikipedia",
       "page": "Jessica Pegula"
     },
-    "autoScore": 47.2
+    "autoScore": 89.2,
+    "autoDay": "wednesday"
   },
   {
     "name": "Jim Courier",
@@ -15036,7 +15100,8 @@
         "2000": "A"
       }
     },
-    "autoScore": 64.4
+    "autoScore": 97.5,
+    "autoDay": "tuesday"
   },
   {
     "name": "Jimmy Connors",
@@ -15148,7 +15213,8 @@
         "1992": "2R"
       }
     },
-    "autoScore": 124.2
+    "autoScore": 150.8,
+    "autoDay": "monday"
   },
   {
     "name": "Jiří Novák",
@@ -15212,7 +15278,7 @@
         "2006": "4R"
       }
     },
-    "autoScore": 23.1
+    "autoScore": 52.7
   },
   {
     "name": "Jo-Wilfried Tsonga",
@@ -15304,7 +15370,8 @@
         "2022": "A"
       }
     },
-    "autoScore": 52.6
+    "autoScore": 100.9,
+    "autoDay": "tuesday"
   },
   {
     "name": "Joachim Johansson",
@@ -15372,7 +15439,7 @@
         "2013": "A"
       }
     },
-    "autoScore": 23.7
+    "autoScore": 51.8
   },
   {
     "name": "Joakim Nystrom",
@@ -15428,7 +15495,7 @@
         "1989": "A"
       }
     },
-    "autoScore": 14.7
+    "autoScore": 33.8
   },
   {
     "name": "Johan Kriek",
@@ -15516,7 +15583,7 @@
         "1994": "A"
       }
     },
-    "autoScore": 35.7
+    "autoScore": 56.3
   },
   {
     "name": "Johanna Konta",
@@ -15572,7 +15639,8 @@
         "2021": "A"
       }
     },
-    "autoScore": 38.4
+    "autoScore": 76.6,
+    "autoDay": "thursday"
   },
   {
     "name": "John Isner",
@@ -15656,7 +15724,8 @@
         "2023": "2R"
       }
     },
-    "autoScore": 35.5
+    "autoScore": 80.5,
+    "autoDay": "thursday"
   },
   {
     "name": "John McEnroe",
@@ -15736,7 +15805,8 @@
         "1992": "4R"
       }
     },
-    "autoScore": 90.9
+    "autoScore": 121.7,
+    "autoDay": "monday"
   },
   {
     "name": "John Newcombe",
@@ -15828,7 +15898,8 @@
         "1978": "A"
       }
     },
-    "autoScore": 81.0
+    "autoScore": 100.3,
+    "autoDay": "tuesday"
   },
   {
     "name": "Jose-Luis Clerc",
@@ -15900,7 +15971,7 @@
         "1990": "A"
       }
     },
-    "autoScore": 14.4
+    "autoScore": 31
   },
   {
     "name": "Juan Carlos Ferrero",
@@ -15972,7 +16043,8 @@
         "2012": "A"
       }
     },
-    "autoScore": 47.0
+    "autoScore": 84.3,
+    "autoDay": "wednesday"
   },
   {
     "name": "Juan Ignacio Chela",
@@ -16040,7 +16112,7 @@
         "2012": "A"
       }
     },
-    "autoScore": 28.5
+    "autoScore": 60.4
   },
   {
     "name": "Juan Martín del Potro",
@@ -16116,7 +16188,8 @@
         "2019": "A"
       }
     },
-    "autoScore": 53.1
+    "autoScore": 93.5,
+    "autoDay": "tuesday"
   },
   {
     "name": "Juan Mónaco",
@@ -16188,7 +16261,7 @@
         "2017": "A"
       }
     },
-    "autoScore": 27.6
+    "autoScore": 64.2
   },
   {
     "name": "Julia Goerges",
@@ -16264,7 +16337,8 @@
         "2020": "A"
       }
     },
-    "autoScore": 31.5
+    "autoScore": 73.1,
+    "autoDay": "saturday"
   },
   {
     "name": "Jürgen Melzer",
@@ -16360,7 +16434,8 @@
         "2018": "Q1"
       }
     },
-    "autoScore": 30.3
+    "autoScore": 68.3,
+    "autoDay": "sunday"
   },
   {
     "name": "Justine Henin",
@@ -16428,7 +16503,8 @@
         "2011": "A"
       }
     },
-    "autoScore": 96.3
+    "autoScore": 141,
+    "autoDay": "monday"
   },
   {
     "name": "Kaia Kanepi",
@@ -16536,7 +16612,8 @@
         "2024": "A"
       }
     },
-    "autoScore": 40.1
+    "autoScore": 81.9,
+    "autoDay": "wednesday"
   },
   {
     "name": "Karel Nováček",
@@ -16604,7 +16681,7 @@
         "1996": "A"
       }
     },
-    "autoScore": 18.7
+    "autoScore": 39.7
   },
   {
     "name": "Karen Khachanov",
@@ -16665,7 +16742,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 41.0
+    "autoScore": 87.2,
+    "autoDay": "wednesday"
   },
   {
     "name": "Karin Knapp",
@@ -16729,7 +16807,7 @@
         "2017": "A"
       }
     },
-    "autoScore": 28.2
+    "autoScore": 62.2
   },
   {
     "name": "Karol Kučera",
@@ -16809,7 +16887,7 @@
         "2005": "2R"
       }
     },
-    "autoScore": 24.7
+    "autoScore": 50.5
   },
   {
     "name": "Karolína Muchová",
@@ -16866,7 +16944,8 @@
         "2025": "QF"
       }
     },
-    "autoScore": 45.4
+    "autoScore": 87.1,
+    "autoDay": "wednesday"
   },
   {
     "name": "Karolína Plíšková",
@@ -16948,7 +17027,8 @@
         "2025": "A"
       }
     },
-    "autoScore": 52.3
+    "autoScore": 95.5,
+    "autoDay": "tuesday"
   },
   {
     "name": "Karolina Šprem",
@@ -17000,7 +17080,7 @@
         "2011": "A"
       }
     },
-    "autoScore": 25.7
+    "autoScore": 55.6
   },
   {
     "name": "Kateřina Siniaková",
@@ -17065,7 +17145,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "saturday"
   },
   {
     "name": "Kathleen Horvath",
@@ -17125,7 +17206,7 @@
         "1989": "A"
       }
     },
-    "autoScore": 13.6
+    "autoScore": 27.1
   },
   {
     "name": "Kathy May",
@@ -17173,7 +17254,7 @@
         "1980": "2R"
       }
     },
-    "autoScore": 9.3
+    "autoScore": 18.8
   },
   {
     "name": "Katie Boulter",
@@ -17238,7 +17319,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 72.8,
+    "autoDay": "saturday"
   },
   {
     "name": "Kei Nishikori",
@@ -17330,7 +17412,8 @@
         "2025": "A"
       }
     },
-    "autoScore": 49.9
+    "autoScore": 100.3,
+    "autoDay": "tuesday"
   },
   {
     "name": "Ken Rosewall",
@@ -17410,7 +17493,8 @@
         "1978": "3R"
       }
     },
-    "autoScore": 89.8
+    "autoScore": 106.2,
+    "autoDay": "tuesday"
   },
   {
     "name": "Kerry Melville Reid",
@@ -17490,7 +17574,7 @@
         "1979": "QF"
       }
     },
-    "autoScore": 38.3
+    "autoScore": 52.1
   },
   {
     "name": "Kevin Curren",
@@ -17566,7 +17650,7 @@
         "1992": "1R"
       }
     },
-    "autoScore": 23.8
+    "autoScore": 43.7
   },
   {
     "name": "Kiki Bertens",
@@ -17626,7 +17710,8 @@
         "2021": "A"
       }
     },
-    "autoScore": 33.2
+    "autoScore": 72.3,
+    "autoDay": "saturday"
   },
   {
     "name": "Kim Clijsters",
@@ -17706,7 +17791,8 @@
         "2021": "3 / 10"
       }
     },
-    "autoScore": 85.9
+    "autoScore": 132.5,
+    "autoDay": "monday"
   },
   {
     "name": "Kim Warwick",
@@ -17790,7 +17876,7 @@
         "1986": "A"
       }
     },
-    "autoScore": 16.9
+    "autoScore": 29.5
   },
   {
     "name": "Kirsten Flipkens",
@@ -17882,7 +17968,8 @@
         "2022": "A"
       }
     },
-    "autoScore": 32.7
+    "autoScore": 70.2,
+    "autoDay": "sunday"
   },
   {
     "name": "Klara Zakopalova",
@@ -17962,7 +18049,7 @@
         "2016": "A"
       }
     },
-    "autoScore": 27.6
+    "autoScore": 62
   },
   {
     "name": "Kristina Mladenovic",
@@ -18048,7 +18135,8 @@
         "2025": "A"
       }
     },
-    "autoScore": 35.8
+    "autoScore": 75.2,
+    "autoDay": "friday"
   },
   {
     "name": "Laura Robson",
@@ -18108,7 +18196,7 @@
         "2019": "A"
       }
     },
-    "autoScore": 28.2
+    "autoScore": 63.3
   },
   {
     "name": "Laura Siegemund",
@@ -18193,7 +18281,8 @@
         "2025": "3R"
       }
     },
-    "autoScore": 35.8
+    "autoScore": 75.2,
+    "autoDay": "friday"
   },
   {
     "name": "Learner Tien",
@@ -18230,7 +18319,8 @@
       "source": "wikipedia",
       "page": "Learner Tien"
     },
-    "autoScore": 34.7
+    "autoScore": 75.1,
+    "autoDay": "friday"
   },
   {
     "name": "Lesia Tsurenko",
@@ -18310,7 +18400,8 @@
         "2024": "1R"
       }
     },
-    "autoScore": 33.5
+    "autoScore": 75.8,
+    "autoDay": "friday"
   },
   {
     "name": "Leylah Fernandez",
@@ -18359,12 +18450,13 @@
         "2025": "3R"
       }
     },
-    "autoScore": 38.7
+    "autoScore": 78,
+    "autoDay": "thursday"
   },
   {
     "name": "Li Na",
-    "gender": "",
-    "nationality": "",
+    "gender": "Female",
+    "nationality": "China",
     "slams": {
       "AustralianOpen": {
         "2000": "A",
@@ -18423,7 +18515,8 @@
         "2014": "A"
       }
     },
-    "autoScore": 53.8
+    "autoScore": 93.6,
+    "autoDay": "tuesday"
   },
   {
     "name": "Linda Nosková",
@@ -18455,7 +18548,8 @@
         "2025": "3R"
       }
     },
-    "autoScore": 34.1
+    "autoScore": 73.8,
+    "autoDay": "saturday"
   },
   {
     "name": "Lindsay Davenport",
@@ -18543,7 +18637,8 @@
         "2008": "3R"
       }
     },
-    "autoScore": 87.6
+    "autoScore": 129.5,
+    "autoDay": "monday"
   },
   {
     "name": "Liudmila Samsonova",
@@ -18588,7 +18683,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 34.7
+    "autoScore": 78.4,
+    "autoDay": "thursday"
   },
   {
     "name": "Lleyton Hewitt",
@@ -18684,7 +18780,8 @@
         "2016": "A"
       }
     },
-    "autoScore": 61.3
+    "autoScore": 112.7,
+    "autoDay": "monday"
   },
   {
     "name": "Lorenzo Musetti",
@@ -18734,7 +18831,8 @@
       "source": "wikipedia",
       "page": "Lorenzo Musetti"
     },
-    "autoScore": 38.8
+    "autoScore": 80.4,
+    "autoDay": "thursday"
   },
   {
     "name": "Lucia Bronzetti",
@@ -18772,7 +18870,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 72.8,
+    "autoDay": "saturday"
   },
   {
     "name": "Luciano Darderi",
@@ -18817,7 +18916,8 @@
       "source": "wikipedia",
       "page": "Luciano Darderi"
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "saturday"
   },
   {
     "name": "Lucie Šafářová",
@@ -18893,7 +18993,8 @@
         "2018": "2R"
       }
     },
-    "autoScore": 35.4
+    "autoScore": 75.7,
+    "autoDay": "friday"
   },
   {
     "name": "Mackenzie McDonald",
@@ -18966,7 +19067,8 @@
       "source": "wikipedia",
       "page": "Mackenzie McDonald"
     },
-    "autoScore": 33.6
+    "autoScore": 75,
+    "autoDay": "friday"
   },
   {
     "name": "Madison Keys",
@@ -19051,7 +19153,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 56.6
+    "autoScore": 109.4,
+    "autoDay": "monday"
   },
   {
     "name": "Magda Linette",
@@ -19128,7 +19231,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 35.1
+    "autoScore": 74.3,
+    "autoDay": "friday"
   },
   {
     "name": "Magdalena Fręch",
@@ -19193,7 +19297,8 @@
         "2025": "3R"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "saturday"
   },
   {
     "name": "Magdalena Maleeva",
@@ -19277,7 +19382,7 @@
         "2005": "2R"
       }
     },
-    "autoScore": 22.1
+    "autoScore": 62.1
   },
   {
     "name": "Magdaléna Rybáriková",
@@ -19345,7 +19450,8 @@
         "2019": "Q1"
       }
     },
-    "autoScore": 30.9
+    "autoScore": 66.3,
+    "autoDay": "sunday"
   },
   {
     "name": "Magnus Gustafsson",
@@ -19429,7 +19535,7 @@
         "2001": "1R"
       }
     },
-    "autoScore": 19.7
+    "autoScore": 45.9
   },
   {
     "name": "Magnus Larsson",
@@ -19505,7 +19611,7 @@
         "2003": "A"
       }
     },
-    "autoScore": 24.6
+    "autoScore": 51.3
   },
   {
     "name": "Magnus Norman",
@@ -19569,7 +19675,7 @@
         "2003": "1R"
       }
     },
-    "autoScore": 26.4
+    "autoScore": 52.9
   },
   {
     "name": "Mal Anderson",
@@ -19681,7 +19787,7 @@
         "1977": "A"
       }
     },
-    "autoScore": 26.4
+    "autoScore": 33
   },
   {
     "name": "MaliVai Washington",
@@ -19745,7 +19851,7 @@
         "1999": "A"
       }
     },
-    "autoScore": 21.9
+    "autoScore": 47.1
   },
   {
     "name": "Manuel Orantes",
@@ -19825,7 +19931,7 @@
         "1983": "A"
       }
     },
-    "autoScore": 27.4
+    "autoScore": 42.5
   },
   {
     "name": "Marat Safin",
@@ -19893,7 +19999,8 @@
         "2009": "1R"
       }
     },
-    "autoScore": 50.1
+    "autoScore": 87.3,
+    "autoDay": "wednesday"
   },
   {
     "name": "Marc Rosset",
@@ -19981,7 +20088,7 @@
         "2005": "A"
       }
     },
-    "autoScore": 22.4
+    "autoScore": 50
   },
   {
     "name": "Marcel Granollers",
@@ -20053,7 +20160,8 @@
         "2019": "1R"
       }
     },
-    "autoScore": 29.4
+    "autoScore": 68.1,
+    "autoDay": "sunday"
   },
   {
     "name": "Marcelo Ríos",
@@ -20117,7 +20225,7 @@
         "2004": "A"
       }
     },
-    "autoScore": 29.3
+    "autoScore": 57.3
   },
   {
     "name": "Marcos Baghdatis",
@@ -20201,7 +20309,8 @@
         "2019": "A"
       }
     },
-    "autoScore": 36.0
+    "autoScore": 75.9,
+    "autoDay": "friday"
   },
   {
     "name": "Mardy Fish",
@@ -20281,7 +20390,8 @@
         "2015": "2R"
       }
     },
-    "autoScore": 30.3
+    "autoScore": 66.5,
+    "autoDay": "sunday"
   },
   {
     "name": "Margaret Court",
@@ -20365,91 +20475,8 @@
         "1975": "QF"
       }
     },
-    "autoScore": 185.2
-  },
-  {
-    "name": "Margaret Smith Court",
-    "gender": "Female",
-    "nationality": "Australia",
-    "slams": {
-      "AustralianOpen": {
-        "1959": "2R",
-        "1960": "W",
-        "1961": "W",
-        "1962": "W",
-        "1963": "W",
-        "1964": "W",
-        "1965": "W",
-        "1966": "W",
-        "1967": "A",
-        "1968": "F",
-        "1969": "W",
-        "1970": "W",
-        "1971": "W",
-        "1972": "A",
-        "1973": "W",
-        "1974": "A",
-        "1975": "QF"
-      },
-      "FrenchOpen": {
-        "1959": "A",
-        "1960": "A",
-        "1961": "QF",
-        "1962": "W",
-        "1963": "QF",
-        "1964": "W",
-        "1965": "F",
-        "1966": "SF",
-        "1967": "A",
-        "1968": "A",
-        "1969": "W",
-        "1970": "W",
-        "1971": "3R",
-        "1972": "A",
-        "1973": "W",
-        "1974": "A",
-        "1975": "A"
-      },
-      "Wimbledon": {
-        "1959": "A",
-        "1960": "A",
-        "1961": "QF",
-        "1962": "2R",
-        "1963": "W",
-        "1964": "F",
-        "1965": "W",
-        "1966": "SF",
-        "1967": "A",
-        "1968": "QF",
-        "1969": "SF",
-        "1970": "W",
-        "1971": "F",
-        "1972": "A",
-        "1973": "SF",
-        "1974": "A",
-        "1975": "SF"
-      },
-      "USOpen": {
-        "1959": "A",
-        "1960": "A",
-        "1961": "SF",
-        "1962": "W",
-        "1963": "F",
-        "1964": "4R",
-        "1965": "W",
-        "1966": "A",
-        "1967": "A",
-        "1968": "QF",
-        "1969": "W",
-        "1970": "W",
-        "1971": "A",
-        "1972": "SF",
-        "1973": "W",
-        "1974": "A",
-        "1975": "QF"
-      }
-    },
-    "autoScore": 185.2
+    "autoScore": 214.5,
+    "autoDay": "monday"
   },
   {
     "name": "Maria Kirilenko",
@@ -20517,7 +20544,8 @@
         "2014": "1R"
       }
     },
-    "autoScore": 29.7
+    "autoScore": 66.3,
+    "autoDay": "sunday"
   },
   {
     "name": "Maria Sakkari",
@@ -20578,7 +20606,8 @@
         "2025": "3R"
       }
     },
-    "autoScore": 36.6
+    "autoScore": 79.1,
+    "autoDay": "thursday"
   },
   {
     "name": "Maria Sharapova",
@@ -20666,7 +20695,8 @@
         "2020": "A"
       }
     },
-    "autoScore": 100.5
+    "autoScore": 157.5,
+    "autoDay": "monday"
   },
   {
     "name": "Mariano Zabaleta",
@@ -20738,7 +20768,7 @@
         "2009": "A"
       }
     },
-    "autoScore": 24.5
+    "autoScore": 54.1
   },
   {
     "name": "Marie Bouzková",
@@ -20799,7 +20829,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 34.7
+    "autoScore": 75.1,
+    "autoDay": "friday"
   },
   {
     "name": "Marin Čilić",
@@ -20897,7 +20928,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 60.9
+    "autoScore": 117.3,
+    "autoDay": "monday"
   },
   {
     "name": "Marina Erakovic",
@@ -20965,7 +20997,7 @@
         "2017": "Q1"
       }
     },
-    "autoScore": 28.2
+    "autoScore": 61.1
   },
   {
     "name": "Mario Ančić",
@@ -21017,7 +21049,7 @@
         "2010": "A"
       }
     },
-    "autoScore": 28.2
+    "autoScore": 59.1
   },
   {
     "name": "Marion Bartoli",
@@ -21089,7 +21121,8 @@
         "2013": "A"
       }
     },
-    "autoScore": 40.6
+    "autoScore": 76.4,
+    "autoDay": "thursday"
   },
   {
     "name": "Mark Edmondson",
@@ -21157,7 +21190,7 @@
         "1987": "A"
       }
     },
-    "autoScore": 20.8
+    "autoScore": 33.2
   },
   {
     "name": "Mark Philippoussis",
@@ -21229,7 +21262,8 @@
         "2006": "1R"
       }
     },
-    "autoScore": 32.9
+    "autoScore": 68.3,
+    "autoDay": "sunday"
   },
   {
     "name": "Markéta Vondroušová",
@@ -21281,7 +21315,8 @@
         "2025": "QF"
       }
     },
-    "autoScore": 46.3
+    "autoScore": 89.4,
+    "autoDay": "wednesday"
   },
   {
     "name": "Marta Kostyuk",
@@ -21330,7 +21365,8 @@
         "2025": "4R"
       }
     },
-    "autoScore": 34.7
+    "autoScore": 76.2,
+    "autoDay": "thursday"
   },
   {
     "name": "Martin Verkerk",
@@ -21370,7 +21406,7 @@
         "2007": "A"
       }
     },
-    "autoScore": 26.2
+    "autoScore": 52.1
   },
   {
     "name": "Martina Hingis",
@@ -21442,7 +21478,8 @@
         "2007": "3R"
       }
     },
-    "autoScore": 96.2
+    "autoScore": 130.9,
+    "autoDay": "monday"
   },
   {
     "name": "Martina Trevisan",
@@ -21499,7 +21536,8 @@
         "2025": "Q1"
       }
     },
-    "autoScore": 35.6
+    "autoScore": 74.2,
+    "autoDay": "friday"
   },
   {
     "name": "Mary Pierce",
@@ -21583,7 +21621,8 @@
         "2006": "3R"
       }
     },
-    "autoScore": 58.4
+    "autoScore": 104,
+    "autoDay": "tuesday"
   },
   {
     "name": "Mats Wilander",
@@ -21667,7 +21706,8 @@
         "1996": "A"
       }
     },
-    "autoScore": 84.7
+    "autoScore": 117.1,
+    "autoDay": "monday"
   },
   {
     "name": "Matteo Berrettini",
@@ -21724,7 +21764,8 @@
       "source": "wikipedia",
       "page": "Matteo Berrettini"
     },
-    "autoScore": 43.3
+    "autoScore": 86.5,
+    "autoDay": "wednesday"
   },
   {
     "name": "Mayar Sherif",
@@ -21772,7 +21813,8 @@
         "2024": "1R"
       }
     },
-    "autoScore": 32.4
+    "autoScore": 70.2,
+    "autoDay": "sunday"
   },
   {
     "name": "Michael Berrer",
@@ -21848,7 +21890,7 @@
         "2016": "Q2"
       }
     },
-    "autoScore": 27.6
+    "autoScore": 59.8
   },
   {
     "name": "Michael Chang",
@@ -21932,7 +21974,8 @@
         "2003": "1R"
       }
     },
-    "autoScore": 49.3
+    "autoScore": 81.6,
+    "autoDay": "wednesday"
   },
   {
     "name": "Michaël Llodra",
@@ -22008,7 +22051,7 @@
         "2014": "2R"
       }
     },
-    "autoScore": 26.4
+    "autoScore": 61.6
   },
   {
     "name": "Michael Stich",
@@ -22064,7 +22107,7 @@
         "1997": "A"
       }
     },
-    "autoScore": 39.1
+    "autoScore": 63.8
   },
   {
     "name": "Mihaela Buzarnescu",
@@ -22122,7 +22165,8 @@
         "2022": "A"
       }
     },
-    "autoScore": 33.0
+    "autoScore": 72.6,
+    "autoDay": "saturday"
   },
   {
     "name": "Mikael Pernfors",
@@ -22182,7 +22226,7 @@
         "1994": "A"
       }
     },
-    "autoScore": 19.5
+    "autoScore": 39.7
   },
   {
     "name": "Mikael Tillstrom",
@@ -22234,7 +22278,7 @@
         "2000": "1R"
       }
     },
-    "autoScore": 19.1
+    "autoScore": 41.3
   },
   {
     "name": "Mikhail Youzhny",
@@ -22326,7 +22370,8 @@
         "2018": "1R"
       }
     },
-    "autoScore": 36.2
+    "autoScore": 81.2,
+    "autoDay": "wednesday"
   },
   {
     "name": "Milos Raonic",
@@ -22402,7 +22447,8 @@
         "2024": "A"
       }
     },
-    "autoScore": 47.1
+    "autoScore": 96.6,
+    "autoDay": "tuesday"
   },
   {
     "name": "Miloslav Mečíř",
@@ -22450,7 +22496,7 @@
         "1990": "A"
       }
     },
-    "autoScore": 26.3
+    "autoScore": 41.7
   },
   {
     "name": "Mima Jaušovec",
@@ -22526,7 +22572,7 @@
         "1988": "A"
       }
     },
-    "autoScore": 32.7
+    "autoScore": 49.4
   },
   {
     "name": "Miomir Kecmanovic",
@@ -22587,7 +22633,8 @@
       "source": "wikipedia",
       "page": "Miomir Kecmanović"
     },
-    "autoScore": 33.6
+    "autoScore": 75,
+    "autoDay": "friday"
   },
   {
     "name": "Mirra Andreeva",
@@ -22616,7 +22663,8 @@
         "2025": "3R"
       }
     },
-    "autoScore": 37.3
+    "autoScore": 81.1,
+    "autoDay": "wednesday"
   },
   {
     "name": "Mona Barthel",
@@ -22698,7 +22746,8 @@
         "2025": "Q1"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "saturday"
   },
   {
     "name": "Monica Puig",
@@ -22754,7 +22803,8 @@
         "2021": "A"
       }
     },
-    "autoScore": 30.0
+    "autoScore": 66.1,
+    "autoDay": "sunday"
   },
   {
     "name": "Monica Seles",
@@ -22838,7 +22888,8 @@
       "source": "wikipedia",
       "page": "Monica Seles"
     },
-    "autoScore": 111.6
+    "autoScore": 148.3,
+    "autoDay": "monday"
   },
   {
     "name": "Nadia Petrova",
@@ -22930,7 +22981,8 @@
         "2014": "A"
       }
     },
-    "autoScore": 36.5
+    "autoScore": 80.5,
+    "autoDay": "thursday"
   },
   {
     "name": "Nancy Richey",
@@ -23026,7 +23078,7 @@
         "1978": "1R"
       }
     },
-    "autoScore": 53.2
+    "autoScore": 63.9
   },
   {
     "name": "Naomi Osaka",
@@ -23087,7 +23139,9 @@
         "2025": "SF"
       }
     },
-    "autoScore": 59.1
+    "autoScore": 104.5,
+    "autoDay": "tuesday",
+    "manualDay": "monday"
   },
   {
     "name": "Nathalie Dechy",
@@ -23167,7 +23221,7 @@
         "2009": "A"
       }
     },
-    "autoScore": 24.9
+    "autoScore": 57.7
   },
   {
     "name": "Nick Kyrgios",
@@ -23240,7 +23294,8 @@
         "2025": "A"
       }
     },
-    "autoScore": 40.3
+    "autoScore": 83.5,
+    "autoDay": "wednesday"
   },
   {
     "name": "Nicolás Almagro",
@@ -23324,7 +23379,8 @@
         "2019": "A"
       }
     },
-    "autoScore": 32.6
+    "autoScore": 71.4,
+    "autoDay": "sunday"
   },
   {
     "name": "Nicolas Jarry",
@@ -23397,7 +23453,8 @@
       "source": "wikipedia",
       "page": "Nicolas Jarry"
     },
-    "autoScore": 33.6
+    "autoScore": 75,
+    "autoDay": "friday"
   },
   {
     "name": "Nicolas Kiefer",
@@ -23477,7 +23534,7 @@
         "2010": "A"
       }
     },
-    "autoScore": 29.9
+    "autoScore": 62.7
   },
   {
     "name": "Nicolás Lapentti",
@@ -23565,7 +23622,7 @@
         "2010": "A"
       }
     },
-    "autoScore": 26.6
+    "autoScore": 56.9
   },
   {
     "name": "Nicolas Mahut",
@@ -23665,7 +23722,8 @@
         "2020": "A"
       }
     },
-    "autoScore": 30.0
+    "autoScore": 66.1,
+    "autoDay": "sunday"
   },
   {
     "name": "Nicolás Massú",
@@ -23753,7 +23811,7 @@
         "2013": "A"
       }
     },
-    "autoScore": 24.6
+    "autoScore": 54.4
   },
   {
     "name": "Nikola Pilić",
@@ -23845,7 +23903,7 @@
         "1978": "A"
       }
     },
-    "autoScore": 11.4
+    "autoScore": 24.8
   },
   {
     "name": "Nikolay Davydenko",
@@ -23921,7 +23979,8 @@
         "2014": "A"
       }
     },
-    "autoScore": 39.0
+    "autoScore": 74.8,
+    "autoDay": "friday"
   },
   {
     "name": "Novak Djokovic",
@@ -24022,7 +24081,8 @@
         "2025": "SF"
       }
     },
-    "autoScore": 269.7
+    "autoScore": 339.5,
+    "autoDay": "monday"
   },
   {
     "name": "Olga Danilovic",
@@ -24074,7 +24134,8 @@
       "source": "wikipedia",
       "page": "Olga Danilović"
     },
-    "autoScore": 33.0
+    "autoScore": 73.7,
+    "autoDay": "saturday"
   },
   {
     "name": "Olga Morozova",
@@ -24134,7 +24195,7 @@
         "1976": "3R"
       }
     },
-    "autoScore": 20.8
+    "autoScore": 27.9
   },
   {
     "name": "Olivier Rochus",
@@ -24210,7 +24271,7 @@
         "2014": "A"
       }
     },
-    "autoScore": 25.8
+    "autoScore": 59.2
   },
   {
     "name": "Onny Parun",
@@ -24294,7 +24355,7 @@
         "1982": "A"
       }
     },
-    "autoScore": 15.6
+    "autoScore": 27.7
   },
   {
     "name": "Ons Jabeur",
@@ -24366,7 +24427,8 @@
         "2025": "A"
       }
     },
-    "autoScore": 49.4
+    "autoScore": 91.6,
+    "autoDay": "tuesday"
   },
   {
     "name": "Pablo Carreño Busta",
@@ -24435,7 +24497,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 38.8
+    "autoScore": 83.7,
+    "autoDay": "wednesday"
   },
   {
     "name": "Paradorn Srichaphan",
@@ -24491,7 +24554,7 @@
         "2007": "A"
       }
     },
-    "autoScore": 22.2
+    "autoScore": 51.4
   },
   {
     "name": "Pat Cash",
@@ -24575,71 +24638,7 @@
         "1997": "A"
       }
     },
-    "autoScore": 37.6
-  },
-  {
-    "name": "Pat Rafter",
-    "gender": "Male",
-    "nationality": "Australia",
-    "slams": {
-      "AustralianOpen": {
-        "1990": "Q2",
-        "1991": "Q1",
-        "1992": "1R",
-        "1993": "1R",
-        "1994": "3R",
-        "1995": "4R",
-        "1996": "2R",
-        "1997": "1R",
-        "1998": "3R",
-        "1999": "3R",
-        "2000": "A",
-        "2001": "SF"
-      },
-      "FrenchOpen": {
-        "1990": "A",
-        "1991": "A",
-        "1992": "A",
-        "1993": "Q3",
-        "1994": "4R",
-        "1995": "1R",
-        "1996": "1R",
-        "1997": "SF",
-        "1998": "2R",
-        "1999": "3R",
-        "2000": "2R",
-        "2001": "1R"
-      },
-      "Wimbledon": {
-        "1990": "A",
-        "1991": "A",
-        "1992": "Q2",
-        "1993": "3R",
-        "1994": "2R",
-        "1995": "1R",
-        "1996": "4R",
-        "1997": "4R",
-        "1998": "4R",
-        "1999": "SF",
-        "2000": "F",
-        "2001": "F"
-      },
-      "USOpen": {
-        "1990": "A",
-        "1991": "A",
-        "1992": "Q1",
-        "1993": "1R",
-        "1994": "3R",
-        "1995": "2R",
-        "1996": "1R",
-        "1997": "W",
-        "1998": "W",
-        "1999": "1R",
-        "2000": "1R",
-        "2001": "4R"
-      }
-    },
-    "autoScore": 43.1
+    "autoScore": 63.4
   },
   {
     "name": "Patrick Rafter",
@@ -24703,7 +24702,8 @@
         "2001": "4R"
       }
     },
-    "autoScore": 43.1
+    "autoScore": 73.4,
+    "autoDay": "saturday"
   },
   {
     "name": "Patrik Kühnen",
@@ -24763,7 +24763,7 @@
         "1996": "A"
       }
     },
-    "autoScore": 16.7
+    "autoScore": 35
   },
   {
     "name": "Patty Schnyder",
@@ -24851,7 +24851,8 @@
         "2018": "1R"
       }
     },
-    "autoScore": 36.9
+    "autoScore": 86.5,
+    "autoDay": "wednesday"
   },
   {
     "name": "Paul-Henri Mathieu",
@@ -24943,7 +24944,8 @@
         "2017": "Q1"
       }
     },
-    "autoScore": 28.2
+    "autoScore": 67.7,
+    "autoDay": "sunday"
   },
   {
     "name": "Paula Badosa",
@@ -24997,7 +24999,8 @@
         "2025": "A"
       }
     },
-    "autoScore": 37.3
+    "autoScore": 82.2,
+    "autoDay": "wednesday"
   },
   {
     "name": "Pauline Parmentier",
@@ -25081,7 +25084,8 @@
         "2019": "1R"
       }
     },
-    "autoScore": 29.4
+    "autoScore": 64.8,
+    "autoDay": "sunday"
   },
   {
     "name": "Pete Sampras",
@@ -25157,7 +25161,8 @@
         "2002": "W"
       }
     },
-    "autoScore": 133.3
+    "autoScore": 178,
+    "autoDay": "monday"
   },
   {
     "name": "Petr Korda",
@@ -25237,7 +25242,7 @@
         "2000": "A"
       }
     },
-    "autoScore": 31.8
+    "autoScore": 57.9
   },
   {
     "name": "Petra Kvitová",
@@ -25329,7 +25334,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 61.6
+    "autoScore": 113.7,
+    "autoDay": "monday"
   },
   {
     "name": "Petra Martić",
@@ -25421,7 +25427,8 @@
         "2025": "Q2"
       }
     },
-    "autoScore": 34.1
+    "autoScore": 81.5,
+    "autoDay": "wednesday"
   },
   {
     "name": "Peyton Stearns",
@@ -25458,7 +25465,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "saturday"
   },
   {
     "name": "Phil Dent",
@@ -25542,7 +25550,7 @@
         "1983": "A"
       }
     },
-    "autoScore": 17.7
+    "autoScore": 31.6
   },
   {
     "name": "Philipp Kohlschreiber",
@@ -25646,7 +25654,8 @@
         "2022": "A"
       }
     },
-    "autoScore": 32.3
+    "autoScore": 79.8,
+    "autoDay": "thursday"
   },
   {
     "name": "Potito Starace",
@@ -25710,7 +25719,7 @@
         "2015": "A"
       }
     },
-    "autoScore": 27.0
+    "autoScore": 58.5
   },
   {
     "name": "Radek Štěpánek",
@@ -25810,7 +25819,8 @@
         "2017": "A"
       }
     },
-    "autoScore": 29.3
+    "autoScore": 65.6,
+    "autoDay": "sunday"
   },
   {
     "name": "Rafael Nadal",
@@ -25914,7 +25924,8 @@
         "2024": "A"
       }
     },
-    "autoScore": 218.3
+    "autoScore": 286.7,
+    "autoDay": "monday"
   },
   {
     "name": "Rainer Schüttler",
@@ -26002,7 +26013,7 @@
         "2012": "A"
       }
     },
-    "autoScore": 30.7
+    "autoScore": 64.5
   },
   {
     "name": "Ramesh Krishnan",
@@ -26082,7 +26093,7 @@
         "1993": "Q3"
       }
     },
-    "autoScore": 17.1
+    "autoScore": 33.5
   },
   {
     "name": "Rebeka Masarova",
@@ -26127,7 +26138,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 72.8,
+    "autoDay": "saturday"
   },
   {
     "name": "Reilly Opelka",
@@ -26192,7 +26204,8 @@
       "source": "wikipedia",
       "page": "Reilly Opelka"
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "saturday"
   },
   {
     "name": "Richard Fromberg",
@@ -26272,7 +26285,7 @@
         "2002": "A"
       }
     },
-    "autoScore": 19.2
+    "autoScore": 43.8
   },
   {
     "name": "Richard Gasquet",
@@ -26384,7 +26397,8 @@
         "2025": "A"
       }
     },
-    "autoScore": 39.7
+    "autoScore": 97.1,
+    "autoDay": "tuesday"
   },
   {
     "name": "Richard Krajicek",
@@ -26444,7 +26458,7 @@
       },
       "USOpen": {}
     },
-    "autoScore": 32.5
+    "autoScore": 60.1
   },
   {
     "name": "Robby Ginepri",
@@ -26520,7 +26534,7 @@
         "2015": "A"
       }
     },
-    "autoScore": 28.5
+    "autoScore": 64.4
   },
   {
     "name": "Roberto Bautista Agut",
@@ -26609,7 +26623,8 @@
       "source": "wikipedia",
       "page": "Roberto Bautista Agut"
     },
-    "autoScore": 36.2
+    "autoScore": 88.7,
+    "autoDay": "wednesday"
   },
   {
     "name": "Robin Söderling",
@@ -26665,7 +26680,8 @@
         "2011": "A"
       }
     },
-    "autoScore": 37.0
+    "autoScore": 68.3,
+    "autoDay": "sunday"
   },
   {
     "name": "Roger Federer",
@@ -26773,7 +26789,8 @@
         "2021": "A"
       }
     },
-    "autoScore": 230.3
+    "autoScore": 299.3,
+    "autoDay": "monday"
   },
   {
     "name": "Roman Safiullin",
@@ -26817,7 +26834,8 @@
       "source": "wikipedia",
       "page": "Roman Safiullin"
     },
-    "autoScore": 34.1
+    "autoScore": 72.7,
+    "autoDay": "saturday"
   },
   {
     "name": "Roscoe Tanner",
@@ -26880,7 +26898,7 @@
         "1984": "1R"
       }
     },
-    "autoScore": 23.9
+    "autoScore": 41.9
   },
   {
     "name": "Sabine Lisicki",
@@ -26960,7 +26978,8 @@
         "2023": "A"
       }
     },
-    "autoScore": 38.2
+    "autoScore": 76.1,
+    "autoDay": "thursday"
   },
   {
     "name": "Sam Querrey",
@@ -27048,7 +27067,8 @@
         "2022": "1R"
       }
     },
-    "autoScore": 36.0
+    "autoScore": 76,
+    "autoDay": "friday"
   },
   {
     "name": "Samantha Stosur",
@@ -27148,7 +27168,8 @@
         "2022": "A"
       }
     },
-    "autoScore": 47.9
+    "autoScore": 91,
+    "autoDay": "tuesday"
   },
   {
     "name": "Sara Errani",
@@ -27248,7 +27269,8 @@
       "source": "wikipedia",
       "page": "Sara Errani"
     },
-    "autoScore": 44.4
+    "autoScore": 83.3,
+    "autoDay": "wednesday"
   },
   {
     "name": "Sara Sorribes Tormo",
@@ -27318,7 +27340,8 @@
         "2024": "2R"
       }
     },
-    "autoScore": 33.0
+    "autoScore": 72.6,
+    "autoDay": "saturday"
   },
   {
     "name": "Sebastian Korda",
@@ -27371,7 +27394,8 @@
       "source": "wikipedia",
       "page": "Sebastian Korda"
     },
-    "autoScore": 34.7
+    "autoScore": 76.2,
+    "autoDay": "thursday"
   },
   {
     "name": "Sébastien Grosjean",
@@ -27443,7 +27467,8 @@
         "2010": "A"
       }
     },
-    "autoScore": 35.5
+    "autoScore": 66.2,
+    "autoDay": "sunday"
   },
   {
     "name": "Serena Williams",
@@ -27559,7 +27584,8 @@
         "2022": "3R"
       }
     },
-    "autoScore": 235.1
+    "autoScore": 306.9,
+    "autoDay": "monday"
   },
   {
     "name": "Sergi Bruguera",
@@ -27635,7 +27661,8 @@
         "2002": "A"
       }
     },
-    "autoScore": 36.1
+    "autoScore": 65.3,
+    "autoDay": "sunday"
   },
   {
     "name": "Sergio Casal",
@@ -27715,7 +27742,7 @@
         "1997": "A"
       }
     },
-    "autoScore": 40.6
+    "autoScore": 60.7
   },
   {
     "name": "Shuai Peng",
@@ -27803,7 +27830,8 @@
         "2021": "A"
       }
     },
-    "autoScore": 31.5
+    "autoScore": 73.1,
+    "autoDay": "saturday"
   },
   {
     "name": "Simona Halep",
@@ -27883,7 +27911,8 @@
         "2024": "A"
       }
     },
-    "autoScore": 68.9
+    "autoScore": 114.6,
+    "autoDay": "monday"
   },
   {
     "name": "Sjeng Schalken",
@@ -27947,7 +27976,7 @@
         "2005": "A"
       }
     },
-    "autoScore": 26.9
+    "autoScore": 52.9
   },
   {
     "name": "Sloane Stephens",
@@ -28036,7 +28065,8 @@
         "2025": "A"
       }
     },
-    "autoScore": 49.5
+    "autoScore": 100,
+    "autoDay": "tuesday"
   },
   {
     "name": "Slobodan Živojinović",
@@ -28092,7 +28122,7 @@
         "1991": "A"
       }
     },
-    "autoScore": 16.7
+    "autoScore": 33.7
   },
   {
     "name": "Sofia Kenin",
@@ -28153,7 +28183,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 43.6
+    "autoScore": 87.1,
+    "autoDay": "wednesday"
   },
   {
     "name": "Sorana Cîrstea",
@@ -28246,7 +28277,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 35.8
+    "autoScore": 78.5,
+    "autoDay": "thursday"
   },
   {
     "name": "Stan Wawrinka",
@@ -28352,7 +28384,8 @@
         "2025": "A"
       }
     },
-    "autoScore": 73.0
+    "autoScore": 127.1,
+    "autoDay": "monday"
   },
   {
     "name": "Stefan Edberg",
@@ -28424,7 +28457,8 @@
         "1996": "QF"
       }
     },
-    "autoScore": 91.3
+    "autoScore": 123.9,
+    "autoDay": "monday"
   },
   {
     "name": "Stefan Koubek",
@@ -28504,7 +28538,7 @@
         "2011": "A"
       }
     },
-    "autoScore": 25.7
+    "autoScore": 55.6
   },
   {
     "name": "Stefanos Tsitsipas",
@@ -28557,7 +28591,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 49.8
+    "autoScore": 94.7,
+    "autoDay": "tuesday"
   },
   {
     "name": "Steffi Graf",
@@ -28641,7 +28676,8 @@
         "1999": "A"
       }
     },
-    "autoScore": 199.9
+    "autoScore": 248.2,
+    "autoDay": "monday"
   },
   {
     "name": "Su-Wei Hsieh",
@@ -28749,7 +28785,8 @@
         "2024": "A"
       }
     },
-    "autoScore": 33.5
+    "autoScore": 74.7,
+    "autoDay": "friday"
   },
   {
     "name": "Sue Barker",
@@ -28813,7 +28850,7 @@
         "1984": "1R"
       }
     },
-    "autoScore": 19.6
+    "autoScore": 32.8
   },
   {
     "name": "Svetlana Kuznetsova",
@@ -28909,7 +28946,8 @@
         "2021": "A"
       }
     },
-    "autoScore": 64.2
+    "autoScore": 120.6,
+    "autoDay": "monday"
   },
   {
     "name": "Sylvia Hanika",
@@ -28981,7 +29019,7 @@
         "1990": "2R"
       }
     },
-    "autoScore": 21.5
+    "autoScore": 45.9
   },
   {
     "name": "Tallon Griekspoor",
@@ -29038,7 +29076,8 @@
       "source": "wikipedia",
       "page": "Tallon Griekspoor"
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "saturday"
   },
   {
     "name": "Tamarine Tanasugarn",
@@ -29146,7 +29185,8 @@
         "2015": "A"
       }
     },
-    "autoScore": 26.9
+    "autoScore": 65.9,
+    "autoDay": "sunday"
   },
   {
     "name": "Tatiana Golovin",
@@ -29190,7 +29230,7 @@
         "2008": "A"
       }
     },
-    "autoScore": 23.9
+    "autoScore": 52.8
   },
   {
     "name": "Tatjana Maria",
@@ -29292,7 +29332,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 35.1
+    "autoScore": 74.3,
+    "autoDay": "friday"
   },
   {
     "name": "Taylor Dent",
@@ -29368,7 +29409,7 @@
       "source": "wikipedia",
       "page": "Taylor Dent"
     },
-    "autoScore": 24.0
+    "autoScore": 54.2
   },
   {
     "name": "Taylor Fritz",
@@ -29434,7 +29475,8 @@
         "2025": "QF"
       }
     },
-    "autoScore": 44.6
+    "autoScore": 87.6,
+    "autoDay": "wednesday"
   },
   {
     "name": "Thomas Enqvist",
@@ -29500,12 +29542,12 @@
       },
       "USOpen": {}
     },
-    "autoScore": 27.2
+    "autoScore": 55.2
   },
   {
     "name": "Thomas Johansson",
     "gender": "Male",
-    "nationality": "",
+    "nationality": "Sweden",
     "slams": {
       "AustralianOpen": {
         "1993": "A",
@@ -29584,7 +29626,8 @@
         "2009": "A"
       }
     },
-    "autoScore": 32.5
+    "autoScore": 65.8,
+    "autoDay": "sunday"
   },
   {
     "name": "Thomas Muster",
@@ -29672,7 +29715,7 @@
         "2011": "A"
       }
     },
-    "autoScore": 33.4
+    "autoScore": 60.7
   },
   {
     "name": "Thomaz Bellucci",
@@ -29756,7 +29799,8 @@
         "2023": "A"
       }
     },
-    "autoScore": 29.4
+    "autoScore": 64.8,
+    "autoDay": "sunday"
   },
   {
     "name": "Tim Henman",
@@ -29836,7 +29880,8 @@
         "2007": "2R"
       }
     },
-    "autoScore": 35.6
+    "autoScore": 68.5,
+    "autoDay": "sunday"
   },
   {
     "name": "Tim Mayotte",
@@ -29912,7 +29957,7 @@
         "1992": "A"
       }
     },
-    "autoScore": 23.3
+    "autoScore": 45.3
   },
   {
     "name": "Timea Babos",
@@ -29984,7 +30029,8 @@
         "2024": "A"
       }
     },
-    "autoScore": 32.4
+    "autoScore": 70.2,
+    "autoDay": "sunday"
   },
   {
     "name": "Todd Martin",
@@ -30060,7 +30106,8 @@
         "2004": "1R"
       }
     },
-    "autoScore": 38.8
+    "autoScore": 70.7,
+    "autoDay": "sunday"
   },
   {
     "name": "Tomáš Berdych",
@@ -30144,7 +30191,9 @@
         "2019": "1R"
       }
     },
-    "autoScore": 53.4
+    "autoScore": 106.3,
+    "autoDay": "monday",
+    "manualDay": "tuesday"
   },
   {
     "name": "Tommy Haas",
@@ -30248,7 +30297,8 @@
         "2017": "A"
       }
     },
-    "autoScore": 38.6
+    "autoScore": 80.7,
+    "autoDay": "thursday"
   },
   {
     "name": "Tommy Robredo",
@@ -30356,7 +30406,8 @@
         "2022": "A"
       }
     },
-    "autoScore": 38.3
+    "autoScore": 92.3,
+    "autoDay": "tuesday"
   },
   {
     "name": "Tony Roche",
@@ -30440,7 +30491,7 @@
         "1979": "A"
       }
     },
-    "autoScore": 50.7
+    "autoScore": 61
   },
   {
     "name": "Tracy Austin",
@@ -30488,7 +30539,7 @@
         "1994": "A"
       }
     },
-    "autoScore": 39.7
+    "autoScore": 60.4
   },
   {
     "name": "Ugo Humbert",
@@ -30549,7 +30600,8 @@
       "source": "wikipedia",
       "page": "Ugo Humbert"
     },
-    "autoScore": 33.6
+    "autoScore": 76.1,
+    "autoDay": "friday"
   },
   {
     "name": "Urszula Radwańska",
@@ -30622,7 +30674,8 @@
         "2021": "Q2"
       }
     },
-    "autoScore": 31.2
+    "autoScore": 67.6,
+    "autoDay": "sunday"
   },
   {
     "name": "Varvara Gracheva",
@@ -30666,7 +30719,8 @@
         "2025": "Q3"
       }
     },
-    "autoScore": 33.0
+    "autoScore": 72.6,
+    "autoDay": "saturday"
   },
   {
     "name": "Venus Williams",
@@ -30799,7 +30853,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 139.7
+    "autoScore": 199.6,
+    "autoDay": "monday"
   },
   {
     "name": "Vera Zvonareva",
@@ -30903,7 +30958,8 @@
         "2023": "1R"
       }
     },
-    "autoScore": 45.0
+    "autoScore": 93.3,
+    "autoDay": "tuesday"
   },
   {
     "name": "Veronika Kudermetova",
@@ -30955,7 +31011,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 34.1
+    "autoScore": 74.9,
+    "autoDay": "friday"
   },
   {
     "name": "Vic Seixas",
@@ -31091,7 +31148,7 @@
         "1969": "1R"
       }
     },
-    "autoScore": 42.5
+    "autoScore": 54.3
   },
   {
     "name": "Víctor Pecci",
@@ -31159,7 +31216,7 @@
         "1986": "A"
       }
     },
-    "autoScore": 15.1
+    "autoScore": 27.4
   },
   {
     "name": "Victoria Mboko",
@@ -31192,7 +31249,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 73.9,
+    "autoDay": "saturday"
   },
   {
     "name": "Vijay Amritraj",
@@ -31284,7 +31342,7 @@
         "1990": "A"
       }
     },
-    "autoScore": 16.4
+    "autoScore": 31.9
   },
   {
     "name": "Viktor Troicki",
@@ -31364,7 +31422,8 @@
         "2021": "A"
       }
     },
-    "autoScore": 30.6
+    "autoScore": 71.8,
+    "autoDay": "saturday"
   },
   {
     "name": "Viktoria Hruncakova",
@@ -31416,7 +31475,8 @@
         "2025": "Q1"
       }
     },
-    "autoScore": 33.0
+    "autoScore": 71.5,
+    "autoDay": "sunday"
   },
   {
     "name": "Virginia Ruzici",
@@ -31492,7 +31552,7 @@
         "1987": "A"
       }
     },
-    "autoScore": 30.5
+    "autoScore": 51.9
   },
   {
     "name": "Vitas Gerulaitis",
@@ -31572,7 +31632,7 @@
         "1986": "A"
       }
     },
-    "autoScore": 33.8
+    "autoScore": 52.2
   },
   {
     "name": "Wally Masur",
@@ -31652,7 +31712,7 @@
         "1995": "A"
       }
     },
-    "autoScore": 19.1
+    "autoScore": 44.4
   },
   {
     "name": "Wang Xinyu",
@@ -31701,7 +31761,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 33.6
+    "autoScore": 76.1,
+    "autoDay": "friday"
   },
   {
     "name": "Wayne Ferreira",
@@ -31785,7 +31846,8 @@
         "2004": "1R"
       }
     },
-    "autoScore": 26.7
+    "autoScore": 67.3,
+    "autoDay": "sunday"
   },
   {
     "name": "Wojciech Fibak",
@@ -31857,7 +31919,7 @@
         "1987": "2R"
       }
     },
-    "autoScore": 28.4
+    "autoScore": 41.5
   },
   {
     "name": "Xavier Malisse",
@@ -31937,7 +31999,8 @@
         "2013": "1R"
       }
     },
-    "autoScore": 27.3
+    "autoScore": 66.2,
+    "autoDay": "sunday"
   },
   {
     "name": "Yannick Noah",
@@ -32009,7 +32072,7 @@
         "1990": "2R"
       }
     },
-    "autoScore": 28.3
+    "autoScore": 54
   },
   {
     "name": "Yen-Hsun Lu",
@@ -32109,7 +32172,8 @@
         "2021": "A"
       }
     },
-    "autoScore": 31.7
+    "autoScore": 67.5,
+    "autoDay": "sunday"
   },
   {
     "name": "Yevgeny Kafelnikov",
@@ -32173,7 +32237,8 @@
         "2003": "3R"
       }
     },
-    "autoScore": 48.0
+    "autoScore": 77.1,
+    "autoDay": "thursday"
   },
   {
     "name": "Younes El Aynaoui",
@@ -32249,7 +32314,7 @@
         "2007": "A"
       }
     },
-    "autoScore": 26.6
+    "autoScore": 55.1
   },
   {
     "name": "Yulia Putintseva",
@@ -32322,7 +32387,8 @@
         "2025": "2R"
       }
     },
-    "autoScore": 36.9
+    "autoScore": 78.6,
+    "autoDay": "thursday"
   },
   {
     "name": "Zhang Shuai",
@@ -32415,7 +32481,8 @@
         "2025": "1R"
       }
     },
-    "autoScore": 35.8
+    "autoScore": 78.5,
+    "autoDay": "thursday"
   },
   {
     "name": "Zheng Qinwen",
@@ -32449,7 +32516,8 @@
         "2025": "A"
       }
     },
-    "autoScore": 40.9
+    "autoScore": 81.5,
+    "autoDay": "wednesday"
   },
   {
     "name": "Zheng Saisai",
@@ -32517,6 +32585,7 @@
         "2025": "A"
       }
     },
-    "autoScore": 33.0
+    "autoScore": 71.5,
+    "autoDay": "sunday"
   }
 ]
