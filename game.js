@@ -248,11 +248,14 @@ function shuffleStable(arr, seedStr) {
 const shuffleCache = {};
 
 function getRotationFor(mode, pool) {
-  // Cache key combines mode + pool size — if the pool changes (data
-  // refresh), we recompute rather than serve stale order.
-  const key = `${mode}:${pool.length}`;
+  // Cache key combines mode + a hash of the pool contents (first 16
+  // player names). Different day-of-week buckets all happen to be
+  // size 51 but contain different players — keying only on length
+  // would cause Monday's bucket shuffle to be reused for Tuesday.
+  const fingerprint = pool.slice(0, 16).map((p) => p.name).join("|");
+  const key = `${mode}:${pool.length}:${hashStr(fingerprint)}`;
   if (!shuffleCache[key]) {
-    shuffleCache[key] = shuffleStable(pool, `${SHUFFLE_SEED}:${mode}`);
+    shuffleCache[key] = shuffleStable(pool, `${SHUFFLE_SEED}:${mode}:${pool.length}`);
   }
   return shuffleCache[key];
 }
@@ -299,6 +302,59 @@ function pickRotationPlayer(mode, dateIso, pool) {
   const order = getRotationFor(mode, pool);
   const i = mod(rotationDayIndex(dateIso), order.length);
   return order[i];
+}
+
+/* =========================================================
+   DIFFICULTY BUCKETING — Mon (easy) → Sun (hard)
+   =========================================================
+   Each player has an `autoScore` (notability + recency) computed by the
+   admin/builder tools and baked into players_328.json. We rank all
+   eligible players by autoScore descending and split into 7 equal
+   buckets. Bucket 0 → Monday, bucket 6 → Sunday.
+
+   Players with a `manualDay` field override the auto-bucket and play
+   on that specific day-of-week.
+
+   Filter is per-date: given today's date, return only the subset of
+   players who belong to today's day-of-week. The seeded rotation then
+   picks among that subset. */
+
+const DAY_NAMES_RUNTIME = [
+  "monday", "tuesday", "wednesday",
+  "thursday", "friday", "saturday", "sunday",
+];
+
+// Day index for a YYYY-MM-DD string (0=Mon, 6=Sun).
+function dayOfWeekIndex(dateIso) {
+  const [y, m, d] = dateIso.split("-").map(Number);
+  // JS Date: 0=Sun..6=Sat. Convert to 0=Mon..6=Sun.
+  const js = new Date(y, m - 1, d).getDay();
+  return (js + 6) % 7;
+}
+
+// Returns the subset of `pool` assigned to the day-of-week of `dateIso`.
+function filterToDayBucket(pool, dateIso) {
+  const todayIdx = dayOfWeekIndex(dateIso);
+  const todayName = DAY_NAMES_RUNTIME[todayIdx];
+
+  // First: anyone manually assigned to today is in today's bucket.
+  const manuals = pool.filter((p) => p.manualDay === todayName);
+
+  // For everyone else (no manualDay), rank by autoScore desc and bucket
+  // into 7 equal slices.
+  const auto = pool.filter((p) => !p.manualDay);
+  auto.sort((a, b) => (b.autoScore ?? 0) - (a.autoScore ?? 0));
+
+  const per = Math.ceil(auto.length / 7);
+  const start = todayIdx * per;
+  const end = Math.min(start + per, auto.length);
+  const autoForToday = auto.slice(start, end);
+
+  // If nothing matches (e.g., autoScore missing on all players because
+  // an older players.json predates the admin update), fall back to the
+  // full pool so the game still works.
+  const combined = [...manuals, ...autoForToday];
+  return combined.length > 0 ? combined : pool;
 }
 
 /* =========================================================
@@ -547,19 +603,22 @@ function next() {
   hideSuggestions();
   clearHints();
 
-  // Single-mode filter — players who reached QF or deeper at any slam.
-  // Smaller and more recognizable than the multi-mode "Standard" pool.
-  let eligiblePlayers = game.players.filter((player) => {
-    const slams = player.slams || {};
-    for (const tournament of Object.values(slams)) {
-      for (const result of Object.values(tournament)) {
-        if (result === "QF" || result === "SF" || result === "F" || result === "W") {
-          return true;
-        }
-      }
-    }
-    return false;
-  });
+  // Eligibility: only the top N players (by autoScore) are in the
+  // daily rotation. Anyone outside the top N stays in the data (we
+  // need them for the autocomplete guess pool) but never gets picked.
+  // The exact ranking is computed in the admin/builder tools; we just
+  // re-sort here and slice.
+  const TOP_N = 300;
+  let eligiblePlayers = game.players
+    .slice()
+    .sort((a, b) => (b.autoScore ?? 0) - (a.autoScore ?? 0))
+    .slice(0, TOP_N);
+
+  // Day-of-week difficulty bucket — Mon = easiest, Sun = hardest. Each
+  // player is assigned to one day, either via manualDay override or via
+  // auto-ranking by autoScore. We filter the eligible pool to today's
+  // bucket so the rotation picks only from players assigned to today.
+  eligiblePlayers = filterToDayBucket(eligiblePlayers, game.date);
 
   // SAFETY CHECK
   if (!eligiblePlayers.length) {

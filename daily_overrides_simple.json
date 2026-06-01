@@ -1,37 +1,3 @@
 {
-  "overrides": {
-    "2026-05-29": {
-      "standard": "Fabio Fognini"
-    },
-    "2026-05-31": {
-      "standard": "Emma Raducanu"
-    },
-    "2026-06-01": {
-      "standard": "Ivan Ljubičić"
-    },
-    "2026-06-03": {
-      "standard": "Sara Errani"
-    },
-    "2026-06-04": {
-      "standard": "Eugenie Bouchard"
-    },
-    "2026-06-06": {
-      "standard": "Thomas Muster"
-    },
-    "2026-06-10": {
-      "standard": "Steffi Graf"
-    },
-    "2026-06-12": {
-      "standard": "Gaël Monfils"
-    },
-    "2026-06-13": {
-      "standard": "Alexander Bublik"
-    },
-    "2026-06-19": {
-      "standard": "Vera Zvonareva"
-    },
-    "2026-06-17": {
-      "standard": "Marta Kostyuk"
-    }
-  }
+  "overrides": {}
 }
