@@ -1,0 +1,1054 @@
+
+/* ===========================================================
+   PALETTE — tennis.com-inspired editorial
+   =========================================================== */
+:root {
+  --bg:           #e8edeb;   /* cool off-white body */
+  --surface:      #ffffff;   /* card / control surfaces */
+  --ink:          #1d3e35;   /* dark forest green (primary text) */
+  --ink-soft:     #4a6e63;   /* muted green for secondary */
+  --ink-faint:    #94a8a0;   /* low-contrast labels */
+  --line:         #cfd4d0;   /* subtle dividers */
+  --accent:       #a5e85a;   /* tennis-ball lime */
+  --accent-ink:   #1d3e35;
+  --header-bg:    #1d3e35;
+  --header-ink:   #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Arial, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fade-in for the main app content (everything except the header).
+   Stays at opacity 0 until JS finishes fetching player data and
+   rendering, at which point body gets .is-ready and .app fades in.
+   Prevents the "fresh-game flash → snap to restored state" glitch on
+   refresh. Header is excluded — it's static and ready at first paint. */
+.app {
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+}
+body.is-ready .app { opacity: 1; }
+
+/* ===========================================================
+   HEADER BAR — dark forest band across the top
+   =========================================================== */
+.header {
+  background: var(--header-bg);
+  color: var(--header-ink);
+  padding: 14px 24px;
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  text-decoration: none;
+  color: var(--header-ink);
+}
+
+.brand svg {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+/* Old text brand variants kept here for reference (the brand is now an SVG
+   logo defined in the markup; no font styling needed). */
+
+   --- Editorial italic ---
+   .brand {
+     font-family: Georgia, "Times New Roman", serif;
+     font-style: italic;
+     font-size: 22px;
+     font-weight: 600;
+     letter-spacing: -0.01em;
+     color: var(--header-ink);
+   }
+
+   --- Magazine masthead (thin, very wide tracking) ---
+   .brand {
+     font-family: Georgia, "Times New Roman", serif;
+     font-size: 17px;
+     font-weight: 400;
+     letter-spacing: 0.25em;
+     text-transform: uppercase;
+     color: var(--header-ink);
+   }
+
+   --- NYT Games style (heavy caps, tight tracking) ---
+   .brand {
+     font-family: Georgia, "Times New Roman", serif;
+     font-size: 18px;
+     font-weight: 700;
+     letter-spacing: 0.02em;
+     text-transform: uppercase;
+     color: var(--header-ink);
+   }
+*/
+
+/* play toggle — lives in the dark header band */
+.play-toggle {
+  display: flex;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 3px;
+}
+
+.play-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 6px 14px;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.play-btn:hover { color: #fff; }
+
+.play-btn.active {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.play-btn[data-play="practice"].active {
+  background: #fde047;
+  color: #1d3e35;
+}
+
+/* header right-side group — children are right-packed so the date button
+   (leftmost) can hide without shifting the info icon or play toggle.
+   flex:1 makes the group fill the space after the brand; without that
+   it'd be content-sized and justify-content would have nothing to act on. */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+  flex: 1 1 auto;
+}
+
+/* circular info icon button */
+.icon-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.85);
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+  filter: none;
+}
+
+/* Date picker — pill button in header */
+.date-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.85);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.date-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+  filter: none;
+}
+
+.date-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Date popover — appears below the header bar, anchored toward the right */
+.date-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px 16px;
+  box-shadow: 0 12px 32px rgba(29, 62, 53, 0.18);
+  z-index: 50;
+  min-width: 280px;
+  max-width: calc(100vw - 32px);
+}
+
+.date-popover[hidden] { display: none; }
+
+.date-popover-title {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+
+.date-popover-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.date-pill {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  padding: 8px 6px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  line-height: 1.2;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.date-pill:hover:not(.active) {
+  background: rgba(29, 62, 53, 0.05);
+  border-color: var(--ink-soft);
+  filter: none;
+}
+
+.date-pill .dp-weekday {
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.date-pill .dp-day {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.date-pill.today {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+.date-pill.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--header-ink);
+}
+
+.date-pill.active .dp-weekday {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dp-mark {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.dp-mark-win  { color: #16a34a; }
+.dp-mark-loss { color: #b8512a; }
+
+.date-pill.active .dp-mark-win  { color: #a5e85a; }
+.date-pill.active .dp-mark-loss { color: #fdb89a; }
+
+.date-pill { position: relative; }
+
+/* How-to-Play dialog */
+.howto-dialog {
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  max-width: 440px;
+  width: calc(100% - 32px);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 24px 48px rgba(29, 62, 53, 0.25);
+}
+
+.howto-dialog::backdrop {
+  background: rgba(29, 62, 53, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.howto-inner {
+  padding: 28px 28px 24px;
+  position: relative;
+}
+
+.howto-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--ink-soft);
+  font-size: 26px;
+  line-height: 1;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.howto-close:hover {
+  background: rgba(29, 62, 53, 0.06);
+  color: var(--ink);
+  filter: none;
+}
+
+.howto-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 14px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+/* Branded variant — "How to Play SLAM GRID" — matches the wordmark
+   styling for the SLAM GRID portion. Slightly smaller overall. */
+.howto-title.is-branded {
+  font-style: normal;
+  font-size: 22px;
+  letter-spacing: 0;
+}
+.howto-title.is-branded .brand-text {
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.howto-body {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0 0 12px;
+}
+
+.howto-body:last-child { margin-bottom: 0; }
+
+.howto-body strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.giveup-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.giveup-confirm,
+.giveup-cancel {
+  flex: 1 1 0;
+  padding: 11px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: filter 0.15s, background 0.15s, border-color 0.15s;
+}
+
+.giveup-confirm {
+  background: transparent;
+  color: var(--ink-soft);
+  border-color: var(--line);
+}
+.giveup-confirm:hover { border-color: #b8512a; color: #b8512a; background: rgba(184, 81, 42, 0.05); filter: none; }
+
+.giveup-cancel {
+  background: var(--ink);
+  color: var(--header-ink);
+  border-color: var(--ink);
+}
+.giveup-cancel:hover { filter: brightness(1.12); }
+
+/* ===========================================================
+   RESULT MODAL — round-end celebration
+   =========================================================== */
+.result-dialog {
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  max-width: 380px;
+  width: calc(100% - 32px);
+  background: var(--ink);
+  color: #ffffff;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+  /* Border state set per outcome via .is-win / .is-loss */
+}
+
+/* Winner — lime accent border + soft outer glow */
+.result-dialog.is-win {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  box-shadow:
+    0 0 0 4px rgba(165, 232, 90, 0.18),
+    0 0 32px 4px rgba(165, 232, 90, 0.35),
+    0 24px 48px rgba(0, 0, 0, 0.4);
+}
+
+/* Missed — warm orange accent border, no glow (quieter) */
+.result-dialog.is-loss {
+  outline: 2px solid #fdba74;
+  outline-offset: -2px;
+  box-shadow:
+    0 0 0 4px rgba(253, 186, 116, 0.15),
+    0 24px 48px rgba(0, 0, 0, 0.4);
+}
+
+.result-dialog::backdrop {
+  background: rgba(12, 26, 22, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.result-inner {
+  padding: 32px 28px 26px;
+  text-align: center;
+  position: relative;
+}
+
+.result-dialog .howto-close {
+  color: rgba(255, 255, 255, 0.5);
+}
+.result-dialog .howto-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.result-outcome {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  margin-bottom: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.result-outcome.is-win  { color: var(--accent); }
+.result-outcome.is-loss { color: #fdba74; }
+
+.result-player {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: #ffffff;
+  margin: 0 0 22px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.result-flag {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.result-share {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border: none;
+  padding: 8px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+.result-share:hover { filter: brightness(1.08); }
+
+/* ===========================================================
+   APP CONTAINER
+   =========================================================== */
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 36px 24px 48px;
+}
+
+/* page title — serif italic, editorial */
+.page-title {
+  text-align: center;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 44px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 28px;
+  color: var(--ink);
+}
+
+/* ===========================================================
+   MODE TOGGLE — pill segmented control like the reference
+   =========================================================== */
+.mode-toggle {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px;
+  margin: 0 auto 24px;
+  width: fit-content;
+}
+
+.mode-btn {
+  background: transparent;
+  border: none;
+  color: var(--ink-soft);
+  padding: 9px 22px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.mode-btn:hover { color: var(--ink); }
+
+.mode-btn.active {
+  background: var(--ink);
+  color: var(--header-ink);
+}
+
+/* keep mode identity, harmonized with the palette */
+.mode-btn[data-mode="winners"].active { background: #2d6e4f; }
+.mode-btn[data-mode="hard"].active    { background: #b8512a; }
+
+/* small descriptor that appears under the toggle for modes that need it */
+.mode-note {
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin: -16px auto 22px;
+  max-width: 480px;
+  padding: 0 12px;
+  line-height: 1.4;
+}
+
+.mode-note[hidden] { display: none; }
+
+/* ===========================================================
+   CONTROLS ROW
+   =========================================================== */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.input-wrap { position: relative; }
+
+input#guess {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  width: 280px;
+  font-size: 16px; /* must be >=16px to prevent iOS auto-zoom on focus */
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+input#guess::placeholder { color: var(--ink-faint); }
+
+input#guess:focus {
+  border-color: var(--ink-soft);
+  box-shadow: 0 0 0 3px rgba(29, 62, 53, 0.08);
+}
+
+/* guess pips */
+.pips {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.pip {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(29, 62, 53, 0.15);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.pip.used-1 { background: #f4a8a0; }
+.pip.used-2 { background: #d63a26; }
+.pip.used-3 { background: #8a1e10; transform: scale(1.15); }
+
+/* buttons */
+button {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: var(--ink);
+  color: var(--header-ink);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.05s;
+}
+
+button:hover:not(:disabled) { filter: brightness(1.12); }
+button:active:not(:disabled) { transform: translateY(1px); }
+
+button:disabled {
+  background: rgba(29, 62, 53, 0.12);
+  color: rgba(29, 62, 53, 0.4);
+  cursor: not-allowed;
+}
+
+#guessBtn:not(:disabled) { background: var(--ink); }
+
+/* Give Up — quieter ghost button */
+#giveUpBtn {
+  background: transparent;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+}
+#giveUpBtn:hover:not(:disabled) {
+  border-color: #b8512a;
+  color: #b8512a;
+  background: rgba(184, 81, 42, 0.05);
+  filter: none;
+}
+
+/* post-round CTAs — accent lime when enabled */
+#nextBtn:not(:disabled),
+#shareBtn:not(:disabled) {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* When the share button becomes available after a win, a single gentle
+   pulse calls a tiny bit of attention to it. Just once — no looping. */
+#shareBtn:not(:disabled) {
+  animation: sharePulse 0.6s ease-out 1;
+}
+
+@keyframes sharePulse {
+  0%   { transform: scale(1);    box-shadow: 0 0 0 0   rgba(165, 232, 90, 0.5); }
+  50%  { transform: scale(1.06); box-shadow: 0 0 0 8px rgba(165, 232, 90, 0);   }
+  100% { transform: scale(1);    box-shadow: 0 0 0 0   rgba(165, 232, 90, 0);   }
+}
+
+/* ===========================================================
+   AUTOCOMPLETE
+   =========================================================== */
+.suggestions {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 280px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 10;
+  box-shadow: 0 10px 28px rgba(29, 62, 53, 0.12);
+}
+
+.suggestion {
+  padding: 9px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.suggestion:hover { background: rgba(29, 62, 53, 0.05); }
+
+/* ===========================================================
+   HINT PANEL — quieter, pill-shaped
+   =========================================================== */
+#hintPanel {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 6px 0;
+  flex-wrap: wrap;
+  min-height: 0;
+}
+
+.hint-card {
+  padding: 6px 13px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeIn 0.25s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.gender-card        { background: #ede5f8; color: #5b21b6; } /* fallback */
+.gender-card.male   { background: #dbeae6; color: #0f5e54; } /* muted teal */
+.gender-card.female { background: #f4e3d2; color: #8a4a1f; } /* muted amber */
+.nation-card  { background: #e3e5e2; color: #4a6e63; }
+.answer-card  { background: #fde2e0; color: #8a1e10; }
+.correct-card { background: #d4f0c4; color: #166534; }
+.invalid-card { background: #fdf0d6; color: #92400e; }
+.already-played-card {
+  background: #e6efea;
+  color: #1d3e35;
+  border: 1px solid #cfd4d0;
+}
+
+/* ===========================================================
+   TABLE
+   =========================================================== */
+.table-wrap {
+  overflow-x: auto;
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  max-height: 65vh;
+  margin-bottom: 8px;
+}
+
+.scroll-hint {
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+
+.scroll-hint[hidden] { display: none; }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 760px;
+}
+
+th, td {
+  border: 1px solid #e3e5e2;
+  padding: 8px 4px;
+  font-size: 12px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+th {
+  background: #f1f1ec;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  font-weight: 600;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+.slam {
+  background: #f1f1ec;
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  font-weight: 600;
+  color: var(--ink);
+  /* Lock the slam-name column width so "Australian Open" always fits on
+     one line, no wrapping. The cells are centered vertically. */
+  width: 120px;
+  min-width: 120px;
+  white-space: nowrap;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* The top-left corner cell (the "Slam" header) sits at the intersection
+   of the sticky row and sticky column, so it needs both axes and a
+   higher z-index than either alone. */
+th.slam,
+th:first-child {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+
+/* result cells — re-tuned for light background */
+.W  { background: #16a34a; color: white; font-weight: 700; }
+.F  { background: #c084fc; color: #2e1065; font-weight: 600; }
+.SF { background: #fde047; color: #713f12; font-weight: 600; }
+.QF { background: #fdba74; color: #7c2d12; font-weight: 600; }
+.R1, .R2, .R3, .R4 { background: #3b82f6; color: white; }
+.Q1, .Q2, .Q3, .Q  { background: #93c5fd; color: #1e3a8a; }
+.A  { background: #c5cac6; color: #4a6e63; }
+.NH { background: #115e59; color: white; }
+
+/* Career reveal animation — each cell "stamps" in one by one with a
+   sharp overshoot. The data is in the cell from first paint; the
+   .is-hidden class hides it behind a gray plate until its stagger
+   delay fires, at which point the stamp animation plays. */
+.reveal-cell.is-hidden {
+  background-color: #e8eae6 !important;
+  color: transparent !important;
+}
+.reveal-cell.is-stamping {
+  animation: stampIn 0.32s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  transform-origin: center;
+}
+@keyframes stampIn {
+  0%   { transform: scale(1.55); opacity: 0; }
+  55%  { transform: scale(0.92); opacity: 1; }
+  78%  { transform: scale(1.04); }
+  100% { transform: scale(1.0);  opacity: 1; }
+}
+
+/* ===========================================================
+   LEGEND
+   =========================================================== */
+.legend-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 0 8px;
+  margin-top: 6px;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--ink-soft);
+  max-width: 720px;
+}
+
+.legend-pair {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.legend-item {
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.02em;
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  margin: 32px auto 0;
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+}
+.countdown[hidden] { display: none; }
+.countdown.is-visible { opacity: 1; }
+
+.countdown-panel {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  background: #115e44; /* courtside dark green */
+  border-radius: 10px;
+  padding: 14px 20px 14px 14px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+.clock-face {
+  flex: 0 0 auto;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clock-svg { width: 100%; height: 100%; }
+
+/* Gold bezel + cream dial — both use radial gradients defined in SVG <defs> */
+.clock-svg .bezel {
+  fill: url(#bezelGrad);
+}
+.clock-svg .dial {
+  fill: url(#dialGrad);
+}
+.clock-svg .ticks line {
+  stroke: #1a2f24;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+.clock-svg .hand-hour {
+  stroke: #0c1f17;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+.clock-svg .hand-minute {
+  stroke: #0c1f17;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+.clock-svg .hand-pin {
+  fill: #0c1f17;
+}
+
+/* Digital readout */
+.countdown-readout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 16px;
+  margin-left: 14px;
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.countdown-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 6px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* LED screen panel — dark backing with a faint dot-matrix grid so the
+   digits look like they're emitting from a real scoreboard. */
+.led-screen {
+  display: inline-block;
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.04) 0.8px, transparent 1.2px) 0 0 / 4px 4px,
+    linear-gradient(180deg, #0c1410 0%, #0a1612 100%);
+  border-radius: 4px;
+  padding: 1px 8px 0;
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.8),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba(255, 255, 255, 0.05);
+  line-height: 0;
+}
+
+.countdown-time {
+  font-family: "VT323", "Courier New", monospace;
+  font-size: 44px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: #ffd84a;
+  text-shadow:
+    0 0 1px  #fffacb,
+    0 0 5px  #ffc23a,
+    0 0 12px #ffa800,
+    0 0 22px rgba(255, 168, 0, 0.6);
+}
+
+/* ===========================================================
+   MOBILE
+   =========================================================== */
+@media (max-width: 640px) {
+  .header { padding: 12px 16px; }
+  .brand { font-size: 18px; }
+  .play-btn { padding: 5px 11px; font-size: 10px; }
+  .header-right { gap: 8px; }
+  .icon-btn { width: 30px; height: 30px; }
+
+  .app { padding: 24px 16px 40px; }
+  .page-title { font-size: 32px; margin-bottom: 20px; }
+
+  .mode-btn { padding: 8px 16px; font-size: 12px; }
+  input#guess { width: 100%; max-width: 280px; }
+  .suggestions { width: 100%; max-width: 280px; }
+  .controls { gap: 8px; }
+  button { padding: 9px 14px; font-size: 12px; }
+
+  .howto-inner { padding: 24px 22px 22px; }
+  .howto-title { font-size: 24px; }
+  .howto-body { font-size: 13.5px; }
+
+  .date-btn { padding: 5px 10px; font-size: 11px; }
+  .date-btn svg { width: 12px; height: 12px; }
+  .date-popover {
+    min-width: 0;
+    width: calc(100vw - 24px);
+    right: -8px; /* nudge to stay within viewport */
+  }
+  .date-popover-grid { grid-template-columns: repeat(5, 1fr); }
+}
+
