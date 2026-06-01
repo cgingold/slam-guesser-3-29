@@ -1112,6 +1112,18 @@ function cls(v) {
   return "";
 }
 
+/* Display label for a result value. Data uses "4R/3R/2R/1R" historically
+   (Wikipedia convention), but the rest of the product talks about rounds
+   as "R1/R2/R3/R4" (Slam Grid convention, matches the difficulty chart).
+   This is a display-only flip — the underlying data stays untouched. */
+function displayResult(v) {
+  if (v === "4R") return "R4";
+  if (v === "3R") return "R3";
+  if (v === "2R") return "R2";
+  if (v === "1R") return "R1";
+  return v;
+}
+
 /* RENDER */
 
 function render() {
@@ -1149,7 +1161,7 @@ function render() {
     for (let colIdx = 0; colIdx < years.length; colIdx++) {
       const y = years[colIdx];
       const v = p.slams?.[slam]?.[y] || "";
-      html += `<td class="${cls(v)} reveal-cell" data-row="${rowIdx}" data-col="${colIdx}">${v}</td>`;
+      html += `<td class="${cls(v)} reveal-cell" data-row="${rowIdx}" data-col="${colIdx}">${displayResult(v)}</td>`;
     }
 
     html += "</tr>";
