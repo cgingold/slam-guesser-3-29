@@ -913,22 +913,21 @@ button:disabled {
    TABLE
    =========================================================== */
 .table-footer {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: baseline;
   margin-bottom: 8px;
 }
 
 .freshness-foot {
-  margin-left: auto;
+  grid-column: 3;
+  text-align: right;
   font-size: 12px;
   font-style: italic;
   font-family: Georgia, serif;
   font-weight: 400;
   color: var(--ink-soft);
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-right: 0;
+  margin: 0;
 }
 
 .table-wrap {
@@ -941,12 +940,17 @@ button:disabled {
 }
 
 .scroll-hint {
+  grid-column: 2;
+  text-align: center;
   font-size: 12px;
   color: var(--ink);
   letter-spacing: 0.04em;
 }
 
-.scroll-hint[hidden] { display: none; }
+.scroll-hint[hidden] {
+  display: block;
+  visibility: hidden;
+}
 
 table {
   border-collapse: collapse;
