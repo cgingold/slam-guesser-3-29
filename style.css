@@ -920,6 +920,7 @@ button:disabled {
 }
 
 .freshness-foot {
+  container-type: inline-size;
   grid-column: 3;
   text-align: right;
   font-size: 12px;
@@ -928,6 +929,13 @@ button:disabled {
   font-weight: 400;
   color: var(--ink-soft);
   margin: 0;
+}
+
+.freshness-short { display: none; }
+
+@container (max-width: 165px) {
+  .freshness-long { display: none; }
+  .freshness-short { display: inline; }
 }
 
 .table-wrap {

@@ -6,6 +6,7 @@ const DAILY_KEY = "slamGuesserSimple.daily.v1";
 const DATA_FRESHNESS_YEAR = "2026";
 const DATA_FRESHNESS_HIDE_SLAMS = ["FrenchOpen", "Wimbledon", "USOpen"];
 const DATA_FRESHNESS_LABEL = "Results through AO 2026";
+const DATA_FRESHNESS_LABEL_SHORT = "Results thru AO ’26";
 
 /* ---- Daily result storage -----------------------------
    Records each completed daily so revisits show the
@@ -1196,7 +1197,9 @@ function render() {
     const foot = document.createElement("p");
     foot.id = "freshnessFoot";
     foot.className = "freshness-foot";
-    foot.textContent = DATA_FRESHNESS_LABEL;
+    foot.innerHTML =
+      `<span class="freshness-long">${DATA_FRESHNESS_LABEL}</span>` +
+      `<span class="freshness-short">${DATA_FRESHNESS_LABEL_SHORT}</span>`;
     document.querySelector(".table-footer").append(foot);
   }
 
