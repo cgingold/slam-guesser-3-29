@@ -1,5 +1,12 @@
 const DAILY_KEY = "slamGuesserSimple.daily.v1";
 
+/* ---- Data freshness gating ----------------------------
+   Results are current through AO 2026. Later 2026 slams
+   are hidden until the constants below are updated. */
+const DATA_FRESHNESS_YEAR = "2026";
+const DATA_FRESHNESS_HIDE_SLAMS = ["FrenchOpen", "Wimbledon", "USOpen"];
+const DATA_FRESHNESS_LABEL = "Results through AO 2026";
+
 /* ---- Daily result storage -----------------------------
    Records each completed daily so revisits show the
    finished state instead of letting the user re-play.
@@ -1136,13 +1143,18 @@ function render() {
     .sort((a, b) => a - b)
     .map(String);
 
-  let html = "<tr><th>Slam</th>";
+  const hasFresh = slams.some((s) => {
+    const v = p.slams?.[s]?.[DATA_FRESHNESS_YEAR];
+    return v && v !== "A" && v !== "NH";
+  });
+
+  let html = "<thead><tr><th>Slam</th>";
 
   years.forEach((y) => {
     html += `<th>${y}</th>`;
   });
 
-  html += "</tr>";
+  html += "</tr></thead><tbody>";
 
   // Display labels for the slam column. Backend keys stay as
   // AustralianOpen/FrenchOpen/Wimbledon/USOpen for data continuity.
@@ -1161,13 +1173,32 @@ function render() {
     for (let colIdx = 0; colIdx < years.length; colIdx++) {
       const y = years[colIdx];
       const v = p.slams?.[slam]?.[y] || "";
-      html += `<td class="${cls(v)} reveal-cell" data-row="${rowIdx}" data-col="${colIdx}">${displayResult(v)}</td>`;
+      const gated =
+        y === DATA_FRESHNESS_YEAR &&
+        DATA_FRESHNESS_HIDE_SLAMS.includes(slam) &&
+        v !== "A" &&
+        v !== "NH" &&
+        v !== "";
+      const displayV = gated ? "" : v;
+      html += `<td class="${cls(displayV)} reveal-cell" data-row="${rowIdx}" data-col="${colIdx}">${displayResult(displayV)}</td>`;
     }
 
     html += "</tr>";
   }
 
+  html += "</tbody>";
+
   document.getElementById("table").innerHTML = html;
+
+  const existingFoot = document.getElementById("freshnessFoot");
+  if (existingFoot) existingFoot.remove();
+  if (hasFresh) {
+    const foot = document.createElement("p");
+    foot.id = "freshnessFoot";
+    foot.className = "freshness-foot";
+    foot.textContent = DATA_FRESHNESS_LABEL;
+    document.querySelector(".table-footer").append(foot);
+  }
 
   // Trigger the column-by-column reveal animation. Skipped on restores
   // (the user has already seen this player), only fires on fresh rounds.
