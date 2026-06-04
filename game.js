@@ -55,6 +55,60 @@ function getDailyResult(date, mode) {
   return all?.[date]?.[mode] || null;
 }
 
+/* ---- Per-day game history (week strip) ----------------
+   One localStorage entry per day, never overwritten (first play wins).
+   Key:   slamGrid.dayResult.YYYY-MM-DD
+   Value: { date, dayOfWeek, round, outcome, guesses, player } */
+
+const DAY_RESULT_KEY_PREFIX = "slamGrid.dayResult.";
+
+function getDayResult(dateIso) {
+  try {
+    const raw = localStorage.getItem(DAY_RESULT_KEY_PREFIX + dateIso);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveDayResult(result) {
+  try {
+    if (localStorage.getItem(DAY_RESULT_KEY_PREFIX + result.date)) return;
+    localStorage.setItem(DAY_RESULT_KEY_PREFIX + result.date, JSON.stringify(result));
+  } catch {
+    /* ignore quota errors */
+  }
+}
+
+function getMondayOfWeek(dateIso) {
+  const [y, m, d] = dateIso.split("-").map(Number);
+  const date = new Date(y, m - 1, d);
+  const daysFromMon = (date.getDay() + 6) % 7;
+  const mon = new Date(y, m - 1, d - daysFromMon);
+  return [
+    mon.getFullYear(),
+    String(mon.getMonth() + 1).padStart(2, "0"),
+    String(mon.getDate()).padStart(2, "0"),
+  ].join("-");
+}
+
+function addDaysToIso(dateIso, n) {
+  const [y, m, d] = dateIso.split("-").map(Number);
+  const date = new Date(y, m - 1, d + n);
+  return [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, "0"),
+    String(date.getDate()).padStart(2, "0"),
+  ].join("-");
+}
+
+function getWeekResults(todayIso) {
+  const monday = getMondayOfWeek(todayIso);
+  return Array.from({ length: 7 }, (_, i) => getDayResult(addDaysToIso(monday, i)));
+}
+
+/* ------------------------------------------------------- */
+
 /* Restore a saved daily — either finished (locked, share enabled) or
    in-progress (mid-round wrong-count, hints visible, can keep guessing).
    Returns true if a restoration was performed, false otherwise. */
@@ -331,6 +385,7 @@ const DAY_NAMES_RUNTIME = [
   "monday", "tuesday", "wednesday",
   "thursday", "friday", "saturday", "sunday",
 ];
+const DAY_LABELS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 // Day index for a YYYY-MM-DD string (0=Mon, 6=Sun).
 function dayOfWeekIndex(dateIso) {
@@ -832,6 +887,16 @@ function endRound() {
       outcome: game.lastOutcome,
       gaveUp: !!game.gaveUp,
     });
+    // Per-day history for the week strip (first attempt only)
+    const histOutcome = game.lastOutcome === "win" ? "won" : game.gaveUp ? "gave-up" : "missed";
+    saveDayResult({
+      date: game.date,
+      dayOfWeek: DAY_NAMES_RUNTIME[dayOfWeekIndex(game.date)],
+      round: ROUND_BY_DAY[dayOfWeekIndex(game.date)].round,
+      outcome: histOutcome,
+      guesses: game.lastOutcome === "win" ? game.wrong + 1 : game.wrong,
+      player: game.current.name,
+    });
   }
 
   game.locked = true;
@@ -852,6 +917,49 @@ function endRound() {
     // "see you tomorrow" reveal moment.
     openResultModal();
   }
+}
+
+function populateWeekStrip(containerEl) {
+  if (!containerEl) return;
+  const todayIso = game.date || todayLocal();
+  const weekResults = getWeekResults(todayIso);
+  const todayIdx = dayOfWeekIndex(todayIso);
+
+  containerEl.innerHTML = "";
+
+  weekResults.forEach((result, i) => {
+    const cell = document.createElement("div");
+    cell.className = "week-cell";
+
+    if (result) {
+      cell.classList.add(
+        result.outcome === "won" ? "is-won" :
+        result.outcome === "gave-up" ? "is-gave-up" : "is-missed"
+      );
+    } else if (i === todayIdx) {
+      cell.classList.add("is-today");
+    } else if (i < todayIdx) {
+      cell.classList.add("is-past-unplayed");
+    } else {
+      cell.classList.add("is-future");
+    }
+
+    const labelEl = document.createElement("span");
+    labelEl.className = "week-cell-label";
+    labelEl.textContent = DAY_LABELS[i];
+    cell.appendChild(labelEl);
+
+    const markerEl = document.createElement("span");
+    markerEl.className = "week-cell-marker";
+    if (result) {
+      markerEl.textContent =
+        result.outcome === "won" ? "✓" :
+        result.outcome === "gave-up" ? "🏳️" : "❌";
+    }
+    cell.appendChild(markerEl);
+
+    containerEl.appendChild(cell);
+  });
 }
 
 // Open the round-end modal. "Winner" (✅ + lime glow) on a correct
@@ -894,6 +1002,7 @@ function openResultModal() {
   }
 
   dlg.showModal();
+  populateWeekStrip(document.getElementById("resultWeekStrip"));
 }
 
 // Gentle reveal of the courtside countdown clock — only appears after the
@@ -1456,11 +1565,34 @@ function paintRoundButton() {
 function openDifficultyDialog() {
   const dlg = document.getElementById("difficultyDialog");
   if (!dlg || typeof dlg.showModal !== "function") return;
-  // Highlight today's pill so the connection from the header button is clear.
+
   const todayIdx = todayDayIndex();
+  const todayIso = game.date || todayLocal();
+  const weekResults = getWeekResults(todayIso);
+
   document.querySelectorAll(".diff-pill").forEach((el) => {
-    el.classList.toggle("is-today", parseInt(el.dataset.day, 10) === todayIdx);
+    const dayIdx = parseInt(el.dataset.day, 10);
+    el.classList.toggle("is-today", dayIdx === todayIdx);
+
+    const prev = el.querySelector(".diff-outcome");
+    if (prev) prev.remove();
+
+    const result = weekResults[dayIdx];
+    if (!result) return;
+
+    const marker = document.createElement("div");
+    marker.className = "diff-outcome";
+    if (result.outcome === "won") {
+      marker.textContent = "✓";
+      marker.classList.add("is-won");
+    } else if (result.outcome === "gave-up") {
+      marker.textContent = "🏳️";
+    } else {
+      marker.textContent = "❌";
+    }
+    el.appendChild(marker);
   });
+
   dlg.showModal();
 }
 

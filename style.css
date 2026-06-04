@@ -1191,6 +1191,76 @@ th:first-child {
 }
 
 /* ===========================================================
+   RESULT MODAL — week history strip
+   =========================================================== */
+.result-week-divider {
+  margin: 20px 0 16px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.result-week-strip {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.week-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 2px;
+  border-radius: 6px;
+  min-width: 0;
+}
+
+.week-cell-label {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1;
+}
+
+.week-cell-marker {
+  font-size: 14px;
+  line-height: 1;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.week-cell.is-won .week-cell-marker { color: #4ade80; }
+
+.week-cell.is-today {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.week-cell.is-past-unplayed { opacity: 0.3; }
+.week-cell.is-future        { opacity: 0.15; }
+
+/* ===========================================================
+   DIFFICULTY CHART — per-pill outcome markers
+   =========================================================== */
+.diff-outcome {
+  margin-top: 6px;
+  font-size: 18px;
+  line-height: 1;
+  text-align: center;
+  min-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+}
+
+.diff-outcome.is-won { color: #4ade80; }
+
+/* ===========================================================
    MOBILE
    =========================================================== */
 @media (max-width: 640px) {
