@@ -902,6 +902,7 @@ function endRound() {
       guesses: game.lastOutcome === "win" ? game.wrong + 1 : game.wrong,
       player: game.current.name,
     });
+    paintRoundButton();
   }
 
   game.locked = true;
@@ -1673,6 +1674,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (result) {
     result.addEventListener("close", () => {
       revealCountdown();
+      paintRoundButton();
     });
   }
 
