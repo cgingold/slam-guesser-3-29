@@ -225,7 +225,7 @@ body.is-ready .app { opacity: 1; }
 /* =========================================================
    DIFFICULTY CHART MODAL
    ========================================================= */
-.difficulty-dialog {
+dialog.difficulty-dialog {
   max-width: 540px;
   width: calc(100% - 32px);
   background: var(--ink);
