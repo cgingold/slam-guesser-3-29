@@ -228,6 +228,32 @@ body.is-ready .app { opacity: 1; }
 .difficulty-dialog {
   max-width: 540px;
   width: calc(100% - 32px);
+  background: var(--ink);
+  color: #ffffff;
+}
+
+.difficulty-dialog::backdrop {
+  background: rgba(12, 26, 22, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.difficulty-dialog .howto-close {
+  color: rgba(255, 255, 255, 0.5);
+}
+.difficulty-dialog .howto-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.difficulty-dialog .diff-day {
+  color: rgba(255, 255, 255, 0.55);
+}
+.difficulty-dialog .diff-pill.is-today .diff-day {
+  color: #ffffff;
+}
+
+.difficulty-dialog .diff-axis-labels {
+  color: rgba(255, 255, 255, 0.45);
 }
 
 /* The difficulty dialog has no header/body text — just the chart and
@@ -292,7 +318,7 @@ body.is-ready .app { opacity: 1; }
 .diff-pill.is-today .diff-halo {
   box-shadow:
     0 0 0 2px #ffffff,
-    0 0 0 4px rgba(29, 62, 53, 0.22);
+    0 0 0 4px rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
 }
 .diff-pill.is-today .diff-day {
