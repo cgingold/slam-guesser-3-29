@@ -1600,7 +1600,11 @@ function openDifficultyDialog() {
         fillEl.style.background = "#16a34a";
         fillEl.style.color = "#ffffff";
         fillEl.textContent = "W";
-        return; // pill itself is the marker — no outcome div beneath it
+        const trophy = document.createElement("div");
+        trophy.className = "diff-outcome";
+        trophy.textContent = "🏆";
+        el.appendChild(trophy);
+        return;
       } else {
         haloEl.style.background = "#b8512a";
         fillEl.style.background = "#c084fc";
