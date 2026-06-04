@@ -107,6 +107,11 @@ function getWeekResults(todayIso) {
   return Array.from({ length: 7 }, (_, i) => getDayResult(addDaysToIso(monday, i)));
 }
 
+function isChampionThisWeek(today) {
+  if (dayOfWeekIndex(today) !== 6) return false;
+  return getWeekResults(today).every((r) => r && r.outcome === "won");
+}
+
 /* ------------------------------------------------------- */
 
 /* Restore a saved daily — either finished (locked, share enabled) or
@@ -982,7 +987,8 @@ function openResultModal() {
   const outcome = document.getElementById("resultOutcome");
   outcome.classList.remove("is-win", "is-loss");
   outcome.classList.add(won ? "is-win" : "is-loss");
-  outcome.textContent = won ? "✅ Winner" : "❌ Missed It";
+  const champion = won && isChampionThisWeek(game.date || todayLocal());
+  outcome.textContent = champion ? "🏆 Champion" : won ? "✅ Winner" : "❌ Missed It";
 
   // Player name with country flag to the right
   const playerEl = document.getElementById("resultPlayer");
@@ -1555,6 +1561,13 @@ function paintRoundButton() {
   const fill = document.getElementById("roundBtnFill");
   const label = document.getElementById("roundBtnLabel");
   if (!halo || !fill || !label) return;
+  if (isChampionThisWeek(game.date || todayLocal())) {
+    halo.style.background = "#a5e85a";
+    fill.style.background = "#16a34a";
+    fill.style.color = "#ffffff";
+    label.textContent = "W";
+    return;
+  }
   const r = ROUND_BY_DAY[todayDayIndex()];
   halo.style.background = r.halo;
   fill.style.background = r.fill;
@@ -1569,6 +1582,7 @@ function openDifficultyDialog() {
   const todayIdx = todayDayIndex();
   const todayIso = game.date || todayLocal();
   const weekResults = getWeekResults(todayIso);
+  const champion = isChampionThisWeek(todayIso);
 
   document.querySelectorAll(".diff-pill").forEach((el) => {
     const dayIdx = parseInt(el.dataset.day, 10);
@@ -1576,6 +1590,24 @@ function openDifficultyDialog() {
 
     const prev = el.querySelector(".diff-outcome");
     if (prev) prev.remove();
+
+    // Sunday pill: switch to green W on championship, restore to purple F otherwise
+    const haloEl = el.querySelector(".diff-halo");
+    const fillEl = el.querySelector(".diff-fill");
+    if (dayIdx === 6 && haloEl && fillEl) {
+      if (champion) {
+        haloEl.style.background = "#a5e85a";
+        fillEl.style.background = "#16a34a";
+        fillEl.style.color = "#ffffff";
+        fillEl.textContent = "W";
+        return; // pill itself is the marker — no outcome div beneath it
+      } else {
+        haloEl.style.background = "#b8512a";
+        fillEl.style.background = "#c084fc";
+        fillEl.style.color = "#2e1065";
+        fillEl.textContent = "F";
+      }
+    }
 
     const result = weekResults[dayIdx];
     if (!result) return;
