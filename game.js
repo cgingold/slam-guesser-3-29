@@ -959,7 +959,7 @@ function populateWeekStrip(containerEl) {
     markerEl.className = "week-cell-marker";
     if (result) {
       markerEl.textContent =
-        result.outcome === "won" ? "✓" :
+        result.outcome === "won" ? "✅" :
         result.outcome === "gave-up" ? "🏳️" : "❌";
     }
     cell.appendChild(markerEl);
