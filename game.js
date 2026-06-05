@@ -968,8 +968,8 @@ function populateWeekStrip(containerEl) {
   });
 }
 
-// Open the round-end modal. "Winner" (✅ + lime glow) on a correct
-// guess, "Missed" (❌ + orange border) after 3 wrong. Give-ups skip
+// Open the round-end modal. "Winner" (lime glow) on a correct
+// guess, "Missed" (orange border) after 3 wrong. Give-ups skip
 // the modal entirely — the user already conceded; no celebration needed.
 function openResultModal() {
   // No modal on give-up
@@ -989,7 +989,7 @@ function openResultModal() {
   outcome.classList.remove("is-win", "is-loss");
   outcome.classList.add(won ? "is-win" : "is-loss");
   const champion = won && isChampionThisWeek(game.date || todayLocal());
-  outcome.textContent = champion ? "🏆 Champion" : won ? "✅ Winner" : "❌ Missed It";
+  outcome.textContent = champion ? "🏆 Champion" : won ? "Winner" : "Missed It";
 
   // Player name with country flag to the right
   const playerEl = document.getElementById("resultPlayer");
