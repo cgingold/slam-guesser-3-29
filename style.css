@@ -71,40 +71,6 @@ body.is-ready .app { opacity: 1; }
   display: block;
 }
 
-/* Old text brand variants kept here for reference (the brand is now an SVG
-   logo defined in the markup; no font styling needed). */
-
-   --- Editorial italic ---
-   .brand {
-     font-family: Georgia, "Times New Roman", serif;
-     font-style: italic;
-     font-size: 22px;
-     font-weight: 600;
-     letter-spacing: -0.01em;
-     color: var(--header-ink);
-   }
-
-   --- Magazine masthead (thin, very wide tracking) ---
-   .brand {
-     font-family: Georgia, "Times New Roman", serif;
-     font-size: 17px;
-     font-weight: 400;
-     letter-spacing: 0.25em;
-     text-transform: uppercase;
-     color: var(--header-ink);
-   }
-
-   --- NYT Games style (heavy caps, tight tracking) ---
-   .brand {
-     font-family: Georgia, "Times New Roman", serif;
-     font-size: 18px;
-     font-weight: 700;
-     letter-spacing: 0.02em;
-     text-transform: uppercase;
-     color: var(--header-ink);
-   }
-*/
-
 /* play toggle — lives in the dark header band */
 .play-toggle {
   display: flex;
@@ -420,6 +386,7 @@ dialog.difficulty-dialog {
   flex-direction: column;
   align-items: center;
   gap: 2px;
+  position: relative;
 }
 
 .date-pill:hover:not(.active) {
@@ -469,8 +436,6 @@ dialog.difficulty-dialog {
 
 .date-pill.active .dp-mark-win  { color: #a5e85a; }
 .date-pill.active .dp-mark-loss { color: #fdb89a; }
-
-.date-pill { position: relative; }
 
 /* How-to-Play dialog */
 .howto-dialog {
@@ -834,8 +799,6 @@ button:disabled {
   color: rgba(29, 62, 53, 0.4);
   cursor: not-allowed;
 }
-
-#guessBtn:not(:disabled) { background: var(--ink); }
 
 /* Give Up — quieter ghost button */
 #giveUpBtn {
@@ -1291,7 +1254,6 @@ th:first-child {
    =========================================================== */
 @media (max-width: 640px) {
   .header { padding: 12px 16px; }
-  .brand { font-size: 18px; }
   .play-btn { padding: 5px 11px; font-size: 10px; }
   .header-right { gap: 8px; }
   .icon-btn { width: 30px; height: 30px; }
