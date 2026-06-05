@@ -1620,7 +1620,7 @@ function openDifficultyDialog() {
     const marker = document.createElement("div");
     marker.className = "diff-outcome";
     if (result.outcome === "won") {
-      marker.textContent = "✓";
+      marker.textContent = "✅";
       marker.classList.add("is-won");
     } else if (result.outcome === "gave-up") {
       marker.textContent = "🏳️";
