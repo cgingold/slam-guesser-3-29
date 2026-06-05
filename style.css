@@ -219,7 +219,7 @@ dialog.difficulty-dialog {
 }
 
 .difficulty-dialog .diff-axis-labels {
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* The difficulty dialog has no header/body text — just the chart and
@@ -236,7 +236,7 @@ dialog.difficulty-dialog {
 .diff-pills {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
+  gap: 7px;
   margin-bottom: 16px;
 }
 
@@ -275,16 +275,13 @@ dialog.difficulty-dialog {
   justify-content: center;
   font-family: Georgia, "Times New Roman", serif;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 14px;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18);
 }
 
 /* Today's pill — white glow + slight bump so the connection from the
    header button is obvious */
 .diff-pill.is-today .diff-halo {
-  box-shadow:
-    0 0 0 2px #ffffff,
-    0 0 0 4px rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
 }
 .diff-pill.is-today .diff-day {
@@ -1210,8 +1207,12 @@ th:first-child {
   font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 1.0);
   line-height: 1;
+}
+
+.week-cell.is-today .week-cell-label {
+  font-weight: 900;
 }
 
 .week-cell-marker {

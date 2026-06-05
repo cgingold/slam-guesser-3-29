@@ -390,7 +390,7 @@ const DAY_NAMES_RUNTIME = [
   "monday", "tuesday", "wednesday",
   "thursday", "friday", "saturday", "sunday",
 ];
-const DAY_LABELS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const DAY_LABELS = ["R1", "R2", "R3", "R4", "QF", "SF", "F"];
 
 // Day index for a YYYY-MM-DD string (0=Mon, 6=Sun).
 function dayOfWeekIndex(dateIso) {
