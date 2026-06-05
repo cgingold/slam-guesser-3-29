@@ -1567,6 +1567,7 @@ function paintRoundButton() {
     fill.style.background = "#16a34a";
     fill.style.color = "#ffffff";
     label.textContent = "W";
+    halo.classList.add("is-painted");
     return;
   }
   const r = ROUND_BY_DAY[todayDayIndex()];
@@ -1574,6 +1575,7 @@ function paintRoundButton() {
   fill.style.background = r.fill;
   fill.style.color = r.text;
   label.textContent = r.round;
+  halo.classList.add("is-painted");
 }
 
 function openDifficultyDialog() {

@@ -169,6 +169,12 @@ body.is-ready .app { opacity: 1; }
   justify-content: center;
   box-sizing: border-box;
   /* halo background is set inline by JS based on today's gradient color */
+  /* Hidden until JS paints today's round + colors. Prevents the
+     hardcoded "R1" markup from flashing before paintRoundButton runs. */
+  visibility: hidden;
+}
+.round-btn-halo.is-painted {
+  visibility: visible;
 }
 .round-btn-fill {
   display: inline-flex;
