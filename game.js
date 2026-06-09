@@ -1260,7 +1260,7 @@ const MOBILE_SLAM_LABELS = {
   AustralianOpen: "AO 🇦🇺",
   FrenchOpen:     "RG 🇫🇷",
   Wimbledon:      "W 🇬🇧",
-  USOpen:         "US 🇺🇸",
+  USOpen:         "USO 🇺🇸",
 };
 
 function buildDesktopTable(p, years, slams) {
@@ -1302,8 +1302,7 @@ function buildMobileTable(p, years, slams) {
   html += "</tr></thead><tbody>";
 
   years.forEach((y, rowIdx) => {
-    const shortYear = "’" + y.slice(-2);
-    html += `<tr><td class="year-col">${shortYear}</td>`;
+    html += `<tr><td class="year-col">${y}</td>`;
     slams.forEach((slam, colIdx) => {
       const v = p.slams?.[slam]?.[y] || "";
       const gated =
