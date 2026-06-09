@@ -1250,6 +1250,75 @@ function displayResult(v) {
 
 /* RENDER */
 
+function isMobileLayout() {
+  return window.innerWidth <= 640;
+}
+
+let _lastLayoutIsMobile = null;
+
+const MOBILE_SLAM_LABELS = {
+  AustralianOpen: "AO 🇦🇺",
+  FrenchOpen:     "RG 🇫🇷",
+  Wimbledon:      "W 🇬🇧",
+  USOpen:         "US 🇺🇸",
+};
+
+function buildDesktopTable(p, years, slams) {
+  const SLAM_LABELS = {
+    AustralianOpen: "Australian Open",
+    FrenchOpen: "French Open",
+    Wimbledon: "Wimbledon",
+    USOpen: "US Open",
+  };
+
+  let html = "<thead><tr><th>Slam</th>";
+  years.forEach((y) => { html += `<th>${y}</th>`; });
+  html += "</tr></thead><tbody>";
+
+  for (let rowIdx = 0; rowIdx < slams.length; rowIdx++) {
+    const slam = slams[rowIdx];
+    html += `<tr><td class="slam">${SLAM_LABELS[slam] || slam}</td>`;
+    for (let colIdx = 0; colIdx < years.length; colIdx++) {
+      const y = years[colIdx];
+      const v = p.slams?.[slam]?.[y] || "";
+      const gated =
+        y === DATA_FRESHNESS_YEAR &&
+        DATA_FRESHNESS_HIDE_SLAMS.includes(slam) &&
+        v !== "A" && v !== "NH" && v !== "";
+      const displayV = gated ? "" : v;
+      html += `<td class="${cls(displayV)} reveal-cell" data-row="${rowIdx}" data-col="${colIdx}">${displayResult(displayV)}</td>`;
+    }
+    html += "</tr>";
+  }
+  html += "</tbody>";
+  return { html, numCols: years.length, numRows: slams.length };
+}
+
+function buildMobileTable(p, years, slams) {
+  let html = "<thead><tr><th class='year-col'>Year</th>";
+  for (const slam of slams) {
+    html += `<th>${MOBILE_SLAM_LABELS[slam] || slam}</th>`;
+  }
+  html += "</tr></thead><tbody>";
+
+  years.forEach((y, rowIdx) => {
+    const shortYear = "’" + y.slice(-2);
+    html += `<tr><td class="year-col">${shortYear}</td>`;
+    slams.forEach((slam, colIdx) => {
+      const v = p.slams?.[slam]?.[y] || "";
+      const gated =
+        y === DATA_FRESHNESS_YEAR &&
+        DATA_FRESHNESS_HIDE_SLAMS.includes(slam) &&
+        v !== "A" && v !== "NH" && v !== "";
+      const displayV = gated ? "" : v;
+      html += `<td class="${cls(displayV)} reveal-cell" data-row="${rowIdx}" data-col="${colIdx}">${displayResult(displayV)}</td>`;
+    });
+    html += "</tr>";
+  });
+  html += "</tbody>";
+  return { html, numCols: slams.length, numRows: years.length };
+}
+
 function render() {
   const p = game.current;
 
@@ -1265,45 +1334,11 @@ function render() {
     return v && v !== "A" && v !== "NH";
   });
 
-  let html = "<thead><tr><th>Slam</th>";
-
-  years.forEach((y) => {
-    html += `<th>${y}</th>`;
-  });
-
-  html += "</tr></thead><tbody>";
-
-  // Display labels for the slam column. Backend keys stay as
-  // AustralianOpen/FrenchOpen/Wimbledon/USOpen for data continuity.
-  const SLAM_LABELS = {
-    AustralianOpen: "Australian Open",
-    FrenchOpen: "French Open",
-    Wimbledon: "Wimbledon",
-    USOpen: "US Open",
-  };
-
-  for (let rowIdx = 0; rowIdx < slams.length; rowIdx++) {
-    const slam = slams[rowIdx];
-    const label = SLAM_LABELS[slam] || slam;
-    html += `<tr><td class="slam">${label}</td>`;
-
-    for (let colIdx = 0; colIdx < years.length; colIdx++) {
-      const y = years[colIdx];
-      const v = p.slams?.[slam]?.[y] || "";
-      const gated =
-        y === DATA_FRESHNESS_YEAR &&
-        DATA_FRESHNESS_HIDE_SLAMS.includes(slam) &&
-        v !== "A" &&
-        v !== "NH" &&
-        v !== "";
-      const displayV = gated ? "" : v;
-      html += `<td class="${cls(displayV)} reveal-cell" data-row="${rowIdx}" data-col="${colIdx}">${displayResult(displayV)}</td>`;
-    }
-
-    html += "</tr>";
-  }
-
-  html += "</tbody>";
+  const mobile = isMobileLayout();
+  _lastLayoutIsMobile = mobile;
+  const { html, numCols, numRows } = mobile
+    ? buildMobileTable(p, years, slams)
+    : buildDesktopTable(p, years, slams);
 
   document.getElementById("table").innerHTML = html;
 
@@ -1333,9 +1368,9 @@ function render() {
 
     if (howToOpen || willShowHowTo) {
       // Defer the reveal until the modal is closed.
-      game._pendingReveal = { cols: years.length, rows: slams.length };
+      game._pendingReveal = { cols: numCols, rows: numRows, rowMajor: mobile };
     } else {
-      animateReveal(years.length, slams.length);
+      animateReveal(numCols, numRows, mobile);
     }
   }
 
@@ -1344,10 +1379,10 @@ function render() {
   requestAnimationFrame(updateScrollHint);
 }
 
-/* Reveal animation: each cell stamps in one at a time. Order is
-   column-by-column (left → right), top-to-bottom within each column.
-   Boom, boom, boom — each slam result lands like a stamp. */
-function animateReveal(numCols, numRows) {
+/* Reveal animation: each cell stamps in one at a time.
+   Desktop (rowMajor=false): column-by-column, top-to-bottom within each column.
+   Mobile  (rowMajor=true):  row-by-row, left-to-right within each row (AO first). */
+function animateReveal(numCols, numRows, rowMajor = false) {
   const STAGGER_MS = 350; // per-cell beat
 
   const cells = document.querySelectorAll("#table .reveal-cell");
@@ -1360,15 +1395,13 @@ function animateReveal(numCols, numRows) {
   cells.forEach((cell) => {
     const row = parseInt(cell.dataset.row, 10);
     const col = parseInt(cell.dataset.col, 10);
-    const order = col * numRows + row;
+    const order = rowMajor ? row * numCols + col : col * numRows + row;
     const delay = order * STAGGER_MS;
     setTimeout(() => {
       cell.classList.remove("is-hidden");
       cell.classList.add("is-stamping");
-      // Auto-scroll: keep the next column in view, but don't scroll once
-      // we've reached the last column (nowhere meaningful to go, and the
-      // smooth-scroll engine causes a visible bump at the edge).
-      if (wrap && col < numCols - 1) {
+      // Desktop only: auto-scroll to keep the next column in view.
+      if (!rowMajor && wrap && col < numCols - 1) {
         const wrapRect = wrap.getBoundingClientRect();
         const cellRect = cell.getBoundingClientRect();
         const RIGHT_MARGIN = 40;
@@ -1399,6 +1432,15 @@ function updateScrollHint() {
 window.addEventListener("resize", () => {
   clearTimeout(window.__scrollHintTimer);
   window.__scrollHintTimer = setTimeout(updateScrollHint, 80);
+
+  // Re-render when crossing the mobile/desktop breakpoint (debounced 200ms).
+  clearTimeout(window.__layoutTimer);
+  window.__layoutTimer = setTimeout(() => {
+    if (game.current && isMobileLayout() !== _lastLayoutIsMobile) {
+      game._skipReveal = true;
+      render();
+    }
+  }, 200);
 });
 
 /* UI */
@@ -1661,9 +1703,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (howTo) {
     howTo.addEventListener("close", () => {
       if (game && game._pendingReveal) {
-        const { cols, rows } = game._pendingReveal;
+        const { cols, rows, rowMajor } = game._pendingReveal;
         game._pendingReveal = null;
-        animateReveal(cols, rows);
+        animateReveal(cols, rows, rowMajor);
       }
     });
   }
