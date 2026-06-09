@@ -1313,10 +1313,10 @@ th:first-child {
     width: 52px;
     min-width: 52px;
     max-width: 52px;
-    text-align: right;
+    text-align: center;
     color: var(--ink-soft);
     padding-left: 4px;
-    padding-right: 6px;
+    padding-right: 4px;
     white-space: nowrap;
     font-weight: 600;
   }
