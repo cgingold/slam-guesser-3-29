@@ -1328,10 +1328,7 @@ function render() {
     .sort((a, b) => a - b)
     .map(String);
 
-  const hasFresh = slams.some((s) => {
-    const v = p.slams?.[s]?.[DATA_FRESHNESS_YEAR];
-    return v && v !== "A" && v !== "NH";
-  });
+  const hasFresh = slams.some((s) => !!p.slams?.[s]?.[DATA_FRESHNESS_YEAR]);
 
   const mobile = isMobileLayout();
   _lastLayoutIsMobile = mobile;
