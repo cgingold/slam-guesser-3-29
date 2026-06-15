@@ -1,12 +1,12 @@
 const DAILY_KEY = "slamGuesserSimple.daily.v1";
 
 /* ---- Data freshness gating ----------------------------
-   Results are current through AO 2026. Later 2026 slams
+   Results are current through RG 2026. Later 2026 slams
    are hidden until the constants below are updated. */
 const DATA_FRESHNESS_YEAR = "2026";
-const DATA_FRESHNESS_HIDE_SLAMS = ["FrenchOpen", "Wimbledon", "USOpen"];
-const DATA_FRESHNESS_LABEL = "Results through AO 2026";
-const DATA_FRESHNESS_LABEL_SHORT = "Results thru AO ’26";
+const DATA_FRESHNESS_HIDE_SLAMS = ["Wimbledon", "USOpen"];
+const DATA_FRESHNESS_LABEL = "Results through RG 2026";
+const DATA_FRESHNESS_LABEL_SHORT = "Results thru RG ‘26";
 
 /* ---- Daily result storage -----------------------------
    Records each completed daily so revisits show the

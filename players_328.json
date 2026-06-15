@@ -69,7 +69,8 @@
         "1996": "A"
       }
     },
-    "autoScore": 51.3
+    "autoScore": 51.3,
+    "inPool": false
   },
   {
     "name": "Adriano Panatta",
@@ -145,7 +146,8 @@
         "1983": "A"
       }
     },
-    "autoScore": 31.4
+    "autoScore": 31.4,
+    "inPool": false
   },
   {
     "name": "Agnieszka Radwanska",
@@ -218,7 +220,8 @@
       "page": "Agnieszka Radwańska"
     },
     "autoScore": 97.3,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Agustín Calleri",
@@ -282,7 +285,8 @@
         "2009": "A"
       }
     },
-    "autoScore": 50.7
+    "autoScore": 50.7,
+    "inPool": false
   },
   {
     "name": "Ajla Tomljanović",
@@ -326,7 +330,8 @@
         "2022": "2R",
         "2023": "A",
         "2024": "1R",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2009": "A",
@@ -368,7 +373,8 @@
       }
     },
     "autoScore": 77.5,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Albert Costa",
@@ -440,7 +446,8 @@
         "2006": "A"
       }
     },
-    "autoScore": 60.9
+    "autoScore": 60.9,
+    "inPool": false
   },
   {
     "name": "Albert Montañés",
@@ -520,7 +527,8 @@
         "2016": "Q2"
       }
     },
-    "autoScore": 62
+    "autoScore": 62,
+    "inPool": false
   },
   {
     "name": "Alberto Berasategui",
@@ -572,7 +580,8 @@
         "2000": "A"
       }
     },
-    "autoScore": 46.4
+    "autoScore": 46.4,
+    "inPool": false
   },
   {
     "name": "Alejandro Davidovich Fokina",
@@ -598,7 +607,8 @@
         "2022": "1R",
         "2023": "3R",
         "2024": "2R",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2018": "Q2",
@@ -626,7 +636,8 @@
       "page": "Alejandro Davidovich Fokina"
     },
     "autoScore": 77.3,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Aleksandra Krunić",
@@ -708,7 +719,8 @@
       }
     },
     "autoScore": 71.3,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Àlex Corretja",
@@ -780,7 +792,8 @@
         "2005": "A"
       }
     },
-    "autoScore": 60.6
+    "autoScore": 60.6,
+    "inPool": false
   },
   {
     "name": "Alex de Minaur",
@@ -810,7 +823,8 @@
         "2022": "1R",
         "2023": "2R",
         "2024": "QF",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "3R"
       },
       "Wimbledon": {
         "2016": "A",
@@ -838,7 +852,8 @@
       }
     },
     "autoScore": 88.9,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Alex Michelsen",
@@ -854,7 +869,8 @@
       "FrenchOpen": {
         "2023": "A",
         "2024": "1R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "3R"
       },
       "Wimbledon": {
         "2023": "A",
@@ -872,7 +888,8 @@
       "page": "Alex Michelsen"
     },
     "autoScore": 73.9,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Alexander Bublik",
@@ -902,7 +919,8 @@
         "2022": "2R",
         "2023": "1R",
         "2024": "2R",
-        "2025": "QF"
+        "2025": "QF",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2016": "A",
@@ -934,7 +952,8 @@
       "page": "Alexander Bublik"
     },
     "autoScore": 77.3,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Alexander Zverev",
@@ -968,7 +987,8 @@
         "2022": "SF",
         "2023": "SF",
         "2024": "F",
-        "2025": "QF"
+        "2025": "QF",
+        "2026": "W"
       },
       "Wimbledon": {
         "2014": "A",
@@ -999,8 +1019,9 @@
         "2025": "3R"
       }
     },
-    "autoScore": 110.2,
-    "autoDay": "monday"
+    "autoScore": 117.2,
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Alexei Popyrin",
@@ -1026,7 +1047,8 @@
         "2022": "1R",
         "2023": "1R",
         "2024": "1R",
-        "2025": "4R"
+        "2025": "4R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2018": "A",
@@ -1054,7 +1076,8 @@
       "page": "Alexei Popyrin"
     },
     "autoScore": 75,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Aliaksandra Sasnovich",
@@ -1128,7 +1151,8 @@
       }
     },
     "autoScore": 75,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Alicia Molik",
@@ -1200,7 +1224,8 @@
         "2011": "A"
       }
     },
-    "autoScore": 55.6
+    "autoScore": 55.6,
+    "inPool": false
   },
   {
     "name": "Alison Riske-Amritraj",
@@ -1285,7 +1310,8 @@
       }
     },
     "autoScore": 73.4,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Alison Van Uytvanck",
@@ -1358,7 +1384,8 @@
       }
     },
     "autoScore": 72.5,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Alize Cornet",
@@ -1459,7 +1486,8 @@
       }
     },
     "autoScore": 79.3,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Amanda Anisimova",
@@ -1489,7 +1517,8 @@
         "2022": "4R",
         "2023": "A",
         "2024": "2R",
-        "2025": "4R"
+        "2025": "4R",
+        "2026": "3R"
       },
       "Wimbledon": {
         "2016": "A",
@@ -1521,7 +1550,8 @@
       "page": "Amanda Anisimova"
     },
     "autoScore": 90.2,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Amanda Coetzer",
@@ -1605,7 +1635,8 @@
         "2004": "A"
       }
     },
-    "autoScore": 63.4
+    "autoScore": 63.4,
+    "inPool": false
   },
   {
     "name": "Amélie Mauresmo",
@@ -1682,7 +1713,8 @@
       }
     },
     "autoScore": 95.7,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Amy Frazier",
@@ -1766,7 +1798,8 @@
         "2006": "1R"
       }
     },
-    "autoScore": 55.8
+    "autoScore": 55.8,
+    "inPool": false
   },
   {
     "name": "Ana Ivanovic",
@@ -1839,7 +1872,8 @@
       }
     },
     "autoScore": 93.5,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Ana Konjuh",
@@ -1905,7 +1939,8 @@
       "page": "Ana Konjuh"
     },
     "autoScore": 73.8,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Anastasia Myskina",
@@ -1958,7 +1993,8 @@
       }
     },
     "autoScore": 65.5,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Anastasia Pavlyuchenkova",
@@ -2006,7 +2042,8 @@
         "2022": "A",
         "2023": "QF",
         "2024": "2R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "A"
       },
       "Wimbledon": {
         "2007": "1R",
@@ -2052,7 +2089,8 @@
       }
     },
     "autoScore": 89.8,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Anastasia Potapova",
@@ -2080,7 +2118,8 @@
         "2022": "Q2",
         "2023": "3R",
         "2024": "4R",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "4R"
       },
       "Wimbledon": {
         "2017": "1R",
@@ -2105,8 +2144,9 @@
         "2025": "2R"
       }
     },
-    "autoScore": 73.9,
-    "autoDay": "friday"
+    "autoScore": 75,
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Anastasija Sevastova",
@@ -2187,7 +2227,8 @@
       }
     },
     "autoScore": 76.1,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Andre Agassi",
@@ -2288,7 +2329,8 @@
       }
     },
     "autoScore": 165.9,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Andrea Petkovic",
@@ -2369,7 +2411,8 @@
       }
     },
     "autoScore": 72.7,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Andrea Petrovic",
@@ -2450,7 +2493,8 @@
       }
     },
     "autoScore": 73.8,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Andreas Seppi",
@@ -2551,7 +2595,8 @@
       }
     },
     "autoScore": 74.2,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Andrei Cherkasov",
@@ -2623,7 +2668,8 @@
         "2001": "A"
       }
     },
-    "autoScore": 45
+    "autoScore": 45,
+    "inPool": false
   },
   {
     "name": "Andrei Chesnokov",
@@ -2707,7 +2753,8 @@
         "2000": "A"
       }
     },
-    "autoScore": 48.1
+    "autoScore": 48.1,
+    "inPool": false
   },
   {
     "name": "Andrei Olhovskiy",
@@ -2811,7 +2858,8 @@
         "2005": "A"
       }
     },
-    "autoScore": 59
+    "autoScore": 59,
+    "inPool": false
   },
   {
     "name": "Andrei Pavel",
@@ -2907,7 +2955,8 @@
         "2009": "1R"
       }
     },
-    "autoScore": 55.2
+    "autoScore": 55.2,
+    "inPool": false
   },
   {
     "name": "Andrés Gómez",
@@ -2979,7 +3028,8 @@
         "1992": "A"
       }
     },
-    "autoScore": 48.2
+    "autoScore": 48.2,
+    "inPool": false
   },
   {
     "name": "Andrey Golubev",
@@ -3039,7 +3089,8 @@
         "2017": "A"
       }
     },
-    "autoScore": 61.1
+    "autoScore": 61.1,
+    "inPool": false
   },
   {
     "name": "Andrey Rublev",
@@ -3073,7 +3124,8 @@
         "2022": "QF",
         "2023": "3R",
         "2024": "3R",
-        "2025": "4R"
+        "2025": "4R",
+        "2026": "4R"
       },
       "Wimbledon": {
         "2014": "A",
@@ -3104,8 +3156,9 @@
         "2025": "4R"
       }
     },
-    "autoScore": 92.5,
-    "autoDay": "tuesday"
+    "autoScore": 93.6,
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Andy Murray",
@@ -3202,7 +3255,8 @@
       }
     },
     "autoScore": 157.8,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Andy Roddick",
@@ -3272,7 +3326,8 @@
     },
     "autoScore": 101.4,
     "autoDay": "tuesday",
-    "manualDay": "monday"
+    "manualDay": "monday",
+    "inPool": true
   },
   {
     "name": "Anett Kontaveit",
@@ -3333,7 +3388,8 @@
       }
     },
     "autoScore": 74.5,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Angelique Kerber",
@@ -3422,7 +3478,8 @@
       }
     },
     "autoScore": 118,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Anhelina Kalinina",
@@ -3454,7 +3511,8 @@
         "2022": "2R",
         "2023": "1R",
         "2024": "1R",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2015": "Q1",
@@ -3484,7 +3542,8 @@
       }
     },
     "autoScore": 72.8,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Anna Blinkova",
@@ -3541,7 +3600,8 @@
       }
     },
     "autoScore": 71.5,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Anna Chakvetadze",
@@ -3601,7 +3661,8 @@
       "source": "wikipedia",
       "page": "Anna Chakvetadze"
     },
-    "autoScore": 60.7
+    "autoScore": 60.7,
+    "inPool": false
   },
   {
     "name": "Anna Kalinskaya",
@@ -3631,7 +3692,8 @@
         "2022": "1R",
         "2023": "A",
         "2024": "2R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "QF"
       },
       "Wimbledon": {
         "2016": "A",
@@ -3658,8 +3720,9 @@
         "2025": "3R"
       }
     },
-    "autoScore": 75.1,
-    "autoDay": "friday"
+    "autoScore": 76.3,
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Anne Kremer",
@@ -3747,7 +3810,8 @@
         "2013": "A"
       }
     },
-    "autoScore": 53.3
+    "autoScore": 53.3,
+    "inPool": false
   },
   {
     "name": "Arantxa Rus",
@@ -3840,7 +3904,8 @@
       }
     },
     "autoScore": 72.6,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Arantxa Sánchez Vicario",
@@ -3926,7 +3991,8 @@
     },
     "autoScore": 141,
     "autoDay": "monday",
-    "manualDay": "tuesday"
+    "manualDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Arnaud Clément",
@@ -4007,7 +4073,8 @@
       }
     },
     "autoScore": 68.7,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Arthur Cazaux",
@@ -4054,7 +4121,8 @@
       "page": "Arthur Cazaux"
     },
     "autoScore": 72.6,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Arthur Fils",
@@ -4097,7 +4165,8 @@
       "page": "Arthur Fils"
     },
     "autoScore": 72.6,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Aryna Sabalenka",
@@ -4125,7 +4194,8 @@
         "2022": "3R",
         "2023": "SF",
         "2024": "QF",
-        "2025": "F"
+        "2025": "F",
+        "2026": "QF"
       },
       "Wimbledon": {
         "2017": "2R",
@@ -4150,8 +4220,9 @@
         "2025": "W"
       }
     },
-    "autoScore": 130.3,
-    "autoDay": "monday"
+    "autoScore": 131.5,
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Ashleigh Barty",
@@ -4216,7 +4287,8 @@
       }
     },
     "autoScore": 95.8,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Aslan Karatsev",
@@ -4285,7 +4357,8 @@
       "page": "Aslan Karatsev"
     },
     "autoScore": 71.7,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Barbara Potter",
@@ -4336,7 +4409,8 @@
       },
       "USOpen": {}
     },
-    "autoScore": 33.9
+    "autoScore": 33.9,
+    "inPool": false
   },
   {
     "name": "Barbara Schett",
@@ -4400,7 +4474,8 @@
         "2005": "A"
       }
     },
-    "autoScore": 55.5
+    "autoScore": 55.5,
+    "inPool": false
   },
   {
     "name": "Barbora Krejčíková",
@@ -4467,7 +4542,8 @@
       }
     },
     "autoScore": 94.9,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Barbora Strýcová",
@@ -4568,7 +4644,8 @@
       }
     },
     "autoScore": 76,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Beatriz Haddad Maia",
@@ -4600,7 +4677,8 @@
         "2022": "2R",
         "2023": "SF",
         "2024": "1R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2015": "Q1",
@@ -4630,7 +4708,8 @@
       }
     },
     "autoScore": 77.7,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Belinda Bencic",
@@ -4664,7 +4743,8 @@
         "2022": "3R",
         "2023": "1R",
         "2024": "A",
-        "2025": "A"
+        "2025": "A",
+        "2026": "4R"
       },
       "Wimbledon": {
         "2014": "3R",
@@ -4695,8 +4775,9 @@
         "2025": "2R"
       }
     },
-    "autoScore": 85.9,
-    "autoDay": "wednesday"
+    "autoScore": 87,
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Ben Shelton",
@@ -4716,7 +4797,8 @@
         "2022": "A",
         "2023": "1R",
         "2024": "3R",
-        "2025": "4R"
+        "2025": "4R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2021": "A",
@@ -4734,7 +4816,8 @@
       }
     },
     "autoScore": 81.6,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Bernard Tomic",
@@ -4823,7 +4906,8 @@
       }
     },
     "autoScore": 78.2,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Bernarda Pera",
@@ -4888,7 +4972,8 @@
       }
     },
     "autoScore": 72.6,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Bernd Karbacher",
@@ -4944,7 +5029,8 @@
         "2000": "A"
       }
     },
-    "autoScore": 41.4
+    "autoScore": 41.4,
+    "inPool": false
   },
   {
     "name": "Bethanie Mattek-Sands",
@@ -5049,7 +5135,8 @@
       }
     },
     "autoScore": 65.9,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Bettina Bunge",
@@ -5113,7 +5200,8 @@
         "1989": "A"
       }
     },
-    "autoScore": 28.1
+    "autoScore": 28.1,
+    "inPool": false
   },
   {
     "name": "Bianca Andreescu",
@@ -5141,7 +5229,8 @@
         "2022": "2R",
         "2023": "3R",
         "2024": "3R",
-        "2025": "Q2"
+        "2025": "Q2",
+        "2026": "Q2"
       },
       "Wimbledon": {
         "2017": "1R",
@@ -5166,8 +5255,9 @@
         "2025": "A"
       }
     },
-    "autoScore": 79.6,
-    "autoDay": "thursday"
+    "autoScore": 80.9,
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Björn Borg",
@@ -5224,7 +5314,8 @@
       }
     },
     "autoScore": 120.9,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Bojana Jovanovski",
@@ -5280,7 +5371,8 @@
         "2018": "Q2"
       }
     },
-    "autoScore": 63.5
+    "autoScore": 63.5,
+    "inPool": false
   },
   {
     "name": "Boris Becker",
@@ -5365,7 +5457,8 @@
       }
     },
     "autoScore": 122.5,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Borna Ćorić",
@@ -5432,7 +5525,8 @@
       }
     },
     "autoScore": 74.9,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Botic van de Zandschulp",
@@ -5456,7 +5550,8 @@
         "2022": "3R",
         "2023": "1R",
         "2024": "1R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2019": "A",
@@ -5482,7 +5577,8 @@
       "page": "Botic van de Zandschulp"
     },
     "autoScore": 75.1,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Brad Gilbert",
@@ -5554,7 +5650,8 @@
         "1995": "A"
       }
     },
-    "autoScore": 40.4
+    "autoScore": 40.4,
+    "inPool": false
   },
   {
     "name": "Brandon Nakashima",
@@ -5580,7 +5677,8 @@
         "2022": "3R",
         "2023": "1R",
         "2024": "2R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "3R"
       },
       "Wimbledon": {
         "2018": "A",
@@ -5608,7 +5706,8 @@
       "page": "Brandon Nakashima"
     },
     "autoScore": 75,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Brian Gottfried",
@@ -5684,7 +5783,8 @@
         "1984": "2R"
       }
     },
-    "autoScore": 38.3
+    "autoScore": 38.3,
+    "inPool": false
   },
   {
     "name": "Brian Teacher",
@@ -5764,7 +5864,8 @@
         "1987": "A"
       }
     },
-    "autoScore": 34.8
+    "autoScore": 34.8,
+    "inPool": false
   },
   {
     "name": "Butch Buchholz",
@@ -5836,7 +5937,8 @@
         "1969": "QF"
       }
     },
-    "autoScore": 7.4
+    "autoScore": 7.4,
+    "inPool": false
   },
   {
     "name": "Cameron Norrie",
@@ -5870,7 +5972,8 @@
         "2022": "3R",
         "2023": "3R",
         "2024": "1R",
-        "2025": "4R"
+        "2025": "4R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2014": "A",
@@ -5906,7 +6009,8 @@
       "page": "Cameron Norrie"
     },
     "autoScore": 78.8,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Camila Giorgi",
@@ -5983,7 +6087,8 @@
       }
     },
     "autoScore": 74.7,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Carla Suárez Navarro",
@@ -6060,7 +6165,8 @@
       }
     },
     "autoScore": 84.6,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Carlos Alcaraz",
@@ -6104,7 +6210,8 @@
       }
     },
     "autoScore": 134.7,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Carlos Moyá",
@@ -6189,7 +6296,8 @@
       }
     },
     "autoScore": 76,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Caroline Dolehide",
@@ -6243,7 +6351,8 @@
       }
     },
     "autoScore": 71.5,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Caroline Garcia",
@@ -6324,7 +6433,8 @@
       }
     },
     "autoScore": 80.8,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Caroline Wozniacki",
@@ -6409,7 +6519,8 @@
       }
     },
     "autoScore": 109.1,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Casper Ruud",
@@ -6437,7 +6548,8 @@
         "2022": "F",
         "2023": "F",
         "2024": "SF",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "4R"
       },
       "Wimbledon": {
         "2017": "A",
@@ -6462,8 +6574,9 @@
         "2025": "2R"
       }
     },
-    "autoScore": 89.6,
-    "autoDay": "wednesday"
+    "autoScore": 90.7,
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Cédric Pioline",
@@ -6543,7 +6656,8 @@
         "2002": "Q1"
       }
     },
-    "autoScore": 62.9
+    "autoScore": 62.9,
+    "inPool": false
   },
   {
     "name": "Chanda Rubin",
@@ -6631,7 +6745,8 @@
         "2007": "A"
       }
     },
-    "autoScore": 64
+    "autoScore": 64,
+    "inPool": false
   },
   {
     "name": "Chris Evert",
@@ -6724,7 +6839,8 @@
       }
     },
     "autoScore": 244.1,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Christian Ruud",
@@ -6788,7 +6904,8 @@
       "source": "wikipedia",
       "page": "Christian Ruud"
     },
-    "autoScore": 41.4
+    "autoScore": 41.4,
+    "inPool": false
   },
   {
     "name": "Chung Hyeon",
@@ -6845,7 +6962,8 @@
       "page": "Chung Hyeon"
     },
     "autoScore": 66.5,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Clara Burel",
@@ -6890,7 +7008,8 @@
       }
     },
     "autoScore": 70.2,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Clara Tauson",
@@ -6918,7 +7037,8 @@
         "2022": "A",
         "2023": "3R",
         "2024": "4R",
-        "2025": "3R"
+        "2025": "3R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2017": "A",
@@ -6948,7 +7068,8 @@
       "page": "Clara Tauson"
     },
     "autoScore": 75,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Cliff Drysdale",
@@ -7040,7 +7161,8 @@
         "1980": "A"
       }
     },
-    "autoScore": 30
+    "autoScore": 30,
+    "inPool": false
   },
   {
     "name": "Coco Gauff",
@@ -7064,7 +7186,8 @@
         "2022": "F",
         "2023": "QF",
         "2024": "SF",
-        "2025": "W"
+        "2025": "W",
+        "2026": "3R"
       },
       "Wimbledon": {
         "2019": "4R",
@@ -7086,7 +7209,8 @@
       }
     },
     "autoScore": 107.5,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Conchita Martínez",
@@ -7175,7 +7299,8 @@
       }
     },
     "autoScore": 99.3,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Cristian Garin",
@@ -7257,7 +7382,8 @@
       "page": "Cristian Garín"
     },
     "autoScore": 76.2,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Cristina Bucșa",
@@ -7281,7 +7407,8 @@
         "2022": "1R",
         "2023": "1R",
         "2024": "2R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2019": "Q2",
@@ -7303,7 +7430,8 @@
       }
     },
     "autoScore": 73.9,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Dája Bedáňová",
@@ -7347,7 +7475,8 @@
         "2005": "A"
       }
     },
-    "autoScore": 47.6
+    "autoScore": 47.6,
+    "inPool": false
   },
   {
     "name": "Daniel Altmaier",
@@ -7375,7 +7504,8 @@
         "2022": "1R",
         "2023": "3R",
         "2024": "2R",
-        "2025": "4R"
+        "2025": "4R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2017": "A",
@@ -7405,7 +7535,8 @@
       "page": "Daniel Altmaier"
     },
     "autoScore": 75,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Daniela Hantuchova",
@@ -7494,7 +7625,8 @@
       }
     },
     "autoScore": 78.4,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Danielle Collins",
@@ -7559,7 +7691,8 @@
       }
     },
     "autoScore": 80.4,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Daniil Medvedev",
@@ -7618,7 +7751,8 @@
       }
     },
     "autoScore": 114.4,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Daria Kasatkina",
@@ -7650,7 +7784,8 @@
         "2022": "SF",
         "2023": "4R",
         "2024": "2R",
-        "2025": "4R"
+        "2025": "4R",
+        "2026": "3R"
       },
       "Wimbledon": {
         "2015": "A",
@@ -7680,7 +7815,8 @@
       }
     },
     "autoScore": 82.2,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Daria Saville",
@@ -7761,7 +7897,8 @@
       }
     },
     "autoScore": 73.7,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "David Ferrer",
@@ -7846,7 +7983,8 @@
       }
     },
     "autoScore": 98.1,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "David Goffin",
@@ -7886,7 +8024,8 @@
         "2022": "3R",
         "2023": "1R",
         "2024": "2R",
-        "2025": "A"
+        "2025": "A",
+        "2026": "Q2"
       },
       "Wimbledon": {
         "2011": "Q3",
@@ -7923,8 +8062,9 @@
         "2025": "2R"
       }
     },
-    "autoScore": 86.2,
-    "autoDay": "wednesday"
+    "autoScore": 87.5,
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "David Nalbandian",
@@ -7993,7 +8133,8 @@
       }
     },
     "autoScore": 75,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "David Wheaton",
@@ -8073,7 +8214,8 @@
         "2001": "A"
       }
     },
-    "autoScore": 49.5
+    "autoScore": 49.5,
+    "inPool": false
   },
   {
     "name": "Dayana Yastremska",
@@ -8124,7 +8266,8 @@
       }
     },
     "autoScore": 75.4,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Denis Istomin",
@@ -8217,7 +8360,8 @@
       }
     },
     "autoScore": 69.6,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Denis Shapovalov",
@@ -8272,7 +8416,8 @@
       }
     },
     "autoScore": 78.9,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Dennis Ralston",
@@ -8368,7 +8513,8 @@
         "1977": "A"
       }
     },
-    "autoScore": 30.3
+    "autoScore": 30.3,
+    "inPool": false
   },
   {
     "name": "Diana Shnaider",
@@ -8384,7 +8530,8 @@
       "FrenchOpen": {
         "2023": "2R",
         "2024": "1R",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "SF"
       },
       "Wimbledon": {
         "2023": "Q2",
@@ -8397,8 +8544,9 @@
         "2025": "1R"
       }
     },
-    "autoScore": 73.9,
-    "autoDay": "friday"
+    "autoScore": 75.4,
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Diego Schwartzman",
@@ -8463,7 +8611,8 @@
       }
     },
     "autoScore": 80.9,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Dinara Safina",
@@ -8520,7 +8669,8 @@
       }
     },
     "autoScore": 75.1,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Dmitry Tursunov",
@@ -8604,7 +8754,8 @@
         "2017": "1R"
       }
     },
-    "autoScore": 63.3
+    "autoScore": 63.3,
+    "inPool": false
   },
   {
     "name": "Dominic Thiem",
@@ -8665,7 +8816,8 @@
       }
     },
     "autoScore": 102.3,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Dominik Hrbatý",
@@ -8741,7 +8893,8 @@
         "2010": "A"
       }
     },
-    "autoScore": 61.3
+    "autoScore": 61.3,
+    "inPool": false
   },
   {
     "name": "Dominika Cibulkova",
@@ -8810,7 +8963,8 @@
       }
     },
     "autoScore": 78.6,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Donna Vekic",
@@ -8831,7 +8985,8 @@
         "2022": "1R",
         "2023": "QF",
         "2024": "1R",
-        "2025": "4R"
+        "2025": "4R",
+        "2026": "1R"
       },
       "FrenchOpen": {
         "2012": "A",
@@ -8847,7 +9002,8 @@
         "2022": "2R",
         "2023": "2R",
         "2024": "3R",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2012": "A",
@@ -8882,8 +9038,9 @@
         "2025": "2R"
       }
     },
-    "autoScore": 80.9,
-    "autoDay": "wednesday"
+    "autoScore": 82.2,
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Eddie Dibbs",
@@ -8939,7 +9096,8 @@
         "1981": "A"
       }
     },
-    "autoScore": 24.4
+    "autoScore": 24.4,
+    "inPool": false
   },
   {
     "name": "Ekaterina Alexandrova",
@@ -8969,7 +9127,8 @@
         "2022": "2R",
         "2023": "3R",
         "2024": "1R",
-        "2025": "4R"
+        "2025": "4R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2016": "2R",
@@ -8997,7 +9156,8 @@
       }
     },
     "autoScore": 77.2,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Ekaterina Makarova",
@@ -9074,7 +9234,8 @@
       }
     },
     "autoScore": 81.4,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Elena Bovina",
@@ -9150,7 +9311,8 @@
         "2012": "A"
       }
     },
-    "autoScore": 56.7
+    "autoScore": 56.7,
+    "inPool": false
   },
   {
     "name": "Elena Dementieva",
@@ -9231,7 +9393,8 @@
       }
     },
     "autoScore": 87.3,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Elena Likhovtseva",
@@ -9307,7 +9470,8 @@
         "2007": "2R"
       }
     },
-    "autoScore": 60.8
+    "autoScore": 60.8,
+    "inPool": false
   },
   {
     "name": "Elena Rybakina",
@@ -9359,7 +9523,8 @@
     },
     "autoScore": 100.3,
     "autoDay": "tuesday",
-    "manualDay": "monday"
+    "manualDay": "monday",
+    "inPool": true
   },
   {
     "name": "Elena Vesnina",
@@ -9436,7 +9601,8 @@
       }
     },
     "autoScore": 71.1,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Eleni Daniilidou",
@@ -9516,7 +9682,8 @@
         "2014": "A"
       }
     },
-    "autoScore": 60.5
+    "autoScore": 60.5,
+    "inPool": false
   },
   {
     "name": "Elina Svitolina",
@@ -9556,7 +9723,8 @@
         "2022": "A",
         "2023": "QF",
         "2024": "4R",
-        "2025": "QF"
+        "2025": "QF",
+        "2026": "QF"
       },
       "Wimbledon": {
         "2011": "A",
@@ -9593,8 +9761,9 @@
         "2025": "1R"
       }
     },
-    "autoScore": 98.5,
-    "autoDay": "tuesday"
+    "autoScore": 99.7,
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Elisabetta Cocciaretto",
@@ -9620,7 +9789,8 @@
         "2022": "Q2",
         "2023": "3R",
         "2024": "4R",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2018": "A",
@@ -9644,7 +9814,8 @@
       }
     },
     "autoScore": 73.9,
-    "autoDay": "friday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Elise Mertens",
@@ -9676,7 +9847,8 @@
         "2022": "4R",
         "2023": "4R",
         "2024": "3R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2015": "Q3",
@@ -9706,7 +9878,8 @@
       }
     },
     "autoScore": 91,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Emilio Sanchez",
@@ -9783,7 +9956,8 @@
       }
     },
     "autoScore": 69.1,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Emma Navarro",
@@ -9830,7 +10004,8 @@
       }
     },
     "autoScore": 78.9,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Emma Raducanu",
@@ -9881,7 +10056,8 @@
       }
     },
     "autoScore": 82,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Ernests Gulbis",
@@ -9974,7 +10150,8 @@
       }
     },
     "autoScore": 73.6,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Eugenie Bouchard",
@@ -10035,7 +10212,8 @@
       }
     },
     "autoScore": 79.3,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Evonne Goolagong Cawley",
@@ -10121,7 +10299,8 @@
     },
     "autoScore": 120.7,
     "autoDay": "monday",
-    "manualDay": "friday"
+    "manualDay": "friday",
+    "inPool": true
   },
   {
     "name": "Fabio Fognini",
@@ -10222,7 +10401,8 @@
       "page": "Fabio Fognini"
     },
     "autoScore": 80.4,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Fabiola Zuluaga",
@@ -10274,7 +10454,8 @@
         "2005": "2R"
       }
     },
-    "autoScore": 48.1
+    "autoScore": 48.1,
+    "inPool": false
   },
   {
     "name": "Fabrice Santoro",
@@ -10378,7 +10559,8 @@
         "2010": "A"
       }
     },
-    "autoScore": 56.5
+    "autoScore": 56.5,
+    "inPool": false
   },
   {
     "name": "Feliciano López",
@@ -10491,7 +10673,8 @@
       }
     },
     "autoScore": 81.2,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Felix Auger-Aliassime",
@@ -10521,7 +10704,8 @@
         "2022": "4R",
         "2023": "1R",
         "2024": "4R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "QF"
       },
       "Wimbledon": {
         "2016": "A",
@@ -10548,8 +10732,9 @@
         "2025": "SF"
       }
     },
-    "autoScore": 83.7,
-    "autoDay": "wednesday"
+    "autoScore": 84.9,
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Fernando González",
@@ -10626,7 +10811,8 @@
       }
     },
     "autoScore": 69.2,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Fernando Verdasco",
@@ -10727,7 +10913,8 @@
       }
     },
     "autoScore": 89.4,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Filippo Volandri",
@@ -10807,7 +10994,8 @@
         "2016": "A"
       }
     },
-    "autoScore": 60.9
+    "autoScore": 60.9,
+    "inPool": false
   },
   {
     "name": "Flavia Pennetta",
@@ -10888,7 +11076,8 @@
       }
     },
     "autoScore": 80.7,
-    "autoDay": "wednesday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Flavio Cobolli",
@@ -10910,7 +11099,8 @@
         "2022": "Q2",
         "2023": "1R",
         "2024": "2R",
-        "2025": "3R"
+        "2025": "3R",
+        "2026": "F"
       },
       "Wimbledon": {
         "2020": "NH",
@@ -10933,8 +11123,9 @@
       "source": "wikipedia",
       "page": "Flavio Cobolli"
     },
-    "autoScore": 74,
-    "autoDay": "friday"
+    "autoScore": 78,
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Florian Mayer",
@@ -11023,7 +11214,8 @@
       }
     },
     "autoScore": 65.9,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Frances Tiafoe",
@@ -11057,7 +11249,8 @@
         "2022": "2R",
         "2023": "3R",
         "2024": "2R",
-        "2025": "QF"
+        "2025": "QF",
+        "2026": "4R"
       },
       "Wimbledon": {
         "2014": "A",
@@ -11088,8 +11281,9 @@
         "2025": "3R"
       }
     },
-    "autoScore": 82.7,
-    "autoDay": "wednesday"
+    "autoScore": 83.8,
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Francesca Schiavone",
@@ -11190,7 +11384,8 @@
       }
     },
     "autoScore": 91.5,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Francisco Cerundolo",
@@ -11210,7 +11405,8 @@
         "2022": "1R",
         "2023": "4R",
         "2024": "4R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "3R"
       },
       "Wimbledon": {
         "2021": "Q3",
@@ -11232,7 +11428,8 @@
       "page": "Francisco Cerúndolo"
     },
     "autoScore": 76.1,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Francisco Clavet",
@@ -11304,7 +11501,8 @@
         "2003": "A"
       }
     },
-    "autoScore": 47.3
+    "autoScore": 47.3,
+    "inPool": false
   },
   {
     "name": "Franco Squillari",
@@ -11360,7 +11558,8 @@
         "2005": "A"
       }
     },
-    "autoScore": 45.5
+    "autoScore": 45.5,
+    "inPool": false
   },
   {
     "name": "Gabriela Sabatini",
@@ -11429,7 +11628,8 @@
       }
     },
     "autoScore": 91,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Gaël Monfils",
@@ -11536,7 +11736,8 @@
       }
     },
     "autoScore": 97.5,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Garbiñe Muguruza",
@@ -11601,7 +11802,8 @@
       }
     },
     "autoScore": 104.8,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Gastón Gaudio",
@@ -11681,7 +11883,8 @@
         "2011": "A"
       }
     },
-    "autoScore": 62.3
+    "autoScore": 62.3,
+    "inPool": false
   },
   {
     "name": "Gilles Simon",
@@ -11774,7 +11977,8 @@
       }
     },
     "autoScore": 79.9,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Giovanni Mpetshi Perricard",
@@ -11821,7 +12025,8 @@
       "page": "Giovanni Mpetshi Perricard"
     },
     "autoScore": 73.9,
-    "autoDay": "friday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Goran Ivanišević",
@@ -11910,7 +12115,8 @@
       }
     },
     "autoScore": 81.6,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Goran Prpić",
@@ -11962,7 +12168,8 @@
         "1993": "1R"
       }
     },
-    "autoScore": 32.3
+    "autoScore": 32.3,
+    "inPool": false
   },
   {
     "name": "Greet Minnen",
@@ -12007,7 +12214,8 @@
       }
     },
     "autoScore": 71.5,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Greg Rusedski",
@@ -12075,7 +12283,8 @@
         "2006": "1R"
       }
     },
-    "autoScore": 59.7
+    "autoScore": 59.7,
+    "inPool": false
   },
   {
     "name": "Grigor Dimitrov",
@@ -12162,7 +12371,8 @@
       }
     },
     "autoScore": 94.3,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Guillermo Cañas",
@@ -12242,7 +12452,8 @@
         "2009": "A"
       }
     },
-    "autoScore": 58.7
+    "autoScore": 58.7,
+    "inPool": false
   },
   {
     "name": "Guillermo Coria",
@@ -12294,7 +12505,8 @@
         "2008": "A"
       }
     },
-    "autoScore": 61.7
+    "autoScore": 61.7,
+    "inPool": false
   },
   {
     "name": "Guillermo García López",
@@ -12383,7 +12595,8 @@
       }
     },
     "autoScore": 68.5,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Guillermo Vilas",
@@ -12480,7 +12693,8 @@
       }
     },
     "autoScore": 89.7,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Gustavo Kuerten",
@@ -12553,7 +12767,8 @@
       }
     },
     "autoScore": 79.7,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Hailey Baptiste",
@@ -12579,7 +12794,8 @@
         "2022": "1R",
         "2023": "A",
         "2024": "2R",
-        "2025": "4R"
+        "2025": "4R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2018": "A",
@@ -12589,7 +12805,8 @@
         "2022": "A",
         "2023": "A",
         "2024": "Q2",
-        "2025": "3R"
+        "2025": "3R",
+        "2026": "A"
       },
       "USOpen": {
         "2018": "A",
@@ -12599,11 +12816,13 @@
         "2022": "Q1",
         "2023": "Q1",
         "2024": "Q3",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "A"
       }
     },
     "autoScore": 73.9,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Hana Mandlíková",
@@ -12672,7 +12891,8 @@
       }
     },
     "autoScore": 97.5,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Harold Solomon",
@@ -12748,7 +12968,8 @@
         "1986": "A"
       }
     },
-    "autoScore": 38.3
+    "autoScore": 38.3,
+    "inPool": false
   },
   {
     "name": "Helena Sukova",
@@ -12837,7 +13058,8 @@
       }
     },
     "autoScore": 82.2,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Henri Leconte",
@@ -12921,7 +13143,8 @@
         "1996": "A"
       }
     },
-    "autoScore": 53.8
+    "autoScore": 53.8,
+    "inPool": false
   },
   {
     "name": "Holger Rune",
@@ -12960,7 +13183,8 @@
       }
     },
     "autoScore": 80.6,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Hsieh Su-wei",
@@ -13073,7 +13297,8 @@
       "page": "Hsieh Su-wei"
     },
     "autoScore": 74.7,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Hubert Hurkacz",
@@ -13099,7 +13324,8 @@
         "2022": "4R",
         "2023": "3R",
         "2024": "4R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2018": "1R",
@@ -13123,7 +13349,8 @@
       }
     },
     "autoScore": 79.9,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Hyung-taik Lee",
@@ -13195,7 +13422,8 @@
         "2009": "A"
       }
     },
-    "autoScore": 52.9
+    "autoScore": 52.9,
+    "inPool": false
   },
   {
     "name": "Iga Świątek",
@@ -13219,7 +13447,8 @@
         "2022": "W",
         "2023": "W",
         "2024": "W",
-        "2025": "SF"
+        "2025": "SF",
+        "2026": "4R"
       },
       "Wimbledon": {
         "2019": "1R",
@@ -13240,8 +13469,9 @@
         "2025": "QF"
       }
     },
-    "autoScore": 133,
-    "autoDay": "monday"
+    "autoScore": 134.1,
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Igor Andreev",
@@ -13297,7 +13527,8 @@
         "2013": "A"
       }
     },
-    "autoScore": 60.4
+    "autoScore": 60.4,
+    "inPool": false
   },
   {
     "name": "Ilie Năstase",
@@ -13393,7 +13624,8 @@
         "1985": "1R"
       }
     },
-    "autoScore": 59.7
+    "autoScore": 59.7,
+    "inPool": false
   },
   {
     "name": "Iva Majoli",
@@ -13461,7 +13693,8 @@
         "2004": "A"
       }
     },
-    "autoScore": 59.2
+    "autoScore": 59.2,
+    "inPool": false
   },
   {
     "name": "Ivan Lendl",
@@ -13546,7 +13779,8 @@
       }
     },
     "autoScore": 160.7,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Ivan Ljubičić",
@@ -13630,7 +13864,8 @@
         "2012": "A"
       }
     },
-    "autoScore": 59.5
+    "autoScore": 59.5,
+    "inPool": false
   },
   {
     "name": "Ivo Karlović",
@@ -13735,7 +13970,8 @@
       }
     },
     "autoScore": 71.9,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Jack Draper",
@@ -13790,7 +14026,8 @@
       "page": "Jack Draper"
     },
     "autoScore": 76.3,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Jack Sock",
@@ -13867,7 +14104,8 @@
       "page": "Jack Sock"
     },
     "autoScore": 69.8,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Jakob Hlasek",
@@ -13939,7 +14177,8 @@
         "1996": "4R"
       }
     },
-    "autoScore": 40.5
+    "autoScore": 40.5,
+    "inPool": false
   },
   {
     "name": "Jamie Hampton",
@@ -13971,7 +14210,8 @@
         "2013": "3R"
       }
     },
-    "autoScore": 57
+    "autoScore": 57,
+    "inPool": false
   },
   {
     "name": "Jan Kodeš",
@@ -14039,7 +14279,8 @@
         "1981": "A"
       }
     },
-    "autoScore": 57.3
+    "autoScore": 57.3,
+    "inPool": false
   },
   {
     "name": "Jan-Lennard Struff",
@@ -14079,7 +14320,8 @@
         "2022": "A",
         "2023": "1R",
         "2024": "3R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2011": "A",
@@ -14121,7 +14363,8 @@
       "page": "Jan-Lennard Struff"
     },
     "autoScore": 76.1,
-    "autoDay": "thursday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Jana Novotná",
@@ -14198,7 +14441,8 @@
       }
     },
     "autoScore": 89.7,
-    "autoDay": "tuesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Janko Tipsarevic",
@@ -14295,7 +14539,8 @@
       }
     },
     "autoScore": 71.6,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Jannik Sinner",
@@ -14342,7 +14587,8 @@
       }
     },
     "autoScore": 124.8,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Jarkko Nieminen",
@@ -14418,7 +14664,8 @@
         "2015": "1R"
       }
     },
-    "autoScore": 63.2
+    "autoScore": 63.2,
+    "inPool": false
   },
   {
     "name": "Jasmine Paolini",
@@ -14450,7 +14697,8 @@
         "2022": "1R",
         "2023": "2R",
         "2024": "F",
-        "2025": "4R"
+        "2025": "4R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2015": "A",
@@ -14480,7 +14728,8 @@
       }
     },
     "autoScore": 84.1,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Jaume Munar",
@@ -14514,7 +14763,8 @@
         "2022": "2R",
         "2023": "1R",
         "2024": "2R",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2014": "A",
@@ -14550,7 +14800,8 @@
       "page": "Jaume Munar"
     },
     "autoScore": 73.9,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Jelena Dokic",
@@ -14626,7 +14877,8 @@
       "source": "wikipedia",
       "page": "Jelena Dokic"
     },
-    "autoScore": 64.1
+    "autoScore": 64.1,
+    "inPool": false
   },
   {
     "name": "Jelena Janković",
@@ -14707,7 +14959,8 @@
       }
     },
     "autoScore": 90.4,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Jeļena Ostapenko",
@@ -14739,7 +14992,8 @@
         "2022": "2R",
         "2023": "2R",
         "2024": "2R",
-        "2025": "3R"
+        "2025": "3R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2015": "2R",
@@ -14769,7 +15023,8 @@
       }
     },
     "autoScore": 87.2,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Jennifer Brady",
@@ -14831,7 +15086,8 @@
       "page": "Jennifer Brady"
     },
     "autoScore": 76.6,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Jennifer Capriati",
@@ -14908,7 +15164,8 @@
       }
     },
     "autoScore": 101,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Jéssica Bouzas Maneiro",
@@ -14928,7 +15185,8 @@
         "2022": "A",
         "2023": "Q1",
         "2024": "1R",
-        "2025": "3R"
+        "2025": "3R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2021": "A",
@@ -14946,7 +15204,8 @@
       }
     },
     "autoScore": 73.9,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Jessica Pegula",
@@ -14986,7 +15245,8 @@
         "2022": "QF",
         "2023": "3R",
         "2024": "A",
-        "2025": "4R"
+        "2025": "4R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2011": "A",
@@ -15028,7 +15288,8 @@
       "page": "Jessica Pegula"
     },
     "autoScore": 89.2,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Jim Courier",
@@ -15101,7 +15362,8 @@
       }
     },
     "autoScore": 97.5,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Jimmy Connors",
@@ -15214,7 +15476,8 @@
       }
     },
     "autoScore": 150.8,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Jiří Novák",
@@ -15278,7 +15541,8 @@
         "2006": "4R"
       }
     },
-    "autoScore": 52.7
+    "autoScore": 52.7,
+    "inPool": false
   },
   {
     "name": "Jo-Wilfried Tsonga",
@@ -15371,7 +15635,8 @@
       }
     },
     "autoScore": 100.9,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Joachim Johansson",
@@ -15439,7 +15704,8 @@
         "2013": "A"
       }
     },
-    "autoScore": 51.8
+    "autoScore": 51.8,
+    "inPool": false
   },
   {
     "name": "Joakim Nystrom",
@@ -15495,7 +15761,8 @@
         "1989": "A"
       }
     },
-    "autoScore": 33.8
+    "autoScore": 33.8,
+    "inPool": false
   },
   {
     "name": "Johan Kriek",
@@ -15583,7 +15850,8 @@
         "1994": "A"
       }
     },
-    "autoScore": 56.3
+    "autoScore": 56.3,
+    "inPool": false
   },
   {
     "name": "Johanna Konta",
@@ -15640,7 +15908,8 @@
       }
     },
     "autoScore": 76.6,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "John Isner",
@@ -15725,7 +15994,8 @@
       }
     },
     "autoScore": 80.5,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "John McEnroe",
@@ -15806,7 +16076,8 @@
       }
     },
     "autoScore": 121.7,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "John Newcombe",
@@ -15899,7 +16170,8 @@
       }
     },
     "autoScore": 100.3,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Jose-Luis Clerc",
@@ -15971,7 +16243,8 @@
         "1990": "A"
       }
     },
-    "autoScore": 31
+    "autoScore": 31,
+    "inPool": false
   },
   {
     "name": "Juan Carlos Ferrero",
@@ -16044,7 +16317,8 @@
       }
     },
     "autoScore": 84.3,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Juan Ignacio Chela",
@@ -16112,7 +16386,8 @@
         "2012": "A"
       }
     },
-    "autoScore": 60.4
+    "autoScore": 60.4,
+    "inPool": false
   },
   {
     "name": "Juan Martín del Potro",
@@ -16189,7 +16464,8 @@
       }
     },
     "autoScore": 93.5,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Juan Mónaco",
@@ -16261,7 +16537,8 @@
         "2017": "A"
       }
     },
-    "autoScore": 64.2
+    "autoScore": 64.2,
+    "inPool": false
   },
   {
     "name": "Julia Görges",
@@ -16338,7 +16615,8 @@
       }
     },
     "autoScore": 73.1,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Jürgen Melzer",
@@ -16435,7 +16713,8 @@
       }
     },
     "autoScore": 68.3,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Justine Henin",
@@ -16504,7 +16783,8 @@
       }
     },
     "autoScore": 141,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Kaia Kanepi",
@@ -16613,7 +16893,8 @@
       }
     },
     "autoScore": 81.9,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Karel Nováček",
@@ -16681,7 +16962,8 @@
         "1996": "A"
       }
     },
-    "autoScore": 39.7
+    "autoScore": 39.7,
+    "inPool": false
   },
   {
     "name": "Karen Khachanov",
@@ -16713,7 +16995,8 @@
         "2022": "4R",
         "2023": "QF",
         "2024": "2R",
-        "2025": "3R"
+        "2025": "3R",
+        "2026": "3R"
       },
       "Wimbledon": {
         "2015": "Q1",
@@ -16743,7 +17026,8 @@
       }
     },
     "autoScore": 87.2,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Karin Knapp",
@@ -16807,7 +17091,8 @@
         "2017": "A"
       }
     },
-    "autoScore": 62.2
+    "autoScore": 62.2,
+    "inPool": false
   },
   {
     "name": "Karol Kučera",
@@ -16887,7 +17172,8 @@
         "2005": "2R"
       }
     },
-    "autoScore": 50.5
+    "autoScore": 50.5,
+    "inPool": false
   },
   {
     "name": "Karolína Muchová",
@@ -16917,7 +17203,8 @@
         "2022": "3R",
         "2023": "F",
         "2024": "A",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "3R"
       },
       "Wimbledon": {
         "2016": "A",
@@ -16945,7 +17232,8 @@
       }
     },
     "autoScore": 87.1,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Karolína Plíšková",
@@ -17028,7 +17316,8 @@
       }
     },
     "autoScore": 95.5,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Karolina Šprem",
@@ -17080,7 +17369,8 @@
         "2011": "A"
       }
     },
-    "autoScore": 55.6
+    "autoScore": 55.6,
+    "inPool": false
   },
   {
     "name": "Kateřina Siniaková",
@@ -17114,7 +17404,8 @@
         "2022": "2R",
         "2023": "1R",
         "2024": "2R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2014": "Q1",
@@ -17146,7 +17437,8 @@
       }
     },
     "autoScore": 73.9,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Kathleen Horvath",
@@ -17206,7 +17498,8 @@
         "1989": "A"
       }
     },
-    "autoScore": 27.1
+    "autoScore": 27.1,
+    "inPool": false
   },
   {
     "name": "Kathy May",
@@ -17254,7 +17547,8 @@
         "1980": "2R"
       }
     },
-    "autoScore": 18.8
+    "autoScore": 18.8,
+    "inPool": false
   },
   {
     "name": "Katie Boulter",
@@ -17288,7 +17582,8 @@
         "2022": "A",
         "2023": "Q2",
         "2024": "1R",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2014": "Q1",
@@ -17320,7 +17615,8 @@
       }
     },
     "autoScore": 72.8,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Kei Nishikori",
@@ -17413,7 +17709,8 @@
       }
     },
     "autoScore": 100.3,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Ken Rosewall",
@@ -17494,7 +17791,8 @@
       }
     },
     "autoScore": 106.2,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Kerry Melville Reid",
@@ -17574,7 +17872,8 @@
         "1979": "QF"
       }
     },
-    "autoScore": 52.1
+    "autoScore": 52.1,
+    "inPool": false
   },
   {
     "name": "Kevin Curren",
@@ -17650,7 +17949,8 @@
         "1992": "1R"
       }
     },
-    "autoScore": 43.7
+    "autoScore": 43.7,
+    "inPool": false
   },
   {
     "name": "Kiki Bertens",
@@ -17711,7 +18011,8 @@
       }
     },
     "autoScore": 72.3,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Kim Clijsters",
@@ -17792,7 +18093,8 @@
       }
     },
     "autoScore": 132.5,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Kim Warwick",
@@ -17876,7 +18178,8 @@
         "1986": "A"
       }
     },
-    "autoScore": 29.5
+    "autoScore": 29.5,
+    "inPool": false
   },
   {
     "name": "Kirsten Flipkens",
@@ -17969,7 +18272,8 @@
       }
     },
     "autoScore": 70.2,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Klara Zakopalova",
@@ -18049,7 +18353,8 @@
         "2016": "A"
       }
     },
-    "autoScore": 62
+    "autoScore": 62,
+    "inPool": false
   },
   {
     "name": "Kristina Mladenovic",
@@ -18136,7 +18441,8 @@
       }
     },
     "autoScore": 75.2,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Laura Robson",
@@ -18196,7 +18502,8 @@
         "2019": "A"
       }
     },
-    "autoScore": 63.3
+    "autoScore": 63.3,
+    "inPool": false
   },
   {
     "name": "Laura Siegemund",
@@ -18240,7 +18547,8 @@
         "2022": "Q3",
         "2023": "A",
         "2024": "1R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2009": "A",
@@ -18282,7 +18590,8 @@
       }
     },
     "autoScore": 75.2,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Learner Tien",
@@ -18300,7 +18609,8 @@
         "2022": "A",
         "2023": "A",
         "2024": "A",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "3R"
       },
       "Wimbledon": {
         "2022": "A",
@@ -18320,7 +18630,8 @@
       "page": "Learner Tien"
     },
     "autoScore": 75.1,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Lesia Tsurenko",
@@ -18401,7 +18712,8 @@
       }
     },
     "autoScore": 75.8,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Leylah Fernandez",
@@ -18427,7 +18739,8 @@
         "2022": "QF",
         "2023": "2R",
         "2024": "3R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2018": "A",
@@ -18451,7 +18764,8 @@
       }
     },
     "autoScore": 78,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Li Na",
@@ -18516,7 +18830,8 @@
       }
     },
     "autoScore": 93.6,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Linda Nosková",
@@ -18527,13 +18842,15 @@
         "2022": "A",
         "2023": "Q1",
         "2024": "QF",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "3R"
       },
       "FrenchOpen": {
         "2022": "1R",
         "2023": "2R",
         "2024": "2R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2022": "A",
@@ -18548,8 +18865,9 @@
         "2025": "3R"
       }
     },
-    "autoScore": 73.8,
-    "autoDay": "saturday"
+    "autoScore": 75.1,
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Lindsay Davenport",
@@ -18638,7 +18956,8 @@
       }
     },
     "autoScore": 129.5,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Liudmila Samsonova",
@@ -18662,7 +18981,8 @@
         "2022": "1R",
         "2023": "2R",
         "2024": "3R",
-        "2025": "4R"
+        "2025": "4R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2019": "Q3",
@@ -18684,7 +19004,8 @@
       }
     },
     "autoScore": 78.4,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Lleyton Hewitt",
@@ -18781,7 +19102,8 @@
       }
     },
     "autoScore": 112.7,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Lorenzo Musetti",
@@ -18832,7 +19154,8 @@
       "page": "Lorenzo Musetti"
     },
     "autoScore": 80.4,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Lucia Bronzetti",
@@ -18871,7 +19194,8 @@
       }
     },
     "autoScore": 72.8,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Luciano Darderi",
@@ -18893,7 +19217,8 @@
         "2022": "A",
         "2023": "Q1",
         "2024": "2R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2020": "NH",
@@ -18917,7 +19242,8 @@
       "page": "Luciano Darderi"
     },
     "autoScore": 73.9,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Lucie Šafářová",
@@ -18994,7 +19320,8 @@
       }
     },
     "autoScore": 75.7,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Mackenzie McDonald",
@@ -19068,7 +19395,8 @@
       "page": "Mackenzie McDonald"
     },
     "autoScore": 75,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Madison Keys",
@@ -19112,7 +19440,8 @@
         "2022": "4R",
         "2023": "2R",
         "2024": "3R",
-        "2025": "QF"
+        "2025": "QF",
+        "2026": "4R"
       },
       "Wimbledon": {
         "2009": "A",
@@ -19153,8 +19482,9 @@
         "2025": "1R"
       }
     },
-    "autoScore": 109.4,
-    "autoDay": "monday"
+    "autoScore": 110.5,
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Magda Linette",
@@ -19194,7 +19524,8 @@
         "2022": "2R",
         "2023": "1R",
         "2024": "1R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "3R"
       },
       "Wimbledon": {
         "2011": "Q1",
@@ -19232,7 +19563,8 @@
       }
     },
     "autoScore": 74.3,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Magdalena Fręch",
@@ -19266,7 +19598,8 @@
         "2022": "1R",
         "2023": "2R",
         "2024": "1R",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2014": "A",
@@ -19298,7 +19631,8 @@
       }
     },
     "autoScore": 73.9,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Magdalena Maleeva",
@@ -19382,7 +19716,8 @@
         "2005": "2R"
       }
     },
-    "autoScore": 62.1
+    "autoScore": 62.1,
+    "inPool": false
   },
   {
     "name": "Magdaléna Rybáriková",
@@ -19451,7 +19786,8 @@
       }
     },
     "autoScore": 66.3,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Magnus Gustafsson",
@@ -19535,7 +19871,8 @@
         "2001": "1R"
       }
     },
-    "autoScore": 45.9
+    "autoScore": 45.9,
+    "inPool": false
   },
   {
     "name": "Magnus Larsson",
@@ -19611,7 +19948,8 @@
         "2003": "A"
       }
     },
-    "autoScore": 51.3
+    "autoScore": 51.3,
+    "inPool": false
   },
   {
     "name": "Magnus Norman",
@@ -19675,7 +20013,8 @@
         "2003": "1R"
       }
     },
-    "autoScore": 52.9
+    "autoScore": 52.9,
+    "inPool": false
   },
   {
     "name": "Mal Anderson",
@@ -19787,7 +20126,8 @@
         "1977": "A"
       }
     },
-    "autoScore": 33
+    "autoScore": 33,
+    "inPool": false
   },
   {
     "name": "MaliVai Washington",
@@ -19851,7 +20191,8 @@
         "1999": "A"
       }
     },
-    "autoScore": 47.1
+    "autoScore": 47.1,
+    "inPool": false
   },
   {
     "name": "Manuel Orantes",
@@ -19931,7 +20272,8 @@
         "1983": "A"
       }
     },
-    "autoScore": 42.5
+    "autoScore": 42.5,
+    "inPool": false
   },
   {
     "name": "Marat Safin",
@@ -20000,7 +20342,8 @@
       }
     },
     "autoScore": 87.3,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Marc Rosset",
@@ -20088,7 +20431,8 @@
         "2005": "A"
       }
     },
-    "autoScore": 50
+    "autoScore": 50,
+    "inPool": false
   },
   {
     "name": "Marcel Granollers",
@@ -20161,7 +20505,8 @@
       }
     },
     "autoScore": 68.1,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Marcelo Ríos",
@@ -20225,7 +20570,8 @@
         "2004": "A"
       }
     },
-    "autoScore": 57.3
+    "autoScore": 57.3,
+    "inPool": false
   },
   {
     "name": "Marcos Baghdatis",
@@ -20310,7 +20656,8 @@
       }
     },
     "autoScore": 75.9,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Mardy Fish",
@@ -20391,7 +20738,8 @@
       }
     },
     "autoScore": 66.5,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Margaret Court",
@@ -20476,7 +20824,8 @@
       }
     },
     "autoScore": 214.5,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Maria Kirilenko",
@@ -20545,7 +20894,8 @@
       }
     },
     "autoScore": 66.3,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Maria Sakkari",
@@ -20577,7 +20927,8 @@
         "2022": "2R",
         "2023": "1R",
         "2024": "1R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "3R"
       },
       "Wimbledon": {
         "2015": "A",
@@ -20607,7 +20958,8 @@
       }
     },
     "autoScore": 79.1,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Maria Sharapova",
@@ -20696,7 +21048,8 @@
       }
     },
     "autoScore": 157.5,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Mariano Zabaleta",
@@ -20768,7 +21121,8 @@
         "2009": "A"
       }
     },
-    "autoScore": 54.1
+    "autoScore": 54.1,
+    "inPool": false
   },
   {
     "name": "Marie Bouzková",
@@ -20800,7 +21154,8 @@
         "2022": "2R",
         "2023": "1R",
         "2024": "3R",
-        "2025": "3R"
+        "2025": "3R",
+        "2026": "3R"
       },
       "Wimbledon": {
         "2015": "A",
@@ -20830,7 +21185,8 @@
       }
     },
     "autoScore": 75.1,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Marin Čilić",
@@ -20929,7 +21285,8 @@
       }
     },
     "autoScore": 117.3,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Marina Erakovic",
@@ -20997,7 +21354,8 @@
         "2017": "Q1"
       }
     },
-    "autoScore": 61.1
+    "autoScore": 61.1,
+    "inPool": false
   },
   {
     "name": "Mario Ančić",
@@ -21049,7 +21407,8 @@
         "2010": "A"
       }
     },
-    "autoScore": 59.1
+    "autoScore": 59.1,
+    "inPool": false
   },
   {
     "name": "Marion Bartoli",
@@ -21122,7 +21481,8 @@
       }
     },
     "autoScore": 76.4,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Mark Edmondson",
@@ -21190,7 +21550,8 @@
         "1987": "A"
       }
     },
-    "autoScore": 33.2
+    "autoScore": 33.2,
+    "inPool": false
   },
   {
     "name": "Mark Philippoussis",
@@ -21263,7 +21624,8 @@
       }
     },
     "autoScore": 68.3,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Markéta Vondroušová",
@@ -21316,7 +21678,8 @@
       }
     },
     "autoScore": 89.4,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Marta Kostyuk",
@@ -21342,7 +21705,8 @@
         "2022": "1R",
         "2023": "1R",
         "2024": "2R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "SF"
       },
       "Wimbledon": {
         "2018": "Q3",
@@ -21365,8 +21729,9 @@
         "2025": "4R"
       }
     },
-    "autoScore": 76.2,
-    "autoDay": "thursday"
+    "autoScore": 77.7,
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Martin Verkerk",
@@ -21406,7 +21771,8 @@
         "2007": "A"
       }
     },
-    "autoScore": 52.1
+    "autoScore": 52.1,
+    "inPool": false
   },
   {
     "name": "Martina Hingis",
@@ -21479,7 +21845,8 @@
       }
     },
     "autoScore": 130.9,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Martina Trevisan",
@@ -21537,7 +21904,8 @@
       }
     },
     "autoScore": 74.2,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Mary Pierce",
@@ -21622,7 +21990,8 @@
       }
     },
     "autoScore": 104,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Mats Wilander",
@@ -21707,7 +22076,8 @@
       }
     },
     "autoScore": 117.1,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Matteo Berrettini",
@@ -21735,7 +22105,8 @@
         "2022": "A",
         "2023": "A",
         "2024": "A",
-        "2025": "A"
+        "2025": "A",
+        "2026": "QF"
       },
       "Wimbledon": {
         "2017": "A",
@@ -21764,8 +22135,9 @@
       "source": "wikipedia",
       "page": "Matteo Berrettini"
     },
-    "autoScore": 86.5,
-    "autoDay": "wednesday"
+    "autoScore": 89,
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Mayar Sherif",
@@ -21814,7 +22186,8 @@
       }
     },
     "autoScore": 70.2,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Michael Berrer",
@@ -21890,7 +22263,8 @@
         "2016": "Q2"
       }
     },
-    "autoScore": 59.8
+    "autoScore": 59.8,
+    "inPool": false
   },
   {
     "name": "Michael Chang",
@@ -21975,7 +22349,8 @@
       }
     },
     "autoScore": 81.6,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Michaël Llodra",
@@ -22051,7 +22426,8 @@
         "2014": "2R"
       }
     },
-    "autoScore": 61.6
+    "autoScore": 61.6,
+    "inPool": false
   },
   {
     "name": "Michael Stich",
@@ -22107,7 +22483,8 @@
         "1997": "A"
       }
     },
-    "autoScore": 63.8
+    "autoScore": 63.8,
+    "inPool": false
   },
   {
     "name": "Mihaela Buzarnescu",
@@ -22166,7 +22543,8 @@
       }
     },
     "autoScore": 72.6,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Mikael Pernfors",
@@ -22226,7 +22604,8 @@
         "1994": "A"
       }
     },
-    "autoScore": 39.7
+    "autoScore": 39.7,
+    "inPool": false
   },
   {
     "name": "Mikael Tillstrom",
@@ -22278,7 +22657,8 @@
         "2000": "1R"
       }
     },
-    "autoScore": 41.3
+    "autoScore": 41.3,
+    "inPool": false
   },
   {
     "name": "Mikhail Youzhny",
@@ -22371,7 +22751,8 @@
       }
     },
     "autoScore": 81.2,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Milos Raonic",
@@ -22448,7 +22829,8 @@
       }
     },
     "autoScore": 96.6,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Miloslav Mečíř",
@@ -22496,7 +22878,8 @@
         "1990": "A"
       }
     },
-    "autoScore": 41.7
+    "autoScore": 41.7,
+    "inPool": false
   },
   {
     "name": "Mima Jaušovec",
@@ -22572,7 +22955,8 @@
         "1988": "A"
       }
     },
-    "autoScore": 49.4
+    "autoScore": 49.4,
+    "inPool": false
   },
   {
     "name": "Miomir Kecmanovic",
@@ -22602,7 +22986,8 @@
         "2022": "3R",
         "2023": "1R",
         "2024": "2R",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2016": "A",
@@ -22634,7 +23019,8 @@
       "page": "Miomir Kecmanović"
     },
     "autoScore": 75,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Mirra Andreeva",
@@ -22650,7 +23036,8 @@
       "FrenchOpen": {
         "2023": "3R",
         "2024": "SF",
-        "2025": "QF"
+        "2025": "QF",
+        "2026": "W"
       },
       "Wimbledon": {
         "2023": "4R",
@@ -22663,8 +23050,9 @@
         "2025": "3R"
       }
     },
-    "autoScore": 81.1,
-    "autoDay": "wednesday"
+    "autoScore": 88.1,
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Mona Barthel",
@@ -22747,7 +23135,8 @@
       }
     },
     "autoScore": 73.9,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Monica Puig",
@@ -22804,7 +23193,8 @@
       }
     },
     "autoScore": 66.1,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Monica Seles",
@@ -22889,7 +23279,8 @@
       "page": "Monica Seles"
     },
     "autoScore": 148.3,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Nadia Petrova",
@@ -22982,7 +23373,8 @@
       }
     },
     "autoScore": 80.5,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Nancy Richey",
@@ -23078,7 +23470,8 @@
         "1978": "1R"
       }
     },
-    "autoScore": 63.9
+    "autoScore": 63.9,
+    "inPool": false
   },
   {
     "name": "Naomi Osaka",
@@ -23110,7 +23503,8 @@
         "2022": "1R",
         "2023": "A",
         "2024": "2R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "4R"
       },
       "Wimbledon": {
         "2015": "Q1",
@@ -23139,9 +23533,10 @@
         "2025": "SF"
       }
     },
-    "autoScore": 104.5,
+    "autoScore": 105.6,
     "autoDay": "tuesday",
-    "manualDay": "monday"
+    "manualDay": "monday",
+    "inPool": true
   },
   {
     "name": "Nathalie Dechy",
@@ -23221,7 +23616,8 @@
         "2009": "A"
       }
     },
-    "autoScore": 57.7
+    "autoScore": 57.7,
+    "inPool": false
   },
   {
     "name": "Nick Kyrgios",
@@ -23259,7 +23655,8 @@
         "2022": "A",
         "2023": "A",
         "2024": "A",
-        "2025": "A"
+        "2025": "A",
+        "2026": "A"
       },
       "Wimbledon": {
         "2012": "A",
@@ -23295,7 +23692,8 @@
       }
     },
     "autoScore": 83.5,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Nicolás Almagro",
@@ -23380,7 +23778,8 @@
       }
     },
     "autoScore": 71.4,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Nicolas Jarry",
@@ -23454,7 +23853,8 @@
       "page": "Nicolas Jarry"
     },
     "autoScore": 75,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Nicolas Kiefer",
@@ -23534,7 +23934,8 @@
         "2010": "A"
       }
     },
-    "autoScore": 62.7
+    "autoScore": 62.7,
+    "inPool": false
   },
   {
     "name": "Nicolás Lapentti",
@@ -23622,7 +24023,8 @@
         "2010": "A"
       }
     },
-    "autoScore": 56.9
+    "autoScore": 56.9,
+    "inPool": false
   },
   {
     "name": "Nicolas Mahut",
@@ -23723,7 +24125,8 @@
       }
     },
     "autoScore": 66.1,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Nicolás Massú",
@@ -23811,7 +24214,8 @@
         "2013": "A"
       }
     },
-    "autoScore": 54.4
+    "autoScore": 54.4,
+    "inPool": false
   },
   {
     "name": "Nikola Pilić",
@@ -23903,7 +24307,8 @@
         "1978": "A"
       }
     },
-    "autoScore": 24.8
+    "autoScore": 24.8,
+    "inPool": false
   },
   {
     "name": "Nikolay Davydenko",
@@ -23980,7 +24385,8 @@
       }
     },
     "autoScore": 74.8,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Novak Djokovic",
@@ -24032,7 +24438,8 @@
         "2022": "QF",
         "2023": "W",
         "2024": "QF",
-        "2025": "SF"
+        "2025": "SF",
+        "2026": "3R"
       },
       "Wimbledon": {
         "2005": "3R",
@@ -24082,7 +24489,8 @@
       }
     },
     "autoScore": 339.5,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Olga Danilovic",
@@ -24135,7 +24543,8 @@
       "page": "Olga Danilović"
     },
     "autoScore": 73.7,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Olga Morozova",
@@ -24195,7 +24604,8 @@
         "1976": "3R"
       }
     },
-    "autoScore": 27.9
+    "autoScore": 27.9,
+    "inPool": false
   },
   {
     "name": "Olivier Rochus",
@@ -24271,7 +24681,8 @@
         "2014": "A"
       }
     },
-    "autoScore": 59.2
+    "autoScore": 59.2,
+    "inPool": false
   },
   {
     "name": "Onny Parun",
@@ -24355,7 +24766,8 @@
         "1982": "A"
       }
     },
-    "autoScore": 27.7
+    "autoScore": 27.7,
+    "inPool": false
   },
   {
     "name": "Ons Jabeur",
@@ -24428,7 +24840,8 @@
       }
     },
     "autoScore": 91.6,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Pablo Carreño Busta",
@@ -24464,7 +24877,8 @@
         "2022": "1R",
         "2023": "A",
         "2024": "1R",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "4R"
       },
       "Wimbledon": {
         "2013": "A",
@@ -24497,8 +24911,9 @@
         "2025": "2R"
       }
     },
-    "autoScore": 83.7,
-    "autoDay": "wednesday"
+    "autoScore": 84.8,
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Paradorn Srichaphan",
@@ -24554,7 +24969,8 @@
         "2007": "A"
       }
     },
-    "autoScore": 51.4
+    "autoScore": 51.4,
+    "inPool": false
   },
   {
     "name": "Pat Cash",
@@ -24638,7 +25054,8 @@
         "1997": "A"
       }
     },
-    "autoScore": 63.4
+    "autoScore": 63.4,
+    "inPool": false
   },
   {
     "name": "Patrick Rafter",
@@ -24703,7 +25120,8 @@
       }
     },
     "autoScore": 73.4,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Patrik Kühnen",
@@ -24763,7 +25181,8 @@
         "1996": "A"
       }
     },
-    "autoScore": 35
+    "autoScore": 35,
+    "inPool": false
   },
   {
     "name": "Patty Schnyder",
@@ -24852,7 +25271,8 @@
       }
     },
     "autoScore": 86.5,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Paul-Henri Mathieu",
@@ -24945,7 +25365,8 @@
       }
     },
     "autoScore": 67.7,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Paula Badosa",
@@ -25000,7 +25421,8 @@
       }
     },
     "autoScore": 82.2,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Pauline Parmentier",
@@ -25085,7 +25507,8 @@
       }
     },
     "autoScore": 64.8,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Pete Sampras",
@@ -25162,7 +25585,8 @@
       }
     },
     "autoScore": 178,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Petr Korda",
@@ -25242,7 +25666,8 @@
         "2000": "A"
       }
     },
-    "autoScore": 57.9
+    "autoScore": 57.9,
+    "inPool": false
   },
   {
     "name": "Petra Kvitová",
@@ -25335,7 +25760,8 @@
       }
     },
     "autoScore": 113.7,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Petra Martić",
@@ -25428,7 +25854,8 @@
       }
     },
     "autoScore": 81.5,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Peyton Stearns",
@@ -25448,7 +25875,8 @@
         "2022": "A",
         "2023": "3R",
         "2024": "3R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "3R"
       },
       "Wimbledon": {
         "2021": "A",
@@ -25466,7 +25894,8 @@
       }
     },
     "autoScore": 73.9,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Phil Dent",
@@ -25550,7 +25979,8 @@
         "1983": "A"
       }
     },
-    "autoScore": 31.6
+    "autoScore": 31.6,
+    "inPool": false
   },
   {
     "name": "Philipp Kohlschreiber",
@@ -25655,7 +26085,8 @@
       }
     },
     "autoScore": 79.8,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Potito Starace",
@@ -25719,7 +26150,8 @@
         "2015": "A"
       }
     },
-    "autoScore": 58.5
+    "autoScore": 58.5,
+    "inPool": false
   },
   {
     "name": "Radek Štěpánek",
@@ -25820,7 +26252,8 @@
       }
     },
     "autoScore": 65.6,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Rafael Nadal",
@@ -25925,7 +26358,8 @@
       }
     },
     "autoScore": 286.7,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Rainer Schüttler",
@@ -26013,7 +26447,8 @@
         "2012": "A"
       }
     },
-    "autoScore": 64.5
+    "autoScore": 64.5,
+    "inPool": false
   },
   {
     "name": "Ramesh Krishnan",
@@ -26093,7 +26528,8 @@
         "1993": "Q3"
       }
     },
-    "autoScore": 33.5
+    "autoScore": 33.5,
+    "inPool": false
   },
   {
     "name": "Rebeka Masarova",
@@ -26139,7 +26575,8 @@
       }
     },
     "autoScore": 72.8,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Reilly Opelka",
@@ -26171,7 +26608,8 @@
         "2022": "1R",
         "2023": "A",
         "2024": "A",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2015": "A",
@@ -26205,7 +26643,8 @@
       "page": "Reilly Opelka"
     },
     "autoScore": 73.9,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Richard Fromberg",
@@ -26285,7 +26724,8 @@
         "2002": "A"
       }
     },
-    "autoScore": 43.8
+    "autoScore": 43.8,
+    "inPool": false
   },
   {
     "name": "Richard Gasquet",
@@ -26398,7 +26838,8 @@
       }
     },
     "autoScore": 97.1,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Richard Krajicek",
@@ -26458,7 +26899,8 @@
       },
       "USOpen": {}
     },
-    "autoScore": 60.1
+    "autoScore": 60.1,
+    "inPool": false
   },
   {
     "name": "Robby Ginepri",
@@ -26534,7 +26976,8 @@
         "2015": "A"
       }
     },
-    "autoScore": 64.4
+    "autoScore": 64.4,
+    "inPool": false
   },
   {
     "name": "Roberto Bautista Agut",
@@ -26578,7 +27021,8 @@
         "2022": "A",
         "2023": "2R",
         "2024": "1R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2009": "A",
@@ -26624,7 +27068,8 @@
       "page": "Roberto Bautista Agut"
     },
     "autoScore": 88.7,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Robin Söderling",
@@ -26681,7 +27126,8 @@
       }
     },
     "autoScore": 68.3,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Roger Federer",
@@ -26790,7 +27236,8 @@
       }
     },
     "autoScore": 299.3,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Roman Safiullin",
@@ -26811,7 +27258,8 @@
         "2022": "Q1",
         "2023": "A",
         "2024": "1R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2020": "NH",
@@ -26834,8 +27282,9 @@
       "source": "wikipedia",
       "page": "Roman Safiullin"
     },
-    "autoScore": 72.7,
-    "autoDay": "saturday"
+    "autoScore": 74,
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Roscoe Tanner",
@@ -26898,7 +27347,8 @@
         "1984": "1R"
       }
     },
-    "autoScore": 41.9
+    "autoScore": 41.9,
+    "inPool": false
   },
   {
     "name": "Sabine Lisicki",
@@ -26979,7 +27429,8 @@
       }
     },
     "autoScore": 76.1,
-    "autoDay": "thursday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Sam Querrey",
@@ -27068,7 +27519,8 @@
       }
     },
     "autoScore": 76,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Samantha Stosur",
@@ -27169,7 +27621,8 @@
       }
     },
     "autoScore": 91,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Sara Errani",
@@ -27270,7 +27723,8 @@
       "page": "Sara Errani"
     },
     "autoScore": 83.3,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Sara Sorribes Tormo",
@@ -27341,7 +27795,8 @@
       }
     },
     "autoScore": 72.6,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Sebastian Korda",
@@ -27395,7 +27850,8 @@
       "page": "Sebastian Korda"
     },
     "autoScore": 76.2,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Sébastien Grosjean",
@@ -27468,7 +27924,8 @@
       }
     },
     "autoScore": 66.2,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Serena Williams",
@@ -27500,7 +27957,8 @@
         "2019": "QF",
         "2020": "3R",
         "2021": "SF",
-        "2022": "A"
+        "2022": "A",
+        "2026": "A"
       },
       "FrenchOpen": {
         "1998": "4R",
@@ -27527,7 +27985,8 @@
         "2019": "3R",
         "2020": "2R",
         "2021": "4R",
-        "2022": "A"
+        "2022": "A",
+        "2026": "A"
       },
       "Wimbledon": {
         "1998": "3R",
@@ -27585,7 +28044,8 @@
       }
     },
     "autoScore": 306.9,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Sergi Bruguera",
@@ -27662,7 +28122,8 @@
       }
     },
     "autoScore": 65.3,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Sergio Casal",
@@ -27742,7 +28203,8 @@
         "1997": "A"
       }
     },
-    "autoScore": 60.7
+    "autoScore": 60.7,
+    "inPool": false
   },
   {
     "name": "Shuai Peng",
@@ -27831,7 +28293,8 @@
       }
     },
     "autoScore": 73.1,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Simona Halep",
@@ -27912,7 +28375,8 @@
       }
     },
     "autoScore": 114.6,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Sjeng Schalken",
@@ -27976,7 +28440,8 @@
         "2005": "A"
       }
     },
-    "autoScore": 52.9
+    "autoScore": 52.9,
+    "inPool": false
   },
   {
     "name": "Sloane Stephens",
@@ -28066,7 +28531,8 @@
       }
     },
     "autoScore": 100,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Slobodan Živojinović",
@@ -28122,7 +28588,8 @@
         "1991": "A"
       }
     },
-    "autoScore": 33.7
+    "autoScore": 33.7,
+    "inPool": false
   },
   {
     "name": "Sofia Kenin",
@@ -28154,7 +28621,8 @@
         "2022": "A",
         "2023": "Q1",
         "2024": "3R",
-        "2025": "3R"
+        "2025": "3R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2015": "A",
@@ -28184,7 +28652,8 @@
       }
     },
     "autoScore": 87.1,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Sorana Cîrstea",
@@ -28232,7 +28701,8 @@
         "2022": "2R",
         "2023": "1R",
         "2024": "1R",
-        "2025": "A"
+        "2025": "A",
+        "2026": "QF"
       },
       "Wimbledon": {
         "2007": "Q2",
@@ -28278,7 +28748,8 @@
       }
     },
     "autoScore": 78.5,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Stan Wawrinka",
@@ -28385,7 +28856,8 @@
       }
     },
     "autoScore": 127.1,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Stefan Edberg",
@@ -28458,7 +28930,8 @@
       }
     },
     "autoScore": 123.9,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Stefan Koubek",
@@ -28538,7 +29011,8 @@
         "2011": "A"
       }
     },
-    "autoScore": 55.6
+    "autoScore": 55.6,
+    "inPool": false
   },
   {
     "name": "Stefanos Tsitsipas",
@@ -28566,7 +29040,8 @@
         "2022": "4R",
         "2023": "QF",
         "2024": "QF",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2017": "1R",
@@ -28592,7 +29067,8 @@
       }
     },
     "autoScore": 94.7,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Steffi Graf",
@@ -28677,7 +29153,8 @@
       }
     },
     "autoScore": 248.2,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Su-Wei Hsieh",
@@ -28786,7 +29263,8 @@
       }
     },
     "autoScore": 74.7,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Sue Barker",
@@ -28850,7 +29328,8 @@
         "1984": "1R"
       }
     },
-    "autoScore": 32.8
+    "autoScore": 32.8,
+    "inPool": false
   },
   {
     "name": "Svetlana Kuznetsova",
@@ -28947,7 +29426,8 @@
       }
     },
     "autoScore": 120.6,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Sylvia Hanika",
@@ -29019,7 +29499,8 @@
         "1990": "2R"
       }
     },
-    "autoScore": 45.9
+    "autoScore": 45.9,
+    "inPool": false
   },
   {
     "name": "Tallon Griekspoor",
@@ -29047,7 +29528,8 @@
         "2022": "2R",
         "2023": "2R",
         "2024": "3R",
-        "2025": "4R"
+        "2025": "4R",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2017": "A",
@@ -29077,7 +29559,8 @@
       "page": "Tallon Griekspoor"
     },
     "autoScore": 73.9,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Tamarine Tanasugarn",
@@ -29186,7 +29669,8 @@
       }
     },
     "autoScore": 65.9,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Tatiana Golovin",
@@ -29230,7 +29714,8 @@
         "2008": "A"
       }
     },
-    "autoScore": 52.8
+    "autoScore": 52.8,
+    "inPool": false
   },
   {
     "name": "Tatjana Maria",
@@ -29333,7 +29818,8 @@
       }
     },
     "autoScore": 74.3,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Taylor Dent",
@@ -29409,7 +29895,8 @@
       "source": "wikipedia",
       "page": "Taylor Dent"
     },
-    "autoScore": 54.2
+    "autoScore": 54.2,
+    "inPool": false
   },
   {
     "name": "Taylor Fritz",
@@ -29476,7 +29963,8 @@
       }
     },
     "autoScore": 87.6,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Thomas Enqvist",
@@ -29542,7 +30030,8 @@
       },
       "USOpen": {}
     },
-    "autoScore": 55.2
+    "autoScore": 55.2,
+    "inPool": false
   },
   {
     "name": "Thomas Johansson",
@@ -29627,7 +30116,8 @@
       }
     },
     "autoScore": 65.8,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Thomas Muster",
@@ -29715,7 +30205,8 @@
         "2011": "A"
       }
     },
-    "autoScore": 60.7
+    "autoScore": 60.7,
+    "inPool": false
   },
   {
     "name": "Thomaz Bellucci",
@@ -29800,7 +30291,8 @@
       }
     },
     "autoScore": 64.8,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Tim Henman",
@@ -29881,7 +30373,8 @@
       }
     },
     "autoScore": 68.5,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Tim Mayotte",
@@ -29957,7 +30450,8 @@
         "1992": "A"
       }
     },
-    "autoScore": 45.3
+    "autoScore": 45.3,
+    "inPool": false
   },
   {
     "name": "Timea Babos",
@@ -30030,7 +30524,8 @@
       }
     },
     "autoScore": 70.2,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Todd Martin",
@@ -30107,7 +30602,8 @@
       }
     },
     "autoScore": 70.7,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Tomáš Berdych",
@@ -30193,7 +30689,8 @@
     },
     "autoScore": 106.3,
     "autoDay": "monday",
-    "manualDay": "tuesday"
+    "manualDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Tommy Haas",
@@ -30298,7 +30795,8 @@
       }
     },
     "autoScore": 80.7,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Tommy Robredo",
@@ -30407,7 +30905,8 @@
       }
     },
     "autoScore": 92.3,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Tony Roche",
@@ -30491,7 +30990,8 @@
         "1979": "A"
       }
     },
-    "autoScore": 61
+    "autoScore": 61,
+    "inPool": false
   },
   {
     "name": "Tracy Austin",
@@ -30539,7 +31039,8 @@
         "1994": "A"
       }
     },
-    "autoScore": 60.4
+    "autoScore": 60.4,
+    "inPool": false
   },
   {
     "name": "Ugo Humbert",
@@ -30569,7 +31070,8 @@
         "2022": "1R",
         "2023": "2R",
         "2024": "1R",
-        "2025": "2R"
+        "2025": "2R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2016": "A",
@@ -30601,7 +31103,8 @@
       "page": "Ugo Humbert"
     },
     "autoScore": 76.1,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Urszula Radwańska",
@@ -30675,7 +31178,8 @@
       }
     },
     "autoScore": 67.6,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Varvara Gracheva",
@@ -30720,7 +31224,8 @@
       }
     },
     "autoScore": 72.6,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Venus Williams",
@@ -30854,7 +31359,8 @@
       }
     },
     "autoScore": 199.6,
-    "autoDay": "monday"
+    "autoDay": "monday",
+    "inPool": true
   },
   {
     "name": "Vera Zvonareva",
@@ -30959,7 +31465,8 @@
       }
     },
     "autoScore": 93.3,
-    "autoDay": "tuesday"
+    "autoDay": "tuesday",
+    "inPool": true
   },
   {
     "name": "Veronika Kudermetova",
@@ -31012,7 +31519,8 @@
       }
     },
     "autoScore": 74.9,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Vic Seixas",
@@ -31148,7 +31656,8 @@
         "1969": "1R"
       }
     },
-    "autoScore": 54.3
+    "autoScore": 54.3,
+    "inPool": false
   },
   {
     "name": "Víctor Pecci",
@@ -31216,7 +31725,8 @@
         "1986": "A"
       }
     },
-    "autoScore": 27.4
+    "autoScore": 27.4,
+    "inPool": false
   },
   {
     "name": "Victoria Mboko",
@@ -31234,7 +31744,8 @@
         "2022": "A",
         "2023": "A",
         "2024": "A",
-        "2025": "3R"
+        "2025": "3R",
+        "2026": "3R"
       },
       "Wimbledon": {
         "2022": "A",
@@ -31250,7 +31761,8 @@
       }
     },
     "autoScore": 73.9,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Vijay Amritraj",
@@ -31342,7 +31854,8 @@
         "1990": "A"
       }
     },
-    "autoScore": 31.9
+    "autoScore": 31.9,
+    "inPool": false
   },
   {
     "name": "Viktor Troicki",
@@ -31423,7 +31936,8 @@
       }
     },
     "autoScore": 71.8,
-    "autoDay": "saturday"
+    "autoDay": "saturday",
+    "inPool": true
   },
   {
     "name": "Viktoria Hruncakova",
@@ -31476,7 +31990,8 @@
       }
     },
     "autoScore": 71.5,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Virginia Ruzici",
@@ -31552,7 +32067,8 @@
         "1987": "A"
       }
     },
-    "autoScore": 51.9
+    "autoScore": 51.9,
+    "inPool": false
   },
   {
     "name": "Vitas Gerulaitis",
@@ -31632,7 +32148,8 @@
         "1986": "A"
       }
     },
-    "autoScore": 52.2
+    "autoScore": 52.2,
+    "inPool": false
   },
   {
     "name": "Wally Masur",
@@ -31712,7 +32229,8 @@
         "1995": "A"
       }
     },
-    "autoScore": 44.4
+    "autoScore": 44.4,
+    "inPool": false
   },
   {
     "name": "Wang Xinyu",
@@ -31738,7 +32256,8 @@
         "2022": "1R",
         "2023": "3R",
         "2024": "3R",
-        "2025": "1R"
+        "2025": "1R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2018": "A",
@@ -31762,7 +32281,8 @@
       }
     },
     "autoScore": 76.1,
-    "autoDay": "friday"
+    "autoDay": "friday",
+    "inPool": true
   },
   {
     "name": "Wayne Ferreira",
@@ -31847,7 +32367,8 @@
       }
     },
     "autoScore": 67.3,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Wojciech Fibak",
@@ -31919,7 +32440,8 @@
         "1987": "2R"
       }
     },
-    "autoScore": 41.5
+    "autoScore": 41.5,
+    "inPool": false
   },
   {
     "name": "Xavier Malisse",
@@ -32000,7 +32522,8 @@
       }
     },
     "autoScore": 66.2,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Yannick Noah",
@@ -32072,7 +32595,8 @@
         "1990": "2R"
       }
     },
-    "autoScore": 54
+    "autoScore": 54,
+    "inPool": false
   },
   {
     "name": "Yen-Hsun Lu",
@@ -32173,7 +32697,8 @@
       }
     },
     "autoScore": 67.5,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   },
   {
     "name": "Yevgeny Kafelnikov",
@@ -32238,7 +32763,8 @@
       }
     },
     "autoScore": 77.1,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Younes El Aynaoui",
@@ -32314,7 +32840,8 @@
         "2007": "A"
       }
     },
-    "autoScore": 55.1
+    "autoScore": 55.1,
+    "inPool": false
   },
   {
     "name": "Yulia Putintseva",
@@ -32352,7 +32879,8 @@
         "2022": "2R",
         "2023": "3R",
         "2024": "2R",
-        "2025": "3R"
+        "2025": "3R",
+        "2026": "2R"
       },
       "Wimbledon": {
         "2012": "A",
@@ -32388,7 +32916,8 @@
       }
     },
     "autoScore": 78.6,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Zhang Shuai",
@@ -32436,7 +32965,8 @@
         "2022": "1R",
         "2023": "1R",
         "2024": "A",
-        "2025": "Q2"
+        "2025": "Q2",
+        "2026": "1R"
       },
       "Wimbledon": {
         "2007": "A",
@@ -32482,7 +33012,8 @@
       }
     },
     "autoScore": 78.5,
-    "autoDay": "thursday"
+    "autoDay": "thursday",
+    "inPool": true
   },
   {
     "name": "Zheng Qinwen",
@@ -32517,7 +33048,8 @@
       }
     },
     "autoScore": 81.5,
-    "autoDay": "wednesday"
+    "autoDay": "wednesday",
+    "inPool": true
   },
   {
     "name": "Zheng Saisai",
@@ -32586,6 +33118,7 @@
       }
     },
     "autoScore": 71.5,
-    "autoDay": "sunday"
+    "autoDay": "sunday",
+    "inPool": true
   }
 ]
