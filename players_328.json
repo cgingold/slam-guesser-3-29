@@ -888,7 +888,7 @@
       "page": "Alex Michelsen"
     },
     "autoScore": 73.9,
-    "autoDay": "friday",
+    "autoDay": "saturday",
     "inPool": true
   },
   {
@@ -2227,7 +2227,7 @@
       }
     },
     "autoScore": 76.1,
-    "autoDay": "thursday",
+    "autoDay": "friday",
     "inPool": true
   },
   {
@@ -3600,7 +3600,7 @@
       }
     },
     "autoScore": 71.5,
-    "autoDay": "saturday",
+    "autoDay": "sunday",
     "inPool": true
   },
   {
@@ -6351,7 +6351,7 @@
       }
     },
     "autoScore": 71.5,
-    "autoDay": "saturday",
+    "autoDay": "sunday",
     "inPool": true
   },
   {
@@ -6433,7 +6433,7 @@
       }
     },
     "autoScore": 80.8,
-    "autoDay": "wednesday",
+    "autoDay": "thursday",
     "inPool": true
   },
   {
@@ -8611,7 +8611,7 @@
       }
     },
     "autoScore": 80.9,
-    "autoDay": "wednesday",
+    "autoDay": "thursday",
     "inPool": true
   },
   {
@@ -11428,7 +11428,7 @@
       "page": "Francisco Cerúndolo"
     },
     "autoScore": 76.1,
-    "autoDay": "thursday",
+    "autoDay": "friday",
     "inPool": true
   },
   {
@@ -12693,7 +12693,7 @@
       }
     },
     "autoScore": 89.7,
-    "autoDay": "tuesday",
+    "autoDay": "wednesday",
     "inPool": true
   },
   {
@@ -25507,8 +25507,7 @@
       }
     },
     "autoScore": 64.8,
-    "autoDay": "sunday",
-    "inPool": true
+    "inPool": false
   },
   {
     "name": "Pete Sampras",
@@ -27283,7 +27282,7 @@
       "page": "Roman Safiullin"
     },
     "autoScore": 74,
-    "autoDay": "friday",
+    "autoDay": "saturday",
     "inPool": true
   },
   {
@@ -28122,8 +28121,7 @@
       }
     },
     "autoScore": 65.3,
-    "autoDay": "sunday",
-    "inPool": true
+    "inPool": false
   },
   {
     "name": "Sergio Casal",
@@ -30767,7 +30765,7 @@
       }
     },
     "autoScore": 106.3,
-    "autoDay": "monday",
+    "autoDay": "tuesday",
     "manualDay": "tuesday",
     "inPool": true
   },
@@ -33199,5 +33197,169 @@
     "autoScore": 71.5,
     "autoDay": "sunday",
     "inPool": true
+  },
+  {
+    "name": "Tommy Paul",
+    "gender": "Male",
+    "nationality": "United States",
+    "slams": {
+      "AustralianOpen": {
+        "2015": "A",
+        "2016": "A",
+        "2017": "A",
+        "2018": "Q2",
+        "2019": "Q2",
+        "2020": "3R",
+        "2021": "2R",
+        "2022": "2R",
+        "2023": "SF",
+        "2024": "3R",
+        "2025": "QF",
+        "2026": "4R"
+      },
+      "FrenchOpen": {
+        "2015": "A",
+        "2016": "Q2",
+        "2017": "A",
+        "2018": "A",
+        "2019": "1R",
+        "2020": "2R",
+        "2021": "2R",
+        "2022": "1R",
+        "2023": "2R",
+        "2024": "3R",
+        "2025": "QF",
+        "2026": "3R"
+      },
+      "Wimbledon": {
+        "2015": "A",
+        "2016": "Q1",
+        "2017": "A",
+        "2018": "A",
+        "2019": "Q3",
+        "2020": "NH",
+        "2021": "A",
+        "2022": "4R",
+        "2023": "3R",
+        "2024": "QF",
+        "2025": "2R"
+      },
+      "USOpen": {
+        "2015": "1R",
+        "2016": "Q1",
+        "2017": "1R",
+        "2018": "A",
+        "2019": "Q2",
+        "2020": "1R",
+        "2021": "1R",
+        "2022": "3R",
+        "2023": "4R",
+        "2024": "4R",
+        "2025": "3R"
+      }
+    },
+    "autoScore": 82.3,
+    "inPool": true,
+    "autoDay": "wednesday"
+  },
+  {
+    "name": "Victoria Azarenka",
+    "gender": "Female",
+    "nationality": "Belarus",
+    "slams": {
+      "AustralianOpen": {
+        "2006": "1R",
+        "2007": "3R",
+        "2008": "3R",
+        "2009": "4R",
+        "2010": "QF",
+        "2011": "4R",
+        "2012": "W",
+        "2013": "W",
+        "2014": "QF",
+        "2015": "4R",
+        "2016": "QF",
+        "2017": "A",
+        "2018": "A",
+        "2019": "1R",
+        "2020": "A",
+        "2021": "1R",
+        "2022": "4R",
+        "2023": "SF",
+        "2024": "4R",
+        "2025": "1R",
+        "2026": "A"
+      },
+      "FrenchOpen": {
+        "2006": "1R",
+        "2007": "1R",
+        "2008": "4R",
+        "2009": "QF",
+        "2010": "1R",
+        "2011": "QF",
+        "2012": "4R",
+        "2013": "SF",
+        "2014": "A",
+        "2015": "3R",
+        "2016": "1R",
+        "2017": "A",
+        "2018": "1R",
+        "2019": "2R",
+        "2020": "2R",
+        "2021": "4R",
+        "2022": "3R",
+        "2023": "1R",
+        "2024": "2R",
+        "2025": "2R",
+        "2026": "A"
+      },
+      "Wimbledon": {
+        "2006": "1R",
+        "2007": "3R",
+        "2008": "3R",
+        "2009": "QF",
+        "2010": "3R",
+        "2011": "SF",
+        "2012": "SF",
+        "2013": "2R",
+        "2014": "2R",
+        "2015": "QF",
+        "2016": "A",
+        "2017": "4R",
+        "2018": "2R",
+        "2019": "3R",
+        "2020": "NH",
+        "2021": "2R",
+        "2022": "A",
+        "2023": "4R",
+        "2024": "A",
+        "2025": "1R"
+      },
+      "USOpen": {
+        "2006": "3R",
+        "2007": "4R",
+        "2008": "3R",
+        "2009": "3R",
+        "2010": "2R",
+        "2011": "3R",
+        "2012": "F",
+        "2013": "F",
+        "2014": "QF",
+        "2015": "QF",
+        "2016": "A",
+        "2017": "A",
+        "2018": "3R",
+        "2019": "1R",
+        "2020": "F",
+        "2021": "3R",
+        "2022": "4R",
+        "2023": "2R",
+        "2024": "3R",
+        "2025": "3R"
+      }
+    },
+    "autoScore": 127.5,
+    "inPool": true,
+    "autoDay": "monday"
   }
 ]
