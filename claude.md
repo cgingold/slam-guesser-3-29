@@ -7,8 +7,8 @@ Each day shows a tennis pro's Grand Slam result grid. The user guesses who it is
 
 ## Project structure
 - `index.html` / `style.css` / `game.js` — the deployed game
-- `players_328.json` — 444 player records (career data + autoScore + optional manualDay + optional hint)
-- `guess_pool_328.json` — autocomplete pool
+- `players.json` — 444 player records (career data + autoScore + optional manualDay + optional hint)
+- `guess_pool.json` — autocomplete pool
 - `daily_overrides_simple.json` — manual date→player overrides
 - Icons + manifest at root
 - `tools/` (gitignored) — admin + universe builder, not deployed

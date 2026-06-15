@@ -357,7 +357,7 @@ function pickRotationPlayer(mode, dateIso, pool) {
    DIFFICULTY BUCKETING — Mon (easy) → Sun (hard)
    =========================================================
    Each player has an `autoScore` (notability + recency) computed by the
-   admin/builder tools and baked into players_328.json. We rank all
+   admin/builder tools and baked into players.json. We rank all
    eligible players by autoScore descending and split into 7 equal
    buckets. Bucket 0 → Monday, bucket 6 → Sunday.
 
@@ -489,11 +489,11 @@ function getRequestedDate() {
 /* LOAD */
 
 async function load() {
-  const res = await fetch("./players_328.json");
+  const res = await fetch("./players.json");
 
   game.players = await res.json();
 
-  const res2 = await fetch("./guess_pool_328.json");
+  const res2 = await fetch("./guess_pool.json");
 
   game.guessPool = await res2.json();
 
