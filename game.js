@@ -346,26 +346,8 @@ function mod(n, m) {
   return ((n % m) + m) % m;
 }
 
-// Pick today's (or any date's) player for the given mode + pool.
-// Manual overrides (loaded from daily_overrides.json) take precedence,
-// but only when the named player is actually in the eligible pool.
-// If the override is missing or invalid, fall back to the auto-pick so
-// the game never breaks on stale overrides.
 function pickRotationPlayer(mode, dateIso, pool) {
   if (!pool || pool.length === 0) return null;
-
-  const overrideName = getDailyOverride(dateIso, mode);
-  if (overrideName) {
-    const match = pool.find((p) => p.name === overrideName);
-    if (match) {
-      return match;
-    }
-    // Stale or invalid override — log once and fall through.
-    console.warn(
-      `[overrides] ${dateIso} ${mode} → "${overrideName}" not in eligible pool, falling back to auto-pick.`
-    );
-  }
-
   const order = getRotationFor(mode, pool);
   const i = mod(rotationDayIndex(dateIso), order.length);
   return order[i];
@@ -426,37 +408,27 @@ function filterToDayBucket(pool, dateIso) {
 }
 
 /* =========================================================
-   DAILY OVERRIDES — loaded once from daily_overrides.json
+   SCHEDULE — loaded once from schedule.json
    =========================================================
-   File shape:
-     { "overrides": {
-         "2026-06-15": { "standard": "Roger Federer" },
-         "2026-06-20": { "winners": "Serena Williams" }
-     } }
-   The file is optional. If missing or invalid, the game falls back to
-   pure auto-pick for every date. */
+   Pre-baked mapping of date → player name. Baked dates are frozen and
+   unaffected by later database changes. Unbaked dates fall back to live
+   rotation. File shape: { "YYYY-MM-DD": "Player Name" }
+   The file is optional. If missing, all dates use live rotation. */
 
-let dailyOverrides = {}; // { "YYYY-MM-DD": { mode: "Player Name" } }
+let schedule = {}; // { "YYYY-MM-DD": "Player Name" }
 
-function getDailyOverride(dateIso, mode) {
-  return dailyOverrides?.[dateIso]?.[mode] || null;
+function getScheduleEntry(dateIso) {
+  return schedule?.[dateIso] || null;
 }
 
-async function loadDailyOverrides() {
+async function loadSchedule() {
   try {
-    const res = await fetch("./daily_overrides_simple.json");
-    if (!res.ok) return; // file just isn't there — silent
+    const res = await fetch("./schedule.json");
+    if (!res.ok) return; // file not deployed yet — silent
     const data = await res.json();
-    const raw =
-      data?.overrides && typeof data.overrides === "object"
-        ? data.overrides
-        : typeof data === "object"
-          ? data
-          : {};
-    dailyOverrides = raw || {};
+    schedule = (data && typeof data === "object" && !Array.isArray(data)) ? data : {};
   } catch {
-    // missing file, parse error, or CORS issue — silently use no overrides
-    dailyOverrides = {};
+    schedule = {};
   }
 }
 
@@ -527,9 +499,8 @@ async function load() {
 
   buildGuessPoolIndex();
 
-  // Load manual daily overrides — optional file. If missing or invalid,
-  // the game proceeds with pure auto-picks.
-  await loadDailyOverrides();
+  // Load pre-baked schedule — optional file. Unbaked dates fall back to live rotation.
+  await loadSchedule();
 
   // URL STATE
   game.playType = getPlayType();
@@ -670,6 +641,22 @@ function next() {
 
   hideSuggestions();
   clearHints();
+
+  // Baked schedule takes priority over live rotation.
+  const scheduledName = getScheduleEntry(game.date);
+  if (scheduledName) {
+    const match = game.players.find((p) => p.name === scheduledName);
+    if (match) {
+      game.current = match;
+      game.previous = match.name;
+      game._skipReveal = !!getDailyResult(game.date, game.mode);
+      render();
+      updateUI();
+      maybeRestoreFinishedDaily();
+      return;
+    }
+    console.warn(`[schedule] ${game.date} → "${scheduledName}" not found in players, falling back to live rotation`);
+  }
 
   // Eligibility flow:
   //   1. Take the top-N players by autoScore (default 300).
