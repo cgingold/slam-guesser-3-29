@@ -1384,7 +1384,7 @@
       }
     },
     "autoScore": 72.5,
-    "autoDay": "saturday",
+    "autoDay": "sunday",
     "inPool": true
   },
   {
@@ -1993,8 +1993,7 @@
       }
     },
     "autoScore": 65.5,
-    "autoDay": "sunday",
-    "inPool": true
+    "inPool": false
   },
   {
     "name": "Anastasia Pavlyuchenkova",
@@ -2595,7 +2594,7 @@
       }
     },
     "autoScore": 74.2,
-    "autoDay": "friday",
+    "autoDay": "saturday",
     "inPool": true
   },
   {
@@ -3388,7 +3387,7 @@
       }
     },
     "autoScore": 74.5,
-    "autoDay": "friday",
+    "autoDay": "saturday",
     "inPool": true
   },
   {
@@ -4357,7 +4356,7 @@
       "page": "Aslan Karatsev"
     },
     "autoScore": 71.7,
-    "autoDay": "saturday",
+    "autoDay": "sunday",
     "inPool": true
   },
   {
@@ -4972,7 +4971,7 @@
       }
     },
     "autoScore": 72.6,
-    "autoDay": "saturday",
+    "autoDay": "sunday",
     "inPool": true
   },
   {
@@ -5135,8 +5134,7 @@
       }
     },
     "autoScore": 65.9,
-    "autoDay": "sunday",
-    "inPool": true
+    "inPool": false
   },
   {
     "name": "Bettina Bunge",
@@ -6968,7 +6966,9 @@
         "2025": "Q1"
       }
     },
-    "autoScore": 72.7
+    "autoScore": 72.7,
+    "inPool": true,
+    "autoDay": "saturday"
   },
   {
     "name": "Chung Hyeon",
@@ -7413,7 +7413,9 @@
         "2025": "1R"
       }
     },
-    "autoScore": 75
+    "autoScore": 75,
+    "inPool": true,
+    "autoDay": "friday"
   },
   {
     "name": "Cristian Garin",
@@ -7495,7 +7497,7 @@
       "page": "Cristian Garín"
     },
     "autoScore": 76.2,
-    "autoDay": "thursday",
+    "autoDay": "friday",
     "inPool": true
   },
   {
@@ -9165,7 +9167,9 @@
         "2021": "A"
       }
     },
-    "autoScore": 67.2
+    "autoScore": 67.2,
+    "inPool": true,
+    "autoDay": "sunday"
   },
   {
     "name": "Donna Vekic",
@@ -11415,8 +11419,7 @@
       }
     },
     "autoScore": 65.9,
-    "autoDay": "sunday",
-    "inPool": true
+    "inPool": false
   },
   {
     "name": "Frances Tiafoe",
@@ -14173,7 +14176,7 @@
       }
     },
     "autoScore": 71.9,
-    "autoDay": "saturday",
+    "autoDay": "sunday",
     "inPool": true
   },
   {
@@ -14229,7 +14232,7 @@
       "page": "Jack Draper"
     },
     "autoScore": 76.3,
-    "autoDay": "thursday",
+    "autoDay": "friday",
     "inPool": true
   },
   {
@@ -14411,7 +14414,9 @@
         "2025": "2R"
       }
     },
-    "autoScore": 75.4
+    "autoScore": 75.4,
+    "inPool": true,
+    "autoDay": "friday"
   },
   {
     "name": "Jamie Hampton",
@@ -14772,7 +14777,7 @@
       }
     },
     "autoScore": 71.6,
-    "autoDay": "saturday",
+    "autoDay": "sunday",
     "inPool": true
   },
   {
@@ -16025,7 +16030,9 @@
         "2025": "2R"
       }
     },
-    "autoScore": 74
+    "autoScore": 74,
+    "inPool": true,
+    "autoDay": "saturday"
   },
   {
     "name": "Johan Kriek",
@@ -16688,7 +16695,9 @@
         "2025": "Q2"
       }
     },
-    "autoScore": 73.9
+    "autoScore": 73.9,
+    "inPool": true,
+    "autoDay": "saturday"
   },
   {
     "name": "Juan Martín del Potro",
@@ -18312,7 +18321,7 @@
       }
     },
     "autoScore": 72.3,
-    "autoDay": "saturday",
+    "autoDay": "sunday",
     "inPool": true
   },
   {
@@ -19864,7 +19873,7 @@
       }
     },
     "autoScore": 74.3,
-    "autoDay": "friday",
+    "autoDay": "saturday",
     "inPool": true
   },
   {
@@ -21196,8 +21205,7 @@
       }
     },
     "autoScore": 66.3,
-    "autoDay": "sunday",
-    "inPool": true
+    "inPool": false
   },
   {
     "name": "Maria Sakkari",
@@ -22207,7 +22215,7 @@
       }
     },
     "autoScore": 74.2,
-    "autoDay": "friday",
+    "autoDay": "saturday",
     "inPool": true
   },
   {
@@ -22290,7 +22298,9 @@
         "2025": "1R"
       }
     },
-    "autoScore": 77.3
+    "autoScore": 77.3,
+    "inPool": true,
+    "autoDay": "thursday"
   },
   {
     "name": "Mary Pierce",
@@ -22504,7 +22514,9 @@
         "2025": "1R"
       }
     },
-    "autoScore": 76.5
+    "autoScore": 76.5,
+    "inPool": true,
+    "autoDay": "thursday"
   },
   {
     "name": "Matteo Berrettini",
@@ -22970,7 +22982,7 @@
       }
     },
     "autoScore": 72.6,
-    "autoDay": "saturday",
+    "autoDay": "sunday",
     "inPool": true
   },
   {
@@ -23620,8 +23632,7 @@
       }
     },
     "autoScore": 66.1,
-    "autoDay": "sunday",
-    "inPool": true
+    "inPool": false
   },
   {
     "name": "Monica Seles",
@@ -24552,8 +24563,7 @@
       }
     },
     "autoScore": 66.1,
-    "autoDay": "sunday",
-    "inPool": true
+    "inPool": false
   },
   {
     "name": "Nicolás Massú",
@@ -26681,8 +26691,7 @@
       }
     },
     "autoScore": 65.6,
-    "autoDay": "sunday",
-    "inPool": true
+    "inPool": false
   },
   {
     "name": "Rafael Jódar",
@@ -26704,7 +26713,9 @@
         "2025": "A"
       }
     },
-    "autoScore": 74
+    "autoScore": 74,
+    "inPool": true,
+    "autoDay": "saturday"
   },
   {
     "name": "Rafael Nadal",
@@ -28246,7 +28257,7 @@
       }
     },
     "autoScore": 72.6,
-    "autoDay": "saturday",
+    "autoDay": "sunday",
     "inPool": true
   },
   {
@@ -28301,7 +28312,7 @@
       "page": "Sebastian Korda"
     },
     "autoScore": 76.2,
-    "autoDay": "thursday",
+    "autoDay": "friday",
     "inPool": true
   },
   {
@@ -28375,8 +28386,7 @@
       }
     },
     "autoScore": 66.2,
-    "autoDay": "sunday",
-    "inPool": true
+    "inPool": false
   },
   {
     "name": "Serena Williams",
@@ -30120,8 +30130,7 @@
       }
     },
     "autoScore": 65.9,
-    "autoDay": "sunday",
-    "inPool": true
+    "inPool": false
   },
   {
     "name": "Tatiana Golovin",
@@ -30269,7 +30278,7 @@
       }
     },
     "autoScore": 74.3,
-    "autoDay": "friday",
+    "autoDay": "saturday",
     "inPool": true
   },
   {
@@ -30647,8 +30656,7 @@
       }
     },
     "autoScore": 65.8,
-    "autoDay": "sunday",
-    "inPool": true
+    "inPool": false
   },
   {
     "name": "Thomas Muster",
@@ -31820,7 +31828,7 @@
       }
     },
     "autoScore": 72.6,
-    "autoDay": "saturday",
+    "autoDay": "sunday",
     "inPool": true
   },
   {
@@ -32633,7 +32641,7 @@
       }
     },
     "autoScore": 71.8,
-    "autoDay": "saturday",
+    "autoDay": "sunday",
     "inPool": true
   },
   {
@@ -33220,8 +33228,7 @@
       }
     },
     "autoScore": 66.2,
-    "autoDay": "sunday",
-    "inPool": true
+    "inPool": false
   },
   {
     "name": "Yannick Noah",
@@ -33662,7 +33669,9 @@
         "2025": "2R"
       }
     },
-    "autoScore": 73.9
+    "autoScore": 73.9,
+    "inPool": true,
+    "autoDay": "saturday"
   },
   {
     "name": "Zhang Shuai",
@@ -33932,7 +33941,8 @@
         "2018": "A"
       }
     },
-    "autoScore": 65.8
+    "autoScore": 65.8,
+    "inPool": false
   },
   {
     "name": "Maja Chwalińska",
@@ -33974,6 +33984,8 @@
         "2025": "Q2"
       }
     },
-    "autoScore": 76.8
+    "autoScore": 76.8,
+    "inPool": true,
+    "autoDay": "thursday"
   }
 ]
