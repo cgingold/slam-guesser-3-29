@@ -532,18 +532,24 @@ function clearHints() {
 
 /* MESSAGE */
 
+function isMobileDevice() {
+  if (navigator.maxTouchPoints > 1) return true;
+  return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+}
+
 function showMessage(text) {
-  const panel = document.getElementById("hintPanel");
+  const openDialog = document.querySelector("dialog[open]");
+  let container;
+  if (openDialog) {
+    container = openDialog.querySelector(".dialog-toast");
+  }
+  if (!container) container = document.getElementById("hintPanel");
 
   const div = document.createElement("div");
-
   div.className = "hint-card invalid-card";
-
   div.textContent = text;
-
-  panel.appendChild(div);
-
-  setTimeout(() => div.remove(), 2000);
+  container.appendChild(div);
+  setTimeout(() => div.remove(), 4000);
 }
 
 /* FLAGS */
@@ -631,7 +637,6 @@ function next() {
   game.gaveUp = false;
 
   const shareBtn = document.getElementById("shareBtn");
-
   shareBtn.disabled = true;
 
   game.lastOutcome = null;
@@ -1181,7 +1186,7 @@ function share() {
   const text = [header, ballsLine, statLine].filter(Boolean).join("\n");
   const fullText = `${text}\n\n${url}`;
 
-  if (navigator.share) {
+  if (isMobileDevice() && navigator.share) {
     navigator
       .share({
         title: "🎾 Slam Grid",
@@ -1196,6 +1201,374 @@ function share() {
     .writeText(fullText)
     .then(() => showMessage("📋 Copied!"))
     .catch(() => showMessage("Couldn't copy"));
+}
+
+/* =========================================================
+   STORY IMAGE SHARE
+   ========================================================= */
+
+const SHARE_URL = "testtesttest";
+
+// Returns a canvas-ready color/text config for a result value.
+function storyCell(v) {
+  if (!v || v === "") return { bg: "#243f32", fg: "transparent", label: "" };
+  const d = displayResult(v);
+  if (v === "W")  return { bg: "#16a34a", fg: "#ffffff", label: d };
+  if (v === "F")  return { bg: "#c084fc", fg: "#2e1065", label: d };
+  if (v === "SF") return { bg: "#fde047", fg: "#713f12", label: d };
+  if (v === "QF") return { bg: "#fdba74", fg: "#7c2d12", label: d };
+  if (v === "4R" || v === "3R" || v === "2R" || v === "1R")
+                  return { bg: "#3b82f6", fg: "#ffffff", label: d };
+  if (v === "A")  return { bg: "#c5cac6", fg: "#4a6e63", label: d };
+  if (v === "NH") return { bg: "#115e59", fg: "#ffffff", label: d };
+  if (v.startsWith("Q")) return { bg: "#93c5fd", fg: "#1e3a8a", label: d };
+  return { bg: "#e8eae6", fg: "#666666", label: d };
+}
+
+// Pick the best 8-consecutive-year window for the story grid.
+// Strength per cell: W=7, F=6, SF=5, QF=4, 4R=3, 3R=2, 2R=1, 1R=0.5, else=0.
+function pickYearWindow(p, slams, allYears) {
+  if (allYears.length <= 8) return allYears;
+  const strength = { W: 15, F: 10, SF: 8, QF: 6, "4R": 2, "3R": 1, "2R": 1, "1R": 0.5 };
+  let bestScore = -1, bestStart = 0;
+  for (let start = 0; start <= allYears.length - 8; start++) {
+    let score = 0;
+    for (let yi = start; yi < start + 8; yi++) {
+      const y = allYears[yi];
+      for (const slam of slams) {
+        const v = p.slams?.[slam]?.[y] || "";
+        score += strength[v] || 0;
+      }
+    }
+    if (score > bestScore) { bestScore = score; bestStart = start; }
+  }
+  return allYears.slice(bestStart, bestStart + 8);
+}
+
+function loadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+
+async function buildStoryImage() {
+  const p = game.current;
+  if (!p) return null;
+
+  const W = 1080, H = 1920;
+  const canvas = document.createElement("canvas");
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext("2d");
+
+  ctx.fillStyle = "#1d3e35";
+  ctx.fillRect(0, 0, W, H);
+
+  function roundRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  // 1. LOGO — draw og_image.png preserving its natural aspect ratio
+  try {
+    const logo = await loadImage("./og_image.png");
+    const logoW = 720;
+    const logoH = logoW * (logo.height / logo.width);
+    ctx.drawImage(logo, (W - logoW) / 2, 160, logoW, logoH);
+  } catch {
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 54px Georgia, serif";
+    ctx.fillText("SLAM GRID", W / 2, 360);
+    ctx.fillStyle = "#9ab8b0";
+    ctx.font = "italic 22px Georgia, serif";
+    ctx.fillText("A game for tennis fans.", W / 2, 405);
+  }
+
+  // 2. RESULT LINE (fixed y)
+  const won = game.lastOutcome === "win";
+  const gaveUp = !!game.gaveUp;
+  const guessNum = won ? game.wrong + 1 : null;
+  const todayForChampion = game.date || todayLocal();
+  let resultLine;
+  if (won && isChampionThisWeek(todayForChampion))
+                   resultLine = "I am a Slam Grid Champion!";
+  else if (won)    resultLine = guessNum === 1 ? "I got it in 1 guess" : `I got it in ${guessNum} guesses`;
+  else if (gaveUp) resultLine = "I was stumped";
+  else             resultLine = "Today's grid beat me";
+
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#a5e85a";
+  ctx.font = "bold 62px Georgia, serif";
+  ctx.fillText(resultLine, W / 2, 565);
+
+  // 3. PROMPT (fixed y)
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "40px Georgia, serif";
+  ctx.fillText("Can you name this player?", W / 2, 632);
+
+  // 4. GRID CARD + CELLS
+  const slams = ["AustralianOpen", "FrenchOpen", "Wimbledon", "USOpen"];
+  const FLAGS = { AustralianOpen: "🇦🇺", FrenchOpen: "🇫🇷", Wimbledon: "🇬🇧", USOpen: "🇺🇸" };
+
+  const allYears = [...new Set(slams.flatMap((s) => Object.keys(p.slams?.[s] || {})))]
+    .map(Number).sort((a, b) => a - b).map(String);
+  const years = pickYearWindow(p, slams, allYears);
+  const numRows = years.length;
+
+  const GRID_TOP_BASELINE = 795;
+  const ROW_H = numRows === 8 ? 68 : 72; // tighten for 8 rows to keep footer in safe zone
+  const CELL_W = 184;
+  const CELL_H = 62;
+  const CELL_R = 9;
+
+  const cardX = 54, cardY = 680, cardW = 972;
+  const cardH = numRows * ROW_H + 90;
+
+  roundRect(cardX, cardY, cardW, cardH, 20);
+  ctx.fillStyle = "#15302a";
+  ctx.fill();
+  ctx.strokeStyle = "#2a4a3a";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Flag headers — centers align with column centers (colLeft + CELL_W/2)
+  ctx.textAlign = "center";
+  ctx.font = "52px serif";
+  const flagCenters = [290, 490, 690, 890];
+  slams.forEach((slam, ci) => {
+    ctx.fillText(FLAGS[slam], flagCenters[ci], 740);
+  });
+
+  // Grid rows — one per year in the selected window (1–8 rows, dynamic)
+  const colLefts = [198, 398, 598, 798];
+  years.forEach((y, r) => {
+    const rowBaseline = GRID_TOP_BASELINE + r * ROW_H;
+
+    ctx.textAlign = "right";
+    ctx.fillStyle = "#9ab8b0";
+    ctx.font = "bold 32px Georgia, serif";
+    ctx.fillText(`'${String(y).slice(2)}`, 160, rowBaseline);
+
+    slams.forEach((slam, ci) => {
+      const rawV = p.slams?.[slam]?.[y] || "";
+      const gated =
+        y === DATA_FRESHNESS_YEAR &&
+        DATA_FRESHNESS_HIDE_SLAMS.includes(slam) &&
+        rawV !== "A" && rawV !== "NH" && rawV !== "";
+      const v = gated ? "" : rawV;
+      const { bg, fg, label: cellLabel } = storyCell(v);
+
+      const cellX = colLefts[ci];
+      const cellY = rowBaseline - 42;
+
+      roundRect(cellX, cellY, CELL_W, CELL_H, CELL_R);
+      ctx.fillStyle = bg;
+      ctx.fill();
+
+      if (cellLabel) {
+        ctx.textAlign = "center";
+        ctx.fillStyle = fg;
+        ctx.font = "bold 30px Georgia, serif";
+        ctx.fillText(cellLabel, cellX + CELL_W / 2, cellY + CELL_H / 2 + 11);
+      }
+    });
+  });
+
+  const gridBottom = cardY + cardH;
+
+  // 5. WEEK STRIP — all positions flow from gridBottom
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#9ab8b0";
+  ctx.font = "30px Georgia, serif";
+  ctx.fillText("My results this week", W / 2, gridBottom + 56);
+
+  const stripTop = gridBottom + 78;
+  const STRIP_X = 58;
+  const STRIP_STRIDE = 140;
+  const STRIP_CELL_W = 132;
+  const STRIP_CELL_H = 80;
+
+  const weekResults = getWeekResults(game.date || todayLocal());
+  const todayIdx = dayOfWeekIndex(game.date || todayLocal());
+
+  weekResults.forEach((result, i) => {
+    const sx = STRIP_X + i * STRIP_STRIDE;
+    const cellCx = sx + STRIP_CELL_W / 2;
+
+    roundRect(sx, stripTop, STRIP_CELL_W, STRIP_CELL_H, 12);
+    ctx.fillStyle = i === todayIdx ? "rgba(165,232,90,0.12)" : "rgba(255,255,255,0.05)";
+    ctx.fill();
+    if (i === todayIdx) {
+      ctx.strokeStyle = "#a5e85a";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#9ab8b0";
+    ctx.font = "bold 24px Georgia, serif";
+    ctx.fillText(DAY_LABELS[i], cellCx, stripTop + 32);
+
+    ctx.font = "34px serif";
+    let marker = "";
+    if (result) {
+      marker = result.outcome === "won" ? "✅" :
+               result.outcome === "gave-up" ? "🏳️" : "❌";
+    } else if (i === todayIdx) {
+      ctx.fillStyle = "#a5e85a";
+      ctx.font = "bold 28px Georgia, serif";
+      marker = "·";
+    } else if (i < todayIdx) {
+      ctx.fillStyle = "#555";
+      ctx.font = "28px serif";
+      marker = "·";
+    }
+    if (marker) ctx.fillText(marker, cellCx, stripTop + 66);
+  });
+
+  const stripBottom = stripTop + STRIP_CELL_H;
+
+  // 6. CTA
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "38px Georgia, serif";
+  ctx.fillText("Play today at", W / 2, stripBottom + 80);
+  ctx.fillStyle = "#a5e85a";
+  ctx.font = "bold 60px Georgia, serif";
+  ctx.fillText(SHARE_URL, W / 2, stripBottom + 162);
+
+  // 7. FOOTER — date only
+  const todayIso = game.date || todayLocal();
+  const [fy, fm, fd] = todayIso.split("-").map(Number);
+  const dateLabel = new Date(fy, fm - 1, fd).toLocaleDateString(undefined, {
+    month: "long", day: "numeric", year: "numeric"
+  });
+  ctx.fillStyle = "#9ab8b0";
+  ctx.font = "28px Georgia, serif";
+  ctx.fillText(dateLabel, W / 2, stripBottom + 232);
+
+  return canvas;
+}
+
+async function shareImage() {
+  if (!game.current) return;
+  const canvas = await buildStoryImage();
+  if (!canvas) throw new Error("buildStoryImage returned null");
+
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((blob) => {
+      if (!blob) { reject(new Error("toBlob produced no data")); return; }
+
+      const todayIso = game.date || todayLocal();
+      const filename = `slam-grid-${todayIso}.png`;
+
+      function downloadBlob() {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        // Must be in the DOM for Safari/Firefox to honour the click
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 10000);
+        showMessage("Image saved — post it to your story!");
+        resolve();
+      }
+
+      const file = new File([blob], filename, { type: "image/png" });
+      if (isMobileDevice() && navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({
+          files: [file],
+          title: "Slam Grid",
+          text: "Can you name this player? Play at " + SHARE_URL,
+        }).then(resolve).catch((err) => {
+          if (err && err.name === "AbortError") { resolve(); return; }
+          // Share failed (e.g. user-activation expired) — fall back to download
+          downloadBlob();
+        });
+      } else {
+        downloadBlob();
+      }
+    }, "image/png");
+  });
+}
+
+/* =========================================================
+   SHARE MENU
+   ========================================================= */
+
+let _shareMenuCleanup = null;
+let _shareMenuOpen = false;
+
+function openSharePopover(event) {
+  const menu = document.getElementById("sharePopover");
+  if (!menu) return;
+
+  // Toggle closed if already open
+  if (_shareMenuOpen) { closeSharePopover(); return; }
+
+  const btn = event.currentTarget;
+  const wrap = btn.closest(".share-wrap");
+  if (!wrap) return;
+
+  // Reparent the menu into the triggering button's wrapper. When triggered
+  // from the result modal, this puts the menu inside the modal's stacking
+  // context (top-layer), so it renders above the modal automatically.
+  wrap.appendChild(menu);
+
+  menu.classList.add("is-open");
+  _shareMenuOpen = true;
+
+  // Defer outside-click listener by one tick so the opening click itself
+  // doesn't immediately trigger it.
+  setTimeout(() => {
+    function onOutside(e) {
+      if (!menu.contains(e.target) && e.target !== btn) closeSharePopover();
+    }
+    function onKey(e) {
+      if (e.key === "Escape") closeSharePopover();
+    }
+    document.addEventListener("pointerdown", onOutside, true);
+    document.addEventListener("keydown", onKey);
+    _shareMenuCleanup = () => {
+      document.removeEventListener("pointerdown", onOutside, true);
+      document.removeEventListener("keydown", onKey);
+      _shareMenuOpen = false;
+    };
+  }, 0);
+}
+
+function closeSharePopover() {
+  const menu = document.getElementById("sharePopover");
+  if (menu) menu.classList.remove("is-open");
+  if (_shareMenuCleanup) { _shareMenuCleanup(); _shareMenuCleanup = null; }
+}
+
+function sharePopoverText() {
+  closeSharePopover();
+  share();
+}
+
+function sharePopoverIG() {
+  closeSharePopover();
+  if (!game.current) { showMessage("Finish today's game first"); return; }
+  shareImage().catch((err) => {
+    console.error("shareImage failed:", err);
+    showMessage("Couldn't create image — try again");
+  });
 }
 
 /* CLASS MAP */

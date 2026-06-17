@@ -143,9 +143,12 @@
             onclick="document.getElementById('resultDialog').close()">×</button>
     <div class="result-outcome" id="resultOutcome">Correct</div>
     <div class="result-player" id="resultPlayer">—</div>
-    <button class="result-share" onclick="share()">Share</button>
+    <div class="share-wrap">
+      <button class="result-share" onclick="openSharePopover(event)">Share</button>
+    </div>
     <div class="result-week-divider"></div>
     <div class="result-week-strip" id="resultWeekStrip"></div>
+    <div class="dialog-toast"></div>
   </div>
 </dialog>
 
@@ -232,7 +235,29 @@
 
   <button id="guessBtn" onclick="guess()">Guess</button>
   <button id="giveUpBtn" onclick="giveUp()">Give Up</button>
-  <button id="shareBtn" onclick="share()" disabled>Share</button>
+  <div class="share-wrap">
+    <button id="shareBtn" onclick="openSharePopover(event)" disabled>Share</button>
+    <!-- Share menu — starts here; JS reparents it to whichever share-wrap triggered it -->
+    <div id="sharePopover" class="share-popover">
+      <button class="share-popover-row" onclick="sharePopoverText()">
+        <span class="share-popover-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M2 4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6l-4 3V4z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="share-popover-label">Text</span>
+      </button>
+      <button class="share-popover-row" onclick="sharePopoverIG()">
+        <span class="share-popover-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M6.5 3.5 8 2h2l1.5 1.5H14a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-10a1 1 0 0 1 1-1h2.5z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="9" cy="9.5" r="2.25" stroke="currentColor" stroke-width="1.75"/>
+          </svg>
+        </span>
+        <span class="share-popover-label">IG Story</span>
+      </button>
+    </div>
+  </div>
 </div>
 
 <div id="hintPanel"></div>
@@ -330,6 +355,7 @@
 </div><!-- /.app -->
 
 <script src="./game.js"></script>
+
 
 </body>
 </html>

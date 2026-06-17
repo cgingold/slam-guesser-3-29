@@ -657,6 +657,113 @@ dialog.difficulty-dialog {
 }
 .result-share:hover { filter: brightness(1.08); }
 
+/* Share menu — position:absolute inside .share-wrap so it tracks the
+   button on scroll/resize automatically. When triggered from the result
+   modal, JS reparents it into the modal's .share-wrap; since the modal
+   is in the CSS top-layer (showModal), the menu renders above everything. */
+.share-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+/* Prevent the result dialog from clipping the absolutely-positioned menu */
+.result-dialog,
+.result-inner {
+  overflow: visible;
+}
+
+/* Toast container inside open dialogs — absolutely positioned so it
+   doesn't shift modal layout. Sits above the bottom edge, centered. */
+.dialog-toast {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+  z-index: 10;
+  width: max-content;
+  max-width: calc(100% - 24px);
+}
+
+.dialog-toast .hint-card {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.share-popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+
+  background: #ffffff;
+  border: 1px solid #ededed;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.05);
+  width: max-content;
+  padding: 3px;
+
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  opacity: 0;
+  translate: 0 -4px;
+  transition: opacity 0.12s ease, translate 0.12s ease;
+}
+
+.share-popover.is-open {
+  opacity: 1;
+  translate: 0 0;
+  pointer-events: auto;
+}
+
+.share-popover-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 10px;
+  min-height: 0;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: background 0.1s;
+  color: #141716;
+}
+
+.share-popover-row:hover,
+.share-popover-row:active {
+  background: #f5f5f5;
+}
+
+.share-popover-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #141716;
+}
+
+.share-popover-label {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #141716;
+  white-space: nowrap;
+}
+
 /* ===========================================================
    APP CONTAINER
    =========================================================== */
