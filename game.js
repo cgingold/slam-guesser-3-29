@@ -1207,7 +1207,7 @@ function share() {
    STORY IMAGE SHARE
    ========================================================= */
 
-const SHARE_URL = "testtesttest";
+const SHARE_URL = "THIS IS A TEST";
 
 // Returns a canvas-ready color/text config for a result value.
 function storyCell(v) {
