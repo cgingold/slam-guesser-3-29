@@ -251,9 +251,10 @@ function setPlayType() {
 
 /* URL SYNC
    Wordle-style clean URL: state lives in localStorage and in memory,
-   not in the URL. Shared links can still pre-seed state via ?date= or
-   ?play= (handled in load()), but the URL is never *written* back.
-   This function exists as a no-op so existing call sites still work. */
+   not in the URL. This build is "today only" — ?date= and ?play= URL
+   params are IGNORED (not read anywhere; getRequestedDate() always
+   returns today). Any query string is stripped on load. This function
+   exists as a no-op so existing call sites still work. */
 
 function syncURL() {
   /* no-op — see comment above */
@@ -515,8 +516,9 @@ async function load() {
 
   next();
 
-  // After honoring any shared-link params (?date=, ?play=), clear them
-  // so the URL stays clean Wordle-style for the rest of the session.
+  // Strip any query string so the URL stays clean Wordle-style. Note:
+  // ?date= / ?play= params are NOT read by this build (today-only); this
+  // just tidies the address bar if someone arrives with a query string.
   if (window.location.search) {
     history.replaceState(null, "", window.location.pathname);
   }
