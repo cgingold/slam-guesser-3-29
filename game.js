@@ -1268,10 +1268,15 @@ async function buildStoryImage() {
 
   // Centers emoji on the canvas using actual pixel metrics rather than
   // textBaseline="middle", which maps differently on iOS vs desktop.
-  function drawEmojiCentered(text, x, centerY) {
+  // fontSize is required as a fallback: on some iOS Safari versions
+  // actualBoundingBoxAscent returns 0 for emoji, so we fall back to
+  // fontSize * 0.8 (emoji typically occupy ~80% of the em above the baseline).
+  function drawEmojiCentered(text, x, centerY, fontSize) {
     ctx.textBaseline = "alphabetic";
     const m = ctx.measureText(text);
-    ctx.fillText(text, x, centerY + (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2);
+    const asc = m.actualBoundingBoxAscent > 1 ? m.actualBoundingBoxAscent : fontSize * 0.8;
+    const desc = m.actualBoundingBoxDescent > 0 ? m.actualBoundingBoxDescent : 0;
+    ctx.fillText(text, x, centerY + (asc - desc) / 2);
   }
 
   function roundRect(x, y, w, h, r) {
@@ -1361,7 +1366,7 @@ async function buildStoryImage() {
   ctx.font = "52px serif";
   const flagCenters = [290, 490, 690, 890];
   slams.forEach((slam, ci) => {
-    drawEmojiCentered(FLAGS[slam], flagCenters[ci], 722);
+    drawEmojiCentered(FLAGS[slam], flagCenters[ci], 722, 52);
   });
 
   // Grid rows — one per year in the selected window (1–8 rows, dynamic)
@@ -1439,7 +1444,7 @@ async function buildStoryImage() {
       const emojiMarker = result.outcome === "won" ? "✅" :
                           result.outcome === "gave-up" ? "🏳" : "❌";
       ctx.font = "34px serif";
-      drawEmojiCentered(emojiMarker, cellCx, stripTop + 59);
+      drawEmojiCentered(emojiMarker, cellCx, stripTop + 59, 34);
     } else if (i === todayIdx) {
       ctx.fillStyle = "#a5e85a";
       ctx.font = "bold 28px Georgia, serif";
