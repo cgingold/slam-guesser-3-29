@@ -1310,7 +1310,7 @@ async function buildStoryImage() {
   } else if (gaveUp) {
     resultLine = "I was stumped";               resultColor = "#b8c4be";
   } else {
-    resultLine = "I didn't get this one";       resultColor = "#fdba74";
+    resultLine = "Missed it!";       resultColor = "#fdba74";
   }
 
   ctx.textAlign = "center";
@@ -1348,13 +1348,15 @@ async function buildStoryImage() {
   ctx.lineWidth = 2;
   ctx.stroke();
 
-  // Flag headers — centers align with column centers (colLeft + CELL_W/2)
+  // Flag headers — use textBaseline "middle" so emoji center on the target y
   ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
   ctx.font = "52px serif";
   const flagCenters = [290, 490, 690, 890];
   slams.forEach((slam, ci) => {
-    ctx.fillText(FLAGS[slam], flagCenters[ci], 740);
+    ctx.fillText(FLAGS[slam], flagCenters[ci], 722);
   });
+  ctx.textBaseline = "alphabetic";
 
   // Grid rows — one per year in the selected window (1–8 rows, dynamic)
   const colLefts = [198, 398, 598, 798];
@@ -1426,21 +1428,24 @@ async function buildStoryImage() {
     ctx.font = "bold 24px Georgia, serif";
     ctx.fillText(DAY_LABELS[i], cellCx, stripTop + 32);
 
-    ctx.font = "34px serif";
-    let marker = "";
     if (result) {
-      marker = result.outcome === "won" ? "✅" :
-               result.outcome === "gave-up" ? "🏳️" : "❌";
+      // Use textBaseline "middle" for emoji so they center reliably on canvas.
+      // Strip the variation selector from 🏳️ — it causes measureText to mis-report width.
+      const emojiMarker = result.outcome === "won" ? "✅" :
+                          result.outcome === "gave-up" ? "🏳" : "❌";
+      ctx.textBaseline = "middle";
+      ctx.font = "34px serif";
+      ctx.fillText(emojiMarker, cellCx, stripTop + 59);
+      ctx.textBaseline = "alphabetic";
     } else if (i === todayIdx) {
       ctx.fillStyle = "#a5e85a";
       ctx.font = "bold 28px Georgia, serif";
-      marker = "·";
+      ctx.fillText("·", cellCx, stripTop + 66);
     } else if (i < todayIdx) {
       ctx.fillStyle = "#555";
       ctx.font = "28px serif";
-      marker = "·";
+      ctx.fillText("·", cellCx, stripTop + 66);
     }
-    if (marker) ctx.fillText(marker, cellCx, stripTop + 66);
   });
 
   const stripBottom = stripTop + STRIP_CELL_H;
