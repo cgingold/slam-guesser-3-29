@@ -1266,17 +1266,14 @@ async function buildStoryImage() {
   ctx.fillStyle = "#1d3e35";
   ctx.fillRect(0, 0, W, H);
 
-  // Centers emoji on the canvas using actual pixel metrics rather than
-  // textBaseline="middle", which maps differently on iOS vs desktop.
-  // fontSize is required as a fallback: on some iOS Safari versions
-  // actualBoundingBoxAscent returns 0 for emoji, so we fall back to
-  // fontSize * 0.8 (emoji typically occupy ~80% of the em above the baseline).
+  // Centers emoji vertically using textBaseline="top" + fontSize/2 offset.
+  // Avoids actualBoundingBoxAscent, which iOS WebKit reports incorrectly
+  // for emoji (returns 0 or a small bogus value), causing the measureText
+  // approach to silently break on mobile.
   function drawEmojiCentered(text, x, centerY, fontSize) {
+    ctx.textBaseline = "top";
+    ctx.fillText(text, x, centerY - fontSize * 0.5);
     ctx.textBaseline = "alphabetic";
-    const m = ctx.measureText(text);
-    const asc = m.actualBoundingBoxAscent > 1 ? m.actualBoundingBoxAscent : fontSize * 0.8;
-    const desc = m.actualBoundingBoxDescent > 0 ? m.actualBoundingBoxDescent : 0;
-    ctx.fillText(text, x, centerY + (asc - desc) / 2);
   }
 
   function roundRect(x, y, w, h, r) {
@@ -1361,16 +1358,15 @@ async function buildStoryImage() {
   ctx.lineWidth = 2;
   ctx.stroke();
 
-  // Flag headers — drawEmojiCentered handles cross-platform metric differences
+  // Column left edges — shared by flag headers and grid rows
+  const colLefts = [198, 398, 598, 798];
+
+  // Flag headers — centered over each column using the same colLefts + CELL_W/2
   ctx.textAlign = "center";
   ctx.font = "52px serif";
-  const flagCenters = [290, 490, 690, 890];
   slams.forEach((slam, ci) => {
-    drawEmojiCentered(FLAGS[slam], flagCenters[ci], 722, 52);
+    drawEmojiCentered(FLAGS[slam], colLefts[ci] + CELL_W / 2, 722, 52);
   });
-
-  // Grid rows — one per year in the selected window (1–8 rows, dynamic)
-  const colLefts = [198, 398, 598, 798];
   years.forEach((y, r) => {
     const rowBaseline = GRID_TOP_BASELINE + r * ROW_H;
 
