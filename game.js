@@ -1301,15 +1301,20 @@ async function buildStoryImage() {
   const gaveUp = !!game.gaveUp;
   const guessNum = won ? game.wrong + 1 : null;
   const todayForChampion = game.date || todayLocal();
-  let resultLine;
-  if (won && isChampionThisWeek(todayForChampion))
-                   resultLine = "I am a Slam Grid Champion!";
-  else if (won)    resultLine = guessNum === 1 ? "I got it in 1 guess" : `I got it in ${guessNum} guesses`;
-  else if (gaveUp) resultLine = "I was stumped";
-  else             resultLine = "Today's grid beat me";
+  let resultLine, resultColor;
+  if (won && isChampionThisWeek(todayForChampion)) {
+    resultLine = "I am a Slam Grid Champion!";  resultColor = "#a5e85a";
+  } else if (won) {
+    resultLine = guessNum === 1 ? "I got it in 1 guess" : `I got it in ${guessNum} guesses`;
+    resultColor = "#a5e85a";
+  } else if (gaveUp) {
+    resultLine = "I was stumped";               resultColor = "#b8c4be";
+  } else {
+    resultLine = "I didn't get this one";       resultColor = "#fdba74";
+  }
 
   ctx.textAlign = "center";
-  ctx.fillStyle = "#a5e85a";
+  ctx.fillStyle = resultColor;
   ctx.font = "bold 62px Georgia, serif";
   ctx.fillText(resultLine, W / 2, 565);
 
