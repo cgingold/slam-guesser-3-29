@@ -1266,6 +1266,14 @@ async function buildStoryImage() {
   ctx.fillStyle = "#1d3e35";
   ctx.fillRect(0, 0, W, H);
 
+  // Centers emoji on the canvas using actual pixel metrics rather than
+  // textBaseline="middle", which maps differently on iOS vs desktop.
+  function drawEmojiCentered(text, x, centerY) {
+    ctx.textBaseline = "alphabetic";
+    const m = ctx.measureText(text);
+    ctx.fillText(text, x, centerY + (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2);
+  }
+
   function roundRect(x, y, w, h, r) {
     ctx.beginPath();
     ctx.moveTo(x + r, y);
@@ -1348,15 +1356,13 @@ async function buildStoryImage() {
   ctx.lineWidth = 2;
   ctx.stroke();
 
-  // Flag headers — use textBaseline "middle" so emoji center on the target y
+  // Flag headers — drawEmojiCentered handles cross-platform metric differences
   ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
   ctx.font = "52px serif";
   const flagCenters = [290, 490, 690, 890];
   slams.forEach((slam, ci) => {
-    ctx.fillText(FLAGS[slam], flagCenters[ci], 722);
+    drawEmojiCentered(FLAGS[slam], flagCenters[ci], 722);
   });
-  ctx.textBaseline = "alphabetic";
 
   // Grid rows — one per year in the selected window (1–8 rows, dynamic)
   const colLefts = [198, 398, 598, 798];
@@ -1429,14 +1435,11 @@ async function buildStoryImage() {
     ctx.fillText(DAY_LABELS[i], cellCx, stripTop + 32);
 
     if (result) {
-      // Use textBaseline "middle" for emoji so they center reliably on canvas.
       // Strip the variation selector from 🏳️ — it causes measureText to mis-report width.
       const emojiMarker = result.outcome === "won" ? "✅" :
                           result.outcome === "gave-up" ? "🏳" : "❌";
-      ctx.textBaseline = "middle";
       ctx.font = "34px serif";
-      ctx.fillText(emojiMarker, cellCx, stripTop + 59);
-      ctx.textBaseline = "alphabetic";
+      drawEmojiCentered(emojiMarker, cellCx, stripTop + 59);
     } else if (i === todayIdx) {
       ctx.fillStyle = "#a5e85a";
       ctx.font = "bold 28px Georgia, serif";
