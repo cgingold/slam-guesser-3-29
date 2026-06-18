@@ -1266,14 +1266,46 @@ async function buildStoryImage() {
   ctx.fillStyle = "#1d3e35";
   ctx.fillRect(0, 0, W, H);
 
-  // Centers emoji vertically using textBaseline="top" + fontSize/2 offset.
-  // Avoids actualBoundingBoxAscent, which iOS WebKit reports incorrectly
-  // for emoji (returns 0 or a small bogus value), causing the measureText
-  // approach to silently break on mobile.
-  function drawEmojiCentered(text, x, centerY, fontSize) {
+  // Renders an emoji to a tiny offscreen canvas and scans the alpha channel
+  // to find the true pixel bounding box. Returns the visual center as an
+  // offset from the draw origin. This bypasses measureText entirely, which
+  // mis-reports advance width for regional indicator flag emoji on iOS.
+  function measureEmojiCenter(text, fontSize) {
+    const tmpSize = Math.ceil(fontSize * 2.5);
+    const tmp = document.createElement("canvas");
+    tmp.width = tmpSize;
+    tmp.height = tmpSize;
+    const tc = tmp.getContext("2d");
+    tc.font = `${fontSize}px serif`;
+    tc.textBaseline = "top";
+    tc.textAlign = "left";
+    tc.fillStyle = "#ffffff";
+    tc.fillText(text, 0, 0);
+    const { data } = tc.getImageData(0, 0, tmpSize, tmpSize);
+    let minX = tmpSize, maxX = 0, minY = tmpSize, maxY = 0, found = false;
+    for (let py = 0; py < tmpSize; py++) {
+      for (let px = 0; px < tmpSize; px++) {
+        if (data[(py * tmpSize + px) * 4 + 3] > 30) {
+          if (px < minX) minX = px;
+          if (px > maxX) maxX = px;
+          if (py < minY) minY = py;
+          if (py > maxY) maxY = py;
+          found = true;
+        }
+      }
+    }
+    return found
+      ? { cx: (minX + maxX) / 2, cy: (minY + maxY) / 2 }
+      : { cx: fontSize / 2, cy: fontSize / 2 };
+  }
+
+  function drawEmojiCentered(text, centerX, centerY, fontSize) {
+    const { cx, cy } = measureEmojiCenter(text, fontSize);
     ctx.textBaseline = "top";
-    ctx.fillText(text, x, centerY - fontSize * 0.5);
+    ctx.textAlign = "left";
+    ctx.fillText(text, centerX - cx, centerY - cy);
     ctx.textBaseline = "alphabetic";
+    ctx.textAlign = "center";
   }
 
   function roundRect(x, y, w, h, r) {
