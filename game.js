@@ -1207,7 +1207,7 @@ function share() {
    STORY IMAGE SHARE
    ========================================================= */
 
-const SHARE_URL = "slamgrid.com";
+const SHARE_URL = "TEST";
 
 // Returns a canvas-ready color/text config for a result value.
 function storyCell(v) {
