@@ -910,10 +910,13 @@ function hasCareerOverlap(p, targetYears) {
   return false;
 }
 
-// Cascade: same gender + career overlap + autoScore band → drop band →
-// drop overlap → same gender only. Returns 2-4 shuffled options
-// (target + up to 3 distractors), or null if no distractor qualifies at
-// any level (tiebreak should be skipped entirely).
+// Fill-to-3 across tiers: 4 total options (target + 3 distractors) is the
+// target every day, not a ceiling that varies. Each tier fills whatever
+// slots are still open after the tighter tiers ran dry, rather than the
+// whole selection collapsing to a single tier once one has ≥1 candidate.
+// Returns null only if literally zero distractors qualify even at the
+// loosest tier (tiebreak should be skipped entirely — a safety net that
+// shouldn't realistically trigger against this player pool).
 function buildTiebreakOptions(target, guessedNames) {
   const targetYears = getCareerYears(target);
   const targetScore = target.autoScore ?? 0;
@@ -943,20 +946,24 @@ function buildTiebreakOptions(target, guessedNames) {
   const sameCountry = sameGender.filter((p) => p.nationality === target.nationality);
   const withOverlap = sameGender.filter((p) => hasCareerOverlap(p, targetYears));
   const tier1 = sameCountry.filter((p) => hasCareerOverlap(p, targetYears));
+  const tiers = [tier1, sameCountry, withOverlap, sameGender];
 
-  let candidates;
-  if (tier1.length > 0) candidates = tier1;
-  else if (sameCountry.length > 0) candidates = sameCountry;
-  else if (withOverlap.length > 0) candidates = withOverlap;
-  else if (sameGender.length > 0) candidates = sameGender;
-  else return null;
-
-  const distractors = candidates
-    .slice()
-    .sort((a, b) =>
+  const closestFirst = (pool) =>
+    pool.slice().sort((a, b) =>
       Math.abs((a.autoScore ?? 0) - targetScore) - Math.abs((b.autoScore ?? 0) - targetScore)
-    )
-    .slice(0, 3);
+    );
+
+  const distractors = [];
+  const picked = new Set();
+  for (const tier of tiers) {
+    if (distractors.length >= 3) break;
+    const fresh = tier.filter((p) => !picked.has(p));
+    for (const p of closestFirst(fresh)) {
+      if (distractors.length >= 3) break;
+      distractors.push(p);
+      picked.add(p);
+    }
+  }
 
   if (distractors.length === 0) return null;
 
