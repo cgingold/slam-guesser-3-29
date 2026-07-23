@@ -999,7 +999,7 @@ function openTiebreak(options) {
   optionsEl.innerHTML = "";
 
   let resolved = false;
-  let started = false; // true once "I'm Ready" is tapped — the clock only runs after this
+  let started = false; // true once "Let's go!" is tapped — the clock only runs after this
   let timerId = null;
   let remaining = TIEBREAK_SECONDS;
 
@@ -1243,7 +1243,7 @@ function openResultModal() {
   outcome.classList.remove("is-win", "is-loss");
   outcome.classList.add(won ? "is-win" : "is-loss");
   const champion = won && isChampionThisWeek(game.date || todayLocal());
-  outcome.textContent = champion ? "🏆 Champion" : isTiebreak ? "🎾 Tiebreak Win" : won ? "Winner" : "Missed It";
+  outcome.textContent = champion ? "🏆 Champion" : isTiebreak ? "Tiebreak Win" : won ? "Winner" : "Missed It";
 
   // Share button glows on any win (plain win, tiebreak, or championship —
   // "champion" only ever fires when `won` is already true, so this one
