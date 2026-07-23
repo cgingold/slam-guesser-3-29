@@ -644,6 +644,15 @@ dialog.difficulty-dialog {
 .result-outcome.is-win  { color: var(--accent); }
 .result-outcome.is-loss { color: #fdba74; }
 
+/* Tiebreak-win descriptive line, replaces a guess count */
+.result-subline {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--accent);
+  margin: -10px 0 18px;
+}
+.result-subline[hidden] { display: none; }
+
 .result-player {
   font-family: Georgia, "Times New Roman", serif;
   font-size: 19px;
@@ -715,6 +724,116 @@ dialog.difficulty-dialog {
   color: #ffffff;
   backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ===========================================================
+   3RD SET TIEBREAK MODAL — multiple-choice salvage round
+   =========================================================== */
+.tiebreak-dialog {
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  max-width: 380px;
+  width: calc(100% - 32px);
+  background: var(--ink);
+  color: #ffffff;
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  box-shadow:
+    0 0 0 4px rgba(165, 232, 90, 0.18),
+    0 0 32px 4px rgba(165, 232, 90, 0.35),
+    0 24px 48px rgba(0, 0, 0, 0.4);
+}
+
+.tiebreak-dialog::backdrop {
+  background: rgba(12, 26, 22, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.tiebreak-inner {
+  padding: 30px 26px 26px;
+  text-align: center;
+}
+
+.tiebreak-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.tiebreak-subtext {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 18px;
+}
+
+.tiebreak-timer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tiebreak-timer-track {
+  flex: 1 1 auto;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+}
+
+.tiebreak-timer-bar {
+  height: 100%;
+  width: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+  transform-origin: left center;
+  transition: transform 0.9s linear, background 0.2s;
+}
+
+.tiebreak-timer-count {
+  flex: 0 0 auto;
+  min-width: 22px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.tiebreak-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tiebreak-option {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.tiebreak-option:hover:not(:disabled) {
+  background: rgba(165, 232, 90, 0.14);
+  border-color: var(--accent);
+}
+
+.tiebreak-option:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.tiebreak-option:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
 .share-popover {

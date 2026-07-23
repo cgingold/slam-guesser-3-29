@@ -140,6 +140,7 @@
             aria-label="Close"
             onclick="document.getElementById('resultDialog').close()">×</button>
     <div class="result-outcome" id="resultOutcome">Correct</div>
+    <div class="result-subline" id="resultSubline" hidden></div>
     <div class="result-player" id="resultPlayer">—</div>
     <div class="share-wrap">
       <button class="result-share" onclick="openSharePopover(event)">Share</button>
@@ -147,6 +148,27 @@
     <div class="result-week-divider"></div>
     <div class="result-week-strip" id="resultWeekStrip"></div>
     <div class="dialog-toast"></div>
+  </div>
+</dialog>
+
+<!-- 3rd Set Tiebreak modal — multiple-choice salvage round shown after 3
+     wrong guesses (when the candidate cascade finds at least one valid
+     distractor). A correct pick upgrades the round to a win; a wrong
+     pick or the 10-second timeout ends it as a normal miss. Opens
+     automatically from game.js; the result modal follows right after. -->
+<dialog id="tiebreakDialog" class="tiebreak-dialog">
+  <div class="tiebreak-inner">
+    <div class="tiebreak-title">3rd Set Tiebreak</div>
+    <div class="tiebreak-subtext">Pick the player — 10 seconds</div>
+
+    <div class="tiebreak-timer">
+      <div class="tiebreak-timer-track">
+        <div class="tiebreak-timer-bar" id="tiebreakBar"></div>
+      </div>
+      <div class="tiebreak-timer-count" id="tiebreakCountdown">10</div>
+    </div>
+
+    <div class="tiebreak-options" id="tiebreakOptions"></div>
   </div>
 </dialog>
 

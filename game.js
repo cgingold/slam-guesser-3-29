@@ -107,9 +107,13 @@ function getWeekResults(todayIso) {
   return Array.from({ length: 7 }, (_, i) => getDayResult(addDaysToIso(monday, i)));
 }
 
+function isDayWon(result) {
+  return !!result && (result.outcome === "won" || result.outcome === "tiebreak");
+}
+
 function isChampionThisWeek(today) {
   if (dayOfWeekIndex(today) !== 6) return false;
-  return getWeekResults(today).every((r) => r && r.outcome === "won");
+  return getWeekResults(today).every(isDayWon);
 }
 
 /* ------------------------------------------------------- */
@@ -176,6 +180,11 @@ function maybeRestoreFinishedDaily() {
     const a = document.createElement("div");
     a.className = "hint-card correct-card";
     a.textContent = `✅ Correct: ${game.current.name}`;
+    panel.appendChild(a);
+  } else if (saved.outcome === "tiebreak") {
+    const a = document.createElement("div");
+    a.className = "hint-card correct-card";
+    a.textContent = `🎾 Tiebreak Win: ${game.current.name}`;
     panel.appendChild(a);
   } else if (saved.gaveUp) {
     const a = document.createElement("div");
@@ -752,12 +761,21 @@ function guess() {
     endRound();
   } else {
     game.wrong++;
-    showHints(false);
 
     if (game.wrong >= 3) {
-      game.lastOutcome = "lose";
-      endRound();
+      // Salvage round: a multiple-choice pick before the reveal. Only
+      // offered when the candidate cascade can find at least one valid
+      // distractor — otherwise fall straight through to a normal loss.
+      const tiebreakOptions = buildTiebreakOptions(game.current);
+      if (tiebreakOptions) {
+        openTiebreak(tiebreakOptions);
+      } else {
+        game.lastOutcome = "lose";
+        showHints(false);
+        endRound();
+      }
     } else {
+      showHints(false);
       // Mid-round: persist the in-progress state so a refresh restores it.
       saveDailyResult(game.date, game.mode, {
         player: game.current.name,
@@ -863,14 +881,151 @@ function showHints(correct) {
   }
 }
 
+/* =========================================================
+   3RD SET TIEBREAK — multiple-choice salvage round
+   =========================================================
+   Offered after the 3rd wrong guess instead of an immediate reveal.
+   A correct pick upgrades the round to a win (outcome "tiebreak"); a
+   wrong pick or a 10-second timeout ends as a normal miss. */
+
+const TIEBREAK_SECONDS = 10;
+const TIEBREAK_SLAMS = ["AustralianOpen", "FrenchOpen", "Wimbledon", "USOpen"];
+
+// All years that appear anywhere in a player's slam record (any value,
+// including "A"/"NH" — this is about career overlap, not participation).
+function getCareerYears(p) {
+  const years = new Set();
+  for (const s of TIEBREAK_SLAMS) {
+    const obj = p.slams?.[s];
+    if (!obj) continue;
+    for (const y of Object.keys(obj)) years.add(y);
+  }
+  return years;
+}
+
+function hasCareerOverlap(p, targetYears) {
+  for (const y of getCareerYears(p)) {
+    if (targetYears.has(y)) return true;
+  }
+  return false;
+}
+
+// Cascade: same gender + career overlap + autoScore band → drop band →
+// drop overlap → same gender only. Returns 2-4 shuffled options
+// (target + up to 3 distractors), or null if no distractor qualifies at
+// any level (tiebreak should be skipped entirely).
+function buildTiebreakOptions(target) {
+  const targetYears = getCareerYears(target);
+  const targetScore = target.autoScore ?? 0;
+  const lo = targetScore * 0.5;
+  const hi = targetScore * 1.5;
+
+  const sameGender = game.players.filter(
+    (p) => p !== target && p.name !== target.name && p.gender === target.gender
+  );
+
+  const withOverlap = sameGender.filter((p) => hasCareerOverlap(p, targetYears));
+  const withOverlapAndBand = withOverlap.filter((p) => {
+    const s = p.autoScore ?? 0;
+    return s >= lo && s <= hi;
+  });
+
+  let candidates;
+  if (withOverlapAndBand.length > 0) candidates = withOverlapAndBand;
+  else if (withOverlap.length > 0) candidates = withOverlap;
+  else if (sameGender.length > 0) candidates = sameGender;
+  else return null;
+
+  const distractors = candidates
+    .slice()
+    .sort((a, b) =>
+      Math.abs((a.autoScore ?? 0) - targetScore) - Math.abs((b.autoScore ?? 0) - targetScore)
+    )
+    .slice(0, 3);
+
+  if (distractors.length === 0) return null;
+
+  // Seeded per day so the option order is deterministic for a re-render
+  // but varies day to day, same approach as the daily rotation shuffle.
+  return shuffleStable([target, ...distractors], `tiebreak:${game.mode}:${game.date}`);
+}
+
+// Opens the tiebreak modal and resolves it (win/miss) before handing off
+// to endRound(). `options` is the pre-shuffled array of 2-4 players.
+function openTiebreak(options) {
+  const dlg = document.getElementById("tiebreakDialog");
+  if (!dlg || typeof dlg.showModal !== "function") {
+    // Defensive fallback — treat as a normal loss if <dialog> isn't supported.
+    game.lastOutcome = "lose";
+    showHints(false);
+    endRound();
+    return;
+  }
+
+  game.locked = true;
+  document.getElementById("guessBtn").disabled = true;
+  document.getElementById("giveUpBtn").disabled = true;
+
+  const optionsEl = document.getElementById("tiebreakOptions");
+  const countdownEl = document.getElementById("tiebreakCountdown");
+  const barEl = document.getElementById("tiebreakBar");
+  optionsEl.innerHTML = "";
+
+  let resolved = false;
+  let timerId = null;
+  let remaining = TIEBREAK_SECONDS;
+
+  function finalize(won) {
+    if (resolved) return;
+    resolved = true;
+    if (timerId) clearInterval(timerId);
+    optionsEl.querySelectorAll("button").forEach((b) => { b.disabled = true; });
+    game.lastOutcome = won ? "tiebreak" : "lose";
+    showHints(won);
+    dlg.close();
+  }
+
+  options.forEach((player) => {
+    const btn = document.createElement("button");
+    btn.className = "tiebreak-option";
+    btn.type = "button";
+    btn.textContent = player.name;
+    btn.addEventListener("click", () => finalize(player.name === game.current.name));
+    optionsEl.appendChild(btn);
+  });
+
+  function renderTick() {
+    countdownEl.textContent = String(remaining);
+    barEl.style.transform = `scaleX(${remaining / TIEBREAK_SECONDS})`;
+  }
+  renderTick();
+
+  timerId = setInterval(() => {
+    remaining--;
+    renderTick();
+    if (remaining <= 0) finalize(false);
+  }, 1000);
+
+  // The round is undecided until a pick or the timeout — don't let ESC
+  // dismiss it for free.
+  dlg.addEventListener("close", function onClose() {
+    dlg.removeEventListener("close", onClose);
+    endRound();
+  }, { once: true });
+
+  dlg.showModal();
+}
+
 /* END ROUND */
 
 function endRound() {
+  const won = game.lastOutcome === "win" || game.lastOutcome === "tiebreak";
+
   // record result BEFORE locking next round
   if (game.current) {
     game.roundHistory.push({
       player: game.current.name,
-      result: game.wrong >= 3 ? "fail" : game.wrong === 0 ? "correct" : "partial",
+      result: won ? "correct" : game.wrong >= 3 ? "fail" : "partial",
     });
   }
 
@@ -886,8 +1041,13 @@ function endRound() {
       outcome: game.lastOutcome,
       gaveUp: !!game.gaveUp,
     });
-    // Per-day history for the week strip (first attempt only)
-    const histOutcome = game.lastOutcome === "win" ? "won" : game.gaveUp ? "gave-up" : "missed";
+    // Per-day history for the week strip (first attempt only). "tiebreak"
+    // counts as won everywhere (championship, week-strip ✓) but keeps its
+    // own outcome value so the restore flow can show tiebreak branding.
+    const histOutcome =
+      game.lastOutcome === "win" ? "won" :
+      game.lastOutcome === "tiebreak" ? "tiebreak" :
+      game.gaveUp ? "gave-up" : "missed";
     saveDayResult({
       date: game.date,
       dayOfWeek: DAY_NAMES_RUNTIME[dayOfWeekIndex(game.date)],
@@ -933,7 +1093,7 @@ function populateWeekStrip(containerEl) {
 
     if (result) {
       cell.classList.add(
-        result.outcome === "won" ? "is-won" :
+        isDayWon(result) ? "is-won" :
         result.outcome === "gave-up" ? "is-gave-up" : "is-missed"
       );
     } else if (i === todayIdx) {
@@ -953,7 +1113,7 @@ function populateWeekStrip(containerEl) {
     markerEl.className = "week-cell-marker";
     if (result) {
       markerEl.textContent =
-        result.outcome === "won" ? "✅" :
+        isDayWon(result) ? "✅" :
         result.outcome === "gave-up" ? "🏳️" : "❌";
     }
     cell.appendChild(markerEl);
@@ -972,7 +1132,8 @@ function openResultModal() {
   const dlg = document.getElementById("resultDialog");
   if (!dlg || typeof dlg.showModal !== "function") return;
 
-  const won = game.lastOutcome === "win";
+  const isTiebreak = game.lastOutcome === "tiebreak";
+  const won = game.lastOutcome === "win" || isTiebreak;
 
   // Border treatment via class on the dialog itself
   dlg.classList.remove("is-win", "is-loss");
@@ -983,7 +1144,15 @@ function openResultModal() {
   outcome.classList.remove("is-win", "is-loss");
   outcome.classList.add(won ? "is-win" : "is-loss");
   const champion = won && isChampionThisWeek(game.date || todayLocal());
-  outcome.textContent = champion ? "🏆 Champion" : won ? "Winner" : "Missed It";
+  outcome.textContent = champion ? "🏆 Champion" : isTiebreak ? "🎾 Tiebreak Win" : won ? "Winner" : "Missed It";
+
+  // Tiebreak wins get a small descriptive line instead of a guess count.
+  const subline = document.getElementById("resultSubline");
+  if (subline) {
+    const showSubline = isTiebreak && !champion;
+    subline.textContent = showSubline ? "I won in a 3rd Set Tiebreak" : "";
+    subline.hidden = !showSubline;
+  }
 
   // Player name with country flag to the right
   const playerEl = document.getElementById("resultPlayer");
@@ -1130,7 +1299,8 @@ function updateHighlight() {
 */
 
 function buildShareLines() {
-  const won = game.lastOutcome === "win";
+  const isTiebreak = game.lastOutcome === "tiebreak";
+  const won = game.lastOutcome === "win" || isTiebreak;
   const wrong = game.wrong;
   const guessNum = won ? wrong + 1 : null;
 
@@ -1148,13 +1318,20 @@ function buildShareLines() {
   // "Used" = the slot was filled by a guess (correct or not). When the
   // round ends in a win, the final correct guess counts as used; when
   // it ends in a loss or give-up, the wrong guesses count as used.
-  const attemptsUsed = won ? guessNum : wrong;
-  const balls = [];
-  for (let i = 0; i < 3; i++) {
-    balls.push(i < attemptsUsed ? "🎾" : "⚪");
+  // A tiebreak win skips the ball count entirely — it doesn't map to a
+  // guess count the same way — and states the salvage outright.
+  let ballsLine;
+  if (isTiebreak) {
+    ballsLine = "🎾 I won in a 3rd Set Tiebreak";
+  } else {
+    const attemptsUsed = won ? guessNum : wrong;
+    const balls = [];
+    for (let i = 0; i < 3; i++) {
+      balls.push(i < attemptsUsed ? "🎾" : "⚪");
+    }
+    balls.push(won ? " ✅" : " ❌");
+    ballsLine = balls.join("");
   }
-  balls.push(won ? " ✅" : " ❌");
-  const ballsLine = balls.join("");
 
   // Career stat line — count of W / F / SF / QF across the player's slams.
   let statLine = null;
@@ -1339,13 +1516,16 @@ async function buildStoryImage() {
   }
 
   // 2. RESULT LINE (fixed y)
-  const won = game.lastOutcome === "win";
+  const isTiebreak = game.lastOutcome === "tiebreak";
+  const won = game.lastOutcome === "win" || isTiebreak;
   const gaveUp = !!game.gaveUp;
   const guessNum = won ? game.wrong + 1 : null;
   const todayForChampion = game.date || todayLocal();
   let resultLine, resultColor;
   if (won && isChampionThisWeek(todayForChampion)) {
     resultLine = "I am a Slam Grid Champion!";  resultColor = "#a5e85a";
+  } else if (isTiebreak) {
+    resultLine = "Won in a 3rd Set Tiebreak";   resultColor = "#a5e85a";
   } else if (won) {
     resultLine = guessNum === 1 ? "I got it in 1 guess" : `I got it in ${guessNum} guesses`;
     resultColor = "#a5e85a";
@@ -1469,7 +1649,7 @@ async function buildStoryImage() {
 
     if (result) {
       // Strip the variation selector from 🏳️ — it causes measureText to mis-report width.
-      const emojiMarker = result.outcome === "won" ? "✅" :
+      const emojiMarker = isDayWon(result) ? "✅" :
                           result.outcome === "gave-up" ? "🏳" : "❌";
       ctx.font = "34px serif";
       drawEmojiCentered(emojiMarker, cellCx, stripTop + 59, 34);
@@ -2067,7 +2247,7 @@ function openDifficultyDialog() {
 
     const marker = document.createElement("div");
     marker.className = "diff-outcome";
-    if (result.outcome === "won") {
+    if (isDayWon(result)) {
       marker.textContent = "✅";
       marker.classList.add("is-won");
     } else if (result.outcome === "gave-up") {
@@ -2130,5 +2310,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const roundBtn = document.getElementById("roundBtn");
   if (roundBtn) {
     roundBtn.addEventListener("click", openDifficultyDialog);
+  }
+
+  // Tiebreak modal — the round is undecided until a pick or the timeout,
+  // so ESC must not dismiss it for free.
+  const tiebreakDialog = document.getElementById("tiebreakDialog");
+  if (tiebreakDialog) {
+    tiebreakDialog.addEventListener("cancel", (e) => e.preventDefault());
   }
 });
