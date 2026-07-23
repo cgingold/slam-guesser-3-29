@@ -747,11 +747,12 @@ dialog.difficulty-dialog {
   width: calc(100% - 32px);
   background: var(--ink);
   color: #ffffff;
-  outline: 2px solid var(--accent);
+  /* R1-R4 blue, not the win-green accent — a tiebreak isn't a win yet. */
+  outline: 2px solid #3b82f6;
   outline-offset: -2px;
   box-shadow:
-    0 0 0 4px rgba(165, 232, 90, 0.18),
-    0 0 32px 4px rgba(165, 232, 90, 0.35),
+    0 0 0 4px rgba(59, 130, 246, 0.18),
+    0 0 32px 4px rgba(59, 130, 246, 0.35),
     0 24px 48px rgba(0, 0, 0, 0.4);
 }
 
@@ -769,7 +770,7 @@ dialog.difficulty-dialog {
   font-family: Georgia, "Times New Roman", serif;
   font-size: 22px;
   font-weight: 700;
-  color: var(--accent);
+  color: #3b82f6;
   margin-bottom: 6px;
 }
 
