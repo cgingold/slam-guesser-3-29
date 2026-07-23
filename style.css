@@ -796,11 +796,11 @@ dialog.difficulty-dialog {
 .tiebreak-ready-btn:active { transform: scale(0.98); }
 
 .tiebreak-timer {
-  margin: 14px 0 20px;
+  margin: 0 0 20px;
 }
 
 .tiebreak-timer-track {
-  height: 6px;
+  height: 12px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.15);
   overflow: hidden;
