@@ -779,6 +779,28 @@ dialog.difficulty-dialog {
   margin-bottom: 18px;
 }
 
+.tiebreak-intro-body {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 4px 0 24px;
+}
+
+.tiebreak-ready-btn {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border: none;
+  padding: 13px 30px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.1s;
+}
+.tiebreak-ready-btn:hover { filter: brightness(1.08); }
+.tiebreak-ready-btn:active { transform: scale(0.98); }
+
 .tiebreak-timer {
   display: flex;
   align-items: center;

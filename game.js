@@ -970,6 +970,10 @@ function buildTiebreakOptions(target, guessedNames) {
 
 // Opens the tiebreak modal and resolves it (win/miss) before handing off
 // to endRound(). `options` is the pre-shuffled array of 2-4 players.
+//
+// Two states inside the same dialog: an untimed intro screen ("I'm
+// Ready") and the play screen (options + 10s countdown), which only
+// starts once the user taps through the intro.
 function openTiebreak(options) {
   const dlg = document.getElementById("tiebreakDialog");
   if (!dlg || typeof dlg.showModal !== "function") {
@@ -984,24 +988,105 @@ function openTiebreak(options) {
   document.getElementById("guessBtn").disabled = true;
   document.getElementById("giveUpBtn").disabled = true;
 
+  const introEl = document.getElementById("tiebreakIntro");
+  const playEl = document.getElementById("tiebreakPlay");
+  const readyBtn = document.getElementById("tiebreakReadyBtn");
   const optionsEl = document.getElementById("tiebreakOptions");
   const countdownEl = document.getElementById("tiebreakCountdown");
   const barEl = document.getElementById("tiebreakBar");
+
+  introEl.hidden = false;
+  playEl.hidden = true;
   optionsEl.innerHTML = "";
 
   let resolved = false;
+  let started = false; // true once "I'm Ready" is tapped — the clock only runs after this
   let timerId = null;
   let remaining = TIEBREAK_SECONDS;
+
+  function clearTimer() {
+    if (timerId) {
+      clearInterval(timerId);
+      timerId = null;
+    }
+  }
+
+  function renderTick() {
+    countdownEl.textContent = String(remaining);
+    barEl.style.transform = `scaleX(${remaining / TIEBREAK_SECONDS})`;
+  }
+
+  function tick() {
+    remaining--;
+    renderTick();
+    if (remaining <= 0) finalize(false);
+  }
+
+  function detachLifecycleGuards() {
+    window.removeEventListener("pagehide", onLeave);
+    window.removeEventListener("beforeunload", onLeave);
+    document.removeEventListener("visibilitychange", onVisibilityChange);
+  }
 
   function finalize(won) {
     if (resolved) return;
     resolved = true;
-    if (timerId) clearInterval(timerId);
+    clearTimer();
+    detachLifecycleGuards();
     optionsEl.querySelectorAll("button").forEach((b) => { b.disabled = true; });
     game.lastOutcome = won ? "tiebreak" : "lose";
     showHints(won);
     dlg.close();
   }
+
+  // The user actually left the page (not just backgrounded the tab) while
+  // the tiebreak was unresolved — forfeit it as a miss right now, written
+  // synchronously to localStorage. This bypasses endRound()'s normal
+  // DOM/modal flow, which the page may not survive long enough to run;
+  // on a later visit maybeRestoreFinishedDaily() picks this record up and
+  // shows the finished/lost state without ever reopening the tiebreak.
+  function forfeitAsMiss() {
+    if (resolved) return;
+    resolved = true;
+    clearTimer();
+    saveDailyResult(game.date, game.mode, {
+      player: game.current.name,
+      playerSnapshot: game.current,
+      wrong: game.wrong,
+      outcome: "lose",
+      gaveUp: false,
+    });
+    saveDayResult({
+      date: game.date,
+      dayOfWeek: DAY_NAMES_RUNTIME[dayOfWeekIndex(game.date)],
+      round: ROUND_BY_DAY[dayOfWeekIndex(game.date)].round,
+      outcome: "missed",
+      guesses: game.wrong,
+      player: game.current.name,
+    });
+  }
+
+  function onLeave() {
+    forfeitAsMiss();
+  }
+
+  // Backgrounding (tab hidden) pauses the clock instead of forfeiting —
+  // only meaningful once the countdown has actually started; the intro
+  // screen has no clock to pause. Guarded against repeated hidden/visible
+  // firings: clearTimer() is idempotent, and resume only restarts the
+  // interval if one isn't already running.
+  function onVisibilityChange() {
+    if (!started || resolved) return;
+    if (document.hidden) {
+      clearTimer();
+    } else if (!timerId && remaining > 0) {
+      timerId = setInterval(tick, 1000);
+    }
+  }
+
+  window.addEventListener("pagehide", onLeave);
+  window.addEventListener("beforeunload", onLeave);
+  document.addEventListener("visibilitychange", onVisibilityChange);
 
   options.forEach((player) => {
     const btn = document.createElement("button");
@@ -1012,22 +1097,20 @@ function openTiebreak(options) {
     optionsEl.appendChild(btn);
   });
 
-  function renderTick() {
-    countdownEl.textContent = String(remaining);
-    barEl.style.transform = `scaleX(${remaining / TIEBREAK_SECONDS})`;
-  }
-  renderTick();
-
-  timerId = setInterval(() => {
-    remaining--;
+  readyBtn.addEventListener("click", function onReady() {
+    readyBtn.removeEventListener("click", onReady);
+    started = true;
+    introEl.hidden = true;
+    playEl.hidden = false;
     renderTick();
-    if (remaining <= 0) finalize(false);
-  }, 1000);
+    timerId = setInterval(tick, 1000);
+  }, { once: true });
 
   // The round is undecided until a pick or the timeout — don't let ESC
   // dismiss it for free.
   dlg.addEventListener("close", function onClose() {
     dlg.removeEventListener("close", onClose);
+    detachLifecycleGuards();
     endRound();
   }, { once: true });
 
