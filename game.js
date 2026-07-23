@@ -569,7 +569,8 @@ function nationalityToFlag(nation) {
     Australia: "🇦🇺",
     Austria: "🇦🇹",
     Argentina: "🇦🇷",
-    Belarus: "🇧🇾",
+    // Neutral-athlete status (post-2022 sanctions) — no national flag shown.
+    Belarus: "",
     Belgium: "🇧🇪",
     "Bosnia and Herzegovina": "🇧🇦",
     Brazil: "🇧🇷",
@@ -605,7 +606,8 @@ function nationalityToFlag(nation) {
     Poland: "🇵🇱",
     Portugal: "🇵🇹",
     Romania: "🇷🇴",
-    Russia: "🇷🇺",
+    // Neutral-athlete status (post-2022 sanctions) — no national flag shown.
+    Russia: "",
     Serbia: "🇷🇸",
     Slovakia: "🇸🇰",
     Slovenia: "🇸🇮",
