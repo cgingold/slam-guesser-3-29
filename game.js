@@ -939,14 +939,17 @@ function buildTiebreakOptions(target, guessedNames) {
       !guessedSet.has(p.name.toLowerCase())
   );
 
+  // Tier 1: gender + country + career overlap + score band.
+  // Tier 2: drops country AND band together, keeps gender + overlap.
+  // Tier 3: gender only.
   const withOverlap = sameGender.filter((p) => hasCareerOverlap(p, targetYears));
-  const withOverlapAndBand = withOverlap.filter((p) => {
+  const tier1 = withOverlap.filter((p) => {
     const s = p.autoScore ?? 0;
-    return s >= lo && s <= hi;
+    return s >= lo && s <= hi && p.nationality === target.nationality;
   });
 
   let candidates;
-  if (withOverlapAndBand.length > 0) candidates = withOverlapAndBand;
+  if (tier1.length > 0) candidates = tier1;
   else if (withOverlap.length > 0) candidates = withOverlap;
   else if (sameGender.length > 0) candidates = sameGender;
   else return null;
