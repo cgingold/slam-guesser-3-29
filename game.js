@@ -992,7 +992,6 @@ function openTiebreak(options) {
   const playEl = document.getElementById("tiebreakPlay");
   const readyBtn = document.getElementById("tiebreakReadyBtn");
   const optionsEl = document.getElementById("tiebreakOptions");
-  const countdownEl = document.getElementById("tiebreakCountdown");
   const barEl = document.getElementById("tiebreakBar");
 
   introEl.hidden = false;
@@ -1012,7 +1011,6 @@ function openTiebreak(options) {
   }
 
   function renderTick() {
-    countdownEl.textContent = String(remaining);
     barEl.style.transform = `scaleX(${remaining / TIEBREAK_SECONDS})`;
   }
 

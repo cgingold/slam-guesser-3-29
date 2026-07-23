@@ -773,12 +773,6 @@ dialog.difficulty-dialog {
   margin-bottom: 6px;
 }
 
-.tiebreak-subtext {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 18px;
-}
-
 .tiebreak-intro-body {
   font-size: 14.5px;
   line-height: 1.55;
@@ -802,14 +796,10 @@ dialog.difficulty-dialog {
 .tiebreak-ready-btn:active { transform: scale(0.98); }
 
 .tiebreak-timer {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
+  margin: 14px 0 20px;
 }
 
 .tiebreak-timer-track {
-  flex: 1 1 auto;
   height: 6px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.15);
@@ -823,15 +813,6 @@ dialog.difficulty-dialog {
   border-radius: 999px;
   transform-origin: left center;
   transition: transform 0.9s linear, background 0.2s;
-}
-
-.tiebreak-timer-count {
-  flex: 0 0 auto;
-  min-width: 22px;
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 700;
-  font-size: 18px;
-  color: #ffffff;
 }
 
 .tiebreak-options {
