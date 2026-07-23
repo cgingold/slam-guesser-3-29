@@ -917,8 +917,6 @@ function hasCareerOverlap(p, targetYears) {
 function buildTiebreakOptions(target, guessedNames) {
   const targetYears = getCareerYears(target);
   const targetScore = target.autoScore ?? 0;
-  const lo = targetScore * 0.5;
-  const hi = targetScore * 1.5;
 
   // Distractors must never repeat a name the user already guessed this
   // round — that would either give away the answer (if it matched) or
@@ -934,17 +932,21 @@ function buildTiebreakOptions(target, guessedNames) {
       !guessedSet.has(p.name.toLowerCase())
   );
 
-  // Tier 1: gender + country + career overlap + score band.
-  // Tier 2: drops country AND band together, keeps gender + overlap.
-  // Tier 3: gender only.
+  // By the time the tiebreak triggers, the user has already seen the
+  // country hint (revealed after the 2nd wrong guess) — country is
+  // preserved as long as possible so that hint stays meaningful, and is
+  // only dropped once overlap alone can't find a candidate either.
+  // Tier 1: gender + country + career overlap.
+  // Tier 2: gender + country                (drop overlap).
+  // Tier 3: gender + career overlap          (drop country instead).
+  // Tier 4: gender only                      (drop both).
+  const sameCountry = sameGender.filter((p) => p.nationality === target.nationality);
   const withOverlap = sameGender.filter((p) => hasCareerOverlap(p, targetYears));
-  const tier1 = withOverlap.filter((p) => {
-    const s = p.autoScore ?? 0;
-    return s >= lo && s <= hi && p.nationality === target.nationality;
-  });
+  const tier1 = sameCountry.filter((p) => hasCareerOverlap(p, targetYears));
 
   let candidates;
   if (tier1.length > 0) candidates = tier1;
+  else if (sameCountry.length > 0) candidates = sameCountry;
   else if (withOverlap.length > 0) candidates = withOverlap;
   else if (sameGender.length > 0) candidates = sameGender;
   else return null;
@@ -966,8 +968,8 @@ function buildTiebreakOptions(target, guessedNames) {
 // Opens the tiebreak modal and resolves it (win/miss) before handing off
 // to endRound(). `options` is the pre-shuffled array of 2-4 players.
 //
-// Two states inside the same dialog: an untimed intro screen ("I'm
-// Ready") and the play screen (options + 10s countdown), which only
+// Two states inside the same dialog: an untimed intro screen ("Let's
+// go!") and the play screen (options + 10s countdown), which only
 // starts once the user taps through the intro.
 function openTiebreak(options) {
   const dlg = document.getElementById("tiebreakDialog");
