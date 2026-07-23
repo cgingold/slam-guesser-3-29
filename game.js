@@ -177,15 +177,10 @@ function maybeRestoreFinishedDaily() {
   }
 
   // Finished round — append the outcome card
-  if (saved.outcome === "win") {
+  if (saved.outcome === "win" || saved.outcome === "tiebreak") {
     const a = document.createElement("div");
     a.className = "hint-card correct-card";
     a.textContent = `✅ Correct: ${game.current.name}`;
-    panel.appendChild(a);
-  } else if (saved.outcome === "tiebreak") {
-    const a = document.createElement("div");
-    a.className = "hint-card correct-card";
-    a.textContent = `🎾 Tiebreak Win: ${game.current.name}`;
     panel.appendChild(a);
   } else if (saved.gaveUp) {
     const a = document.createElement("div");
