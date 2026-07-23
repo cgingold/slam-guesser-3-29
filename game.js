@@ -1146,14 +1146,6 @@ function openResultModal() {
   const champion = won && isChampionThisWeek(game.date || todayLocal());
   outcome.textContent = champion ? "🏆 Champion" : isTiebreak ? "🎾 Tiebreak Win" : won ? "Winner" : "Missed It";
 
-  // Tiebreak wins get a small descriptive line instead of a guess count.
-  const subline = document.getElementById("resultSubline");
-  if (subline) {
-    const showSubline = isTiebreak && !champion;
-    subline.textContent = showSubline ? "I won in a 3rd Set Tiebreak" : "";
-    subline.hidden = !showSubline;
-  }
-
   // Player name with country flag to the right
   const playerEl = document.getElementById("resultPlayer");
   playerEl.innerHTML = "";

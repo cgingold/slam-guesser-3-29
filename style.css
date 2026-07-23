@@ -644,15 +644,6 @@ dialog.difficulty-dialog {
 .result-outcome.is-win  { color: var(--accent); }
 .result-outcome.is-loss { color: #fdba74; }
 
-/* Tiebreak-win descriptive line, replaces a guess count */
-.result-subline {
-  font-size: 13px;
-  font-style: italic;
-  color: var(--accent);
-  margin: -10px 0 18px;
-}
-.result-subline[hidden] { display: none; }
-
 .result-player {
   font-family: Georgia, "Times New Roman", serif;
   font-size: 19px;
