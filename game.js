@@ -1,12 +1,16 @@
 const DAILY_KEY = "slamGuesserSimple.daily.v1";
 
 /* ---- Data freshness gating ----------------------------
-   Results are current through RG 2026. Later 2026 slams
-   are hidden until the constants below are updated. */
+   Results are current through Wimbledon 2026. Later 2026 slams
+   are hidden until the constants below are updated. The footer
+   notice itself is off until the next milestone is worth calling
+   out — flip SHOW_FRESHNESS_NOTICE back on (and update the label
+   text) once USOpen 2026 lands. */
 const DATA_FRESHNESS_YEAR = "2026";
-const DATA_FRESHNESS_HIDE_SLAMS = ["Wimbledon", "USOpen"];
+const DATA_FRESHNESS_HIDE_SLAMS = ["USOpen"];
 const DATA_FRESHNESS_LABEL = "Results through RG 2026";
 const DATA_FRESHNESS_LABEL_SHORT = "Results thru RG ‘26";
+const SHOW_FRESHNESS_NOTICE = false;
 
 /* ---- Daily result storage -----------------------------
    Records each completed daily so revisits show the
@@ -2040,7 +2044,7 @@ function render() {
 
   const existingFoot = document.getElementById("freshnessFoot");
   if (existingFoot) existingFoot.remove();
-  if (hasFresh) {
+  if (hasFresh && SHOW_FRESHNESS_NOTICE) {
     const foot = document.createElement("p");
     foot.id = "freshnessFoot";
     foot.className = "freshness-foot";
