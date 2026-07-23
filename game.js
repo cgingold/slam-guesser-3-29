@@ -1161,6 +1161,12 @@ function openResultModal() {
   const champion = won && isChampionThisWeek(game.date || todayLocal());
   outcome.textContent = champion ? "🏆 Champion" : isTiebreak ? "🎾 Tiebreak Win" : won ? "Winner" : "Missed It";
 
+  // Share button glows on any win (plain win, tiebreak, or championship —
+  // "champion" only ever fires when `won` is already true, so this one
+  // flag covers all three). No glow on a miss/give-up.
+  const shareBtn = document.getElementById("resultShareBtn");
+  if (shareBtn) shareBtn.classList.toggle("is-glowing", won);
+
   // Player name with country flag to the right
   const playerEl = document.getElementById("resultPlayer");
   playerEl.innerHTML = "";
