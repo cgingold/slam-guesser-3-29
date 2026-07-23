@@ -141,6 +141,7 @@ function maybeRestoreFinishedDaily() {
   game.wrong = saved.wrong;
   game.lastOutcome = saved.outcome;
   game.gaveUp = !!saved.gaveUp;
+  game.wrongGuessNames = saved.wrongGuessNames || [];
 
   const inProgress = !!saved.inProgress && saved.outcome === null;
 
@@ -235,6 +236,7 @@ let game = {
   current: null,
   previous: null,
   wrong: 0,
+  wrongGuessNames: [],
   locked: false,
   selectedSuggestion: false,
   suggestionIndex: -1,
@@ -639,6 +641,7 @@ function seededRandom(seed) {
 
 function next() {
   game.wrong = 0;
+  game.wrongGuessNames = [];
   game.locked = false;
   game.selectedSuggestion = false;
   game.hintLocked = false;
@@ -761,12 +764,13 @@ function guess() {
     endRound();
   } else {
     game.wrong++;
+    game.wrongGuessNames.push(val);
 
     if (game.wrong >= 3) {
       // Salvage round: a multiple-choice pick before the reveal. Only
       // offered when the candidate cascade can find at least one valid
       // distractor — otherwise fall straight through to a normal loss.
-      const tiebreakOptions = buildTiebreakOptions(game.current);
+      const tiebreakOptions = buildTiebreakOptions(game.current, game.wrongGuessNames);
       if (tiebreakOptions) {
         openTiebreak(tiebreakOptions);
       } else {
@@ -781,6 +785,7 @@ function guess() {
         player: game.current.name,
         playerSnapshot: game.current,
         wrong: game.wrong,
+        wrongGuessNames: game.wrongGuessNames,
         outcome: null,
         gaveUp: false,
         inProgress: true,
@@ -914,14 +919,24 @@ function hasCareerOverlap(p, targetYears) {
 // drop overlap → same gender only. Returns 2-4 shuffled options
 // (target + up to 3 distractors), or null if no distractor qualifies at
 // any level (tiebreak should be skipped entirely).
-function buildTiebreakOptions(target) {
+function buildTiebreakOptions(target, guessedNames) {
   const targetYears = getCareerYears(target);
   const targetScore = target.autoScore ?? 0;
   const lo = targetScore * 0.5;
   const hi = targetScore * 1.5;
 
+  // Distractors must never repeat a name the user already guessed this
+  // round — that would either give away the answer (if it matched) or
+  // just look broken. The target itself is exempt: a wrong guess is by
+  // definition never the target, so this only ever filters distractors.
+  const guessedSet = new Set((guessedNames || []).map((n) => n.toLowerCase()));
+
   const sameGender = game.players.filter(
-    (p) => p !== target && p.name !== target.name && p.gender === target.gender
+    (p) =>
+      p !== target &&
+      p.name !== target.name &&
+      p.gender === target.gender &&
+      !guessedSet.has(p.name.toLowerCase())
   );
 
   const withOverlap = sameGender.filter((p) => hasCareerOverlap(p, targetYears));
