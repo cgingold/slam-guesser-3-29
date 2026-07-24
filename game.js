@@ -1066,6 +1066,11 @@ function openTiebreak(options) {
     optionsEl.querySelectorAll("button").forEach((b) => { b.disabled = true; });
     game.lastOutcome = won ? "tiebreak" : "lose";
     showHints(won);
+    // Open the result modal WHILE the tiebreak dialog is still open (dialogs
+    // stack), then close the tiebreak dialog underneath it — closing it
+    // first and letting the async "close" event trigger endRound() left a
+    // ~1-frame gap with no modal open at all, flashing the page underneath.
+    endRound();
     dlg.close();
   }
 
@@ -1141,14 +1146,6 @@ function openTiebreak(options) {
     renderBar(1);
     segmentStart = performance.now();
     rafId = requestAnimationFrame(tick);
-  }, { once: true });
-
-  // The round is undecided until a pick or the timeout — don't let ESC
-  // dismiss it for free.
-  dlg.addEventListener("close", function onClose() {
-    dlg.removeEventListener("close", onClose);
-    detachLifecycleGuards();
-    endRound();
   }, { once: true });
 
   dlg.showModal();
