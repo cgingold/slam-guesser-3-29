@@ -1038,7 +1038,14 @@ function openTiebreak(options) {
   function tick() {
     remaining--;
     renderTick();
-    if (remaining <= 0) finalize(false);
+    if (remaining <= 0) {
+      clearTimer();
+      // Let the bar's own CSS transition actually finish shrinking to
+      // empty before resolving — otherwise dlg.close() tears the modal
+      // down instantly and the bar never visually reaches the end. Must
+      // match .tiebreak-timer-bar's `transition: transform` duration.
+      setTimeout(() => finalize(false), 900);
+    }
   }
 
   function detachLifecycleGuards() {
