@@ -1021,31 +1021,35 @@ function openTiebreak(options) {
 
   let resolved = false;
   let started = false; // true once "Let's go!" is tapped — the clock only runs after this
-  let timerId = null;
-  let remaining = TIEBREAK_SECONDS;
+  let rafId = null;
+  let elapsedMs = 0; // accumulated run time across pause/resume segments
+  let segmentStart = 0; // performance.now() when the current running segment began
+  const totalMs = TIEBREAK_SECONDS * 1000;
 
-  function clearTimer() {
-    if (timerId) {
-      clearInterval(timerId);
-      timerId = null;
+  function stopClock() {
+    if (rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
     }
   }
 
-  function renderTick() {
-    barEl.style.transform = `scaleX(${remaining / TIEBREAK_SECONDS})`;
+  function renderBar(frac) {
+    barEl.style.transform = `scaleX(${frac})`;
   }
 
-  function tick() {
-    remaining--;
-    renderTick();
-    if (remaining <= 0) {
-      clearTimer();
-      // Let the bar's own CSS transition actually finish shrinking to
-      // empty before resolving — otherwise dlg.close() tears the modal
-      // down instantly and the bar never visually reaches the end. Must
-      // match .tiebreak-timer-bar's `transition: transform` duration.
-      setTimeout(() => finalize(false), 900);
+  // Driven every frame (not once/second) so the bar shrinks continuously
+  // instead of stepping in 10 discrete per-second jumps.
+  function tick(now) {
+    const elapsed = elapsedMs + (now - segmentStart);
+    const frac = Math.max(0, 1 - elapsed / totalMs);
+    renderBar(frac);
+    if (frac <= 0) {
+      // One more frame so the fully-empty bar actually paints before the
+      // dialog closes, instead of resolving in the same frame it was set.
+      requestAnimationFrame(() => finalize(false));
+      return;
     }
+    rafId = requestAnimationFrame(tick);
   }
 
   function detachLifecycleGuards() {
@@ -1057,7 +1061,7 @@ function openTiebreak(options) {
   function finalize(won) {
     if (resolved) return;
     resolved = true;
-    clearTimer();
+    stopClock();
     detachLifecycleGuards();
     optionsEl.querySelectorAll("button").forEach((b) => { b.disabled = true; });
     game.lastOutcome = won ? "tiebreak" : "lose";
@@ -1074,7 +1078,7 @@ function openTiebreak(options) {
   function forfeitAsMiss() {
     if (resolved) return;
     resolved = true;
-    clearTimer();
+    stopClock();
     saveDailyResult(game.date, game.mode, {
       player: game.current.name,
       playerSnapshot: game.current,
@@ -1099,14 +1103,20 @@ function openTiebreak(options) {
   // Backgrounding (tab hidden) pauses the clock instead of forfeiting —
   // only meaningful once the countdown has actually started; the intro
   // screen has no clock to pause. Guarded against repeated hidden/visible
-  // firings: clearTimer() is idempotent, and resume only restarts the
-  // interval if one isn't already running.
+  // firings: stopClock() is idempotent, and resume only restarts the
+  // rAF loop if one isn't already running, folding the elapsed time from
+  // the segment that just ended into elapsedMs so the bar resumes from
+  // exactly where it paused instead of losing or double-counting time.
   function onVisibilityChange() {
     if (!started || resolved) return;
     if (document.hidden) {
-      clearTimer();
-    } else if (!timerId && remaining > 0) {
-      timerId = setInterval(tick, 1000);
+      if (rafId !== null) {
+        elapsedMs += performance.now() - segmentStart;
+        stopClock();
+      }
+    } else if (rafId === null && elapsedMs < totalMs) {
+      segmentStart = performance.now();
+      rafId = requestAnimationFrame(tick);
     }
   }
 
@@ -1128,8 +1138,9 @@ function openTiebreak(options) {
     started = true;
     introEl.hidden = true;
     playEl.hidden = false;
-    renderTick();
-    timerId = setInterval(tick, 1000);
+    renderBar(1);
+    segmentStart = performance.now();
+    rafId = requestAnimationFrame(tick);
   }, { once: true });
 
   // The round is undecided until a pick or the timeout — don't let ESC

@@ -813,7 +813,11 @@ dialog.difficulty-dialog {
   background: var(--accent);
   border-radius: 999px;
   transform-origin: left center;
-  transition: transform 0.9s linear, background 0.2s;
+  /* transform is driven every animation frame in JS now (continuous
+     countdown), not CSS-transitioned between sparse updates — a
+     transition here would lag behind and re-introduce the jank this
+     was designed to fix. */
+  transition: background 0.2s;
 }
 
 .tiebreak-options {
