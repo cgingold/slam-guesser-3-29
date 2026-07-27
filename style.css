@@ -543,15 +543,18 @@ dialog.difficulty-dialog {
   border-radius: 2px;
 }
 
-.giveup-actions {
+/* Generic two-button confirmation dialog layout (e.g. the voluntary-
+   tiebreak confirmation) — primary is the safe/default action, secondary
+   is the more committal one. */
+.confirm-actions {
   display: flex;
   gap: 10px;
   margin-top: 18px;
   flex-wrap: wrap;
 }
 
-.giveup-confirm,
-.giveup-cancel {
+.confirm-primary,
+.confirm-secondary {
   flex: 1 1 0;
   padding: 11px 16px;
   border-radius: 999px;
@@ -562,19 +565,34 @@ dialog.difficulty-dialog {
   transition: filter 0.15s, background 0.15s, border-color 0.15s;
 }
 
-.giveup-confirm {
-  background: transparent;
-  color: var(--ink-soft);
-  border-color: var(--line);
-}
-.giveup-confirm:hover { border-color: #b8512a; color: #b8512a; background: rgba(184, 81, 42, 0.05); filter: none; }
-
-.giveup-cancel {
+.confirm-secondary {
+  /* Solid dark fill — same weight as the old "Keep Guessing" pill — with
+     the glow doing the work of marking this as the committal action. */
   background: var(--ink);
   color: var(--header-ink);
   border-color: var(--ink);
+  /* Same lime glow as the post-win share button — draws the eye to the
+     more committal action. */
+  box-shadow: 0 0 8px rgba(165, 232, 90, 0.5);
+  animation: resultShareGlow 2s ease-in-out infinite;
 }
-.giveup-cancel:hover { filter: brightness(1.12); }
+.confirm-secondary:hover { filter: brightness(1.12); }
+
+@media (prefers-reduced-motion: reduce) {
+  .confirm-secondary {
+    animation: none;
+    box-shadow: 0 0 14px rgba(165, 232, 90, 0.65);
+  }
+}
+
+.confirm-primary {
+  /* Game-background fill — the quieter option next to Play Tiebreak's
+     glowing dark pill. */
+  background: var(--bg);
+  color: var(--ink);
+  border-color: var(--line);
+}
+.confirm-primary:hover { border-color: var(--ink-soft); filter: brightness(0.97); }
 
 /* ===========================================================
    RESULT MODAL — round-end celebration
@@ -1068,13 +1086,13 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* Give Up — quieter ghost button */
-#giveUpBtn {
+/* Tiebreak — quieter ghost button (same role Give Up used to occupy) */
+#tiebreakBtn {
   background: transparent;
   color: var(--ink-soft);
   border: 1px solid var(--line);
 }
-#giveUpBtn:hover:not(:disabled) {
+#tiebreakBtn:hover:not(:disabled) {
   border-color: #b8512a;
   color: #b8512a;
   background: rgba(184, 81, 42, 0.05);

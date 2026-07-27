@@ -174,7 +174,7 @@ function maybeRestoreFinishedDaily() {
     // guessing. No banner, no answer reveal.
     game.locked = false;
     document.getElementById("guessBtn").disabled = false;
-    document.getElementById("giveUpBtn").disabled = false;
+    document.getElementById("tiebreakBtn").disabled = false;
     document.getElementById("shareBtn").disabled = true;
     updateUI();
     return true;
@@ -207,7 +207,7 @@ function maybeRestoreFinishedDaily() {
   // Lock the input/buttons via the same end-of-round flow
   game.locked = true;
   document.getElementById("guessBtn").disabled = true;
-  document.getElementById("giveUpBtn").disabled = true;
+  document.getElementById("tiebreakBtn").disabled = true;
   document.getElementById("shareBtn").disabled = false;
 
   revealCountdown();
@@ -666,7 +666,7 @@ function next() {
   game.lastOutcome = null;
 
   document.getElementById("guessBtn").disabled = false;
-  document.getElementById("giveUpBtn").disabled = false;
+  document.getElementById("tiebreakBtn").disabled = false;
 
   document.getElementById("guess").value = "";
 
@@ -782,7 +782,7 @@ function guess() {
       // Salvage round: a multiple-choice pick before the reveal. Only
       // offered when the candidate cascade can find at least one valid
       // distractor — otherwise fall straight through to a normal loss.
-      const tiebreakOptions = buildTiebreakOptions(game.current, game.wrongGuessNames);
+      const tiebreakOptions = buildTiebreakOptions(game.current, game.wrongGuessNames, game.wrong);
       if (tiebreakOptions) {
         openTiebreak(tiebreakOptions);
       } else {
@@ -816,39 +816,36 @@ function guess() {
   hideSuggestions();
 }
 
-/* GIVE UP */
+/* VOLUNTARY TIEBREAK */
 
-function giveUp() {
+// Tapping the Tiebreak button (available any time before the automatic
+// 3-guess trigger) opens a confirmation first — unlike the automatic
+// trigger, this one is optional, so it needs an "are you sure" beat.
+function openTiebreakConfirm() {
   if (game.locked) return;
-  // Show the confirmation dialog instead of giving up immediately.
-  const dlg = document.getElementById("giveUpDialog");
+  const dlg = document.getElementById("tiebreakConfirmDialog");
   if (dlg && typeof dlg.showModal === "function") {
     dlg.showModal();
-  } else {
-    // Fallback if <dialog> isn't supported
-    confirmGiveUp();
   }
 }
 
-function confirmGiveUp() {
-  // Close the dialog if it's open
-  const dlg = document.getElementById("giveUpDialog");
+function confirmPlayTiebreak() {
+  const dlg = document.getElementById("tiebreakConfirmDialog");
   if (dlg && dlg.open) dlg.close();
 
   if (game.locked) return;
 
-  game.lastOutcome = "lose";
-  game.gaveUp = true;
-
-  const panel = document.getElementById("hintPanel");
-
-  const a = document.createElement("div");
-  a.className = "hint-card answer-card";
-  a.textContent = `🏳️ Gave Up: ${game.current.name}`;
-
-  panel.appendChild(a);
-
-  endRound();
+  const tiebreakOptions = buildTiebreakOptions(game.current, game.wrongGuessNames, game.wrong);
+  if (tiebreakOptions) {
+    // Skip the "Let's go!" intro — that's only for the automatic
+    // 3-guess trigger. A voluntary trigger goes straight to the clock.
+    openTiebreak(tiebreakOptions, { skipIntro: true });
+  } else {
+    // Safety net — essentially unreachable given the player pool size.
+    game.lastOutcome = "lose";
+    showHints(false);
+    endRound();
+  }
 }
 
 // "win" or "lose"
@@ -993,9 +990,14 @@ function buildTiebreakOptions(target, guessedNames) {
 // to endRound(). `options` is the pre-shuffled array of 2-4 players.
 //
 // Two states inside the same dialog: an untimed intro screen ("Let's
-// go!") and the play screen (options + 10s countdown), which only
-// starts once the user taps through the intro.
-function openTiebreak(options) {
+// go!") and the play screen (options + 10s countdown). For the automatic
+// 3-guess trigger the intro shows first and the clock only starts once
+// the user taps through it; pass `{ skipIntro: true }` for a voluntary
+// trigger (via the Tiebreak button + confirmation) to go straight to the
+// play screen and start the clock immediately.
+function openTiebreak(options, opts) {
+  const skipIntro = !!(opts && opts.skipIntro);
+
   const dlg = document.getElementById("tiebreakDialog");
   if (!dlg || typeof dlg.showModal !== "function") {
     // Defensive fallback — treat as a normal loss if <dialog> isn't supported.
@@ -1007,7 +1009,7 @@ function openTiebreak(options) {
 
   game.locked = true;
   document.getElementById("guessBtn").disabled = true;
-  document.getElementById("giveUpBtn").disabled = true;
+  document.getElementById("tiebreakBtn").disabled = true;
 
   const introEl = document.getElementById("tiebreakIntro");
   const playEl = document.getElementById("tiebreakPlay");
@@ -1015,9 +1017,10 @@ function openTiebreak(options) {
   const optionsEl = document.getElementById("tiebreakOptions");
   const barEl = document.getElementById("tiebreakBar");
 
-  introEl.hidden = false;
+  introEl.hidden = skipIntro;
   playEl.hidden = true;
   optionsEl.innerHTML = "";
+  dlg.classList.toggle("is-intro", !skipIntro);
 
   let resolved = false;
   let started = false; // true once "Let's go!" is tapped — the clock only runs after this
@@ -1138,15 +1141,24 @@ function openTiebreak(options) {
     optionsEl.appendChild(btn);
   });
 
-  readyBtn.addEventListener("click", function onReady() {
-    readyBtn.removeEventListener("click", onReady);
+  function startClock() {
     started = true;
     introEl.hidden = true;
     playEl.hidden = false;
+    dlg.classList.remove("is-intro");
     renderBar(1);
     segmentStart = performance.now();
     rafId = requestAnimationFrame(tick);
-  }, { once: true });
+  }
+
+  if (skipIntro) {
+    startClock();
+  } else {
+    readyBtn.addEventListener("click", function onReady() {
+      readyBtn.removeEventListener("click", onReady);
+      startClock();
+    }, { once: true });
+  }
 
   dlg.showModal();
 }
@@ -1197,7 +1209,7 @@ function endRound() {
   game.locked = true;
 
   document.getElementById("guessBtn").disabled = true;
-  document.getElementById("giveUpBtn").disabled = true;
+  document.getElementById("tiebreakBtn").disabled = true;
   document.getElementById("shareBtn").disabled = false;
 
   updateUI();
@@ -1279,7 +1291,7 @@ function openResultModal() {
   outcome.classList.remove("is-win", "is-loss");
   outcome.classList.add(won ? "is-win" : "is-loss");
   const champion = won && isChampionThisWeek(game.date || todayLocal());
-  outcome.textContent = champion ? "🏆 Champion" : isTiebreak ? "Tiebreak Win" : won ? "Winner" : "Missed It";
+  outcome.textContent = champion ? "🏆 Champion" : isTiebreak ? "Tiebreak Win!" : won ? "Winner" : "Missed It";
 
   // Share button glows on any win (plain win, tiebreak, or championship —
   // "champion" only ever fires when `won` is already true, so this one
@@ -1455,7 +1467,7 @@ function buildShareLines() {
   // guess count the same way — and states the salvage outright.
   let ballsLine;
   if (isTiebreak) {
-    ballsLine = "🎾 I won in a 3rd Set Tiebreak";
+    ballsLine = "🎾 I won in a tiebreak!";
   } else {
     const attemptsUsed = won ? guessNum : wrong;
     const balls = [];
@@ -1658,7 +1670,7 @@ async function buildStoryImage() {
   if (won && isChampionThisWeek(todayForChampion)) {
     resultLine = "I am a Slam Grid Champion!";  resultColor = "#a5e85a";
   } else if (isTiebreak) {
-    resultLine = "Won in a 3rd Set Tiebreak";   resultColor = "#a5e85a";
+    resultLine = "I won in a tiebreak!";        resultColor = "#a5e85a";
   } else if (won) {
     resultLine = guessNum === 1 ? "I got it in 1 guess" : `I got it in ${guessNum} guesses`;
     resultColor = "#a5e85a";

@@ -113,24 +113,31 @@
       You get three guesses. Each miss reveals a hint.
     </p>
     <p class="howto-body">
+      Or play a Tiebreak at any point — a timed, multiple-choice shot at the answer. Win it and you're through; lose it and the round is over.
+    </p>
+    <p class="howto-body">
       The grids get harder all week — Monday's the first round, Sunday's the final. Win all seven to become a Champion 🏆
     </p>
     <div class="howto-vamos">Vamos!</div>
   </div>
 </dialog>
 
-<dialog id="giveUpDialog" class="howto-dialog">
+<!-- Voluntary-tiebreak confirmation — shown when the Tiebreak button is
+     tapped with fewer than 3 guesses used. Confirming skips straight to
+     the options + countdown (no intro screen — that's only shown for
+     the automatic 3rd-wrong-guess trigger). -->
+<dialog id="tiebreakConfirmDialog" class="howto-dialog">
   <div class="howto-inner">
-    <h2 class="howto-title">What would Rafa do?</h2>
-    <p class="howto-body">You sure?</p>
-    <div class="giveup-actions">
-      <button class="giveup-confirm" onclick="confirmGiveUp()">Give up</button>
-      <button class="giveup-cancel" onclick="document.getElementById('giveUpDialog').close()">Play on</button>
+    <h2 class="howto-title">Play a Tiebreak?</h2>
+    <p class="howto-body">A multiple-choice sudden death round. Get it right and you win — get it wrong (or run out of time) and the round is over.</p>
+    <div class="confirm-actions">
+      <button class="confirm-secondary" onclick="confirmPlayTiebreak()">Play Tiebreak</button>
+      <button class="confirm-primary" onclick="document.getElementById('tiebreakConfirmDialog').close()">Keep Guessing</button>
     </div>
   </div>
 </dialog>
 
-<!-- Round-result modal — opens automatically on win/lose/give-up and
+<!-- Round-result modal — opens automatically on win/lose and
      reveals the player, animates the W/F/SF/QF stat counts, and offers
      the share button as the primary action. Closing returns the user
      to the regular end-of-round page state. -->
@@ -261,7 +268,7 @@
   </div>
 
   <button id="guessBtn" onclick="guess()">Guess</button>
-  <button id="giveUpBtn" onclick="giveUp()">Give Up</button>
+  <button id="tiebreakBtn" onclick="openTiebreakConfirm()" title="Multiple-choice">Tiebreak</button>
   <div class="share-wrap">
     <button id="shareBtn" onclick="openSharePopover(event)" disabled>Share</button>
     <!-- Share menu — starts here; JS reparents it to whichever share-wrap triggered it -->
