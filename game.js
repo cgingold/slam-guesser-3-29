@@ -917,9 +917,18 @@ function getCareerYears(p) {
   return years;
 }
 
-function hasCareerOverlap(p, targetYears) {
+// `minYears` lets callers demand more than a single shared year — used to
+// tighten the 0/1-guess tiers, where career overlap is the only filter (or
+// the only filter besides gender) and a single shared year isn't enough of
+// a plausibility signal on its own.
+function hasCareerOverlap(p, targetYears, minYears) {
+  const need = minYears ?? 1;
+  let shared = 0;
   for (const y of getCareerYears(p)) {
-    if (targetYears.has(y)) return true;
+    if (targetYears.has(y)) {
+      shared++;
+      if (shared >= need) return true;
+    }
   }
   return false;
 }
@@ -931,7 +940,24 @@ function hasCareerOverlap(p, targetYears) {
 // Returns null only if literally zero distractors qualify even at the
 // loosest tier (tiebreak should be skipped entirely — a safety net that
 // shouldn't realistically trigger against this player pool).
-function buildTiebreakOptions(target, guessedNames) {
+//
+// The candidate pool depends on how many guesses had been used at the
+// moment the tiebreak was triggered — it mirrors exactly which hints the
+// user has actually seen so far, whether the tiebreak was reached
+// automatically (3 guesses) or voluntarily (0, 1, or 2):
+//   0 guesses: no gender/country hint revealed yet — any player at all,
+//              filtered only by career overlap: 4+ shared years first,
+//              falling back to 2+ for short-career players where a 4-year
+//              bar would leave too few (or zero) candidates.
+//   1 guess:   gender hint revealed — same gender + overlap (4+ shared
+//              years, falling back to 2+), country not yet filtered.
+//   2 or 3:    both hints revealed — the full gender/country/overlap
+//              cascade, unchanged from before (1+ shared year — country
+//              already narrows the pool, so overlap only needs to be a
+//              light plausibility check here).
+// Overlap always applies at every guess count — it's a baseline
+// plausibility filter, not something tied to a revealed hint.
+function buildTiebreakOptions(target, guessedNames, guessesUsed) {
   const targetYears = getCareerYears(target);
   const targetScore = target.autoScore ?? 0;
 
@@ -940,32 +966,41 @@ function buildTiebreakOptions(target, guessedNames) {
   // just look broken. The target itself is exempt: a wrong guess is by
   // definition never the target, so this only ever filters distractors.
   const guessedSet = new Set((guessedNames || []).map((n) => n.toLowerCase()));
-
-  const sameGender = game.players.filter(
-    (p) =>
-      p !== target &&
-      p.name !== target.name &&
-      p.gender === target.gender &&
-      !guessedSet.has(p.name.toLowerCase())
-  );
-
-  // By the time the tiebreak triggers, the user has already seen the
-  // country hint (revealed after the 2nd wrong guess) — country is
-  // preserved as long as possible so that hint stays meaningful, and is
-  // only dropped once overlap alone can't find a candidate either.
-  // Tier 1: gender + country + career overlap.
-  // Tier 2: gender + country                (drop overlap).
-  // Tier 3: gender + career overlap          (drop country instead).
-  // Tier 4: gender only                      (drop both).
-  const sameCountry = sameGender.filter((p) => p.nationality === target.nationality);
-  const withOverlap = sameGender.filter((p) => hasCareerOverlap(p, targetYears));
-  const tier1 = sameCountry.filter((p) => hasCareerOverlap(p, targetYears));
-  const tiers = [tier1, sameCountry, withOverlap, sameGender];
+  const eligible = (p) =>
+    p !== target && p.name !== target.name && !guessedSet.has(p.name.toLowerCase());
 
   const closestFirst = (pool) =>
     pool.slice().sort((a, b) =>
       Math.abs((a.autoScore ?? 0) - targetScore) - Math.abs((b.autoScore ?? 0) - targetScore)
     );
+
+  let tiers;
+  if (guessesUsed === 0) {
+    // 4-year overlap first; fall back to 2 years for short-career players
+    // where a 4-year bar would otherwise leave too few (or zero) candidates.
+    const overlap4 = game.players.filter((p) => eligible(p) && hasCareerOverlap(p, targetYears, 4));
+    const overlap2 = game.players.filter((p) => eligible(p) && hasCareerOverlap(p, targetYears, 2));
+    tiers = [overlap4, overlap2];
+  } else if (guessesUsed === 1) {
+    const sameGender = game.players.filter((p) => eligible(p) && p.gender === target.gender);
+    const overlap4 = sameGender.filter((p) => hasCareerOverlap(p, targetYears, 4));
+    const overlap2 = sameGender.filter((p) => hasCareerOverlap(p, targetYears, 2));
+    tiers = [overlap4, overlap2];
+  } else {
+    // 2 or 3 guesses used — both gender and country hints revealed.
+    // Country is preserved as long as possible so that hint stays
+    // meaningful, and is only dropped once overlap alone can't find a
+    // candidate either.
+    // Tier 1: gender + country + career overlap.
+    // Tier 2: gender + country                (drop overlap).
+    // Tier 3: gender + career overlap          (drop country instead).
+    // Tier 4: gender only                      (drop both).
+    const sameGender = game.players.filter((p) => eligible(p) && p.gender === target.gender);
+    const sameCountry = sameGender.filter((p) => p.nationality === target.nationality);
+    const withOverlap = sameGender.filter((p) => hasCareerOverlap(p, targetYears));
+    const tier1 = sameCountry.filter((p) => hasCareerOverlap(p, targetYears));
+    tiers = [tier1, sameCountry, withOverlap, sameGender];
+  }
 
   const distractors = [];
   const picked = new Set();
