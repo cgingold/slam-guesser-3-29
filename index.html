@@ -157,20 +157,26 @@
   </div>
 </dialog>
 
-<!-- 3rd Set Tiebreak modal — multiple-choice salvage round shown after 3
-     wrong guesses (when the candidate cascade finds at least one valid
-     distractor). Opens on an untimed intro screen first; tapping "I'm
-     Ready" reveals the 2-4 player buttons and starts the 10-second
-     countdown. A correct pick upgrades the round to a win; a wrong pick
-     or the timeout ends it as a normal miss. The result modal follows
-     right after resolution. -->
+<!-- Tiebreak modal — multiple-choice salvage round, either triggered
+     automatically after the 3rd wrong guess, or voluntarily at any point
+     via the Tiebreak button (see tiebreakConfirmDialog above). The
+     untimed "Let's go!" intro screen only shows for the automatic
+     3-guess trigger; a voluntary trigger skips straight to the options +
+     10-second countdown. A correct pick upgrades the round to a win; a
+     wrong pick or the timeout ends it as a normal miss. The result modal
+     follows right after resolution. -->
 <dialog id="tiebreakDialog" class="tiebreak-dialog">
   <div class="tiebreak-inner">
-    <!-- Intro state — no clock runs here; shown until "Let's go!" is tapped. -->
+    <!-- Intro state — no clock runs here; shown until "Let's go!" is tapped.
+         Same look as tiebreakConfirmDialog (reuses its classes), minus the
+         "Keep Guessing" option — by this point (automatic 3-guess trigger)
+         there's no guessing left to keep doing. -->
     <div class="tiebreak-intro" id="tiebreakIntro">
-      <div class="tiebreak-title">Tiebreak</div>
-      <p class="tiebreak-intro-body">You've used all 3 guesses — one last swing. Pick the correct player before time runs out.</p>
-      <button class="tiebreak-ready-btn" id="tiebreakReadyBtn" type="button">Let's go!</button>
+      <h2 class="howto-title">Tiebreak time!</h2>
+      <p class="howto-body">A multiple-choice sudden death round. Get it right and you win — get it wrong (or run out of time) and the round is over.</p>
+      <div class="confirm-actions">
+        <button class="confirm-secondary" id="tiebreakReadyBtn" type="button">Let's go!</button>
+      </div>
     </div>
 
     <!-- Play state — hidden until "Let's go!"; this is when the countdown runs. -->

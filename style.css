@@ -784,35 +784,29 @@ dialog.difficulty-dialog {
   text-align: center;
 }
 
-.tiebreak-title {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: #fde047;
-  margin-bottom: 6px;
+/* Intro screen ("Tiebreak time!") reuses the confirmation dialog's white
+   look (see .howto-title/.howto-body/.confirm-actions/.confirm-secondary
+   in the how-to-play section above) — nothing's actually at risk yet on
+   this screen, so it shouldn't carry the play screen's dark/yellow
+   treatment. Toggled via JS (openTiebreak() in game.js) alongside
+   introEl.hidden, since both states share the same <dialog>. */
+.tiebreak-dialog.is-intro {
+  max-width: 440px;
+  background: var(--surface);
+  color: var(--ink);
+  outline: none;
+  box-shadow: 0 24px 48px rgba(29, 62, 53, 0.25);
 }
 
-.tiebreak-intro-body {
-  font-size: 14.5px;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.82);
-  margin: 4px 0 24px;
+.tiebreak-dialog.is-intro::backdrop {
+  background: rgba(29, 62, 53, 0.45);
+  backdrop-filter: blur(2px);
 }
 
-.tiebreak-ready-btn {
-  background: var(--accent);
-  color: var(--accent-ink);
-  border: none;
-  padding: 13px 30px;
-  border-radius: 999px;
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  transition: filter 0.15s, transform 0.1s;
+.tiebreak-dialog.is-intro .tiebreak-inner {
+  text-align: left;
+  padding: 28px 28px 24px;
 }
-.tiebreak-ready-btn:hover { filter: brightness(1.08); }
-.tiebreak-ready-btn:active { transform: scale(0.98); }
 
 .tiebreak-timer {
   margin: 0 0 20px;
