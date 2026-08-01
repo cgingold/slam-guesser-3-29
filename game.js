@@ -782,6 +782,7 @@ function confirmPlayTiebreak() {
   } else {
     // Safety net — essentially unreachable given the player pool size.
     game.lastOutcome = "lose";
+    game.lockProgressHints = true;
     showHints(false);
     announce("Missed it — the answer was revealed.");
     endRound();
@@ -1038,6 +1039,10 @@ function openTiebreak(options, opts) {
     detachLifecycleGuards();
     optionsEl.querySelectorAll("button").forEach((b) => { b.disabled = true; });
     game.lastOutcome = won ? "tiebreak" : "lose";
+    // Whatever guess count the tiebreak was triggered at (0-3), any
+    // gender/nation hint due by that point was already shown by an
+    // earlier wrong guess — block showHints() from re-adding it here.
+    game.lockProgressHints = true;
     showHints(won);
     announce(won ? "Correct! Tiebreak win." : "Incorrect. Tiebreak lost — the answer was revealed.");
     // Open the result modal WHILE the tiebreak dialog is still open (dialogs
