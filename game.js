@@ -198,6 +198,15 @@ function maybeRestoreFinishedDaily() {
   banner.textContent = "🕘 You've already played today's game";
   panel.insertBefore(banner, panel.firstChild);
 
+  // Screen-reader users landing on an already-finished day get no visual
+  // cue at all otherwise — mirror the banner + outcome card as one
+  // announcement, same outcome-naming convention as a live loss (item 2).
+  const restoreOutcomeText =
+    saved.outcome === "win" ? "Correct! " :
+    saved.outcome === "tiebreak" ? "Correct! Tiebreak win. " :
+    "Incorrect. ";
+  announce(`You've already played today's game. ${restoreOutcomeText}The answer was ${game.current.name}.`);
+
   // Lock the input/buttons via the same end-of-round flow
   game.locked = true;
   document.getElementById("guessBtn").disabled = true;
@@ -499,6 +508,8 @@ function showMessage(text) {
   div.textContent = text;
   container.appendChild(div);
   setTimeout(() => div.remove(), 4000);
+
+  announce(text);
 }
 
 // Screen-reader announcement — updates the visually-hidden aria-live
@@ -721,7 +732,7 @@ function guess() {
       } else {
         game.lastOutcome = "lose";
         showHints(false);
-        announce("Incorrect. Missed it — the answer was revealed.");
+        announce(`Incorrect. Missed it — the answer was ${game.current.name}.`);
         endRound();
       }
     } else {
@@ -784,7 +795,7 @@ function confirmPlayTiebreak() {
     game.lastOutcome = "lose";
     game.lockProgressHints = true;
     showHints(false);
-    announce("Missed it — the answer was revealed.");
+    announce(`Missed it — the answer was ${game.current.name}.`);
     endRound();
   }
 }
@@ -1044,7 +1055,7 @@ function openTiebreak(options, opts) {
     // earlier wrong guess — block showHints() from re-adding it here.
     game.lockProgressHints = true;
     showHints(won);
-    announce(won ? "Correct! Tiebreak win." : "Incorrect. Tiebreak lost — the answer was revealed.");
+    announce(won ? "Correct! Tiebreak win." : `Incorrect. Tiebreak lost — the answer was ${game.current.name}.`);
     // Open the result modal WHILE the tiebreak dialog is still open (dialogs
     // stack), then close the tiebreak dialog underneath it — closing it
     // first and letting the async "close" event trigger endRound() left a
