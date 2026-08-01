@@ -244,32 +244,6 @@ let game = {
   playType: "daily", // single play type — no practice mode in this build
   date: null,
 };
-/* HIGHLIGHT HELPERS — no-ops since there's no play toggle */
-
-function highlightPlayButtons() {
-  /* no-op */
-}
-function setPlayType() {
-  /* no-op */
-}
-
-/* URL SYNC
-   Wordle-style clean URL: state lives in localStorage and in memory,
-   not in the URL. This build is "today only" — ?date= and ?play= URL
-   params are IGNORED (not read anywhere; getRequestedDate() always
-   returns today). Any query string is stripped on load. This function
-   exists as a no-op so existing call sites still work. */
-
-function syncURL() {
-  /* no-op — see comment above */
-}
-
-/* SEED REBUILD */
-
-function rebuildSeed() {
-  game.seed = `${game.mode}-${game.date}`;
-}
-
 /* =========================================================
    DAILY ROTATION — Fisher-Yates with a stable seed
    =========================================================
@@ -437,29 +411,6 @@ async function loadSchedule() {
   }
 }
 
-/* MODE — single-mode game; these are kept as no-ops so the rest of the
-   code still calls them without conditionals. */
-
-function highlightModeButtons() {
-  /* no-op: no toggle in single-mode build */
-}
-function updateModeNote() {
-  /* no-op: no mode descriptor needed */
-}
-function setMode() {
-  /* no-op: there's only one mode here */
-}
-
-/* CALENDAR REMOVED — daily mode is now "today only".
-   These stubs exist because setPlayType() and other places call them. */
-
-function updateDateUI() {
-  /* no-op: no calendar in this build */
-}
-function closeDatePopover() {
-  /* no-op: no popover */
-}
-
 /* DAILY PUZZLE SYSTEM */
 
 /* PLAY TYPE */
@@ -511,12 +462,6 @@ async function load() {
   game.playType = getPlayType();
   game.mode = getMode();
   game.date = getRequestedDate();
-
-  highlightModeButtons();
-  highlightPlayButtons();
-  updateDateUI();
-
-  rebuildSeed();
 
   next();
 
@@ -820,11 +765,6 @@ function confirmPlayTiebreak() {
     showHints(false);
     endRound();
   }
-}
-
-// "win" or "lose"
-function setOutcome(type) {
-  game.lastOutcome = type; // "win" or "lose"
 }
 
 /* HINTS */
