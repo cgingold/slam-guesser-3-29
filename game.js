@@ -18,8 +18,8 @@ const SHOW_FRESHNESS_NOTICE = false;
    Shape:
      {
        "2026-05-28": {
-         "standard": { player, wrong, outcome, gaveUp },
-         "hard":     { player, wrong, outcome, gaveUp }
+         "standard": { player, wrong, outcome },
+         "hard":     { player, wrong, outcome }
        },
        ...
      }
@@ -144,13 +144,12 @@ function maybeRestoreFinishedDaily() {
   // Reset the round state to match the saved state
   game.wrong = saved.wrong;
   game.lastOutcome = saved.outcome;
-  game.gaveUp = !!saved.gaveUp;
   game.wrongGuessNames = saved.wrongGuessNames || [];
 
   const inProgress = !!saved.inProgress && saved.outcome === null;
 
   // Rebuild hint cards (gender appears at wrong>=1, nation at wrong>=2,
-  // answer/correct/give-up at the very end — for finished rounds only).
+  // answer/correct at the very end — for finished rounds only).
   const panel = document.getElementById("hintPanel");
   panel.innerHTML = "";
 
@@ -185,11 +184,6 @@ function maybeRestoreFinishedDaily() {
     const a = document.createElement("div");
     a.className = "hint-card correct-card";
     a.textContent = `✅ Correct: ${game.current.name}`;
-    panel.appendChild(a);
-  } else if (saved.gaveUp) {
-    const a = document.createElement("div");
-    a.className = "hint-card answer-card";
-    a.textContent = `🏳️ Gave Up: ${game.current.name}`;
     panel.appendChild(a);
   } else {
     const a = document.createElement("div");
@@ -658,7 +652,6 @@ function next() {
   game.selectedSuggestion = false;
   game.hintLocked = false;
   game.lockProgressHints = false;
-  game.gaveUp = false;
 
   const shareBtn = document.getElementById("shareBtn");
   shareBtn.disabled = true;
@@ -799,7 +792,6 @@ function guess() {
         wrong: game.wrong,
         wrongGuessNames: game.wrongGuessNames,
         outcome: null,
-        gaveUp: false,
         inProgress: true,
       });
     }
@@ -1127,7 +1119,6 @@ function openTiebreak(options, opts) {
       playerSnapshot: game.current,
       wrong: game.wrong,
       outcome: "lose",
-      gaveUp: false,
     });
     saveDayResult({
       date: game.date,
@@ -1221,15 +1212,13 @@ function endRound() {
       playerSnapshot: game.current,
       wrong: game.wrong,
       outcome: game.lastOutcome,
-      gaveUp: !!game.gaveUp,
     });
     // Per-day history for the week strip (first attempt only). "tiebreak"
     // counts as won everywhere (championship, week-strip ✓) but keeps its
     // own outcome value so the restore flow can show tiebreak branding.
     const histOutcome =
       game.lastOutcome === "win" ? "won" :
-      game.lastOutcome === "tiebreak" ? "tiebreak" :
-      game.gaveUp ? "gave-up" : "missed";
+      game.lastOutcome === "tiebreak" ? "tiebreak" : "missed";
     saveDayResult({
       date: game.date,
       dayOfWeek: DAY_NAMES_RUNTIME[dayOfWeekIndex(game.date)],
@@ -1249,16 +1238,10 @@ function endRound() {
 
   updateUI();
 
-  if (game.gaveUp) {
-    // Give-up has no modal — reveal the countdown immediately since
-    // there's no other dismissal beat to wait for.
-    revealCountdown();
-  } else {
-    // For win/loss, open the modal first. The countdown stays hidden
-    // until the user closes the modal — that dismissal becomes the
-    // "see you tomorrow" reveal moment.
-    openResultModal();
-  }
+  // Open the modal first. The countdown stays hidden until the user
+  // closes the modal — that dismissal becomes the "see you tomorrow"
+  // reveal moment.
+  openResultModal();
 }
 
 function populateWeekStrip(containerEl) {
@@ -1274,10 +1257,7 @@ function populateWeekStrip(containerEl) {
     cell.className = "week-cell";
 
     if (result) {
-      cell.classList.add(
-        isDayWon(result) ? "is-won" :
-        result.outcome === "gave-up" ? "is-gave-up" : "is-missed"
-      );
+      cell.classList.add(isDayWon(result) ? "is-won" : "is-missed");
     } else if (i === todayIdx) {
       cell.classList.add("is-today");
     } else if (i < todayIdx) {
@@ -1294,9 +1274,7 @@ function populateWeekStrip(containerEl) {
     const markerEl = document.createElement("span");
     markerEl.className = "week-cell-marker";
     if (result) {
-      markerEl.textContent =
-        isDayWon(result) ? "✅" :
-        result.outcome === "gave-up" ? "🏳️" : "❌";
+      markerEl.textContent = isDayWon(result) ? "✅" : "❌";
     }
     cell.appendChild(markerEl);
 
@@ -1305,12 +1283,8 @@ function populateWeekStrip(containerEl) {
 }
 
 // Open the round-end modal. "Winner" (lime glow) on a correct
-// guess, "Missed" (orange border) after 3 wrong. Give-ups skip
-// the modal entirely — the user already conceded; no celebration needed.
+// guess, "Missed" (orange border) after 3 wrong.
 function openResultModal() {
-  // No modal on give-up
-  if (game.gaveUp) return;
-
   const dlg = document.getElementById("resultDialog");
   if (!dlg || typeof dlg.showModal !== "function") return;
 
@@ -1330,7 +1304,7 @@ function openResultModal() {
 
   // Share button glows on any win (plain win, tiebreak, or championship —
   // "champion" only ever fires when `won` is already true, so this one
-  // flag covers all three). No glow on a miss/give-up.
+  // flag covers all three). No glow on a miss.
   const shareBtn = document.getElementById("resultShareBtn");
   if (shareBtn) shareBtn.classList.toggle("is-glowing", won);
 
@@ -1494,10 +1468,10 @@ function buildShareLines() {
   const header = `Slam Grid — ${tag}`;
 
   // Balls row — a tennis ball for each used attempt (right or wrong),
-  // ⚪ for unused. Ends in ✅ on a win or ❌ on a loss/give-up.
+  // ⚪ for unused. Ends in ✅ on a win or ❌ on a loss.
   // "Used" = the slot was filled by a guess (correct or not). When the
   // round ends in a win, the final correct guess counts as used; when
-  // it ends in a loss or give-up, the wrong guesses count as used.
+  // it ends in a loss, the wrong guesses count as used.
   // A tiebreak win skips the ball count entirely — it doesn't map to a
   // guess count the same way — and states the salvage outright.
   let ballsLine;
@@ -1698,7 +1672,6 @@ async function buildStoryImage() {
   // 2. RESULT LINE (fixed y)
   const isTiebreak = game.lastOutcome === "tiebreak";
   const won = game.lastOutcome === "win" || isTiebreak;
-  const gaveUp = !!game.gaveUp;
   const guessNum = won ? game.wrong + 1 : null;
   const todayForChampion = game.date || todayLocal();
   let resultLine, resultColor;
@@ -1709,8 +1682,6 @@ async function buildStoryImage() {
   } else if (won) {
     resultLine = guessNum === 1 ? "I got it in 1 guess" : `I got it in ${guessNum} guesses`;
     resultColor = "#a5e85a";
-  } else if (gaveUp) {
-    resultLine = "I was stumped";               resultColor = "#b8c4be";
   } else {
     resultLine = "Missed it!";       resultColor = "#fdba74";
   }
@@ -1828,9 +1799,7 @@ async function buildStoryImage() {
     ctx.fillText(DAY_LABELS[i], cellCx, stripTop + 32);
 
     if (result) {
-      // Strip the variation selector from 🏳️ — it causes measureText to mis-report width.
-      const emojiMarker = isDayWon(result) ? "✅" :
-                          result.outcome === "gave-up" ? "🏳" : "❌";
+      const emojiMarker = isDayWon(result) ? "✅" : "❌";
       ctx.font = "34px serif";
       drawEmojiCentered(emojiMarker, cellCx, stripTop + 59, 34);
     } else if (i === todayIdx) {
@@ -2430,8 +2399,6 @@ function openDifficultyDialog() {
     if (isDayWon(result)) {
       marker.textContent = "✅";
       marker.classList.add("is-won");
-    } else if (result.outcome === "gave-up") {
-      marker.textContent = "🏳️";
     } else {
       marker.textContent = "❌";
     }
