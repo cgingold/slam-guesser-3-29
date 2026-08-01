@@ -625,24 +625,6 @@ function nationalityToFlag(nation) {
   return map[nation] || "";
 }
 
-/* SEEDING */
-
-function seededRandom(seed) {
-  // Hash the FULL seed string into an initial state. (Previously used
-  // only seed.length and the first character, which meant every daily
-  // seed in a given mode produced the same player every day.)
-  let hash = 5381;
-  for (let i = 0; i < seed.length; i++) {
-    hash = ((hash << 5) + hash + seed.charCodeAt(i)) | 0;
-  }
-  let x = Math.sin(hash) * 10000;
-
-  return function () {
-    x = Math.sin(x) * 10000;
-    return x - Math.floor(x);
-  };
-}
-
 /* NEXT PLAYER */
 
 function next() {
