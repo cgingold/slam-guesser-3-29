@@ -260,17 +260,23 @@
 
 <div class="app">
 
+<!-- Screen-reader-only status announcements for guess/round outcomes.
+     Visually hidden (not display:none, which would stop it being
+     announced) — see announce() in game.js for what updates it and when. -->
+<div id="liveRegion" class="visually-hidden" role="status" aria-live="polite"></div>
 
 <div class="controls">
   <div class="input-wrap">
-    <input id="guess" placeholder="Guess player..." autocomplete="off"/>
-    <div id="suggestions" class="suggestions" style="display:none"></div>
+    <input id="guess" placeholder="Guess player..." autocomplete="off"
+           role="combobox" aria-expanded="false" aria-controls="suggestions"
+           aria-autocomplete="list" aria-haspopup="listbox"/>
+    <div id="suggestions" class="suggestions" role="listbox" aria-label="Player suggestions" style="display:none"></div>
   </div>
 
-  <div class="pips" aria-label="Guesses remaining">
-    <div class="pip" id="pip1"></div>
-    <div class="pip" id="pip2"></div>
-    <div class="pip" id="pip3"></div>
+  <div class="pips" role="group" id="pipsGroup" aria-label="Guesses used: 0 of 3">
+    <div class="pip" id="pip1" role="img" aria-label="Guess 1: not yet used"></div>
+    <div class="pip" id="pip2" role="img" aria-label="Guess 2: not yet used"></div>
+    <div class="pip" id="pip3" role="img" aria-label="Guess 3: not yet used"></div>
   </div>
 
   <button id="guessBtn" onclick="guess()">Guess</button>

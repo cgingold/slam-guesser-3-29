@@ -17,6 +17,21 @@
 
 * { box-sizing: border-box; }
 
+/* Screen-reader-only content — visually hidden but still announced
+   (unlike display:none/visibility:hidden, which pull it from the a11y
+   tree too). Standard "clip" pattern. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 body {
   margin: 0;
   background: var(--bg);
@@ -1047,6 +1062,7 @@ input#guess:focus {
 }
 
 .pip {
+  position: relative;
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -1057,6 +1073,22 @@ input#guess:focus {
 .pip.used-1 { background: #f4a8a0; }
 .pip.used-2 { background: #d63a26; }
 .pip.used-3 { background: #8a1e10; transform: scale(1.15); }
+
+/* Non-color state marker (redundant with the fill color, for colorblind
+   users) — a small "×" on any used/wrong pip. Nothing shown on an unused
+   pip; absence of a mark reads as "nothing happened here yet". */
+.pip.used-1::after,
+.pip.used-2::after,
+.pip.used-3::after {
+  content: "×";
+  position: absolute;
+  inset: 0;
+  text-align: center;
+  line-height: 10px;
+  font-size: 8px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+}
 
 /* buttons */
 button {

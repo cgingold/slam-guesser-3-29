@@ -501,6 +501,15 @@ function showMessage(text) {
   setTimeout(() => div.remove(), 4000);
 }
 
+// Screen-reader announcement — updates the visually-hidden aria-live
+// region (see #liveRegion in index.html). Polite live regions announce
+// on text change, so just setting new text each call is enough; no need
+// to clear first.
+function announce(text) {
+  const el = document.getElementById("liveRegion");
+  if (el) el.textContent = text;
+}
+
 /* FLAGS */
 
 function nationalityToFlag(nation) {
@@ -693,6 +702,9 @@ function guess() {
 
     showHints(true);
 
+    const guessNum = game.wrong + 1;
+    announce(`Correct! You won in ${guessNum === 1 ? "1 guess" : `${guessNum} guesses`}.`);
+
     endRound();
   } else {
     game.wrong++;
@@ -704,14 +716,21 @@ function guess() {
       // distractor — otherwise fall straight through to a normal loss.
       const tiebreakOptions = buildTiebreakOptions(game.current, game.wrongGuessNames, game.wrong);
       if (tiebreakOptions) {
+        announce("Incorrect. Starting tiebreak.");
         openTiebreak(tiebreakOptions);
       } else {
         game.lastOutcome = "lose";
         showHints(false);
+        announce("Incorrect. Missed it — the answer was revealed.");
         endRound();
       }
     } else {
       showHints(false);
+      announce(
+        game.wrong === 1
+          ? `Incorrect. Hint revealed: gender is ${game.current.gender}.`
+          : `Incorrect. Hint revealed: country is ${game.current.nationality}.`
+      );
       // Mid-round: persist the in-progress state so a refresh restores it.
       saveDailyResult(game.date, game.mode, {
         player: game.current.name,
@@ -758,11 +777,13 @@ function confirmPlayTiebreak() {
   if (tiebreakOptions) {
     // Skip the "Let's go!" intro — that's only for the automatic
     // 3-guess trigger. A voluntary trigger goes straight to the clock.
+    announce("Starting tiebreak.");
     openTiebreak(tiebreakOptions, { skipIntro: true });
   } else {
     // Safety net — essentially unreachable given the player pool size.
     game.lastOutcome = "lose";
     showHints(false);
+    announce("Missed it — the answer was revealed.");
     endRound();
   }
 }
@@ -1018,6 +1039,7 @@ function openTiebreak(options, opts) {
     optionsEl.querySelectorAll("button").forEach((b) => { b.disabled = true; });
     game.lastOutcome = won ? "tiebreak" : "lose";
     showHints(won);
+    announce(won ? "Correct! Tiebreak win." : "Incorrect. Tiebreak lost — the answer was revealed.");
     // Open the result modal WHILE the tiebreak dialog is still open (dialogs
     // stack), then close the tiebreak dialog underneath it — closing it
     // first and letting the async "close" event trigger endRound() left a
@@ -1292,9 +1314,12 @@ function updateSuggestions() {
   const input = deaccent(rawInput).toLowerCase();
 
   const box = document.getElementById("suggestions");
+  const guessInput = document.getElementById("guess");
 
   if (input.length < 3) {
     box.style.display = "none";
+    guessInput.setAttribute("aria-expanded", "false");
+    guessInput.removeAttribute("aria-activedescendant");
     return;
   }
 
@@ -1310,32 +1335,44 @@ function updateSuggestions() {
     div.className = "suggestion";
     div.textContent = m;
 
-    div.dataset.index = game.suggestionItems.length;
+    const index = game.suggestionItems.length;
+    div.dataset.index = index;
+    div.id = `suggestion-opt-${index}`;
+    div.setAttribute("role", "option");
+    div.setAttribute("aria-selected", "false");
 
     game.suggestionItems.push(div);
 
     div.onclick = () => {
       document.getElementById("guess").value = m;
       game.selectedSuggestion = true;
-      box.style.display = "none";
+      hideSuggestions();
     };
 
     box.appendChild(div);
   });
 
   box.style.display = matches.length ? "block" : "none";
+  guessInput.setAttribute("aria-expanded", matches.length ? "true" : "false");
+  guessInput.removeAttribute("aria-activedescendant");
 }
 
 function hideSuggestions() {
   document.getElementById("suggestions").style.display = "none";
+  const guessInput = document.getElementById("guess");
+  guessInput.setAttribute("aria-expanded", "false");
+  guessInput.removeAttribute("aria-activedescendant");
 }
 function updateHighlight() {
   const items = game.suggestionItems;
+  const guessInput = document.getElementById("guess");
 
   for (let i = 0; i < items.length; i++) {
     if (i === game.suggestionIndex) {
       items[i].style.background = "#1e293b";
       items[i].style.color = "white";
+      items[i].setAttribute("aria-selected", "true");
+      guessInput.setAttribute("aria-activedescendant", items[i].id);
 
       const box = document.getElementById("suggestions");
 
@@ -1357,7 +1394,12 @@ function updateHighlight() {
     } else {
       items[i].style.background = "";
       items[i].style.color = "";
+      items[i].setAttribute("aria-selected", "false");
     }
+  }
+
+  if (game.suggestionIndex < 0) {
+    guessInput.removeAttribute("aria-activedescendant");
   }
 }
 
@@ -2115,10 +2157,17 @@ function updateUI() {
     const p = pips[i];
     if (!p) continue;
     p.classList.remove("used-1", "used-2", "used-3");
-    if (i < wrong) {
+    const isUsed = i < wrong;
+    if (isUsed) {
       // pick the class matching the current total wrong count
       p.classList.add(`used-${Math.min(wrong, 3)}`);
     }
+    p.setAttribute("aria-label", `Guess ${i + 1}: ${isUsed ? "incorrect" : "not yet used"}`);
+  }
+
+  const pipsGroup = document.getElementById("pipsGroup");
+  if (pipsGroup) {
+    pipsGroup.setAttribute("aria-label", `Guesses used: ${Math.min(wrong, 3)} of 3`);
   }
 }
 
@@ -2150,6 +2199,11 @@ document.getElementById("guess").addEventListener("keydown", (e) => {
       } else {
         guess();
       }
+    } else if (e.key === "Escape") {
+      // ARIA combobox pattern: Escape closes the listbox without clearing
+      // the input. Focus stays on the input either way (it never moved).
+      e.preventDefault();
+      hideSuggestions();
     }
   } else {
     if (e.key === "Enter") guess();
