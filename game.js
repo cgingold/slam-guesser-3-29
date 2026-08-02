@@ -2404,9 +2404,12 @@ function openDifficultyDialog() {
   document.querySelectorAll(".diff-pill").forEach((el) => {
     const dayIdx = parseInt(el.dataset.day, 10);
     el.classList.toggle("is-today", dayIdx === todayIdx);
+    el.classList.remove("is-future");
 
-    const prev = el.querySelector(".diff-outcome");
-    if (prev) prev.remove();
+    const prevOutcome = el.querySelector(".diff-outcome");
+    if (prevOutcome) prevOutcome.remove();
+    const prevBadge = el.querySelector(".diff-badge");
+    if (prevBadge) prevBadge.remove();
 
     // Sunday pill: switch to green W on championship, restore to purple F otherwise
     const haloEl = el.querySelector(".diff-halo");
@@ -2421,6 +2424,8 @@ function openDifficultyDialog() {
         trophy.className = "diff-outcome";
         trophy.textContent = "🏆";
         el.appendChild(trophy);
+        // Champion Sunday: the green W + trophy already say "won" —
+        // no corner badge on top of it.
         return;
       } else {
         haloEl.style.background = "#b8512a";
@@ -2431,17 +2436,35 @@ function openDifficultyDialog() {
     }
 
     const result = weekResults[dayIdx];
-    if (!result) return;
+    const badge = document.createElement("div");
+    badge.className = "diff-badge";
 
-    const marker = document.createElement("div");
-    marker.className = "diff-outcome";
-    if (isDayWon(result)) {
-      marker.textContent = "✅";
-      marker.classList.add("is-won");
+    if (result) {
+      // Covers "today, already played" too — a result existing at all
+      // (regardless of which day) means show the real outcome, not a
+      // blank "today" state.
+      if (isDayWon(result)) {
+        badge.classList.add("is-won");
+        badge.textContent = "✓";
+      } else {
+        badge.classList.add("is-missed");
+        badge.textContent = "✕";
+      }
+      el.appendChild(badge);
+    } else if (dayIdx === todayIdx) {
+      // Today, not yet played — the white "today" ring already signals
+      // this; a badge here would be redundant.
+    } else if (dayIdx < todayIdx) {
+      // Past day with no recorded result — shouldn't normally happen
+      // given daily play, but don't let it silently look identical to
+      // "not yet reached" or blend in as if nothing needs explaining.
+      badge.classList.add("is-unplayed");
+      badge.textContent = "–";
+      el.appendChild(badge);
     } else {
-      marker.textContent = "❌";
+      // Future — not yet reached this week.
+      el.classList.add("is-future");
     }
-    el.appendChild(marker);
   });
 
   dlg.showModal();

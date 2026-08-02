@@ -305,6 +305,14 @@ dialog.difficulty-dialog {
   backdrop-filter: blur(3px);
 }
 
+.diff-eyebrow {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 16px;
+}
+
 .difficulty-dialog .howto-close {
   color: rgba(255, 255, 255, 0.5);
 }
@@ -337,15 +345,24 @@ dialog.difficulty-dialog {
 
 .diff-pills {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 7px;
-  margin-bottom: 16px;
+  grid-template-columns: repeat(7, 58px);
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 24px;
 }
 
 .diff-pill {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: opacity 0.15s;
+}
+
+/* Not yet reached this week — quieted down, no badge (there's nothing
+   to report yet). No lock icon; reduced opacity alone reads as "later". */
+.diff-pill.is-future {
+  opacity: 0.4;
 }
 
 .diff-day {
@@ -359,10 +376,10 @@ dialog.difficulty-dialog {
 
 .diff-halo {
   display: inline-flex;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 9px;
-  padding: 3px;
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  padding: 4px;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
@@ -372,7 +389,7 @@ dialog.difficulty-dialog {
   display: inline-flex;
   width: 100%;
   height: 100%;
-  border-radius: 6px;
+  border-radius: 14px;
   align-items: center;
   justify-content: center;
   font-family: Georgia, "Times New Roman", serif;
@@ -388,6 +405,36 @@ dialog.difficulty-dialog {
 }
 .diff-pill.is-today .diff-day {
   color: var(--ink);
+}
+
+/* Outcome badge — small circle overlapping the pill's bottom-right
+   corner, bordered in the modal's own background so it reads as
+   "attached" rather than a separate floating marker. Skipped entirely
+   for today-not-yet-played (the white ring above already signals
+   "today") and for the champion Sunday pill (green W + trophy already
+   says "won" — a badge on top would be redundant). */
+.diff-badge {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+}
+.diff-badge.is-won     { background: #16a34a; color: #ffffff; }
+.diff-badge.is-missed  { background: #b8512a; color: #ffffff; }
+.diff-badge.is-unplayed {
+  background: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .diff-axis {
@@ -1645,7 +1692,8 @@ th:first-child {
 .week-cell.is-future        { opacity: 0.15; }
 
 /* ===========================================================
-   DIFFICULTY CHART — per-pill outcome markers
+   DIFFICULTY CHART — championship trophy (below the pill; see
+   .diff-badge above for the per-day won/missed corner indicator)
    =========================================================== */
 .diff-outcome {
   margin-top: 6px;
@@ -1658,8 +1706,6 @@ th:first-child {
   justify-content: center;
   opacity: 0.85;
 }
-
-.diff-outcome.is-won { color: #4ade80; }
 
 /* ===========================================================
    MOBILE
@@ -1689,6 +1735,29 @@ th:first-child {
   .howto-inner { padding: 24px 22px 22px; }
   .howto-title { font-size: 24px; }
   .howto-body { font-size: 13.5px; }
+
+  /* Difficulty chart — 58px pills don't fit 7-across under ~420px
+     viewports (verified at 375/390/414); shrink the pill (not the gap)
+     to a size that clears all three with room to spare. Badge/radii
+     scaled down proportionally so they stay legible at the new size. */
+  .difficulty-dialog .howto-inner { padding: 28px 16px 20px; }
+  .diff-eyebrow { margin-bottom: 12px; }
+  .diff-pills {
+    grid-template-columns: repeat(7, 36px);
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .diff-day { font-size: 9px; }
+  .diff-halo { width: 36px; height: 36px; border-radius: 11px; padding: 3px; }
+  .diff-fill { border-radius: 9px; font-size: 11px; }
+  .diff-badge {
+    width: 14px;
+    height: 14px;
+    bottom: -4px;
+    right: -4px;
+    border-width: 1.5px;
+    font-size: 8px;
+  }
 
   .date-btn { padding: 5px 10px; font-size: 11px; }
   .date-btn svg { width: 12px; height: 12px; }
