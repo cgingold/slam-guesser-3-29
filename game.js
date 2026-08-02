@@ -1,5 +1,52 @@
 const DAILY_KEY = "slamGuesserSimple.daily.v1";
 
+/* ---- Theme (light/dark) -------------------------------
+   The actual data-theme attribute is set as early as possible by an
+   inline script in index.html's <head> (localStorage choice, else OS
+   preference) to avoid a flash of the wrong theme before this file even
+   loads. Everything here just keeps the toggle button's icon/label in
+   sync and handles the user explicitly flipping it. */
+const THEME_KEY = "slamGrid.theme";
+
+function getCurrentTheme() {
+  return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+}
+
+// Syncs the toggle button's icon + aria-label/title to whatever theme is
+// currently active. Called once on load (the button's HTML defaults to
+// the light-mode look, in case JS is slow) and again after every toggle.
+function updateThemeToggleUI(theme) {
+  const btn = document.getElementById("themeToggleBtn");
+  if (!btn) return;
+  const sun = btn.querySelector(".icon-sun");
+  const moon = btn.querySelector(".icon-moon");
+  const isDark = theme === "dark";
+  // Dark mode: show the sun ("tap to go light"). Light mode: show the
+  // moon ("tap to go dark"). Uses explicit style.display values (not
+  // [hidden] — inline <svg> doesn't reliably honor the hidden attribute
+  // across browsers) — and not "" either, since #themeToggleBtn
+  // .icon-sun's stylesheet default is display:none, which an empty
+  // inline value would just fall through to instead of clearing.
+  if (sun) sun.style.display = isDark ? "block" : "none";
+  if (moon) moon.style.display = isDark ? "none" : "block";
+  const label = isDark ? "Switch to light mode" : "Switch to dark mode";
+  btn.setAttribute("aria-label", label);
+  btn.title = label;
+}
+
+function toggleTheme() {
+  const next = getCurrentTheme() === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try {
+    localStorage.setItem(THEME_KEY, next);
+  } catch {
+    /* ignore quota/privacy-mode errors — theme just won't persist */
+  }
+  updateThemeToggleUI(next);
+}
+
+updateThemeToggleUI(getCurrentTheme());
+
 /* ---- Data freshness gating ----------------------------
    Results are current through Wimbledon 2026. Later 2026 slams
    are hidden until the constants below are updated. The footer

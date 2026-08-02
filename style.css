@@ -5,14 +5,87 @@
 :root {
   --bg:           #e8edeb;   /* cool off-white body */
   --surface:      #ffffff;   /* card / control surfaces */
-  --ink:          #1d3e35;   /* dark forest green (primary text) */
+  --surface-2:    #f1f1ec;   /* secondary surface — table header row, sticky slam/year column */
+  --ink:          #1d3e35;   /* dark forest green (primary text) — theme-adaptive */
   --ink-soft:     #4a6e63;   /* muted green for secondary */
   --ink-faint:    #94a8a0;   /* low-contrast labels */
   --line:         #cfd4d0;   /* subtle dividers */
-  --accent:       #a5e85a;   /* tennis-ball lime */
+  --accent:       #a5e85a;   /* tennis-ball lime — same in both themes */
   --accent-ink:   #1d3e35;
   --header-bg:    #1d3e35;
   --header-ink:   #ffffff;
+
+  /* Fixed brand dark green — NEVER redefined per theme. Several
+     components (the Guess button, result/tiebreak-play modals, the
+     used-1 pip's contrast-fix glyph, difficulty-dialog's dark plate)
+     use this literal color as a deliberate constant, not as "page text
+     that should adapt" — that's what --ink is for. Keeping them on a
+     separate token means redefining --ink for dark mode can't
+     accidentally invert them. */
+  --brand-dark:   #1d3e35;
+
+  /* How fast themed colors cross-fade when the toggle is used. Zeroed
+     under prefers-reduced-motion below. */
+  --theme-transition: 0.2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --theme-transition: 0s; }
+}
+
+/* ===========================================================
+   DARK THEME — same tokens, dark equivalents. Applied via
+   data-theme="dark" on <html>, set as early as possible (inline script
+   in <head>) to avoid a flash of the wrong theme on load, and flipped
+   instantly by toggleTheme() in game.js.
+   =========================================================== */
+[data-theme="dark"] {
+  --bg:           #14201c;
+  --surface:      #1c2b26;
+  --surface-2:    #24362f;
+  --ink:          #eef3f0;   /* soft light, not pure white */
+  --ink-soft:     #9fb5ac;
+  --ink-faint:    #5d7369;
+  --line:         #2d3f38;
+  /* --accent/--accent-ink/--header-bg/--header-ink/--brand-dark
+     intentionally NOT redefined here — see their comments above. */
+}
+
+/* Generic disabled-button ghosting (button:disabled below) is a tinted
+   overlay derived from the light-mode --ink hex, hardcoded rather than
+   var()-based (rgba() can't reference a custom property's channels
+   directly) — needs its own dark-mode value so it doesn't read as
+   near-invisible dark-on-dark. */
+[data-theme="dark"] button:disabled {
+  background: rgba(238, 243, 240, 0.12);
+  color: rgba(238, 243, 240, 0.4);
+}
+
+/* The career-reveal "hidden" placeholder plate is a hardcoded light
+   grey — needs a dark counterpart so cells don't flash pale rectangles
+   mid-animation on a dark table. */
+[data-theme="dark"] .reveal-cell.is-hidden {
+  background-color: var(--surface-2) !important;
+}
+
+/* "Always light" family — How-to-Play, the voluntary-tiebreak confirm
+   dialog, and the tiebreak intro screen that mirrors it (all share
+   .howto-dialog's look — see .howto-title/.howto-body/.confirm-actions/
+   .tiebreak-dialog.is-intro below). Deliberately independent of the
+   page theme (an intentional contrast choice, not an oversight) — so
+   re-pin the adaptive tokens back to their light values for anything
+   inside, regardless of [data-theme] on <html>. This also means
+   difficulty-dialog (which extends .howto-dialog and overrides back to
+   a dark plate via --brand-dark) and confirm-secondary (used inside
+   both families) don't need any special-casing of their own. */
+.howto-dialog,
+.tiebreak-dialog.is-intro {
+  --bg: #e8edeb;
+  --surface: #ffffff;
+  --ink: #1d3e35;
+  --ink-soft: #4a6e63;
+  --ink-faint: #94a8a0;
+  --line: #cfd4d0;
 }
 
 * { box-sizing: border-box; }
@@ -39,6 +112,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Arial, sans-serif;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
+  transition: background-color var(--theme-transition) ease, color var(--theme-transition) ease;
 }
 
 /* Fade-in for the main app content (everything except the header).
@@ -155,6 +229,13 @@ body.is-ready .app { opacity: 1; }
   border-color: rgba(255, 255, 255, 0.3);
   filter: none;
 }
+
+/* Theme toggle's sun/moon swap — driven by inline style.display from
+   updateThemeToggleUI() in game.js, not the [hidden] attribute (inline
+   <svg> doesn't reliably honor [hidden] across browsers). This is just
+   the light-mode-default fallback for the instant before that JS runs;
+   it's overwritten immediately after. */
+#themeToggleBtn .icon-sun { display: none; }
 
 /* =========================================================
    ROUND-OF-DAY BUTTON — sits to the left of the info icon
@@ -618,7 +699,7 @@ dialog.difficulty-dialog {
   padding: 0;
   max-width: 380px;
   width: calc(100% - 32px);
-  background: var(--ink);
+  background: var(--brand-dark);
   color: #ffffff;
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
   /* Border state set per outcome via .is-win / .is-loss */
@@ -778,7 +859,7 @@ dialog.difficulty-dialog {
   padding: 0;
   max-width: 380px;
   width: calc(100% - 32px);
-  background: var(--ink);
+  background: var(--brand-dark);
   color: #ffffff;
   /* SF yellow, not the win-green accent — a tiebreak isn't a win yet. */
   outline: 2px solid #fde047;
@@ -1044,7 +1125,8 @@ input#guess {
   width: 280px;
   font-size: 16px; /* must be >=16px to prevent iOS auto-zoom on focus */
   outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s,
+    background-color var(--theme-transition) ease, color var(--theme-transition) ease;
 }
 
 input#guess::placeholder { color: var(--ink-faint); }
@@ -1091,8 +1173,12 @@ input#guess:focus {
 
 /* used-1's background (#f4a8a0) is too light for white to clear 3:1
    (WCAG 1.4.11) — dark ink reads clearly against it instead. used-2/
-   used-3 are dark enough that white already passes; left unchanged. */
-.pip.used-1::after { color: var(--ink); }
+   used-3 are dark enough that white already passes; left unchanged.
+   Fixed --brand-dark, not adaptive --ink — the pip background is a
+   fixed semantic color regardless of page theme, so its glyph must
+   stay paired with a fixed dark color too, or dark mode would silently
+   reintroduce this same contrast failure. */
+.pip.used-1::after { color: var(--brand-dark); }
 .pip.used-2::after,
 .pip.used-3::after { color: rgba(255, 255, 255, 0.85); }
 
@@ -1101,7 +1187,7 @@ button {
   padding: 10px 18px;
   border-radius: 999px;
   border: none;
-  background: var(--ink);
+  background: var(--brand-dark);
   color: var(--header-ink);
   font-weight: 600;
   font-size: 13px;
@@ -1164,6 +1250,7 @@ button:disabled {
   max-height: 250px;
   overflow-y: auto;
   z-index: 10;
+  transition: background-color var(--theme-transition) ease, border-color var(--theme-transition) ease;
   box-shadow: 0 10px 28px rgba(29, 62, 53, 0.12);
 }
 
@@ -1252,6 +1339,7 @@ button:disabled {
   border: 1px solid var(--line);
   max-height: 65vh;
   margin-bottom: 8px;
+  transition: background-color var(--theme-transition) ease, border-color var(--theme-transition) ease;
 }
 
 .scroll-hint {
@@ -1274,7 +1362,7 @@ table {
 }
 
 th, td {
-  border: 1px solid #e3e5e2;
+  border: 1px solid var(--line);
   padding: 8px 4px;
   font-size: 12px;
   text-align: center;
@@ -1282,22 +1370,24 @@ th, td {
 }
 
 th {
-  background: #f1f1ec;
+  background: var(--surface-2);
   position: sticky;
   top: 0;
   z-index: 2;
   font-weight: 600;
   color: var(--ink-soft);
   letter-spacing: 0.02em;
+  transition: background-color var(--theme-transition) ease, color var(--theme-transition) ease;
 }
 
 .slam {
-  background: #f1f1ec;
+  background: var(--surface-2);
   position: sticky;
   left: 0;
   z-index: 2;
   font-weight: 600;
   color: var(--ink);
+  transition: background-color var(--theme-transition) ease, color var(--theme-transition) ease;
   /* Lock the slam-name column width so "Australian Open" always fits on
      one line, no wrapping. The cells are centered vertically. */
   width: 120px;
@@ -1621,7 +1711,7 @@ th:first-child {
   /* Year column — sticky left, right-aligned, muted */
   th.year-col,
   td.year-col {
-    background: #f1f1ec;
+    background: var(--surface-2);
     position: sticky;
     left: 0;
     z-index: 2;
