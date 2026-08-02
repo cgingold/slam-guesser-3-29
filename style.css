@@ -68,6 +68,15 @@
   background-color: var(--surface-2) !important;
 }
 
+/* difficulty-dialog's border (below) is a fixed rgba(255,255,255,0.15)
+   regardless of theme — fine against the light-mode backdrop, but the
+   dark-mode page behind it sits close enough in tone to the modal's own
+   dark-green plate that the same value reads as barely-there. Brighter
+   here so the edge still pops. */
+[data-theme="dark"] dialog.difficulty-dialog {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
 /* "Always light" family — How-to-Play, the voluntary-tiebreak confirm
    dialog, and the tiebreak intro screen that mirrors it (all share
    .howto-dialog's look — see .howto-title/.howto-body/.confirm-actions/
@@ -298,6 +307,12 @@ dialog.difficulty-dialog {
   width: calc(100% - 32px);
   background: var(--ink);
   color: #ffffff;
+  /* Unlike the other dark modals (result/tiebreak), this one has no
+     win/loss/tiebreak state to color-code, so a quiet neutral edge
+     instead of a bold accent outline — just enough to separate the
+     modal from its blurred backdrop, which sits at a different
+     brightness in light vs dark site theme. */
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .difficulty-dialog::backdrop {
