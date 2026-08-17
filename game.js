@@ -677,15 +677,15 @@ function next() {
   }
 
   // Eligibility flow:
-  //   1. Take the top-N players by autoScore (default 300).
+  //   1. Take the top-N players by autoScore (default 500).
   //   2. ADD any below-cut players who have a manualDay (Mon-Sun) override
   //      — admin force-included them.
   //   3. REMOVE any player whose manualDay === "excluded" — admin force-
   //      excluded them despite high score.
   //
-  // The 144 below-cut players are still in `game.players` for autocomplete
+  // Below-cut players are still in `game.players` for autocomplete
   // matching; the eligibility filter is just about who can be picked.
-  const TOP_N = 300;
+  const TOP_N = 500;
   const sortedByScore = game.players
     .slice()
     .sort((a, b) => (b.autoScore ?? 0) - (a.autoScore ?? 0));
