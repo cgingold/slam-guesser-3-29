@@ -752,7 +752,10 @@ function guess() {
   const target = game.current.name.toLowerCase();
   const guessLower = val.toLowerCase();
 
-  const ok = guessLower === target || guessLower === target.split(" ").pop();
+  const ok =
+    guessLower === target ||
+    guessLower === target.split(" ").pop() ||
+    sortedNameKey(val) === sortedNameKey(game.current.name);
 
   if (ok) {
     game.lastOutcome = "win";
@@ -1356,6 +1359,24 @@ function revealCountdown() {
    "Àlex Corretja"). Built once after the guess pool loads. */
 function deaccent(s) {
   return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+/* Accent- and word-order-insensitive key for guess matching. guess() used
+   to compare raw lowercased strings, which meant a guess_pool.json entry
+   whose name-token order didn't match the player's canonical `name` field
+   (e.g. "Han Xinyun" as a guess when the record is "Xinyun Han") would
+   register a correct pick as wrong. Sorting tokens closes that whole class
+   of bug regardless of what order future data ends up in. */
+function sortedNameKey(s) {
+  return deaccent(s)
+    .toLowerCase()
+    .replace(/[^\w\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(" ")
+    .filter(Boolean)
+    .sort()
+    .join(" ");
 }
 
 let guessPoolIndex = []; // [{ display: "Àlex Corretja", search: "alex corretja" }]
